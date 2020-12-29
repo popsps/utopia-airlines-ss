@@ -38,6 +38,11 @@ const userService = {
       console.log(err);
     }
   },
+  async deleteUser(userId) {
+    const user = await User.findByPk(userId);
+    if (!user) throw new NotFoundError("cannot find user");
+    await user.destroy();
+  },
 };
 
 module.exports = userService;
