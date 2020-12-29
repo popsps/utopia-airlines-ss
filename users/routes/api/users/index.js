@@ -1,7 +1,7 @@
-const {Router} = require("express");
+const { Router } = require("express");
 const router = Router();
 
-const {userService} = require("../../../services");
+const { userService } = require("../../../services");
 
 router.get("/", async (req, res, next) => {
   try {
