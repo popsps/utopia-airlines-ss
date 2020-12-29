@@ -1,4 +1,4 @@
-const {Model, DataTypes} = require("sequelize");
+const {Model, DataTypes,} = require("sequelize");
 const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
@@ -14,12 +14,12 @@ User.init({
   username: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 }, {
   tableName: "user",
   timestamps: false,
@@ -29,8 +29,8 @@ User.init({
       if (user.changed("password")) {
         user.password = await hash(user.password);
       }
-    }
-  }
+    },
+  },
 });
 
 module.exports = User;
