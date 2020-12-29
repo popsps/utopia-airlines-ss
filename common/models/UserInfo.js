@@ -1,7 +1,13 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-class UserInfo extends Model {}
+class UserInfo extends Model {
+  toJSON() {
+    const values = Object.assign({}, this.get());
+    delete values.userId;
+    return values;
+  }
+}
 
 UserInfo.init({
   userId: {
