@@ -10,7 +10,16 @@
     },
     "rules": {
         "semi": "warn",
-        "comma-dangle": "warn",
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always",
+                "imports": "never",
+                "exports": "never",
+                "functions": "never"
+            }
+        ],
         "quotes": [
             "warn",
             "double"
