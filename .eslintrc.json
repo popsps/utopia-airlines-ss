@@ -9,6 +9,10 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "indent": [
+            "error",
+            2
+        ],
         "semi": "warn",
         "comma-dangle": [
             "error",
@@ -23,6 +27,12 @@
         "quotes": [
             "warn",
             "double"
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
         ]
     }
 }
