@@ -11,6 +11,6 @@ UserRole.init({
   tableName: "user_role",
   timestamps: false,
   freezeTableName: true
-})
+});
 
 module.exports = UserRole;

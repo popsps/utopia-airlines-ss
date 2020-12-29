@@ -14,17 +14,17 @@ UserInfo.init({
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   phone: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   }
 }, {
   tableName: "user_info",
   timestamps: false,
   freezeTableName: true
-})
+});
 
 module.exports = UserInfo;
