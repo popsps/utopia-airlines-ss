@@ -2,7 +2,7 @@ const { StandardizedError } = require("../errors");
 
 module.exports = ( err, req, res, _next ) => {
   if (err instanceof StandardizedError) {
-    res.status(err.status).json(err.toJson());
+    res.status(err.status).json(err);
   } else {
     res.status(500).send({ message: err.message });
   }
