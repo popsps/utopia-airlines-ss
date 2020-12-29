@@ -37,7 +37,8 @@ router.put("/:id", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    res.json(await userService.deleteUser(req.params.id));
+    await userService.deleteUser(req.params.id);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
