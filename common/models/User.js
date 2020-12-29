@@ -13,6 +13,7 @@ class User extends Model {
     const values = Object.assign({}, this.get());
     delete values.password;
     delete values.roleId;
+    if (values.info === null) delete values.info;
     return values;
   }
 }
