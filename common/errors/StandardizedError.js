@@ -1,4 +1,3 @@
-
 class StandardizedError extends Error {
   constructor(message, status, ...errors) {
     super(message);
@@ -15,4 +14,4 @@ class StandardizedError extends Error {
   }
 }
 
-module.exports = {StandardizedError};
+module.exports = { StandardizedError };

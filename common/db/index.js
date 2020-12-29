@@ -1,4 +1,4 @@
-const {Sequelize} = require("sequelize");
+const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize({
   dialect: "mysql",
@@ -11,4 +11,4 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
 });
 
-module.exports = {sequelize};
+module.exports = { sequelize };
