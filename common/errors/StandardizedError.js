@@ -11,7 +11,7 @@ class StandardizedError extends Error {
     const jsonObj = {};
     if (this.message) jsonObj.message = this.message;
     if (this.errors.length) jsonObj.errors = this.errors;
-    return JSON.stringify(jsonObj);
+    return jsonObj;
   }
 }
 
