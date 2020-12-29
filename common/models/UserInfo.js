@@ -3,9 +3,15 @@ const { sequelize } = require("../db");
 
 class UserInfo extends Model {
   toJSON() {
-    const values = Object.assign({}, this.get());
-    delete values.userId;
-    return values;
+    const { givenName, familyName, email, phone } = this.get();
+    return {
+      name: {
+        given: givenName,
+        family: familyName,
+      },
+      email,
+      phone,
+    };
   }
 }
 
