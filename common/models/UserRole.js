@@ -1,6 +1,11 @@
-const {Model, DataTypes} = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
+const { sequelize } = require("../db");
 
-class UserRole extends Model {}
+class UserRole extends Model {
+  toJSON() {
+    return this.name;
+  }
+}
 
 UserRole.init({
   name: {
@@ -12,6 +17,7 @@ UserRole.init({
   underscored: true,
   timestamps: false,
   freezeTableName: true,
+  sequelize,
 });
 
 module.exports = UserRole;

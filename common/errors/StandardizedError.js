@@ -1,4 +1,3 @@
-
 class StandardizedError extends Error {
   constructor(message, status, ...errors) {
     super(message);
@@ -7,12 +6,12 @@ class StandardizedError extends Error {
     Object.setPrototypeOf(this, StandardizedError.prototype);
   }
 
-  toJson() {
+  toJSON() {
     const jsonObj = {};
     if (this.message) jsonObj.message = this.message;
     if (this.errors.length) jsonObj.errors = this.errors;
-    return JSON.stringify(jsonObj);
+    return jsonObj;
   }
 }
 
-module.exports = {StandardizedError};
+module.exports = { StandardizedError };

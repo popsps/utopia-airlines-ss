@@ -7,4 +7,4 @@ class BadRequestError extends StandardizedError {
   }
 }
 
-module.exports = {BadRequestError};
+module.exports = { BadRequestError };

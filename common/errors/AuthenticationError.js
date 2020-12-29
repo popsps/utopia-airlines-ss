@@ -7,4 +7,4 @@ class AuthenticationError extends StandardizedError {
   }
 }
 
-module.exports = {AuthenticationError};
+module.exports = { AuthenticationError };

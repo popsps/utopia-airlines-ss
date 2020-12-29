@@ -1,5 +1,6 @@
-const {Model, DataTypes} = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
+const { sequelize } = require("../db");
 
 const saltRounds = 10;
 const hash = async (data) => bcrypt.hash(data, await bcrypt.genSalt(saltRounds));
@@ -7,6 +8,13 @@ const hash = async (data) => bcrypt.hash(data, await bcrypt.genSalt(saltRounds))
 class User extends Model {
   async comparePassword(password) {
     return bcrypt.compare(password, this.password);
+  }
+  toJSON() {
+    const values = Object.assign({}, this.get());
+    delete values.password;
+    delete values.roleId;
+    if (values.info === null) delete values.info;
+    return values;
   }
 }
 
@@ -32,6 +40,7 @@ User.init({
       }
     },
   },
+  sequelize,
 });
 
 module.exports = User;
