@@ -1,8 +1,14 @@
-const express = require("express");
+const {Sequelize} = require("sequelize");
 
-const PORT = 3000;
+const sequelize = new Sequelize({
+  dialect: "mysql",
+  dialectOptions: {
+    decimalNumbers: true,
+  },
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+});
 
-const app = express();
-
-
-app.listen(PORT, () => console.log("App listening on " + PORT));
+module.exports = {sequelize};
