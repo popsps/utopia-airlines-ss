@@ -9,7 +9,11 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "semi": "error",
-        "comma-dangle": "error"
+        "semi": "warn",
+        "comma-dangle": "warn",
+        "quotes": [
+            "warn",
+            "double"
+        ]
     }
 }
