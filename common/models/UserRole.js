@@ -5,7 +5,6 @@ class UserRole extends Model {}
 UserRole.init({
   name: {
     type: DataTypes.STRING,
-    
     allowNull: false,
   },
 }, {
