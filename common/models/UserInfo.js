@@ -4,6 +4,14 @@ const {sequelize} = require("../db");
 class UserInfo extends Model {}
 
 UserInfo.init({
+  userId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    references: {
+      model: "User",
+      key: "id",
+    },
+  },
   givenName: {
     type: DataTypes.STRING,
     allowNull: false,
