@@ -9,6 +9,11 @@ class User extends Model {
   async comparePassword(password) {
     return bcrypt.compare(password, this.password);
   }
+  toJSON() {
+    const values = Object.assign({}, this.get());
+    delete values.password;
+    delete values.roleId;
+  }
 }
 
 User.init({
