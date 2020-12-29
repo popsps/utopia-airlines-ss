@@ -1,5 +1,6 @@
 const {Model, DataTypes} = require("sequelize");
 const bcrypt = require("bcrypt");
+const {sequelize} = require("../db");
 
 const saltRounds = 10;
 const hash = async (data) => bcrypt.hash(data, await bcrypt.genSalt(saltRounds));
@@ -32,6 +33,7 @@ User.init({
       }
     },
   },
+  sequelize,
 });
 
 module.exports = User;
