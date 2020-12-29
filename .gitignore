@@ -103,5 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
+<<<<<<< HEAD
 # IDE FILES
 .idea/
+=======
+*.mwb.bak
+
+.vscode
+>>>>>>> 54fa3b6ae3f5ee55cffae3ff57f02892f624f95a

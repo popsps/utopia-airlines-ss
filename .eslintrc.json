@@ -9,5 +9,31 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "camelcase": "error",
+        "semi": "warn",
+        "comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "never",
+                "exports": "never",
+                "functions": "never"
+            }
+        ],
+        "quotes": [
+            "warn",
+            "double"
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ]
     }
 }
