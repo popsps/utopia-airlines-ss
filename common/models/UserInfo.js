@@ -23,6 +23,7 @@ UserInfo.init({
   },
 }, {
   tableName: "user_info",
+  underscored: true,
   timestamps: false,
   freezeTableName: true,
 });
