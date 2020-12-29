@@ -9,5 +9,7 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "semi": "error",
+        "comma-dangle": "error"
     }
 }
