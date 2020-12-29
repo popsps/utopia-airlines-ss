@@ -21,6 +21,7 @@ User.init({
     allowNull: false
   }
 }, {
+  tableName: "user",
   timestamps: false,
   freezeTableName: true,
   hooks: {

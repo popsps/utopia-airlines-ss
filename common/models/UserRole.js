@@ -8,6 +8,7 @@ UserRole.init({
     allowNull: false
   }
 }, {
+  tableName: "user_role",
   timestamps: false,
   freezeTableName: true
 })
