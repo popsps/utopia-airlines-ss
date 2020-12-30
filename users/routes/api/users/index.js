@@ -3,20 +3,46 @@ const router = Router();
 
 const { userController } = require("../../../controllers");
 
-const { checkSchema } = require("express-validator");
-const getUserSchema = require("../../../schemas/user");
+const { oneOf, checkSchema } = require("express-validator");
+const { getUserSchema, getUserInfoSchema } = require("../../../schemas/user");
 const { validateRequest } = require("@utopia-airlines-wss/common/middleware");
 
 router.get("/", userController.getAll);
 router.post("/",
-  checkSchema(getUserSchema(), ["body"]),
+  oneOf([
+    checkSchema(
+      {
+        ...getUserSchema(),
+        info: {
+          exists: {
+            errorMessage: "invalid info structure",
+            negated: true,
+          },
+        },
+      },
+      ["body"]
+    ),
+    checkSchema(
+      {
+        ...getUserSchema(),
+        ...getUserInfoSchema(),
+      },
+      ["body"]
+    ),
+  ]),
   validateRequest,
   userController.create
 );
 
 router.get("/:id", userController.getById);
 router.put("/:id",
-  checkSchema(getUserSchema(true), ["body"]),
+  checkSchema(
+    {
+      ...getUserSchema({ optional:true }),
+      ...getUserInfoSchema({ optional:true }),
+    },
+    ["body"]
+  ),
   validateRequest,
   userController.updateById
 );
