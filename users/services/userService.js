@@ -36,13 +36,21 @@ const userService = {
       .forEach(([key, value]) => user[key] = value);
     await Promise.all([
       user.save(),
-      info != null && UserInfo.upsert({
-        userId,
-        givenName: info.name?.given, 
-        familyName: info.name?.family, 
-        email: info.email,
-        phone: info.phone,
-      })]);
+      info != null &&
+        UserInfo.findByPk(userId)
+          .then((userInfo) => {
+            const newInfo = {
+              givenName: info.name?.given, 
+              familyName: info.name?.family, 
+              email: info.email,
+              phone: info.phone,
+            };
+            if (userInfo) userInfo.update(newInfo);
+            else UserInfo.create({
+              userId,
+              ...newInfo,
+            });
+          })]);
     return;
   },
   async deleteUser(userId) {
