@@ -1,5 +1,6 @@
+const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { User, UserInfo } = require("@utopia-airlines-wss/common/models");
-const { NotFoundError } = require("@utopia-airlines-wss/common/errors");
+const { NotFoundError, BadRequestError } = require("@utopia-airlines-wss/common/errors");
 
 const userService = {
   async findAllUsers({ roleId } = {}) {
@@ -16,32 +17,42 @@ const userService = {
     return user;
   },
   async createUser({ roleId = 2, username, password, info } = {}) {
-    const user = await User.create({ roleId, username, password });
-    if (info != null) {
-      await UserInfo.create({
-        userId: user.id,
-        givenName: info.name.given, 
-        familyName: info.name.family, 
-        email: info.email,
-        phone: info.phone,
-      });
+    const transaction = await sequelize.transaction();
+    try {
+      const user = await User.create({ roleId, username, password });
+      if (info != null) {
+        await UserInfo.create({
+          userId: user.id,
+          givenName: info.name.given,
+          familyName: info.name.family,
+          email: info.email,
+          phone: info.phone,
+        });
+      }
+      await transaction.commit();
+      return user;
+    } catch (err) {
+      console.error(err);
+      await transaction.rollback();
+      throw new BadRequestError("invalid user data");
     }
-    return user;
   },
   async updateUser(userId, { roleId, username, password, info }) {
-    const user = await userService.findUserById(userId);
-    if (!user) throw new NotFoundError("cannot find user");
-    Object.entries({ roleId, username, password })
-      .filter(([, value]) => value != null)
-      .forEach(([key, value]) => user[key] = value);
-    await Promise.all([
-      user.save(),
-      info != null &&
+    const transaction = await sequelize.transaction();
+    try {
+      const user = await userService.findUserById(userId);
+      if (!user) throw new NotFoundError("cannot find user");
+      Object.entries({ roleId, username, password })
+        .filter(([, value]) => value != null)
+        .forEach(([key, value]) => user[key] = value);
+      await Promise.all([
+        user.save(),
+        info != null &&
         UserInfo.findByPk(userId)
           .then((userInfo) => {
             const newInfo = {
-              givenName: info.name?.given, 
-              familyName: info.name?.family, 
+              givenName: info.name?.given,
+              familyName: info.name?.family,
               email: info.email,
               phone: info.phone,
             };
@@ -51,7 +62,12 @@ const userService = {
               ...newInfo,
             });
           })]);
-    return;
+      await transaction.commit();
+    } catch (err) {
+      console.error(err);
+      await transaction.rollback();
+      throw new BadRequestError("invalid user data");
+    }
   },
   async deleteUser(userId) {
     const user = await User.findByPk(userId);
