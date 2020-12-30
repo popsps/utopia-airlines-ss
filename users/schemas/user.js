@@ -8,51 +8,6 @@ const getRequired = ({ optional, errorMessage }) => {
   };
 };
 
-const getUserSchema = ({ optional = false } = {}) => ({
-  roleId: {
-    optional: true,
-    isInt: {
-      errorMessage: "roleId must be an int",
-      options: { min: 1 },
-    },
-  },
-  username: {
-    ...getRequired({
-      optional,
-      errorMessage: "please provide a username",
-    }),
-    isString: {
-      errorMessage: "username must be a string",
-      bail: true,
-    },
-    isLength: {
-      errorMessage: "username must be at least 3 characters long",
-      options: { min: 3 },
-    },
-    isAlphanumeric: {
-      errorMessage: "username must be alphanumeric",
-    },
-  },
-  password: {
-    ...getRequired({
-      optional,
-      errorMessage: "please provide a password",
-    }),
-    isString: {
-      errorMessage: "password must be a string",
-      bail: true,
-    },
-    isLength: {
-      errorMessage: "password must be at least 8 characters long",
-      options: { min: 8 },
-    },
-    isStrongPassword: {
-      errorMessage: "password must contain at least one lowercase character, one uppercase character, one number, and one special character.",
-      options: { minLength: 1 },
-    },
-  },
-});
-
 const getUserInfoSchema = ({ optional = false } = {}) => ({
   "info.name.given": {
     ...getRequired({
@@ -109,4 +64,61 @@ const getUserInfoSchema = ({ optional = false } = {}) => ({
   },
 });
 
-module.exports = { getUserSchema, getUserInfoSchema };
+const getUserSchema = ({ optional = false, excludeInfo = false } = {}) => ({
+  roleId: {
+    optional: true,
+    isInt: {
+      errorMessage: "roleId must be an int",
+      options: { min: 1 },
+    },
+  },
+  username: {
+    ...getRequired({
+      optional,
+      errorMessage: "please provide a username",
+    }),
+    isString: {
+      errorMessage: "username must be a string",
+      bail: true,
+    },
+    isLength: {
+      errorMessage: "username must be at least 3 characters long",
+      options: { min: 3 },
+    },
+    isAlphanumeric: {
+      errorMessage: "username must be alphanumeric",
+    },
+  },
+  password: {
+    ...getRequired({
+      optional,
+      errorMessage: "please provide a password",
+    }),
+    isString: {
+      errorMessage: "password must be a string",
+      bail: true,
+    },
+    isLength: {
+      errorMessage: "password must be at least 8 characters long",
+      options: { min: 8 },
+    },
+    isStrongPassword: {
+      errorMessage: "password must contain at least one lowercase character, one uppercase character, one number, and one special character.",
+      options: { minLength: 1 },
+    },
+  },
+  ...(
+    !excludeInfo
+      ? getUserInfoSchema({ optional })
+      : {
+        info: {
+          exists: {
+            errorMessage: "invalid info structure",
+            negated: true,
+          },
+        },
+      }
+  ),
+});
+
+module.exports = { getUserSchema };
