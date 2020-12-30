@@ -8,6 +8,9 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 });
 
 const bookingDao = sequelize.define("booking", booking, {
+  tableName: "booking",
+  freezeTableName: true,
+  underscored: true,
   timestamps: false,
 });
 

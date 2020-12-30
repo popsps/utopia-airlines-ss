@@ -3,7 +3,7 @@
  * @author: Shayan Amirhosseini
  */
 // eslint-disable-next-line no-unused-vars
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, Model } = require("sequelize");
 
 const Booking = {
   id: {
