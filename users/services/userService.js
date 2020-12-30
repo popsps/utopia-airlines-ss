@@ -4,7 +4,6 @@ const { NotFoundError, BadRequestError } = require("@utopia-airlines-wss/common/
 const { StateConflictError } = require("@utopia-airlines-wss/common/errors/StateConflictError");
 
 const handleMutationError = (err) => {
-  console.error(err);
   if (err.original?.code === "ER_DUP_ENTRY") {
     throw new StateConflictError(
       Object.keys(err.fields)
@@ -13,8 +12,10 @@ const handleMutationError = (err) => {
           + " already exists"
     );
   }
-  else
+  else {
+    console.error(err);
     throw new BadRequestError("invalid user data");
+  }
 };
 
 const userService = {
