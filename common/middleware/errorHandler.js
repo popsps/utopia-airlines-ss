@@ -5,7 +5,7 @@ const errorHandler = ( err, req, res, _next ) => {
     res.status(err.status).json(err);
   } else {
     console.error(err);
-    res.status(500).send({ message: err.message });
+    res.status(err.status || 500).send({ message: err.message });
   }
 };
 
