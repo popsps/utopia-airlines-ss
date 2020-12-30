@@ -20,4 +20,4 @@ UserRole.init({
   sequelize,
 });
 
-module.exports = UserRole;
+module.exports = { UserRole };

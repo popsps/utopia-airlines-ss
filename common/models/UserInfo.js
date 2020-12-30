@@ -50,4 +50,4 @@ UserInfo.init({
   sequelize,
 });
 
-module.exports = UserInfo;
+module.exports = { UserInfo };

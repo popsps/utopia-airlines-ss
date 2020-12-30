@@ -1,6 +1,6 @@
-const UserRole = require("./UserRole");
-const User = require("./User");
-const UserInfo = require("./UserInfo");
+const { UserRole } = require("./UserRole");
+const { User } = require("./User");
+const { UserInfo } = require("./UserInfo");
 
 UserRole.hasMany(User, { foreignKey: { name:"roleId", field: "role_id", allowNull: false }, as: "users" });
 User.belongsTo(UserRole, { foreignKey: { name:"roleId", field: "role_id", allowNull: false }, as: "role" });
