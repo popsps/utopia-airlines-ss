@@ -15,16 +15,15 @@ const userService = {
     if (!user) throw new NotFoundError("cannot find user");
     return user;
   },
-  async createUser({ roleId, username, password, info } = {}) {
+  async createUser({ roleId = 2, username, password, info } = {}) {
     const user = await User.create({ roleId, username, password });
     if (info != null) {
-      const { givenName, familyName, email, phone } = info;
       await UserInfo.create({
         userId: user.id,
-        givenName,
-        familyName,
-        email,
-        phone,
+        givenName: info.name.given, 
+        familyName: info.name.family, 
+        email: info.email,
+        phone: info.phone,
       });
     }
     return user;
@@ -35,7 +34,15 @@ const userService = {
     Object.entries({ roleId, username, password })
       .filter(([, value]) => value != null)
       .forEach(([key, value]) => user[key] = value);
-    await Promise.all([user.save(), info != null && UserInfo.upsert({ ...info, userId })]);
+    await Promise.all([
+      user.save(),
+      info != null && UserInfo.upsert({
+        userId,
+        givenName: info.name?.given, 
+        familyName: info.name?.family, 
+        email: info.email,
+        phone: info.phone,
+      })]);
     return;
   },
   async deleteUser(userId) {
