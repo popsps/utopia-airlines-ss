@@ -29,21 +29,13 @@ const userService = {
     }
     return user;
   },
-  async updateUser(userId, { roleId, username, password, userInfo }) {
+  async updateUser(userId, { roleId, username, password, info }) {
     const user = await userService.findUserById(userId);
     if (!user) throw new NotFoundError("cannot find user");
-    if (roleId != null)
-      user.roleId = roleId;
-    if (username != null)
-      user.username = username;
-    if (password != null)
-      user.password = password;
-    const promises = [user.save()];
-    if (userInfo != null) {
-      const { givenName, familyName, email, phone } = userInfo;
-      promises.push(UserInfo.upsert({ userId,givenName, familyName, email, phone }));
-    }
-    await Promise.all(promises);
+    Object.entries({ roleId, username, password })
+      .filter(([, value]) => value != null)
+      .forEach(([key, value]) => user[key] = value);
+    await Promise.all([user.save(), info != null && UserInfo.upsert({ ...info, userId })]);
     return;
   },
   async deleteUser(userId) {

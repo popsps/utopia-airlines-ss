@@ -4,4 +4,5 @@ module.exports = {
   ...require("./BadRequestError"),
   ...require("./AuthenticationError"),
   ...require("./AuthorizationError"),
+  ...require("./RequestValidationError"),
 };
