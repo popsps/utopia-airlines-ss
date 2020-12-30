@@ -1,7 +1,7 @@
 module.exports = {
   Host: "localhost",
-  USER: "root",
-  PASSWORD: "amdin",
-  DB: "testutopia01",
+  USER: "nodeadmin",
+  PASSWORD: "ppooiiuu",
+  DB: "utopia",
   dialect: "mysql",
 };
