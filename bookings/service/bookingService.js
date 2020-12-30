@@ -14,9 +14,10 @@ exports.getAllBookings = async () => {
 exports.makeABooking = async (booking) => {
   // eslint-disable-next-line no-useless-catch
   try {
-    const bookings = await bookingDao.findOrCreate(
+    const _booking = await bookingDao.findOrCreate(
       { where: { id: booking.id } });
-    return bookings;
+    console.log("booking:", _booking);
+    return _booking;
   } catch (err) {
     throw err;
   }
