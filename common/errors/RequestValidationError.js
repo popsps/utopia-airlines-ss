@@ -2,10 +2,13 @@ const { StandardizedError } = require("./StandardizedError");
 
 class RequestValidationError extends StandardizedError {
   constructor(errors) {
+    console.log(errors);
     super(
       "Invalid data",
       400,
-      ...errors.map(({ msg: message, param, location }) => ({ message, param, location }))
+      ...errors.map((error) => error.nestedErrors ? error.nestedErrors : error)
+        .flat()
+        .map(({ msg: message, param, location }) => ({ message, param, location }))
     );
     Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
