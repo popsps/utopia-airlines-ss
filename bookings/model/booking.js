@@ -1,3 +1,7 @@
+/**
+ * Booking Model
+ * @author: Shayan Amirhosseini
+ */
 // eslint-disable-next-line no-unused-vars
 const { Sequelize, DataTypes } = require("sequelize");
 
