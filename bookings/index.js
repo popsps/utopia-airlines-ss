@@ -15,4 +15,5 @@ app.use((error, req, res, _next) => {
     stack: error.stack,
   });
 });
+
 app.listen(PORT, () => console.log("Booking controller is running on " + PORT));

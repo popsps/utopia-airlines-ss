@@ -1,12 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-const { Sequelize, Model } = require("sequelize");
-const dbConfig = require("../config/db.config");
-const booking = require("../model/booking");
+const sequelize = require("../db");
+const { booking } = require("../model");
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.Host,
-  dialect: dbConfig.dialect,
-});
 
 const bookingDao = sequelize.define("booking", booking, {
   tableName: "booking",

@@ -10,6 +10,7 @@ const Booking = {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
     field: "id",
   },
   bookerId: {
@@ -23,5 +24,8 @@ const Booking = {
     field: "is_active",
   },
 };
+// class Booking extends Model {
+// }
+
 
 module.exports = Booking;

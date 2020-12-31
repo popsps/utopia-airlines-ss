@@ -1,4 +1,4 @@
-const bookingDao = require("../dao/bookingDao");
+const { bookingDao } = require("../dao");
 const NotFoundError = require("../error/NotFoundError");
 
 const bookingService = {
@@ -21,7 +21,7 @@ const bookingService = {
   },
   async findBookingById(id) {
     const booking = await bookingDao.findByPk(id);
-    if (!booking) throw new NotFoundError("cannot find the booking");
+    if (!booking) throw new NotFoundError(`cannot find #${id} booking`);
     return booking;
   },
   async updateBooking(id, booking) {
@@ -30,7 +30,7 @@ const bookingService = {
      */
     const oldBooking = await this.findBookingById(id);
     if (!booking)
-      throw new NotFoundError("cannot find the booking");
+      throw new NotFoundError(`cannot find #${id} booking`);
     // const { bookerId, isActive } = booking;
     const newBooking = await oldBooking.update(booking);
     return newBooking;
@@ -41,7 +41,7 @@ const bookingService = {
      */
     const booking = await bookingDao.findByPk(id);
     if (!booking)
-      throw new NotFoundError("cannot find the booking");
+      throw new NotFoundError(`cannot find #${id} booking`);
     const res = await booking.destroy();
     return res;
   },
