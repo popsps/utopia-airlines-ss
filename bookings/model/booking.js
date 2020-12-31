@@ -20,7 +20,7 @@ const Booking = {
   isActive: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    field: "booker_id",
+    field: "is_active",
   },
 };
 

@@ -1,4 +1,5 @@
-const { Sequelize } = require("sequelize");
+// eslint-disable-next-line no-unused-vars
+const { Sequelize, Model } = require("sequelize");
 const dbConfig = require("../config/db.config");
 const booking = require("../model/booking");
 
