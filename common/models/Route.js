@@ -3,7 +3,10 @@ const { sequelize } = require("../db");
 
 class Route extends Model {
   toJSON() {
-    return this.name;
+    const values = this.get();
+    if (values.origin) delete values.originId;
+    if (values.destination) delete values.destinationId;
+    return values;
   }
 }
 
