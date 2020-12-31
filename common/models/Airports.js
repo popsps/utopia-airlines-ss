@@ -9,7 +9,7 @@ class Airport extends Model {
 }
 
 Airport.init({
-  iaid: {
+  iataId: {
     type: STRING,
     primaryKey: true,
   },
@@ -21,6 +21,6 @@ Airport.init({
   tableName: "airport",
   underscored: true,
   timestamps: false,
-  freezetableName: true,
+  freezeTableName: true,
   sequelize,
 });
