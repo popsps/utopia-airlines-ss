@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const bookingService = require("../service/bookingService");
-const HttpError = require("../error/HttpError");
+// eslint-disable-next-line no-unused-vars
+const { HttpError, BadRequestError, NotFoundError, ValidationError } = require("../error");
+
 
 router.get("/", async (req, res, next) => {
   try {
@@ -13,13 +15,13 @@ router.get("/", async (req, res, next) => {
 });
 router.get("/test", async (req, res, next) => {
   try {
-    throw new HttpError(400, "Bad Request");
+    throw new BadRequestError("test not found");
   } catch (err) {
     console.log("err:", err);
     next(err);
   }
 });
-router.get("/test2/t5", async (req, res, next) => {
+router.get("/test2/t5", async (req, res, _next) => {
   // throw "custom error 2";
   res.status(500).json("err");
 });
@@ -27,10 +29,14 @@ router.get("/test2/t5", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const booking = req.body;
-    const bookiningMade = await bookingService.makeBooking(booking);
-    res.status(201).json(bookiningMade);
+    if (!bookingService.validateBooking(booking))
+      throw new ValidationError("Invalid Input");
+    const bookingMade = await bookingService.makeBooking(booking);
+    if(bookingMade[1] === true)
+      res.status(201).json(bookingMade[0]);
+    else
+      throw new HttpError(409, "The booking already exists");
   } catch (err) {
-    console.log("err:", err);
     next(err);
   }
 });

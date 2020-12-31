@@ -2,6 +2,9 @@ const bookingDao = require("../dao/bookingDao");
 const NotFoundError = require("../error/NotFoundError");
 
 const bookingService = {
+  validateBooking(_booking) {
+    return true;
+  },
   async getAllBookings() {
     const bookings = await bookingDao.findAll();
     return bookings;
@@ -14,7 +17,7 @@ const bookingService = {
 
     // const _booking = await bookingDao.create(booking);
     console.log("booking:", _booking);
-    return _booking[0];
+    return _booking;
     // return _booking;
   },
   async findBookingById(id) {
