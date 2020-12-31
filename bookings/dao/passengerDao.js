@@ -10,4 +10,4 @@ const passengerDao = sequelize.define("passenger", passenger, {
   timestamps: false,
 });
 
-module.exports = passengerDao;
+module.exports = { passengerDao };
