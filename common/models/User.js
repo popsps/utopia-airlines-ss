@@ -10,7 +10,7 @@ class User extends Model {
     return bcrypt.compare(password, this.password);
   }
   toJSON() {
-    const values = Object.assign({}, this.get());
+    const values = this.get();
     delete values.password;
     delete values.roleId;
     if (values.info === null) delete values.info;
