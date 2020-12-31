@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bookingService = require("../service/bookingService");
+const HttpError = require("../Error/HttpError");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -10,11 +11,24 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+router.get("/test", async (req, res, next) => {
+  try {
+    throw new HttpError(400, "Bad Request");
+  } catch (err) {
+    console.log("err:", err);
+    next(err);
+  }
+});
+router.get("/test2/t5", async (req, res, next) => {
+  // throw "custom error 2";
+  res.status(500).json("err");
+});
 
 router.post("/", async (req, res, next) => {
   try {
     const booking = req.body;
-    res.json(await bookingService.makeBooking(booking));
+    const bookiningMade = await bookingService.makeBooking(booking);
+    res.status(201).json(bookiningMade);
   } catch (err) {
     console.log("err:", err);
     next(err);
@@ -48,5 +62,6 @@ router.put("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
 
 module.exports = router;

@@ -33,7 +33,6 @@ const bookingService = {
   },
   async deleteBookingById(id) {
     /**
-     *
      * @type Model
      */
     const booking = await bookingDao.findByPk(id);
