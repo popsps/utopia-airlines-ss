@@ -24,3 +24,5 @@ Airport.init({
   freezeTableName: true,
   sequelize,
 });
+
+module.exports = { Airport };

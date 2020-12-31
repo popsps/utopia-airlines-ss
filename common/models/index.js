@@ -1,6 +1,7 @@
 const { UserRole } = require("./UserRole");
 const { User } = require("./User");
 const { UserInfo } = require("./UserInfo");
+const { Airport } = require("./Airport");
 const { Route } = require("./Route");
 
 UserRole.hasMany(User, {
