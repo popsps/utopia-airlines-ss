@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bookingService = require("../service/bookingService");
-const HttpError = require("../Error/HttpError");
+const HttpError = require("../error/HttpError");
 
 router.get("/", async (req, res, next) => {
   try {

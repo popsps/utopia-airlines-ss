@@ -1,5 +1,5 @@
 const bookingDao = require("../dao/bookingDao");
-const { NotFoundError } = require("../../common/errors/NotFoundError");
+const NotFoundError = require("../error/NotFoundError");
 
 const bookingService = {
   async getAllBookings() {
@@ -27,6 +27,8 @@ const bookingService = {
      * @type Model
      */
     const oldBooking = await this.findBookingById(id);
+    if (!booking)
+      throw new NotFoundError("cannot find the booking");
     // const { bookerId, isActive } = booking;
     const newBooking = await oldBooking.update(booking);
     return newBooking;
