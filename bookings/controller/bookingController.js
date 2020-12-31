@@ -21,9 +21,12 @@ router.get("/test", async (req, res, next) => {
     next(err);
   }
 });
-router.get("/test2/t5", async (req, res, _next) => {
-  // throw "custom error 2";
-  res.status(500).json("err");
+router.get("/test2/t5", async (req, res, next) => {
+  try {
+    throw { message:"custom Error", stack:"random stack" };
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.post("/", async (req, res, next) => {
@@ -32,7 +35,7 @@ router.post("/", async (req, res, next) => {
     if (!bookingService.validateBooking(booking))
       throw new ValidationError("Invalid Input");
     const bookingMade = await bookingService.makeBooking(booking);
-    if(bookingMade[1] === true)
+    if (bookingMade[1] === true)
       res.status(201).json(bookingMade[0]);
     else
       throw new HttpError(409, "The booking already exists");

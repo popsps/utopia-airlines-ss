@@ -10,15 +10,14 @@ const bookingService = {
     return bookings;
   },
   async makeBooking(booking) {
-    const myBooking = bookingDao.build(booking);
-    console.log(myBooking instanceof bookingDao);
+    // const myBooking = bookingDao.build(booking);
+    // console.log(myBooking instanceof bookingDao, myBooking);
+    // const _booking = await bookingDao.create(booking);
+    // return _booking;
     const _booking = await bookingDao.findOrCreate(
       { where: { id: booking.id }, defaults: booking });
-
-    // const _booking = await bookingDao.create(booking);
-    console.log("booking:", _booking);
     return _booking;
-    // return _booking;
+
   },
   async findBookingById(id) {
     const booking = await bookingDao.findByPk(id);

@@ -7,9 +7,10 @@ app.use(express.json());
 
 app.use("/bookings", BookingController);
 app.use((error, req, res, _next) => {
-  res.status(error.status);
+  const status = error.status || 400;
+  res.status(status);
   res.json({
-    status: error.status,
+    status: status,
     message: error.message,
     stack: error.stack,
   });
