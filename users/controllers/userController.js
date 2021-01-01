@@ -1,4 +1,5 @@
-const { userService } = require("../services");
+const { StateConflictError } = require("@utopia-airlines-wss/common/errors");
+const { userService, sessionService } = require("../services");
 
 const userController = {
   async getAll(req, res, next) {
@@ -37,6 +38,23 @@ const userController = {
     } catch (err) {
       next(err);
     }
+  },
+  async getSession(req, res) {
+    res.status(200).json(req.user || null);
+  },
+  async createSession(req, res, next) {
+    if (req.user)
+      next(new StateConflictError("session already exists"));
+    try {
+      req.session.jwt = await sessionService.createSession(req.body);
+      res.sendStatus(201);
+    } catch (err) {
+      next(err);
+    }
+  },
+  async deleteSession(req, res) {
+    req.session = null;
+    res.sendStatus(205);
   },
 };
 
