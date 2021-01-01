@@ -1,5 +1,5 @@
 const { StateConflictError } = require("@utopia-airlines-wss/common/errors");
-const { userService, sessionService } = require("../services");
+const { userService, sessionService, bookingService } = require("../services");
 
 const userController = {
   async getAll(req, res, next) {
@@ -55,6 +55,14 @@ const userController = {
   async deleteSession(req, res) {
     req.session = null;
     res.sendStatus(205);
+  },
+  async getUserBookings(req, res, next) {
+    try {
+      const user = await userService.findUserById(req.params.id);
+      res.json(await bookingService.getBookingsForUser(user));
+    } catch(err) {
+      next(err);
+    }
   },
 };
 
