@@ -43,4 +43,12 @@ router.route("/:id")
   )
   .delete(userController.deleteById);
 
+router.get("/:id/bookings",
+  requireAuthentication({
+    condition: (req) => req.user?.id !== +req.params.id,
+    roles: ["ADMIN"],
+  }),
+  userController.getUserBookings
+);
+
 module.exports = router;
