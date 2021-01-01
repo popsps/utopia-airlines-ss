@@ -1,25 +1,25 @@
-// eslint-disable-next-line no-unused-vars
-// const { Sequelize, DataTypes, Model } = require("sequelize");
-const Sequelize = require("sequelize").Sequelize;
+const { Model, DataTypes } = require("sequelize");
+const { sequelize } = require("../db");
 
-const Booking = {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    field: "id",
-  },
-  bookerId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    field: "booker_id",
-  },
+class Booking extends Model { 
+  toJSON(){
+    const values = Object.assign({}, this.get());
+    return values;
+  }
+}
+
+Booking.init ({
   isActive: {
-    type: Sequelize.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     allowNull: false,
-    field: "is_active",
   },
-};
+}, {
+  tableName: "booking",
+  underscored: true,
+  timestamps: false,
+  freezeTableName: true,
+  sequelize,
+});
 
 
-module.exports = Booking;
+module.exports = { Booking };

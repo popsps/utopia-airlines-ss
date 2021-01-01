@@ -1,43 +1,40 @@
-// eslint-disable-next-line no-unused-vars
-const Sequelize = require("sequelize").Sequelize;
+const { Model, DataTypes } = require("sequelize");
+const { sequelize } = require("../db");
 
-const Passenger = {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    field: "id",
-  },
-  bookingId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    field: "booking_id",
-  },
+class Passenger extends Model { 
+  toJSON(){
+    const values = Object.assign({}, this.get());
+    return values;
+  }
+}
+
+Passenger.init({
   givenName: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
-    field: "given_name",
   },
   familyName: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
-    field: "family_name",
   },
   dob: {
-    type: Sequelize.DATE,
+    type: DataTypes.DATE,
     allowNull: false,
-    field: "dob",
   },
   gender: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
-    field: "gender",
   },
   address: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
-    field: "address",
   },
-};
+}, {
+  tableName: "passenger",
+  underscored: true,
+  timestamps: false,
+  freezeTableName: true,
+  sequelize,
+});
 
-module.exports = Passenger;
+module.exports = { Passenger };
