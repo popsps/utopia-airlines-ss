@@ -1,13 +1,9 @@
-const { AuthenticationError } = require("../errors");
+const { AuthenticationError, AuthorizationError } = require("../errors");
 
-/**
- * 
- * @param  {...string} roles 
- */
-const requireAuthentication = (...roles) => async (req, res, next) => {
-  if (!roles.includes(req.user?.role.name)) {
-    throw new AuthenticationError();
-  }
+const requireAuthentication = ({ roles, errorMessage }) => (req, res, next) => {
+  if (!res.user) throw new AuthenticationError();
+  if (!roles.includes(req.user.role.name)) 
+    throw new AuthorizationError(errorMessage);
   next();
 };
 
