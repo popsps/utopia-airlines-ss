@@ -7,7 +7,9 @@ const { HttpError, BadRequestError, NotFoundError, ValidationError } = require("
 
 router.get("/", async (req, res, next) => {
   try {
-    const bookings = await bookingService.getAllBookings();
+    const bookerId = req.query.bookerId;
+    const isActive = req.query.isActive;
+    const bookings = await bookingService.getAllBookings({ bookerId, isActive });
     res.status(200).json(bookings);
   } catch (err) {
     console.log("err:", err);
@@ -24,7 +26,7 @@ router.get("/test", async (req, res, next) => {
 });
 router.get("/test2/t5", async (req, res, next) => {
   try {
-    throw { message:"custom Error", stack:"random stack" };
+    throw { message: "custom Error", stack: "random stack" };
   } catch (err) {
     next(err);
   }

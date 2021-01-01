@@ -6,8 +6,13 @@ const bookingService = {
   validateBooking(_booking) {
     return true;
   },
-  async getAllBookings() {
-    const bookings = await bookingDao.findAll();
+  async getAllBookings(query = null) {
+    const filter = {};
+    if (query.bookerId)
+      filter.bookerId = parseInt(query.bookerId);
+    if (query.isActive)
+      filter.isActive = (query.isActive == "true") ? true : false;
+    const bookings = await bookingDao.findAll({ where: filter });
     return bookings;
   },
   async makeBooking(booking) {
