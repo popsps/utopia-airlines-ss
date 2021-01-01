@@ -3,9 +3,6 @@ const { bookingDao, passengerDao } = require("../dao");
 const NotFoundError = require("../error/NotFoundError");
 
 const bookingService = {
-  validateBooking(_booking) {
-    return true;
-  },
   async getAllBookings(query = null) {
     const filter = {};
     if (query.bookerId)
@@ -15,7 +12,7 @@ const bookingService = {
     const bookings = await bookingDao.findAll({ where: filter });
     return bookings;
   },
-  async makeBooking(booking) {
+  makeBooking: async (booking) => {
     // const myBooking = bookingDao.build(booking);
     // console.log(myBooking instanceof bookingDao, myBooking);
     // const _booking = await bookingDao.create(booking);
@@ -32,7 +29,7 @@ const bookingService = {
     const _booking = await bookingDao.create(booking);
     return _booking;
   },
-  async findBookingById(id) {
+  findBookingById: async (id) => {
     // eager loading
     // const booking = await bookingDao.findByPk(id, { include: passengerDao });
     const booking = await bookingDao.findByPk(id);
@@ -43,7 +40,7 @@ const bookingService = {
     booking.setDataValue("passengers", bookingWithPassenger);
     return booking;
   },
-  async updateBooking(id, booking) {
+  updateBooking: async (id, booking) => {
     /**
      * @type Model
      */
@@ -53,7 +50,7 @@ const bookingService = {
     const newBooking = await oldBooking.update(booking);
     return newBooking;
   },
-  async deleteBookingById(id) {
+  deleteBookingById: async (id) => {
     /**
      * @type Model
      */
