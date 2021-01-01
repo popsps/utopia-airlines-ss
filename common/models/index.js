@@ -80,7 +80,7 @@ User.hasMany(Booking,{
   },
   as: "bookings",
 });
-Booking.hasOne(User,{
+Booking.belongsTo(User,{
   foreignKey: {
     name: "bookerId",
     field: "booker_id",
@@ -97,7 +97,7 @@ Booking.hasMany(Passenger, {
   },
   as: "passengers",
 });
-Passenger.hasOne(Booking, {
+Passenger.belongsTo(Booking, {
   foreignKey: {
     name: "bookingId",
     field: "booking_id",
