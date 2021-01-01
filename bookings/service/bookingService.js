@@ -26,6 +26,12 @@ const bookingService = {
     });
     return _booking;
   },
+  async makeBooking2(booking) {
+    const myBooking = bookingDao.build(booking);
+    console.log(myBooking instanceof bookingDao, myBooking);
+    const _booking = await bookingDao.create(booking);
+    return _booking;
+  },
   async findBookingById(id) {
     // eager loading
     // const booking = await bookingDao.findByPk(id, { include: passengerDao });

@@ -5,7 +5,6 @@ const Sequelize = require("sequelize").Sequelize;
 const Booking = {
   id: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
     field: "id",

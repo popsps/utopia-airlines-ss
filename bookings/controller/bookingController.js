@@ -43,6 +43,18 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
+router.post("/post", async (req, res, next) => {
+  try {
+    const booking = req.body;
+    const bookingMade = await bookingService.makeBooking2(booking);
+    if (bookingMade[1] === true)
+      res.status(201).json(bookingMade[0]);
+    else
+      throw new HttpError(409, "The booking already exists");
+  } catch (err) {
+    next(err);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;

@@ -4,7 +4,6 @@ const Sequelize = require("sequelize").Sequelize;
 const Passenger = {
   id: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
     field: "id",
