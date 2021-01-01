@@ -7,7 +7,11 @@ const { oneOf, checkSchema } = require("express-validator");
 const { getUserSchema } = require("../../../schemas/user");
 const { validateRequest, requireAuthentication  } = require("@utopia-airlines-wss/common/middleware");
 
-router.get("/", userController.getAll);
+router.get("/",
+  requireAuthentication({
+    roles: ["ADMIN"],
+  }),
+  userController.getAll);
 router.post("/",
   oneOf([
     checkSchema(getUserSchema({ excludeInfo: true }), ["body"] ),
@@ -26,12 +30,17 @@ router.get("/session", userController.getSession);
 router.post("/session", userController.createSession);
 router.delete("/session", userController.deleteSession);
 
-router.get("/:id", userController.getById);
-router.put("/:id",
-  checkSchema(getUserSchema({ optional:true }), ["body"]),
-  validateRequest,
-  userController.updateById
-);
-router.delete("/:id", userController.deleteById);
+router.route("/:id")
+  .all(requireAuthentication({
+    condition: (req) => req.user?.id !== +req.params.id,
+    roles: ["ADMIN"],
+  }))
+  .get(userController.getById)
+  .put(
+    checkSchema(getUserSchema({ optional:true }), ["body"]),
+    validateRequest,
+    userController.updateById
+  )
+  .delete(userController.deleteById);
 
 module.exports = router;
