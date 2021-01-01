@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bookingService = require("../service/bookingService");
 // eslint-disable-next-line no-unused-vars
-const { HttpError, BadRequestError, NotFoundError, ValidationError } = require("../error");
+const { HttpError } = require("../error");
 
 
 router.get("/", async (req, res, next) => {
@@ -13,21 +13,6 @@ router.get("/", async (req, res, next) => {
     res.status(200).json(bookings);
   } catch (err) {
     console.log("err:", err);
-    next(err);
-  }
-});
-router.get("/test", async (req, res, next) => {
-  try {
-    throw new BadRequestError("test not found");
-  } catch (err) {
-    console.log("err:", err);
-    next(err);
-  }
-});
-router.get("/test2/t5", async (req, res, next) => {
-  try {
-    throw { message: "custom Error", stack: "random stack" };
-  } catch (err) {
     next(err);
   }
 });

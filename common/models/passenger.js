@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const Sequelize = require("sequelize").Sequelize;
 
 const Passenger = {
