@@ -5,7 +5,7 @@ const PORT = process.env.Port || 3000;
 const app = express();
 app.use(express.json());
 
-app.use("/bookings", BookingController);
+app.use("/api/bookings", BookingController);
 app.use((error, req, res, _next) => {
   const status = error.status || 400;
   res.status(status);
