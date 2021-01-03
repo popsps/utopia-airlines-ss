@@ -3,6 +3,15 @@ const { bookingDao, passengerDao } = require("../dao");
 const NotFoundError = require("../error/NotFoundError");
 
 const bookingService = {
+  validateBooking(booking) {
+    if (!("bookerId" in booking) || !Number.isInteger(booking["bookerId"]))
+      return false;
+    if (!("isActive" in booking) || !(typeof booking["isActive"] === "boolean"))
+      return false;
+    if (("id" in booking) && !Number.isInteger(booking["id"]))
+      return false;
+    return true;
+  },
   async getAllBookings(query = null) {
     const filter = {};
     if (query.bookerId)
@@ -12,16 +21,31 @@ const bookingService = {
     const bookings = await bookingDao.findAll({ where: filter });
     return bookings;
   },
-  makeBooking: async (booking) => {
+  async makeBooking(booking) {
     // const myBooking = bookingDao.build(booking);
     // console.log(myBooking instanceof bookingDao, myBooking);
-    // const _booking = await bookingDao.create(booking);
+    // const _booking = await bookingDao.save(booking);
     // return _booking;
-    const _booking = await bookingDao.findOrCreate({
-      where: { id: booking.id },
-      defaults: booking,
-    });
+    let _booking = null;
+    if ("id" in booking) {
+      _booking = await bookingDao.findOrCreate({
+        where: { id: booking.id },
+        defaults: booking,
+      });
+    }
+    else {
+      _booking = await bookingDao.create(booking);
+      _booking = [_booking, true];
+      if ("passengers" in booking)
+        await this.addPassengers(_booking[0]["id"], booking["passengers"]);
+    }
     return _booking;
+  },
+  async addPassengers(id, passengers) {
+    for (let passenger of passengers) {
+      passenger["bookingId"] = id;
+      await passengerDao.create(passenger);
+    }
   },
   async makeBooking2(booking) {
     const myBooking = bookingDao.build(booking);
@@ -29,7 +53,7 @@ const bookingService = {
     const _booking = await bookingDao.create(booking);
     return _booking;
   },
-  findBookingById: async (id) => {
+  async findBookingById(id) {
     // eager loading
     // const booking = await bookingDao.findByPk(id, { include: passengerDao });
     const booking = await bookingDao.findByPk(id);
@@ -40,22 +64,22 @@ const bookingService = {
     booking.setDataValue("passengers", bookingWithPassenger);
     return booking;
   },
-  updateBooking: async (id, booking) => {
+  async updateBooking(id, booking) {
     /**
      * @type Model
      */
     const oldBooking = await this.findBookingById(id);
-    if (!booking) throw new NotFoundError(`cannot find #${id} booking`);
+    if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
     // const { bookerId, isActive } = booking;
     const newBooking = await oldBooking.update(booking);
     return newBooking;
   },
-  deleteBookingById: async (id) => {
+  async deleteBookingById(id) {
     /**
      * @type Model
      */
     const booking = await bookingDao.findByPk(id);
-    if (!booking) throw new NotFoundError(`cannot find #${id} booking`);
+    if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
     const res = await booking.destroy();
     return res;
   },

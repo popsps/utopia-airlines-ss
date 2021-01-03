@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bookingService = require("../service/bookingService");
-// eslint-disable-next-line no-unused-vars
-const { HttpError } = require("../error");
+const { HttpError, BadRequestError } = require("../error");
 
 
 router.get("/", async (req, res, next) => {
@@ -19,12 +18,15 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const booking = req.body;
+    if (!bookingService.validateBooking(booking))
+      throw new BadRequestError("Bad input");
     const bookingMade = await bookingService.makeBooking(booking);
     if (bookingMade[1] === true)
       res.status(201).json(bookingMade[0]);
     else
       throw new HttpError(409, "The booking already exists");
   } catch (err) {
+    console.log(err);
     next(err);
   }
 });
@@ -48,6 +50,8 @@ router.put("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const booking = req.body;
+    if (!bookingService.validateBooking(booking))
+      throw new BadRequestError("Bad input");
     res.json(await bookingService.updateBooking(id, booking));
   } catch (err) {
     next(err);
