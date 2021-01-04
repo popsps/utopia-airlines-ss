@@ -15,8 +15,6 @@ Booking.init ({
   },
 }, {
   tableName: "booking",
-  underscored: true,
-  timestamps: false,
   freezeTableName: true,
   sequelize,
 });

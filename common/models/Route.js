@@ -12,8 +12,6 @@ class Route extends Model {
 
 Route.init({}, {
   tableName: "route",
-  underscored: true,
-  timestamps: false,
   freezeTableName: true,
   sequelize,
 });

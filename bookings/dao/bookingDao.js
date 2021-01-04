@@ -11,4 +11,4 @@ const bookingDao = sequelize.define("booking", booking, {
 });
 
 
-module.exports = {bookingDao};
+module.exports = { bookingDao };

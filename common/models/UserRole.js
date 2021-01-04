@@ -14,8 +14,6 @@ UserRole.init({
   },
 }, {
   tableName: "user_role",
-  underscored: true,
-  timestamps: false,
   freezeTableName: true,
   sequelize,
 });

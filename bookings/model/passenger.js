@@ -4,11 +4,11 @@ const Passenger = {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
     field: "id",
   },
   bookingId: {
     type: Sequelize.INTEGER,
+    primaryKey: true,
     allowNull: false,
     field: "booking_id",
   },
