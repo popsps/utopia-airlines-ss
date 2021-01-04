@@ -36,8 +36,11 @@ const bookingService = {
     else {
       _booking = await bookingDao.create(booking);
       _booking = [_booking, true];
-      if ("passengers" in booking)
+      if ("passengers" in booking) {
         await this.addPassengers(_booking[0]["id"], booking["passengers"]);
+        const { id, bookerId, isActive } = _booking[0];
+        _booking[0] = { id, bookerId, isActive, passengers: booking["passengers"] };
+      }
     }
     return _booking;
   },

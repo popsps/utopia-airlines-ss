@@ -22,7 +22,7 @@ router.post("/", async (req, res, next) => {
       throw new BadRequestError("Bad input");
     const bookingMade = await bookingService.makeBooking(booking);
     if (bookingMade[1] === true)
-      res.status(201).json(bookingMade[0]);
+      res.status(201).json(bookingMade[0]).json(bookingMade[2]);
     else
       throw new HttpError(409, "The booking already exists");
   } catch (err) {
