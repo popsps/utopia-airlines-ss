@@ -5,7 +5,36 @@ const { User } = require("./User");
 const { UserInfo } = require("./UserInfo");
 const { Booking } = require("./Booking");
 const { Passenger } = require("./Passenger");
+const { Flight } = require("./Flight");
 
+Flight.belongsToMany(Booking, {
+  through: "flight_bookings",
+  foreignKey: "flight_id",
+  otherKey: "booking_id",
+  as: "bookings",
+});
+Booking.belongsToMany(Flight, {
+  through: "flight_bookings",
+  foreignKey: "booking_id",
+  otherKey: "flight_id",
+  as: "flights",
+});
+Route.hasMany(Flight, {
+  foreignKey: {
+    name: "routeId",
+    field: "route_id",
+    allowNull: false,
+  },
+  as: "flights",
+});
+Flight.belongsTo(Route, {
+  foreignKey: {
+    name: "routeId",
+    field: "route_id",
+    allowNull: false,
+  },
+  as: "route",
+});
 Airport.hasMany(Route, {
   foreignKey: {
     name: "originId",
@@ -114,4 +143,5 @@ module.exports = {
   UserInfo,
   Booking,
   Passenger,
+  Flight,
 };

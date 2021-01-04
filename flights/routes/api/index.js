@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
 
-router.use("/airports", require("./airports"));
+router.use("/flights", require("./flights"));
 
 module.exports = router;
