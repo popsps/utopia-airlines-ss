@@ -72,9 +72,11 @@ const bookingService = {
     if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
     // const { bookerId, isActive } = booking;
     const { bookerId, isActive } = booking;
-    const newBooking = await oldBooking.update({ bookerId, isActive });
-    if ("passengers" in booking)
+    let newBooking = await oldBooking.update({ bookerId, isActive });
+    if ("passengers" in booking) {
       await this.addPassengers(id, booking["passengers"]);
+      newBooking = await this.findBookingById(id);
+    }
     return newBooking;
   },
   async deleteBookingById(id) {
