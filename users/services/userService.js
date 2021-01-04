@@ -1,22 +1,7 @@
 const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { User, UserInfo } = require("@utopia-airlines-wss/common/models");
-const { NotFoundError, BadRequestError } = require("@utopia-airlines-wss/common/errors");
-const { StateConflictError } = require("@utopia-airlines-wss/common/errors/StateConflictError");
+const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 
-const handleMutationError = (err) => {
-  if (err.original?.code === "ER_DUP_ENTRY") {
-    throw new StateConflictError(
-      Object.keys(err.fields)
-        .map((path) => path.match(/([^.]*)(?=_UNIQUE$)/)?.[0])
-        .join(", ")
-          + " already exists"
-    );
-  }
-  else {
-    console.error(err);
-    throw new BadRequestError("invalid user data");
-  }
-};
 
 const userService = {
   async findAllUsers({ roleId } = {}) {
