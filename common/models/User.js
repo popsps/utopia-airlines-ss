@@ -30,8 +30,6 @@ User.init({
   },
 }, {
   tableName: "user",
-  underscored: true,
-  timestamps: false,
   freezeTableName: true,
   hooks: {
     async beforeSave(user) {

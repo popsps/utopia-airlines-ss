@@ -19,8 +19,6 @@ Airport.init({
   },
 }, { 
   tableName: "airport",
-  underscored: true,
-  timestamps: false,
   freezeTableName: true,
   sequelize,
 });

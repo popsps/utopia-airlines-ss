@@ -31,8 +31,6 @@ Passenger.init({
   },
 }, {
   tableName: "passenger",
-  underscored: true,
-  timestamps: false,
   freezeTableName: true,
   sequelize,
 });
