@@ -44,7 +44,7 @@ const bookingService = {
   async addPassengers(id, passengers) {
     for (let passenger of passengers) {
       passenger["bookingId"] = id;
-      await passengerDao.create(passenger);
+      await passengerDao.upsert(passenger);
     }
   },
   async makeBooking2(booking) {
@@ -71,7 +71,10 @@ const bookingService = {
     const oldBooking = await this.findBookingById(id);
     if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
     // const { bookerId, isActive } = booking;
-    const newBooking = await oldBooking.update(booking);
+    const { bookerId, isActive } = booking;
+    const newBooking = await oldBooking.update({ bookerId, isActive });
+    if ("passengers" in booking)
+      await this.addPassengers(id, booking["passengers"]);
     return newBooking;
   },
   async deleteBookingById(id) {
