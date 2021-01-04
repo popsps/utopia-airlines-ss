@@ -1,7 +1,7 @@
 const express = require("express");
 const BookingController = require("./controller/bookingController");
 
-const PORT = process.env.Port || 3000;
+const PORT = process.env.PORT || process.argv[2] || 3000;
 const app = express();
 app.use(express.json());
 
