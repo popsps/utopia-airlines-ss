@@ -6,6 +6,7 @@ const errors = {
   ...require("./AuthenticationError"),
   ...require("./AuthorizationError"),
   ...require("./RequestValidationError"),
+  ...require("./StateConflictError"),
   handleMutationError(err) {
     if (err.original?.code === "ER_DUP_ENTRY") {
       throw new errors.StateConflictError(
