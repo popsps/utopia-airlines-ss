@@ -84,9 +84,11 @@ const bookingService = {
         { transaction: transaction });
       if ("passengers" in booking) {
         await this.addPassengers(id, booking["passengers"], transaction);
-        newBooking = await this.findBookingById(id);
       }
       await transaction.commit();
+      if ("passengers" in booking) {
+        newBooking = await this.findBookingById(id);
+      }
       return newBooking;
     } catch (err) {
       await transaction.rollback();
