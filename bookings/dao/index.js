@@ -1,5 +1,6 @@
 const { bookingDao } = require("./bookingDao");
 const { passengerDao } = require("./passengerDao");
+const sequelize = require("../db");
 
 bookingDao.hasMany(passengerDao, {
   foreignKey: {
@@ -16,4 +17,4 @@ passengerDao.belongsTo(bookingDao, {
   },
 });
 
-module.exports = { bookingDao, passengerDao };
+module.exports = { sequelize, bookingDao, passengerDao };
