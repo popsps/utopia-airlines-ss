@@ -6,7 +6,7 @@ const models = {
   ...require("./User"),
   ...require("./Booking"),
   ...require("./BookingGuest"),
-  ...require("./BookingBooker"),
+  ...require("./BookingAgent"),
   ...require("./BookingUser"),
   ...require("./GuestBooking"),
   ...require("./UserBooking"),
