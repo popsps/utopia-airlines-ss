@@ -8,11 +8,11 @@ const userService = {
     if (roleId != null) query.roleId = roleId;
     return User.findAll({
       where: query,
-      include: ["role", "info"],
+      include: "role",
     });
   },
   async findUserById(userId) {
-    const user = await User.findByPk(userId, { include: ["role", "info"] });
+    const user = await User.findByPk(userId, { include: "role" });
     if (!user) throw new NotFoundError("cannot find user");
     return user;
   },

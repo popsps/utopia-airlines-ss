@@ -11,9 +11,8 @@ class User extends Model {
   }
   toJSON() {
     const values = this.get();
-    delete values.password;
     delete values.roleId;
-    if (values.info === null) delete values.info;
+    delete values.password;
     return values;
   }
 }
@@ -25,6 +24,24 @@ User.init({
     unique: true,
   },
   password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  givenName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  familyName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
