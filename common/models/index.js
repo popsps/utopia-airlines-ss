@@ -1,40 +1,10 @@
 const { Airport } = require("./Airport");
 const { Route } = require("./Route");
+const { Flight } = require("./Flight");
 const { UserRole } = require("./UserRole");
 const { User } = require("./User");
-const { UserInfo } = require("./UserInfo");
 const { Booking } = require("./Booking");
 const { Passenger } = require("./Passenger");
-const { Flight } = require("./Flight");
-
-Flight.belongsToMany(Booking, {
-  through: "flight_bookings",
-  foreignKey: "flight_id",
-  otherKey: "booking_id",
-  as: "bookings",
-});
-Booking.belongsToMany(Flight, {
-  through: "flight_bookings",
-  foreignKey: "booking_id",
-  otherKey: "flight_id",
-  as: "flights",
-});
-Route.hasMany(Flight, {
-  foreignKey: {
-    name: "routeId",
-    field: "route_id",
-    allowNull: false,
-  },
-  as: "flights",
-});
-Flight.belongsTo(Route, {
-  foreignKey: {
-    name: "routeId",
-    field: "route_id",
-    allowNull: false,
-  },
-  as: "route",
-});
 Airport.hasMany(Route, {
   foreignKey: {
     name: "originId",
@@ -67,6 +37,22 @@ Route.belongsTo(Airport, {
   },
   as: "destination",
 });
+Route.hasMany(Flight, {
+  foreignKey: {
+    name: "routeId",
+    field: "route_id",
+    allowNull: false,
+  },
+  as: "flights",
+});
+Flight.belongsTo(Route, {
+  foreignKey: {
+    name: "routeId",
+    field: "route_id",
+    allowNull: false,
+  },
+  as: "route",
+});
 
 UserRole.hasMany(User, {
   foreignKey: {
@@ -83,22 +69,6 @@ User.belongsTo(UserRole, {
     allowNull: false,
   },
   as: "role",
-});
-
-User.hasOne(UserInfo, {
-  foreignKey: {
-    name:"userId",
-    field: "user_id",
-    allowNull: false,
-  },
-  as: "info",
-});
-UserInfo.belongsTo(User, {
-  foreignKey: {
-    name:"userId",
-    field: "user_id",
-    allowNull: false,
-  },
 });
 
 User.hasMany(Booking,{
@@ -135,13 +105,25 @@ Passenger.belongsTo(Booking, {
   as: "booking",
 });
 
+Flight.belongsToMany(Booking, {
+  through: "flight_bookings",
+  foreignKey: "flight_id",
+  otherKey: "booking_id",
+  as: "bookings",
+});
+Booking.belongsToMany(Flight, {
+  through: "flight_bookings",
+  foreignKey: "booking_id",
+  otherKey: "flight_id",
+  as: "flights",
+});
+
 module.exports = {
   Airport,
   Route,
+  Flight,
   UserRole,
   User,
-  UserInfo,
   Booking,
   Passenger,
-  Flight,
 };
