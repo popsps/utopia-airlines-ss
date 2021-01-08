@@ -14,6 +14,11 @@ Booking.init ({
     allowNull: false,
     defaultValue: true,
   },
+  confirmationCode: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV4,
+  },
 }, {
   tableName: "booking",
   freezeTableName: true,
