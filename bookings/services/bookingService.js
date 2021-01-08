@@ -1,6 +1,7 @@
+const { Op } = require("sequelize");
 const { sequelize } = require("@utopia-airlines-wss/common/db");
-const { Booking } = require("@utopia-airlines-wss/common/models");
-const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
+const { Booking, Flight } = require("@utopia-airlines-wss/common/models");
+const { NotFoundError, BadRequestError, handleMutationError  } = require("@utopia-airlines-wss/common/errors");
 
 const bookingService = {
   validateBooking(booking) {
@@ -23,21 +24,30 @@ const bookingService = {
     const booking = await Booking.findByPk(id, {
       include: "passengers",
     });
-    if (!booking) throw new NotFoundError(`cannot find #${id} booking`);
+    if (!booking) throw new NotFoundError("cannot find booking");
     return booking;
   },
   async createBooking({ flights, passengers }) {
     const transaction = await sequelize.transaction();
     try {
+      flights = await Flight.findAll({
+        where: {
+          id: {
+            [Op.or]: flights,
+          },
+        },
+      });
+      if (!flights.every(flight => flight.availableSeats >= passengers.length)) {
+        throw new BadRequestError("not enough seats");
+      }
       const booking = await Booking.create({ passengers }, {
         transaction,
         include: [
           "passengers",
         ],
       });
-
       await booking
-        .update("flights", flights);
+        .update({ flights }, { transaction });
 
       await transaction.commit();
       return booking;
@@ -46,23 +56,18 @@ const bookingService = {
       handleMutationError(err);
     }
   },
-  async updateBooking(id, booking) {
-    const oldBooking = await this.findBookingById(id);
-    if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
+  async updateBooking(id, { isActive, flights, passengers }) {
+    const booking = await bookingService.findBookingById(id);
     const transaction = await sequelize.transaction();
     try {
-      // const { bookerId, isActive } = booking;
-      const { bookerId, isActive } = booking;
-      let newBooking = await oldBooking.update({ bookerId, isActive },
-        { transaction: transaction });
-      if ("passengers" in booking) {
-        await this.addPassengers(id, booking["passengers"], transaction);
-      }
+      await booking.update({ 
+        flights,
+        isActive,
+      }, {
+        transaction,
+      });
       await transaction.commit();
-      if ("passengers" in booking) {
-        newBooking = await this.findBookingById(id);
-      }
-      return newBooking;
+      return booking;
     } catch (err) {
       await transaction.rollback();
       handleMutationError(err);
@@ -75,4 +80,4 @@ const bookingService = {
   },
 };
 
-module.exports = bookingService;
+module.exports = { bookingService };
