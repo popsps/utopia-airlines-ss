@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-class BookingBooker extends Model {
+class BookingAgent extends Model {
   static associate({ User }) {
-    BookingBooker.belongsTo(User, {
+    BookingAgent.belongsTo(User, {
       foreignKey: {
         name: "bookerId",
         field: "booker_id",
@@ -14,7 +14,7 @@ class BookingBooker extends Model {
   }
 }
 
-BookingBooker.init ({
+BookingAgent.init ({
   bookingId: {
     type: DataTypes.INTEGER.UNSIGNED,
     primaryKey: true,
@@ -28,4 +28,4 @@ BookingBooker.init ({
 });
 
 
-module.exports = { BookingBooker };
+module.exports = { BookingAgent };

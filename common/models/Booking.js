@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class Booking extends Model {
-  static associate({ Flight, Passenger, BookingGuest, BookingBooker, BookingUser }) {
+  static associate({ Flight, Passenger, BookingGuest, BookingAgent, BookingUser }) {
     Booking.belongsToMany(Flight, {
       through: "flight_bookings",
       foreignKey: "booking_id",
@@ -25,13 +25,13 @@ class Booking extends Model {
       },
       as: "guest",
     });
-    Booking.hasOne(BookingBooker, {
+    Booking.hasOne(BookingAgent, {
       foreignKey: {
         name: "bookingId",
         field: "booking_id",
         allowNull: false,
       },
-      as: "booker",
+      as: "agent",
     });
     Booking.hasOne(BookingUser, {
       foreignKey: {
