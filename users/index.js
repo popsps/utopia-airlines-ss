@@ -18,6 +18,7 @@ app.use(cookieSession({
 }));
 
 app.use(getCurrentUser);
+
 app.use(require("./routes"));
 
 app.use(errorHandler);
