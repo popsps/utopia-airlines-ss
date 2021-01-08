@@ -20,6 +20,7 @@ class Booking extends Model {
   }
   toJSON(){
     const values = Object.assign({}, this.get());
+    delete values.confirmationCode;
     return values;
   }
 }
