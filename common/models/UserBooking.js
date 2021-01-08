@@ -7,6 +7,7 @@ class UserBooking extends Model {
       foreignKey: {
         name: "userId",
         field: "user_id",
+        allowNull: false,
       },
       as: "user",
     });
@@ -21,6 +22,7 @@ class UserBooking extends Model {
       foreignKey: {
         name: "bookingId",
         field: "booking_id",
+        allowNull: false,
       },
       as: "passengers",
     });
