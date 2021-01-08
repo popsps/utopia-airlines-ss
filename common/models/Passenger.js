@@ -12,9 +12,13 @@ class Passenger extends Model {
       as: "booking",
     });
   }
-  toJSON(){
-    const values = Object.assign({}, this.get());
-    return values;
+  toJSON(role){
+    const { givenName: given, familyName: family, ...values } = Object.assign({}, this.get());
+    if (role !== "ADMIN") return { name: { given, family } };
+    return  {
+      ...values,
+      name: { given, family },
+    };
   }
 }
 

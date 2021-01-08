@@ -29,10 +29,12 @@ class User extends Model {
   }
   toJSON() {
     const { givenName: given, familyName: family, ...values } = this.get();
-    values.name = { given, family };
     delete values.roleId;
     delete values.password;
-    return values;
+    return {
+      ...values,
+      name: { given, family },
+    };
   }
 }
 
