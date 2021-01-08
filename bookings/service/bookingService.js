@@ -1,7 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-const { sequelize, bookingDao, passengerDao } = require("../dao");
-const NotFoundError = require("../error/NotFoundError");
-const { BadRequestError } = require("../error");
+const { sequelize } = require("@utopia-airlines-wss/common/db");
+const { Booking } = require("@utopia-airlines-wss/common/models");
+const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 
 const bookingService = {
   validateBooking(booking) {
@@ -13,67 +12,41 @@ const bookingService = {
       return false;
     return true;
   },
-  async getAllBookings(query = null) {
-    const filter = {};
-    if (query.bookerId)
-      filter.bookerId = parseInt(query.bookerId);
-    if (query.isActive)
-      filter.isActive = (query.isActive == "true") ? true : false;
-    const bookings = await bookingDao.findAll({ where: filter });
-    return bookings;
-  },
-  async makeBooking(booking) {
-    // const myBooking = bookingDao.build(booking);
-    // console.log(myBooking instanceof bookingDao, myBooking);
-    // const _booking = await bookingDao.save(booking);
-    // return _booking;
-    let _booking = null;
-    const transaction = await sequelize.transaction();
-    try {
-      if ("id" in booking) {
-        _booking = await bookingDao.findOrCreate({
-          where: { id: booking.id },
-          defaults: booking,
-          transaction: transaction,
-        });
-      }
-      else {
-        _booking = await bookingDao.create(booking, { transaction: transaction });
-        _booking = [_booking, true];
-      }
-      if ("passengers" in booking && _booking[1]) {
-        await this.addPassengers(_booking[0]["id"], booking["passengers"], transaction);
-        const { id, bookerId, isActive } = _booking[0];
-        _booking[0] = { id, bookerId, isActive, passengers: booking["passengers"] };
-      }
-      await transaction.commit();
-      return _booking;
-    } catch (err) {
-      await transaction.rollback();
-      throw new BadRequestError("Something went wrong processing your request");
-    }
-  },
-  async addPassengers(id, passengers, transaction) {
-    for (let passenger of passengers) {
-      passenger["bookingId"] = id;
-      await passengerDao.upsert(passenger, { transaction: transaction });
-    }
+  async findAllBookings({ isActive } = {}) {
+    return await Booking.findAll({
+      where: {
+        isActive: isActive ?? true,
+      },
+    });
   },
   async findBookingById(id) {
-    // eager loading
-    // const booking = await bookingDao.findByPk(id, { include: passengerDao });
-    const booking = await bookingDao.findByPk(id);
-    // const booking = await bookingDao.findOne({where: {id: id}});
+    const booking = await Booking.findByPk(id, {
+      include: "passengers",
+    });
     if (!booking) throw new NotFoundError(`cannot find #${id} booking`);
-    // lazy loading
-    const bookingWithPassenger = await booking.getPassengers();
-    booking.setDataValue("passengers", bookingWithPassenger);
     return booking;
   },
+  async createBooking({ flights, passengers }) {
+    const transaction = await sequelize.transaction();
+    try {
+      const booking = await Booking.create({ passengers }, {
+        transaction,
+        include: [
+          "passengers",
+        ],
+      });
+
+      await booking
+        .update("flights", flights);
+
+      await transaction.commit();
+      return booking;
+    } catch (err) {
+      await transaction.rollback();
+      handleMutationError(err);
+    }
+  },
   async updateBooking(id, booking) {
-    /**
-     * @type Model
-     */
     const oldBooking = await this.findBookingById(id);
     if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
     const transaction = await sequelize.transaction();
@@ -92,26 +65,13 @@ const bookingService = {
       return newBooking;
     } catch (err) {
       await transaction.rollback();
-      throw new BadRequestError("Something went wrong processing your request");
+      handleMutationError(err);
     }
 
   },
   async deleteBookingById(id) {
-    /**
-     * @type Model
-     */
-    const booking = await bookingDao.findByPk(id);
-    if (!booking) throw new NotFoundError(`cannot find booking #${id}`);
-    const transaction = await sequelize.transaction();
-    try {
-      const res = await booking.destroy({ transaction: transaction });
-      await transaction.commit();
-      return res;
-    } catch (err) {
-      await transaction.rollback();
-      throw new BadRequestError("Something went wrong processing your request");
-    }
-
+    const booking = await bookingService.findBookingById(id);
+    await booking.destroy();
   },
 };
 

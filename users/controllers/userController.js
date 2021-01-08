@@ -19,14 +19,16 @@ const userController = {
   },
   async getById(req, res, next) {
     try {
-      res.json(await userService.findUserById(req.params.id));
+      const user = await userService.findUserById(req.params.id);
+      res.json(user);
     } catch (err) {
       next(err);
     }
   },
   async updateById(req, res, next) {
     try {
-      res.json(await userService.updateUser(req.params.id, req.body));
+      const user = await userService.updateUser(req.params.id, req.body);
+      res.json(user);
     } catch (err) {
       next(err);
     }
