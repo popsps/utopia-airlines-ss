@@ -27,6 +27,7 @@ const userService = {
         givenName: name.given,
         familyName: name.family,
       });
+      await user.reload({ include: "role" });
       return user;
     } catch (err) {
       handleMutationError(err);
@@ -47,6 +48,7 @@ const userService = {
         }).filter(([, value]) => value != null)
           .reduce((query, [key, value]) => query[key] = value, {})
       );
+      return user;
     } catch (err) {
       handleMutationError(err);
     }
