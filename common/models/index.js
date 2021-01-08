@@ -14,6 +14,8 @@ const models = {
   ...require("./UserRole"),
   ...require("./User"),
   ...require("./Booking"),
+  ...require("./GuestBooking"),
+  ...require("./UserBooking"),
   ...require("./Passenger"),
 };
 
