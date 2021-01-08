@@ -3,7 +3,7 @@ const router = Router();
 
 const { userController } = require("../../../controllers");
 
-const { oneOf, checkSchema } = require("express-validator");
+const { checkSchema } = require("express-validator");
 const { getUserSchema } = require("../../../schemas/user");
 const { validateRequest, requireAuthentication  } = require("@utopia-airlines-wss/common/middleware");
 
@@ -13,10 +13,7 @@ router.get("/",
   }),
   userController.getAll);
 router.post("/",
-  oneOf([
-    checkSchema(getUserSchema({ excludeInfo: true }), ["body"] ),
-    checkSchema(getUserSchema(), ["body"]),
-  ]),
+  checkSchema(getUserSchema(), ["body"]),
   validateRequest,
   requireAuthentication({
     condition: (req) => req.body?.roleId != null,

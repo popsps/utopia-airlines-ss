@@ -8,63 +8,7 @@ const getRequired = ({ optional, errorMessage }) => {
   };
 };
 
-const getUserInfoSchema = ({ optional = false } = {}) => ({
-  "info.name.given": {
-    ...getRequired({
-      optional,
-      errorMessage: "please provide a given name",
-    }),
-    isString: {
-      errorMessage: "given name must be a string",
-      bail: true,
-    },
-    notEmpty: {
-      errorMessage: "please provide a given name",
-    },
-  },
-  "info.name.family": {
-    ...getRequired({
-      optional,
-      errorMessage: "please provide a family name",
-    }),
-    isString: {
-      errorMessage: "family name must be a string",
-      bail: true,
-    },
-    notEmpty: {
-      errorMessage: "please provide a given name",
-    },
-  },
-  "info.email": {
-    ...getRequired({
-      optional,
-      errorMessage: "please provide an email",
-    }),
-    isString: {
-      errorMessage: "email must be a string",
-      bail: true,
-    },
-    isEmail: {
-      errorMessage: "please provide a valid email",
-    },
-    normalizeEmail: true,
-  },
-  "info.phone": {
-    ...getRequired({
-      optional,
-      errorMessage: "please provide a phone number",
-    }),
-    isString: {
-      errorMessage: "phone number must be a string",
-      bail: true,
-    },
-    isMobilePhone: {
-      errorMessage: "please provide a valid phone number",
-    },
-  },
-});
-
-const getUserSchema = ({ optional = false, excludeInfo = false } = {}) => ({
+const getUserSchema = ({ optional = false } = {}) => ({
   roleId: {
     optional: true,
     isInt: {
@@ -107,18 +51,59 @@ const getUserSchema = ({ optional = false, excludeInfo = false } = {}) => ({
       options: { minLength: 1 },
     },
   },
-  ...(
-    !excludeInfo
-      ? getUserInfoSchema({ optional })
-      : {
-        info: {
-          exists: {
-            errorMessage: "invalid info structure",
-            negated: true,
-          },
-        },
-      }
-  ),
+  email: {
+    ...getRequired({
+      optional,
+      errorMessage: "please provide an email",
+    }),
+    isString: {
+      errorMessage: "email must be a string",
+      bail: true,
+    },
+    isEmail: {
+      errorMessage: "please provide a valid email",
+    },
+    normalizeEmail: true,
+  },
+  phone: {
+    ...getRequired({
+      optional,
+      errorMessage: "please provide a phone number",
+    }),
+    isString: {
+      errorMessage: "phone number must be a string",
+      bail: true,
+    },
+    isMobilePhone: {
+      errorMessage: "please provide a valid phone number",
+    },
+  },
+  "name.given": {
+    ...getRequired({
+      optional,
+      errorMessage: "please provide a given name",
+    }),
+    isString: {
+      errorMessage: "given name must be a string",
+      bail: true,
+    },
+    notEmpty: {
+      errorMessage: "please provide a given name",
+    },
+  },
+  "name.family": {
+    ...getRequired({
+      optional,
+      errorMessage: "please provide a family name",
+    }),
+    isString: {
+      errorMessage: "family name must be a string",
+      bail: true,
+    },
+    notEmpty: {
+      errorMessage: "please provide a given name",
+    },
+  },
 });
 
 module.exports = { getUserSchema };
