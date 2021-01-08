@@ -1,7 +1,17 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-class Passenger extends Model { 
+class Passenger extends Model {
+  static associate({ Booking }) {
+    Passenger.belongsTo(Booking, {
+      foreignKey: {
+        name: "bookingId",
+        field: "booking_id",
+        allowNull: false,
+      },
+      as: "booking",
+    });
+  }
   toJSON(){
     const values = Object.assign({}, this.get());
     return values;

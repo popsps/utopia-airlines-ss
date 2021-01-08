@@ -1,7 +1,23 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-class Booking extends Model { 
+class Booking extends Model {
+  static associate({ Flight, Passenger }) {
+    Booking.belongsToMany(Flight, {
+      through: "flight_bookings",
+      foreignKey: "booking_id",
+      otherKey: "flight_id",
+      as: "flights",
+    });
+    Booking.hasMany(Passenger, {
+      foreignKey: {
+        name: "bookingId",
+        field: "booking_id",
+        allowNull: false,
+      },
+      as: "passengers",
+    });
+  }
   toJSON(){
     const values = Object.assign({}, this.get());
     return values;

@@ -2,6 +2,17 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class UserRole extends Model {
+  static associate({ User }) {
+    UserRole.hasMany(User, {
+      foreignKey: {
+        name:"roleId",
+        field: "role_id",
+        allowNull: false,
+      },
+      as: "users",
+    });
+  }
+
   toJSON() {
     return this.name;
   }

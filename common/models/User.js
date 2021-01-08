@@ -6,11 +6,30 @@ const saltRounds = 10;
 const hash = async (data) => bcrypt.hash(data, await bcrypt.genSalt(saltRounds));
 
 class User extends Model {
+  static associate({ UserRole, Booking }) {
+    User.belongsTo(UserRole, {
+      foreignKey: {
+        name:"roleId",
+        field: "role_id",
+        allowNull: false,
+      },
+      as: "role",
+    });
+    User.hasMany(Booking,{
+      foreignKey: {
+        name: "bookerId",
+        field: "booker_id",
+        allowNull: false,
+      },
+      as: "bookings",
+    });
+  }
   async comparePassword(password) {
     return bcrypt.compare(password, this.password);
   }
   toJSON() {
-    const values = this.get();
+    const { givenName: given, familyName: family, ...values } = this.get();
+    values.name = { given, family };
     delete values.roleId;
     delete values.password;
     return values;
