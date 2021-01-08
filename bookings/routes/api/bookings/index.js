@@ -21,13 +21,19 @@ router.post("/",
       .isArray().withMessage("passengers must be an array")
       .isLength({ min:1 }).withMessage("please provide a passenger"),
     oneOf([
+      body("contact").not().exists(),
       body("contact")
-        .isInt().withMessage("please provide a contact"),
+        .exists()
+        .isInt().withMessage("please provide a valid user id"),
       [
-        body("contact.contactEmail")
-          .isEmail().withMessage("please provide a contact email"),
-        body("contact.contactPhone")
-          .isEmail().withMessage("please provide a contact phone"),
+        body("contact.email")
+          .exists().withMessage("please provide an email")
+          .bail()
+          .isEmail().withMessage("please provide a valid email"),
+        body("contact.phone")
+          .exists().withMessage("please provide a phone")
+          .bail()
+          .isMobilePhone().withMessage("please provide a valid phone number"),
       ],
     ]),
   ],
