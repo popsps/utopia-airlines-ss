@@ -7,6 +7,8 @@ const { checkSchema } = require("express-validator");
 const { getUserSchema } = require("../../../schemas/user");
 const { validateRequest, requireAuthentication  } = require("@utopia-airlines-wss/common/middleware");
 
+router.use("/session", require("./session"));
+
 router.get("/",
   requireAuthentication({
     roles: ["ADMIN"],
@@ -21,11 +23,6 @@ router.post("/",
   }),
   userController.create
 );
-
-router.get("/session", userController.getSession);
-
-router.post("/session", userController.createSession);
-router.delete("/session", userController.deleteSession);
 
 router.route("/:id")
   .all(requireAuthentication({
