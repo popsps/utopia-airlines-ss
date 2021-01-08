@@ -12,6 +12,7 @@ Booking.init ({
   isActive: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
+    defaultValue: true,
   },
 }, {
   tableName: "booking",
