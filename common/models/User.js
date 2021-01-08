@@ -6,7 +6,7 @@ const saltRounds = 10;
 const hash = async (data) => bcrypt.hash(data, await bcrypt.genSalt(saltRounds));
 
 class User extends Model {
-  static associate({ UserRole, Booking }) {
+  static associate({ UserRole, UserBooking }) {
     User.belongsTo(UserRole, {
       foreignKey: {
         name:"roleId",
@@ -15,7 +15,7 @@ class User extends Model {
       },
       as: "role",
     });
-    User.hasMany(Booking,{
+    User.hasMany(UserBooking,{
       foreignKey: {
         name: "bookerId",
         field: "booker_id",
