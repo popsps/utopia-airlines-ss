@@ -1,5 +1,4 @@
-const { sequelize } = require("@utopia-airlines-wss/common/db");
-const { User, UserInfo } = require("@utopia-airlines-wss/common/models");
+const { User } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 
 
@@ -17,58 +16,43 @@ const userService = {
     if (!user) throw new NotFoundError("cannot find user");
     return user;
   },
-  async createUser({ roleId = 2, username, password, info } = {}) {
-    const transaction = await sequelize.transaction();
+  async createUser({ roleId = 2, username, password, email, phone, name } = {}) {
     try {
-      const user = await User.create({ roleId, username, password });
-      if (info != null) {
-        await UserInfo.create({
-          userId: user.id,
-          givenName: info.name.given,
-          familyName: info.name.family,
-          email: info.email,
-          phone: info.phone,
-        });
-      }
-      await transaction.commit();
+      const user = await User.create({
+        roleId,
+        username,
+        password,
+        email,
+        phone,
+        givenName: name.given,
+        familyName: name.family,
+      });
       return user;
     } catch (err) {
-      await transaction.rollback();
       handleMutationError(err);
     }
   },
-  async updateUser(userId, { roleId, username, password, info }) {
+  async updateUser(userId, { roleId, username, password, email, phone, name }) {
     const user = await userService.findUserById(userId);
-    if (!user) throw new NotFoundError("cannot find user");
-    const transaction = await sequelize.transaction();
     try {
-      Object.entries({ roleId, username, password })
-        .filter(([, value]) => value != null)
-        .forEach(([key, value]) => user[key] = value);
-      await user.save();
-      if (info != null) {
-        const userInfo = await UserInfo.findByPk(userId);
-        const newInfo = {
-          givenName: info.name?.given,
-          familyName: info.name?.family,
-          email: info.email,
-          phone: info.phone,
-        };
-        if (userInfo) userInfo.update(newInfo);
-        else await UserInfo.create({
-          userId,
-          ...newInfo,
-        });
-      }
-      await transaction.commit();
+      await user.update(
+        Object.entries({
+          roleId,
+          username,
+          password,
+          email,
+          phone,
+          givenName: name.given,
+          familyName: name.family,
+        }).filter(([, value]) => value != null)
+          .reduce((query, [key, value]) => query[key] = value, {})
+      );
     } catch (err) {
-      await transaction.rollback();
       handleMutationError(err);
     }
   },
   async deleteUser(userId) {
-    const user = await User.findByPk(userId);
-    if (!user) throw new NotFoundError("cannot find user");
+    const user = await userService.findUserById(userId);
     await user.destroy();
   },
 };
