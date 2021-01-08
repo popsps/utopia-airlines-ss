@@ -1,5 +1,3 @@
-const { BadRequestError } = require("@utopia-airlines-wss/common/errors");
-
 const { bookingService } = require("../services");
 
 const bookingController = {
@@ -13,12 +11,20 @@ const bookingController = {
   },
   async create(req, res, next) {
     try {
-    // if (!bookingService.validateBooking(req.body))
-    //   throw new BadRequestError("Bad input");
-      const booking = await bookingService.createBooking(req.body);
+      const booking = await bookingService.createBooking(
+        (({ user, body }) => {
+          switch (user?.role.name) {
+          case "CUSTOMER":
+            return { ...body, contact: user };
+          case "AGENT":
+            return { ...body, agent: user };
+          default:
+            return body;
+          }
+        })(req)
+      );
       res.status(201).json(booking);
     } catch (err) {
-      console.log(err);
       next(err);
     }
   },
@@ -32,8 +38,6 @@ const bookingController = {
   },
   async updateById(req, res, next) {
     try {
-      if (!bookingService.validateBooking(req.body))
-        throw new BadRequestError("Bad input");
       const booking = await bookingService.updateBooking(req.params.id, req.body);
       res.json(booking);
     } catch (err) {
