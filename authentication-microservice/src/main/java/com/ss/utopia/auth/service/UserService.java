@@ -1,6 +1,6 @@
 package com.ss.utopia.auth.service;
 
-import com.ss.utopia.auth.entity.UserDao;
+import com.ss.utopia.auth.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
