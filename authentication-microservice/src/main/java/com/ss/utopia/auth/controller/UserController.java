@@ -2,7 +2,6 @@ package com.ss.utopia.auth.controller;
 
 import com.ss.utopia.auth.dto.LoginDto;
 import com.ss.utopia.auth.entity.User;
-import com.ss.utopia.auth.security.JwtProvider;
 import com.ss.utopia.auth.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +48,8 @@ public class UserController {
   }
 
   @GetMapping("/{userId}")
-  public User getUserById(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
+  public User getUserById(@PathVariable("userId") Long userId,
+                          @AuthenticationPrincipal UserDetails currentUser) {
     User user = userService.getUserById(userId);
     if (currentUser.getUsername().equals(user.getUsername()))
       return user;
