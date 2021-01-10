@@ -52,6 +52,7 @@ public class UserService {
   }
 
   public Optional<User> signup(String username, String password) {
+    //..................... placeholder ..............
     LOGGER.info("New user attempting to sign up");
     Optional<User> user = Optional.empty();
     if (!userDao.findByUsername(username).isPresent()) {
