@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.security.core.AuthenticationException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +41,8 @@ public class UserService {
     if (user.isPresent()) {
       try {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        token = Optional.of(jwtProvider.createToken(username));
+        token = Optional.of(jwtProvider.createToken(username,
+          Arrays.asList(user.get().getRole())));
       } catch (AuthenticationException e) {
         LOGGER.info("Log in failed for user {}", username);
         e.printStackTrace();

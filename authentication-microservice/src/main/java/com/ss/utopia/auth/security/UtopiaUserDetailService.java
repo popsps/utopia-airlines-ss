@@ -3,6 +3,7 @@ package com.ss.utopia.auth.security;
 import com.ss.utopia.auth.dao.UserDao;
 import com.ss.utopia.auth.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,7 +31,7 @@ public class UtopiaUserDetailService implements UserDetailsService {
       new UsernameNotFoundException(String.format("User with name %s does not exist", username)));
     return withUsername(user.getUsername())
       .password(user.getPassword())
-      .authorities(Collections.emptyList())
+      .authorities(user.getRole().getName())
       .accountExpired(false)
       .accountLocked(false)
       .credentialsExpired(false)
@@ -40,9 +41,10 @@ public class UtopiaUserDetailService implements UserDetailsService {
 
   public Optional<UserDetails> loadUserByJwtToken(String jwtToken) {
     if (jwtProvider.isValidToken(jwtToken)) {
+      System.out.println("::::::" + jwtProvider.getRoles(jwtToken));
       return Optional.of(
         withUsername(jwtProvider.getUsername(jwtToken))
-          .authorities(Collections.emptyList())
+          .authorities(jwtProvider.getRoles(jwtToken))
           .password("")
           .accountExpired(false)
           .accountLocked(false)

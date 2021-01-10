@@ -1,5 +1,8 @@
 package com.ss.utopia.auth.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_role")
-public class UserRole {
+public class UserRole implements GrantedAuthority {
   private static final long serialVersionUID = 1L;
   @Id
   @Column(name = "id")
@@ -38,5 +41,11 @@ public class UserRole {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  @JsonIgnore
+  @Override
+  public String getAuthority() {
+    return name;
   }
 }
