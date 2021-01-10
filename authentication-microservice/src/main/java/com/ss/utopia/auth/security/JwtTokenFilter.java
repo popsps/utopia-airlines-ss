@@ -20,12 +20,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
   private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenFilter.class);
 
   private final UtopiaUserDetailService utopiaUserDetailService;
-  @Autowired
-  private JwtProvider jwtProvider;
+
+  private final JwtProvider jwtProvider;
 
   @Autowired
-  public JwtTokenFilter(UtopiaUserDetailService utopiaUserDetailService) {
+  public JwtTokenFilter(UtopiaUserDetailService utopiaUserDetailService, JwtProvider jwtProvider) {
     this.utopiaUserDetailService = utopiaUserDetailService;
+    this.jwtProvider = jwtProvider;
   }
 
   @Override
@@ -57,12 +58,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     String token = null;
     if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
       token = authorizationHeader.substring(7);
-      username = jwtProvider.getUsername(token);
+      username = jwtProvider.extractUsername(token);
     }
 
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.utopiaUserDetailService.loadUserByUsername(username);
-      if (this.jwtProvider.isValidToken(token)) {
+      if (this.jwtProvider.validateToken(token, userDetails)) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
           userDetails, null, userDetails.getAuthorities());
         usernamePasswordAuthenticationToken

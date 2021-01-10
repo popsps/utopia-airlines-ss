@@ -11,22 +11,27 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
-  @Column(name = "role_id", nullable = false)
-  private Long roleId;
   @Column(name = "username", nullable = false)
   private String username;
   @Column(name = "password", nullable = false)
   @JsonIgnore
   private String password;
 
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "role_id", nullable = false)
+  private UserRole role;
+
   protected User() {
   }
 
-  public User(Long id, Long roleId, String username, String password) {
+
+
+  public User(Long id, String username, String password, UserRole role) {
     this.id = id;
-    this.roleId = roleId;
     this.username = username;
     this.password = password;
+    this.role = role;
   }
 
   public Long getId() {
@@ -35,14 +40,6 @@ public class User {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public Long getRoleId() {
-    return roleId;
-  }
-
-  public void setRoleId(Long roleId) {
-    this.roleId = roleId;
   }
 
   public String getUsername() {
@@ -59,5 +56,13 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public UserRole getRole() {
+    return role;
+  }
+
+  public void setRole(UserRole role) {
+    this.role = role;
   }
 }

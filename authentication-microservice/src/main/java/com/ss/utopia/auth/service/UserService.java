@@ -2,6 +2,7 @@ package com.ss.utopia.auth.service;
 
 import com.ss.utopia.auth.dao.UserDao;
 import com.ss.utopia.auth.entity.User;
+import com.ss.utopia.auth.entity.UserRole;
 import com.ss.utopia.auth.security.JwtProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,8 +54,9 @@ public class UserService {
     Optional<User> user = Optional.empty();
     if (!userDao.findByUsername(username).isPresent()) {
       // needs work
-      user = Optional.of(userDao.save(new User(8L, 3L,
-        username, passwordEncoder.encode(password))));
+      user = Optional.of(userDao.save(new User(8L,
+        username, passwordEncoder.encode(password),
+        new UserRole(2L, "CUSTOMER"))));
     }
     return user;
   }

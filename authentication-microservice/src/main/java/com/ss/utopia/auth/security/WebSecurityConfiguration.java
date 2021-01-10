@@ -18,10 +18,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final UtopiaUserDetailService utopiaUserDetailService;
+  private final JwtProvider jwtProvider;
 
   @Autowired
-  public WebSecurityConfiguration(UtopiaUserDetailService utopiaUserDetailService) {
+  public WebSecurityConfiguration(UtopiaUserDetailService utopiaUserDetailService, JwtProvider jwtProvider) {
     this.utopiaUserDetailService = utopiaUserDetailService;
+    this.jwtProvider = jwtProvider;
   }
 
   @Override
@@ -32,7 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
       .anyRequest().authenticated();
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.addFilterBefore(new JwtTokenFilter(utopiaUserDetailService),
+    http.addFilterBefore(new JwtTokenFilter(utopiaUserDetailService, jwtProvider),
       UsernamePasswordAuthenticationFilter.class);
   }
 
