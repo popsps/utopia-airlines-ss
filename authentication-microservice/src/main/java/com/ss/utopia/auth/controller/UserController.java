@@ -2,12 +2,15 @@ package com.ss.utopia.auth.controller;
 
 import com.ss.utopia.auth.dto.LoginDto;
 import com.ss.utopia.auth.entity.User;
+import com.ss.utopia.auth.security.JwtProvider;
 import com.ss.utopia.auth.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -43,5 +46,14 @@ public class UserController {
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   public List<User> getAllUsers() {
     return userService.getAll();
+  }
+
+  @GetMapping("/{userId}")
+  public User getUserById(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
+    User user = userService.getUserById(userId);
+    if (currentUser.getUsername().equals(user.getUsername()))
+      return user;
+    else
+      throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Access denied.");
   }
 }
