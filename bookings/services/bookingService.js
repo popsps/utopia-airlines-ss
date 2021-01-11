@@ -1,6 +1,6 @@
 const { Op, Model } = require("sequelize");
 const { sequelize } = require("@utopia-airlines-wss/common/db");
-const { Booking, Flight } = require("@utopia-airlines-wss/common/models");
+const { Booking, UserBooking, GuestBooking, Flight } = require("@utopia-airlines-wss/common/models");
 const { StandardizedError, NotFoundError, BadRequestError, handleMutationError   } = require("@utopia-airlines-wss/common/errors");
 
 const parseBookingData = ({ passengers, contact, agent }) => {
@@ -20,15 +20,15 @@ const parseBookingData = ({ passengers, contact, agent }) => {
 };
 
 const bookingService = {
-  async findAllBookings({ isActive } = {}) {
-    return await Booking.findAll({
+  async findAllBookings({ isActive, isGuest } = {}) {
+    return await (isGuest ? GuestBooking : UserBooking).findAll({
       where: {
         isActive: isActive ?? true,
       },
     });
   },
-  async findBookingById(id) {
-    const booking = await Booking.findByPk(id, {
+  async findBookingById({ id, isGuest }) {
+    const booking = await (isGuest ? GuestBooking : UserBooking).findByPk(id, {
       include: "passengers",
     });
     if (!booking) throw new NotFoundError("cannot find booking");
@@ -64,12 +64,11 @@ const bookingService = {
       handleMutationError(err);
     }
   },
-  async updateBooking(id, { isActive, flights, passengers }) {
+  async updateBooking(id, { isActive }) {
     const booking = await bookingService.findBookingById(id);
     const transaction = await sequelize.transaction();
     try {
       await booking.update({ 
-        flights,
         isActive,
       }, {
         transaction,
