@@ -23,7 +23,7 @@ class Flight extends Model {
 Flight.init({
   departureTime: {
     type: DataTypes.DATE,
-    primaryKey: true,   
+    allowNull: false,
   },
   seatPrice: {
     type: DataTypes.FLOAT,
