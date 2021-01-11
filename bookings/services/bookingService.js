@@ -20,14 +20,14 @@ const parseBookingData = ({ passengers, contact, agent }) => {
 };
 
 const bookingService = {
-  async findAllBookings({ isActive, isGuest } = {}) {
+  async findAllBookings({ isActive = true, isGuest = true } = {}) {
     return await (isGuest ? GuestBooking : UserBooking).findAll({
       where: {
-        isActive: isActive ?? true,
+        isActive: isActive,
       },
     });
   },
-  async findBookingById({ id, isGuest }) {
+  async findBookingById({ id, isGuest = true }) {
     const booking = await (isGuest ? GuestBooking : UserBooking).findByPk(id, {
       include: "passengers",
     });
