@@ -22,7 +22,7 @@ BookingAgent.init ({
     allowNull: false,
   },
 }, {
-  tableName: "booking_booker",
+  tableName: "booking_agent",
   freezeTableName: true,
   sequelize,
 });
