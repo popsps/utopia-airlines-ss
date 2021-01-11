@@ -34,6 +34,13 @@ public class UserService {
     this.jwtProvider = jwtProvider;
   }
 
+  /**
+   * Sign in a user into the application, with JWT-enabled authentication
+   *
+   * @param username username
+   * @param password password
+   * @return Optional of the Java Web Token, empty otherwise
+   */
   public Optional<String> signin(String username, String password) {
     LOGGER.info("New user attempting to sign in");
     Optional<String> token = Optional.empty();
@@ -51,8 +58,17 @@ public class UserService {
     return token;
   }
 
+  /**
+   * Create a new user in the database.
+   * Assigned to Samuel
+   *
+   * @param username username
+   * @param password password
+   * @return Optional of the Java Web Token, empty if the user already exists.
+   */
   public Optional<User> signup(String username, String password) {
     //..................... placeholder ..............
+    // use  passwordEncoder.encode(password) to save password into the database
     LOGGER.info("New user attempting to sign up");
     Optional<User> user = Optional.empty();
     if (!userDao.findByUsername(username).isPresent()) {

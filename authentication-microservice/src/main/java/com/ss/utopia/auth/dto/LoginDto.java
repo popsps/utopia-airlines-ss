@@ -1,9 +1,11 @@
 package com.ss.utopia.auth.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class LoginDto {
   @NotBlank
+  @Size(min = 3)
   private String username;
   @NotBlank
   private String password;

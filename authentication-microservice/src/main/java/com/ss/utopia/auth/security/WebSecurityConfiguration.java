@@ -12,6 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuration file for web security
+ */
 @Configuration
 //@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -30,8 +33,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     // Entry points
     http.authorizeRequests()
-      .antMatchers("/users/signin").permitAll()
+      .antMatchers("/users/signin", "/users/signup").permitAll()
+      // Disallow everything else
       .anyRequest().authenticated();
+    // Disable CSRF (cross site request forgery)
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(new JwtTokenFilter(utopiaUserDetailService, jwtProvider),
