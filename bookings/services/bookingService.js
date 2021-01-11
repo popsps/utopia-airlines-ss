@@ -1,18 +1,25 @@
-const { Op } = require("sequelize");
+const { Op, Model } = require("sequelize");
 const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking, Flight } = require("@utopia-airlines-wss/common/models");
-const { NotFoundError, BadRequestError, handleMutationError  } = require("@utopia-airlines-wss/common/errors");
+const { StandardizedError, NotFoundError, BadRequestError, handleMutationError   } = require("@utopia-airlines-wss/common/errors");
+
+const parseBookingData = ({ passengers, contact, agent }) => {
+  const data = {
+    passengers: passengers.map(
+      ({ name: { given: givenName, family: familyName } = {}, ...rest }) => ({ ...rest,  givenName, familyName })
+    ),
+  };
+  if (agent != null) data.agent = { agentId: agent.id };
+  if (typeof contact === "number") data.user = { userId: contact };
+  else if (contact instanceof Model) data.user = { userId: contact.id };
+  else data.guest = {
+    contactEmail: contact.email,
+    contactPhone: contact.phone,
+  };
+  return data;
+};
 
 const bookingService = {
-  validateBooking(booking) {
-    if (!("bookerId" in booking) || !Number.isInteger(booking["bookerId"]))
-      return false;
-    if (!("isActive" in booking) || !(typeof booking["isActive"] === "boolean"))
-      return false;
-    if (("id" in booking) && !Number.isInteger(booking["id"]))
-      return false;
-    return true;
-  },
   async findAllBookings({ isActive } = {}) {
     return await Booking.findAll({
       where: {
@@ -27,32 +34,33 @@ const bookingService = {
     if (!booking) throw new NotFoundError("cannot find booking");
     return booking;
   },
-  async createBooking({ flights, passengers }) {
+  async createBooking({ flights, passengers, contact, agent }) {
     const transaction = await sequelize.transaction();
     try {
-      flights = await Flight.findAll({
+      const booking = await Booking.create(
+        parseBookingData({ passengers, contact, agent }),
+        {
+          transaction,
+          include: [
+            "passengers",
+            "agent",
+            typeof contact === "number" || contact instanceof Model ? "user" : "guest",
+          ],
+        });
+      const fullFlightCount = await Flight.count({
         where: {
-          id: {
-            [Op.or]: flights,
-          },
+          id: { [Op.or]: flights },
+          availableSeats: { [Op.lt]: passengers.length },
         },
       });
-      if (!flights.every(flight => flight.availableSeats >= passengers.length)) {
+      if (fullFlightCount)
         throw new BadRequestError("not enough seats");
-      }
-      const booking = await Booking.create({ passengers }, {
-        transaction,
-        include: [
-          "passengers",
-        ],
-      });
-      await booking
-        .update({ flights }, { transaction });
-
+      await booking.setFlights(flights, { transaction });
       await transaction.commit();
       return booking;
     } catch (err) {
       await transaction.rollback();
+      if (err instanceof StandardizedError) throw err;
       handleMutationError(err);
     }
   },
