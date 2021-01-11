@@ -5,11 +5,11 @@ class BookingAgent extends Model {
   static associate({ User }) {
     BookingAgent.belongsTo(User, {
       foreignKey: {
-        name: "bookerId",
-        field: "booker_id",
+        name: "agentId",
+        field: "agent_id",
         allowNull: false,
       },
-      as: "booker",
+      as: "agent",
     });
   }
 }
