@@ -33,9 +33,16 @@ public class UserController {
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.FORBIDDEN, "Login Failed"));
   }
 
+  // Samuel will be working here
+  // placeholder code
+  // You may need to replace loginDto with your own Dto or
+  // add additional arbitrary information to the LoginDto or
+  // You may want to create a signup DTO in the DTO package to pass all necessary information
+  // regarding th user sign-up information as a class
   @PostMapping("/signup")
   @ResponseStatus(HttpStatus.CREATED)
   public User signup(@RequestBody @Valid LoginDto loginDto) {
+    // needs work
     return userService.signup(loginDto.getUsername(), loginDto.getPassword())
       .orElseThrow(() ->
         new HttpServerErrorException(HttpStatus.BAD_REQUEST, "User already exists"));
