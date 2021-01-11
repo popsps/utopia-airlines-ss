@@ -31,7 +31,6 @@ Flight.init({
   },
   maxCapacity: {
     type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
   },
   reservedSeats: {
     type: DataTypes.INTEGER.UNSIGNED,
@@ -39,11 +38,9 @@ Flight.init({
   },
   passengerCount: {
     type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
   },
   availableSeats: {
     type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
   },
 }, {
   tableName: "flight_status",
