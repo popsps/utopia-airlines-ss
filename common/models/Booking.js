@@ -45,9 +45,9 @@ class Booking extends Model {
   toJSON(){
     const values = Object.assign({}, this.get());
     delete values.confirmationCode;
-    delete values.guest;
-    delete values.booker;
-    delete values.user;
+    values.agent ?? delete values.agent;
+    values.user ?? delete values.user;
+    values.guest ?? delete values.guest;
     return values;
   }
 }

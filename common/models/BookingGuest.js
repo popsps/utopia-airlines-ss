@@ -2,6 +2,10 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class BookingGuest extends Model {
+  toJSON() {
+    const { contactEmail: email, contactPhone: phone } = this.get();
+    return { email, phone };
+  }
 }
 
 BookingGuest.init ({
