@@ -3,7 +3,12 @@ const { bookingService } = require("../services");
 const bookingController = {
   async getAll(req, res, next) {
     try {
-      const bookings = await bookingService.findAllBookings(req.query);
+      const bookings = await bookingService.findAllBookings({
+        ...req.query,
+        userId: req.user?.role.name === "CUSTOMER"
+          ? req.user?.id
+          :  null,
+      });
       res.json(bookings);
     } catch (err) {
       next(err);
