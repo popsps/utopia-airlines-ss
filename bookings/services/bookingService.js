@@ -1,7 +1,7 @@
 const { Op, Model } = require("sequelize");
 const { sequelize } = require("@utopia-airlines-wss/common/db");
-const { Booking, UserBooking, GuestBooking, Flight } = require("@utopia-airlines-wss/common/models");
-const { StandardizedError, NotFoundError, BadRequestError, handleMutationError   } = require("@utopia-airlines-wss/common/errors");
+const { Booking, UserBooking, Flight } = require("@utopia-airlines-wss/common/models");
+const { StandardizedError, NotFoundError, BadRequestError, handleMutationError, AuthorizationError   } = require("@utopia-airlines-wss/common/errors");
 
 const parseBookingData = ({ passengers, contact, agent }) => {
   const data = {
@@ -19,34 +19,59 @@ const parseBookingData = ({ passengers, contact, agent }) => {
   return data;
 };
 
+const findBookingById = async (id, options) => {
+  const booking = await Booking.findByPk(id, options);
+  if (!booking) throw new NotFoundError("cannot find booking");
+  return booking;
+};
+
 const bookingService = {
-  async findAllBookings({ isActive = true, isGuest = true } = {}) {
-    return await (isGuest ? GuestBooking : UserBooking).findAll({
+  async findAllBookings({ isActive = true, userId } = {}) {
+    const query = {
       where: {
         isActive: isActive,
       },
-    });
+    };
+    if (userId != null) query.where.userId = userId;
+    else query.include = [
+      {
+        association: "agent",
+        include: "agent",
+      },
+      {
+        association: "user",
+        include: "user",
+      },
+      "guest",
+    ];
+    return await (userId == null ? Booking : UserBooking).findAll(query);
   },
-  async findBookingById({ id, isGuest = true }) {
-    const booking = await (isGuest ? GuestBooking : UserBooking).findByPk(id, {
-      include: "passengers",
-    });
-    if (!booking) throw new NotFoundError("cannot find booking");
+  async findBookingById({ id, userId }) {
+    const booking = await findBookingById(
+      id,
+      {
+        include: [
+          {
+            association: "agent",
+            include: "agent",
+          },
+          {
+            association: "user",
+            include: "user",
+          },
+          "guest",
+          "flights",
+          "passengers",
+        ],
+      }
+    );
+    if (userId != null && booking.type === "USER" && booking.user?.userId !== userId)
+      throw new AuthorizationError();
     return booking;
   },
   async createBooking({ flights, passengers, contact, agent }) {
     const transaction = await sequelize.transaction();
     try {
-      const booking = await Booking.create(
-        parseBookingData({ passengers, contact, agent }),
-        {
-          transaction,
-          include: [
-            "passengers",
-            "agent",
-            typeof contact === "number" || contact instanceof Model ? "user" : "guest",
-          ],
-        });
       const fullFlightCount = await Flight.count({
         where: {
           id: { [Op.or]: flights },
@@ -55,6 +80,19 @@ const bookingService = {
       });
       if (fullFlightCount)
         throw new BadRequestError("not enough seats");
+      const booking = await Booking.create(
+        parseBookingData({ passengers, contact, agent }),
+        {
+          transaction,
+          include: [
+            "passengers",
+            "agent",
+            typeof contact === "number" || contact instanceof Model
+              ? "user"
+              : "guest",
+          ],
+        }
+      );
       await booking.setFlights(flights, { transaction });
       await transaction.commit();
       return booking;
@@ -65,7 +103,7 @@ const bookingService = {
     }
   },
   async updateBooking(id, { isActive }) {
-    const booking = await bookingService.findBookingById(id);
+    const booking = await findBookingById(id);
     const transaction = await sequelize.transaction();
     try {
       await booking.update({ 
@@ -82,7 +120,7 @@ const bookingService = {
 
   },
   async deleteBookingById(id) {
-    const booking = await bookingService.findBookingById(id);
+    const booking = await findBookingById(id);
     await booking.destroy();
   },
 };
