@@ -70,8 +70,12 @@ const bookingService = {
         ],
       }
     );
-    if (userId != null && booking.type === "USER" && booking.user?.userId !== userId)
-      throw new AuthorizationError();
+    if (booking.type === "USER") {
+      if (userId != null && booking.user?.userId !== userId)
+        throw new AuthorizationError();
+      if (userId !== null)
+        throw new AuthorizationError();
+    }
     return booking;
   },
   async createBooking({ flights, passengers, contact, agent }) {
