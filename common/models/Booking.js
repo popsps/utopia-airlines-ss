@@ -63,6 +63,19 @@ Booking.init ({
     allowNull: false,
     defaultValue: DataTypes.UUIDV4,
   },
+  type: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      const [hasGuest, hasUser] = [this.guest, this.user].map(value => value !== undefined);
+      if (hasGuest && hasUser) {
+
+        if (this.guest && !this.user) 
+          return "GUEST";
+        if (!this.guest && this.user)
+          return "USER";
+      }
+    },
+  },
 }, {
   tableName: "booking",
   freezeTableName: true,
