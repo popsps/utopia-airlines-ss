@@ -17,8 +17,8 @@ class User extends Model {
     });
     User.hasMany(UserBooking,{
       foreignKey: {
-        name: "bookerId",
-        field: "booker_id",
+        name: "userId",
+        field: "user_id",
         allowNull: false,
       },
       as: "bookings",
