@@ -5,10 +5,10 @@ class GuestBooking extends Model {
   static associate({ User, Passenger }) {
     GuestBooking.belongsTo(User, {
       foreignKey: {
-        name: "bookerId",
-        field: "booker_id",
+        name: "agentId",
+        field: "agent_id",
       },
-      as: "booker",
+      as: "agent",
     });
     GuestBooking.hasMany(Passenger, {
       foreignKey: {

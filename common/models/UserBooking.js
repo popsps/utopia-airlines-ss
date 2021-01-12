@@ -13,10 +13,10 @@ class UserBooking extends Model {
     });
     UserBooking.belongsTo(User, {
       foreignKey: {
-        name: "bookerId",
-        field: "booker_id",
+        name: "agentId",
+        field: "agent_id",
       },
-      as: "booker",
+      as: "agent",
     });
     UserBooking.hasMany(Passenger, {
       foreignKey: {
