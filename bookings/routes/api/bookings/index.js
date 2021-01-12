@@ -7,7 +7,10 @@ const { body, oneOf } = require("express-validator");
 const { validateRequest, requireAuthentication } = require("@utopia-airlines-wss/common/middleware");
 
 
-router.get("/", bookingController.getAll);
+router.get("/",
+  requireAuthentication(),
+  bookingController.getAll
+);
 router.post("/",
   [
     body("flights")
@@ -52,6 +55,7 @@ router.post("/",
 router.route("/:id")
   .get(bookingController.getById)
   .put(
+    requireAuthentication(),
     [
       body("flights")
         .isArray().withMessage("please provide flights"),
@@ -61,6 +65,9 @@ router.route("/:id")
     validateRequest,
     bookingController.updateById
   )
-  .delete(bookingController.deleteById);
+  .delete(
+    requireAuthentication(),
+    bookingController.deleteById
+  );
 
 module.exports = router;
