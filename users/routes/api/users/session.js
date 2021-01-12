@@ -3,9 +3,9 @@ const router = Router();
 
 const { userController } = require("../../../controllers");
 
-router.get("/session", userController.getSession);
+router.get("/", userController.getSession);
 
-router.post("/session", userController.createSession);
-router.delete("/session", userController.deleteSession);
+router.post("/", userController.createSession);
+router.delete("/", userController.deleteSession);
 
 module.exports = router;
