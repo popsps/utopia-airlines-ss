@@ -27,24 +27,31 @@ const findBookingById = async (id, options) => {
 
 const bookingService = {
   async findAllBookings({ isActive = true, userId } = {}) {
-    const query = {
-      where: {
-        isActive: isActive,
-      },
+    const where = {
+      isActive: isActive,
     };
-    if (userId != null) query.where.userId = userId;
-    else query.include = [
-      {
-        association: "agent",
-        include: "agent",
-      },
-      {
-        association: "user",
-        include: "user",
-      },
-      "guest",
-    ];
-    return await (userId == null ? Booking : UserBooking).findAll(query);
+    if (userId != null) {
+      where.userId = userId;
+      return await UserBooking.findAll({
+        where,
+        include: [ "agent", "user" ],
+      });
+    }
+    else 
+      return await Booking.findAll({
+        where,
+        include: [
+          {
+            association: "agent",
+            include: "agent",
+          },
+          {
+            association: "user",
+            include: "user",
+          },
+          "guest",
+        ],
+      });
   },
   async findBookingById({ id, userId }) {
     const booking = await findBookingById(
