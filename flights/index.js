@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 // const {sequelize} = require("@utopia-airlines-wss/common/db");
 const { errorHandler } = require("@utopia-airlines-wss/common/middleware");
-const PORT = process.env.PORT || 8093;
+const PORT = process.env.PORT || process.argv[2] || 8093;
 
 const app = express();
 

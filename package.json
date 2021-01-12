@@ -2,7 +2,18 @@
   "name": "utopia-airlines-node",
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "postinstall": "npm-run-all -p *:install",
+    "start": "npm-run-all -p *:start",
+    "users:install": "cd ./users && npm ci",
+    "users:start": "cd ./users && npm start 3001",
+    "bookings:install": "cd ./bookings && npm ci",
+    "bookings:start": "cd ./bookings && npm start 3002",
+    "airports:install": "cd ./airports && npm ci",
+    "airports:start": "cd ./airports && npm start 3003",
+    "flights:install": "cd ./flights && npm ci",
+    "flights:start": "cd ./flights && npm start 3004"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WesleyClements/utopia-airlines-node.git"
@@ -14,5 +25,8 @@
   "homepage": "https://github.com/WesleyClements/utopia-airlines-node#readme",
   "devDependencies": {
     "eslint": "^7.16.0"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
