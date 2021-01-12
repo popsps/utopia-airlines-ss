@@ -30,7 +30,24 @@ const bookingController = {
   },
   async getById(req, res, next) {
     try {
-      const booking = await bookingService.findBookingById(req.params.id);
+      const booking = await bookingService.findBookingById(
+        (({ user, params: { id } }) => {
+          switch (user?.role.name) {
+          case "AGENT":
+          case "ADMIN":
+            return {
+              id,
+              userId: null,
+            };
+          case "CUSTOMER":
+            return {
+              id,
+              userId: user.id,
+            };
+          default:
+            return { id };
+          }
+        })(req));
       res.json(booking);
     } catch (err) {
       next(err);
