@@ -1,7 +1,7 @@
 const { Schema } = require("./Schema");
 
 class UserSchema extends Schema {
-  constructor({ optional = false }) {
+  constructor({ optional = false } = {}) {
     super();
     this.roleId = {
       optional: true,
