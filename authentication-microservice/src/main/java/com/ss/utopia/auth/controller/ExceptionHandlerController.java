@@ -61,8 +61,7 @@ public class ExceptionHandlerController {
   @ExceptionHandler(HttpServerErrorException.class)
   public void handleHttpServerErrorException(HttpServerErrorException ex,
                                              HttpServletResponse res) throws IOException {
-    System.out.println(ex.getStatusCode().toString() + ex.getStatusCode().value() + ex.getMessage());
-    res.sendError(ex.getStatusCode().value(), ex.getMessage());
+    res.sendError(ex.getStatusCode().value(), ex.getStatusText());
   }
 
   @ExceptionHandler(Exception.class)
