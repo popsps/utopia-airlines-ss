@@ -30,7 +30,7 @@ class UserBooking extends Model {
   toJSON(){
     const values = Object.assign({}, this.get());
     delete values.confirmationCode;
-    values.bookerId ?? delete values.bookerId;
+    values.agentId ?? delete values.agentId;
     return values;
   }
 }
@@ -50,5 +50,4 @@ UserBooking.init({
   freezeTableName: true,
   sequelize,
 });
-
 module.exports = { UserBooking };
