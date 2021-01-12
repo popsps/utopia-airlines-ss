@@ -14,7 +14,7 @@ class BookingUser extends Model {
   }
   toJSON() {
     const { userId, user } = this.get();
-    return user ?? userId;
+    return user?.toJSON() ?? userId;
   }
 }
 

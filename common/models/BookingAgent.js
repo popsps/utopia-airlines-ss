@@ -14,7 +14,7 @@ class BookingAgent extends Model {
   }
   toJSON() {
     const { agentId, agent } = this.get();
-    return agent ?? agentId;
+    return agent?.toJSON() ?? agentId;
   }
 }
 
