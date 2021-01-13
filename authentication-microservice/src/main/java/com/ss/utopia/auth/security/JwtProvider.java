@@ -27,7 +27,13 @@ public class JwtProvider {
     this.validityInMilliseconds = validityInMilliseconds;
   }
 
-  // roles need to be added
+  /**
+   * Create A JWT Token based on username and roles associated to the user
+   *
+   * @param username
+   * @param roles
+   * @return
+   */
   public String createToken(String username, List<UserRole> roles) {
     Claims claims = Jwts.claims().setSubject(username);
     claims.put(ROLES_KEY, roles.stream().map(role ->
@@ -43,6 +49,11 @@ public class JwtProvider {
       .compact();
   }
 
+  /**
+   *
+   * @param token
+   * @return
+   */
   public boolean isValidToken(String token) {
     try {
       Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
@@ -52,11 +63,23 @@ public class JwtProvider {
     }
   }
 
+  /**
+   * extract username from the jwt token
+   *
+   * @param token
+   * @return
+   */
   public String getUsername(String token) {
     return Jwts.parser().setSigningKey(secretKey)
       .parseClaimsJws(token).getBody().getSubject();
   }
 
+  /**
+   * extract the list of user roles from the token
+   *
+   * @param token
+   * @return
+   */
   public List<GrantedAuthority> getRoles(String token) {
     List<Map<String, String>> roleClaims = Jwts.parser()
       .setSigningKey(secretKey).parseClaimsJws(token).getBody()

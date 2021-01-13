@@ -1,5 +1,6 @@
 package com.ss.utopia.auth.security;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,30 @@ public class JwtTokenFilter extends OncePerRequestFilter {
           new PreAuthenticatedAuthenticationToken(userDetails,
             "", userDetails.getAuthorities())));
 
+    }
+  }
+
+  private void authRefresh(HttpServletRequest request) {
+    final String authorizationHeader = request.getHeader("Authorization");
+    String username = null;
+    String token = null;
+    try {
+      if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+        token = authorizationHeader.substring(7);
+        utopiaUserDetailService.loadUserByJwtToken(token).ifPresent(userDetails ->
+          SecurityContextHolder.getContext().setAuthentication(
+            new PreAuthenticatedAuthenticationToken(userDetails,
+              "", userDetails.getAuthorities())));
+
+      }
+    } catch (ExpiredJwtException e) {
+      String isRefreshToken = request.getHeader("isRefreshToken");
+      String requestURL = request.getRequestURL().toString();
+      // allow for Refresh Token creation if following conditions are true.
+      if (isRefreshToken != null && isRefreshToken.equals("true") && requestURL.contains("refreshtoken")) {
+//        allowForRefreshToken(e, request);
+      } else
+        request.setAttribute("exception", e);
     }
   }
 

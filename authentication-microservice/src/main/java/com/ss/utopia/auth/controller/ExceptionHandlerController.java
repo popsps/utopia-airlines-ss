@@ -64,9 +64,9 @@ public class ExceptionHandlerController {
     res.sendError(ex.getStatusCode().value(), ex.getStatusText());
   }
 
-  @ExceptionHandler(Exception.class)
-  public void handleException(Exception ex, HttpServletResponse res) throws IOException {
-    LOGGER.error("Handled Exception", ex);
-    res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
-  }
+//  @ExceptionHandler(Exception.class)
+//  public void handleException(Exception ex, HttpServletResponse res) throws IOException {
+//    LOGGER.error("Handled Exception", ex);
+//    res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
+//  }
 }
