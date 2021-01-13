@@ -1,10 +1,24 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-class Passenger extends Model { 
-  toJSON(){
-    const values = Object.assign({}, this.get());
-    return values;
+class Passenger extends Model {
+  static associate({ Booking }) {
+    Passenger.belongsTo(Booking, {
+      foreignKey: {
+        name: "bookingId",
+        field: "booking_id",
+        allowNull: false,
+      },
+      as: "booking",
+    });
+  }
+  toJSON(role){
+    const { givenName: given, familyName: family, ...values } = Object.assign({}, this.get());
+    if (role !== "ADMIN") return { name: { given, family } };
+    return  {
+      ...values,
+      name: { given, family },
+    };
   }
 }
 

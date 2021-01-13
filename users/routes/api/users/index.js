@@ -3,9 +3,11 @@ const router = Router();
 
 const { userController } = require("../../../controllers");
 
-const { oneOf, checkSchema } = require("express-validator");
-const { getUserSchema } = require("../../../schemas/user");
+const { checkSchema } = require("express-validator");
+const { UserSchema } = require("@utopia-airlines-wss/common/schemas");
 const { validateRequest, requireAuthentication  } = require("@utopia-airlines-wss/common/middleware");
+
+router.use("/session", require("./session"));
 
 router.get("/",
   requireAuthentication({
@@ -13,10 +15,7 @@ router.get("/",
   }),
   userController.getAll);
 router.post("/",
-  oneOf([
-    checkSchema(getUserSchema({ excludeInfo: true }), ["body"] ),
-    checkSchema(getUserSchema(), ["body"]),
-  ]),
+  checkSchema(new UserSchema(), ["body"]),
   validateRequest,
   requireAuthentication({
     condition: (req) => req.body?.roleId != null,
@@ -25,11 +24,6 @@ router.post("/",
   userController.create
 );
 
-router.get("/session", userController.getSession);
-
-router.post("/session", userController.createSession);
-router.delete("/session", userController.deleteSession);
-
 router.route("/:id")
   .all(requireAuthentication({
     condition: (req) => req.user?.id !== +req.params.id,
@@ -37,7 +31,7 @@ router.route("/:id")
   }))
   .get(userController.getById)
   .put(
-    checkSchema(getUserSchema({ optional:true }), ["body"]),
+    checkSchema(new UserSchema({ optional:true }), ["body"]),
     validateRequest,
     userController.updateById
   )

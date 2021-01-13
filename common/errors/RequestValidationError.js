@@ -2,7 +2,6 @@ const { StandardizedError } = require("./StandardizedError");
 
 class RequestValidationError extends StandardizedError {
   constructor(errors) {
-    console.log(errors);
     super(
       "Invalid data",
       400,
