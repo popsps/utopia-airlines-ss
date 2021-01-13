@@ -74,6 +74,9 @@ public class UserController {
 	  if(user == null) {
 		  throw new HttpServerErrorException(HttpStatus.NOT_FOUND, "User not Found");
 	  }
+	  else if(!user.getUsername().equals(currentUser.getUsername())) {
+		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized user");
+	  }
 	  try {
 		  return userService.updateUser(userId, signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
 				  signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone());
