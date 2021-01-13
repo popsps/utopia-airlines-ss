@@ -1,6 +1,7 @@
 package com.ss.utopia.auth.controller;
 
 import com.ss.utopia.auth.dto.LoginDto;
+import com.ss.utopia.auth.dto.SignUpDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.service.UserService;
 import org.slf4j.Logger;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
 import javax.validation.Valid;
+
+import java.sql.SQLException;
+
+//import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.util.List;
 
 @RestController
@@ -38,16 +44,82 @@ public class UserController {
   // You may need to replace loginDto with your own Dto or
   // add additional arbitrary information to the LoginDto or
   // You may want to create a signup DTO in the DTO package to pass all necessary information
-  // regarding th user sign-up information as a class
+  // regarding the user sign-up information as a class
   @PostMapping("/signup")
   @ResponseStatus(HttpStatus.CREATED)
-  public User signup(@RequestBody @Valid LoginDto loginDto) {
+  public User signup(@RequestBody @Valid SignUpDto signUpDto) {
     // needs work
-    return userService.signup(loginDto.getUsername(), loginDto.getPassword())
-      .orElseThrow(() ->
-        new HttpServerErrorException(HttpStatus.BAD_REQUEST, "User already exists"));
+	  try {
+		  return userService.signup(signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
+    		signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone()).get();
+	  }
+	  catch(Exception e) {
+		  String error = e.getMessage();
+		  if(error.contains("user.phone_UNIQUE")) {
+			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+		  }
+		  else if(error.contains("user.username_UNIQUE")) {
+			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+		  }
+		  else if(error.contains("user.email_UNIQUE")) {
+			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+		  }
+	  }
+	  return null;
   }
-
+  
+  @PutMapping("/{userId}")
+  public User updateUser(@PathVariable Long userId, @RequestBody @Valid SignUpDto signUpDto,
+		  				 @AuthenticationPrincipal UserDetails currentUser) {
+	  User user = userService.getUserById(userId);
+	  if(user == null) {
+		  throw new HttpServerErrorException(HttpStatus.NOT_FOUND, "User not Found");
+	  }
+	  try {
+		  return userService.updateUser(userId, signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
+				  signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone());
+	  }
+	  catch(Exception e) {
+		  String error = e.getMessage();
+		  if(error.contains("user.phone_UNIQUE")) {
+			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+		  }
+		  else if(error.contains("user.username_UNIQUE")) {
+			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+		  }
+		  else if(error.contains("user.email_UNIQUE")) {
+			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+		  }
+	  }
+	  return null;
+//	  else if(currentUser.getUsername().equals(user.getUsername())){
+//		  User updatedUser = userService.updateUser(userId, signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
+//				  signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone());
+//		  if(updatedUser == null) {
+//			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username, email, or phone is taken");
+//		  }
+//		  return updatedUser;
+//	  }
+//	  else {
+//		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Access denied");
+//	  }
+  }
+  
+  @DeleteMapping("/{userId}")
+  public int deletUser(@PathVariable("userId") Long userId,
+		  			   @AuthenticationPrincipal UserDetails currentUser) {
+	  User user = userService.getUserById(userId);
+	  if(user == null) {
+		  throw new HttpServerErrorException(HttpStatus.NOT_FOUND, "User not found");
+	  }
+	  else if(currentUser.getUsername().equals(user.getUsername())) {
+		  return userService.deleteUser(userId);
+	  }
+	  else {
+		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Access denied");
+	  }
+  }
+  
   @GetMapping
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   public List<User> getAllUsers() {
