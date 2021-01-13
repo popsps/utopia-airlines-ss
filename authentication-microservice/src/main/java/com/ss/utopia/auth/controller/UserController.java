@@ -27,6 +27,11 @@ public class UserController {
     this.userService = userService;
   }
 
+  /**
+   * Login user
+   * @param loginDto
+   * @return
+   */
   @PostMapping("/signin")
   public String login(@RequestBody @Valid LoginDto loginDto) {
     return userService.signin(loginDto.getUsername(), loginDto.getPassword())
