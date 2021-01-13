@@ -39,17 +39,16 @@ public class UserController {
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.FORBIDDEN, "Login Failed"));
   }
 
-  // Samuel will be working here
-  // placeholder code
-  // You may need to replace loginDto with your own Dto or
-  // add additional arbitrary information to the LoginDto or
-  // You may want to create a signup DTO in the DTO package to pass all necessary information
-  // regarding the user sign-up information as a class
+   /*Samuel will be working here
+   placeholder code
+   You may need to replace loginDto with your own Dto or
+   add additional arbitrary information to the LoginDto or
+   You may want to create a signup DTO in the DTO package to pass all necessary information
+   regarding the user sign-up information as a class*/
   @PostMapping("/signup")
   @ResponseStatus(HttpStatus.CREATED)
   public User signup(@RequestBody @Valid SignUpDto signUpDto) {
-    // needs work
-	  try {
+   	  try {
 		  return userService.signup(signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
     		signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone()).get();
 	  }
@@ -92,17 +91,6 @@ public class UserController {
 		  }
 	  }
 	  return null;
-//	  else if(currentUser.getUsername().equals(user.getUsername())){
-//		  User updatedUser = userService.updateUser(userId, signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
-//				  signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone());
-//		  if(updatedUser == null) {
-//			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username, email, or phone is taken");
-//		  }
-//		  return updatedUser;
-//	  }
-//	  else {
-//		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Access denied");
-//	  }
   }
   
   @DeleteMapping("/{userId}")

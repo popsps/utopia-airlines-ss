@@ -1,9 +1,7 @@
 package com.ss.utopia.auth.service;
 
 import com.ss.utopia.auth.dao.UserDao;
-import com.ss.utopia.auth.dao.UserInfoDao;
 import com.ss.utopia.auth.entity.User;
-import com.ss.utopia.auth.entity.UserInfo;
 import com.ss.utopia.auth.entity.UserRole;
 import com.ss.utopia.auth.security.JwtProvider;
 import org.slf4j.Logger;
@@ -24,15 +22,13 @@ import java.util.Optional;
 public class UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
   private final UserDao userDao;
-  private final UserInfoDao userInfoDao;
   private final AuthenticationManager authenticationManager;
   private final PasswordEncoder passwordEncoder;
   private final JwtProvider jwtProvider;
 
   @Autowired
-  public UserService(UserDao userDao, UserInfoDao userInfoDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
+  public UserService(UserDao userDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
     this.userDao = userDao;
-    this.userInfoDao = userInfoDao;
     this.authenticationManager = authenticationManager;
     this.passwordEncoder = passwordEncoder;
     this.jwtProvider = jwtProvider;
@@ -76,13 +72,10 @@ public class UserService {
    */
   public Optional<User> signup(String username, String password, String givenName, String familyName,
 		  String email, String phone) {
-    //..................... placeholder ..............
-    // use  passwordEncoder.encode(password) to save password into the database
     LOGGER.info("New user attempting to sign up");
     Optional<User> user = Optional.empty();
     if (!userDao.findByUsername(username).isPresent()) {
-      // needs work
-		User createdUser = new User(8L,
+      		User createdUser = new User(8L,
 				username, passwordEncoder.encode(password),
 				new UserRole(2L, "CUSTOMER"), givenName, familyName, email, phone);
 	
@@ -107,7 +100,6 @@ public class UserService {
   
   public int deleteUser(Long userId) {
 	  LOGGER.info("User attempting to delete profile");
-//	  userInfoDao.deleteById();
 	  userDao.deleteById(userId);
 	  return 1;
   }
