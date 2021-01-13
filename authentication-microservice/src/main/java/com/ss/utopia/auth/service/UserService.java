@@ -64,20 +64,44 @@ public class UserService {
    *
    * @param username username
    * @param password password
+   * @param givenName First Name
+   * @param familyName Last Name
+   * @param email Email
+   * @param phone Phone Number
    * @return Optional of the Java Web Token, empty if the user already exists.
    */
-  public Optional<User> signup(String username, String password) {
-    //..................... placeholder ..............
-    // use  passwordEncoder.encode(password) to save password into the database
+  public Optional<User> signup(String username, String password, String givenName, String familyName,
+		  String email, String phone) {
     LOGGER.info("New user attempting to sign up");
     Optional<User> user = Optional.empty();
     if (!userDao.findByUsername(username).isPresent()) {
-      // needs work
-      user = Optional.of(userDao.save(new User(8L,
-        username, passwordEncoder.encode(password),
-        new UserRole(2L, "CUSTOMER"))));
+      		User createdUser = new User(8L,
+				username, passwordEncoder.encode(password),
+				new UserRole(2L, "CUSTOMER"), givenName, familyName, email, phone);
+	
+		user = Optional.of(userDao.save(createdUser));
     }
     return user;
+  }
+  
+  public User updateUser(Long id, String username, String password, String givenName, String familyName,
+		  String email, String phone) {
+	  LOGGER.info("User attempting to update info");
+	  User user = userDao.findById(id).get();
+	  user.setUsername(username);
+	  user.setPassword(passwordEncoder.encode(password));
+	  user.setGivenName(givenName);
+	  user.setFamilyName(familyName);
+	  user.setEmail(email);
+	  user.setPhone(phone);
+	  userDao.save(user);
+	  return user;
+  }
+  
+  public int deleteUser(Long userId) {
+	  LOGGER.info("User attempting to delete profile");
+	  userDao.deleteById(userId);
+	  return 1;
   }
 
   public List<User> getAll() {
