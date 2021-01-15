@@ -44,10 +44,10 @@ const flightService = {
   //     include: [],
   //   });
   // },
-  async createFlight({ id, routeId, departureTime, flightDuration, capacity, seatPrice } = {}) {
+  async createFlight({ id, routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
     const transaction = await sequelize.transaction();
     try {
-      const flight = await Flight.create({ id, routeId, departureTime, flightDuration, capacity, seatPrice });
+      const flight = await Flight.create({ id, routeId, airplaneId, departureTime, reservedSeats, seatPrice });
       await transaction.commit();
       return flight;
     } catch(err) {
@@ -55,7 +55,7 @@ const flightService = {
       handleMutationError(err);
     }
   },
-  async updateFlight(id, { routeId, departureTime, flightDuration, capacity, seatPrice } = {}) {
+  async updateFlight(id, { routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
     const flight = await flightService.findFlightById(id);
     if(!flight) throw new NotFoundError("cannot find flight");
     const transaction = await sequelize.transaction();
@@ -63,9 +63,9 @@ const flightService = {
       const newFlightInfo = {
         id: id,
         routeId: routeId,
+        airplaneId: airplaneId,
         departureTime: departureTime,
-        flightDuration: flightDuration,
-        capacity: capacity,
+        reservedSeats: reservedSeats,
         seatPrice: seatPrice,
       };
       flight.update(newFlightInfo);
