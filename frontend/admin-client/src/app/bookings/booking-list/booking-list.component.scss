@@ -1,0 +1,30 @@
+.booking-item {
+  display : flex;
+  color   : #212529;
+  padding : 0;
+
+  .main {
+    flex    : 1;
+    padding : 0.75rem 1.25rem;
+  }
+
+  .reserved {
+    border-left     : 1px solid rgba(0, 0, 0, 0.1);
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    margin-left     : auto;
+    width           : 10%;
+    min-width       : 40px;
+
+  }
+}
+
+.green {
+  background-color : forestgreen;
+}
+
+.red {
+  background-color : red;
+}
+

@@ -1,11 +1,51 @@
 <p class="lead">
-  List of all of all bookings
+  List of all of all bookings Debug
 </p>
-<ul class="list-group m-3" *ngFor="let booking of bookings">
+<div class="list-group m-3" *ngFor="let booking of bookings">
   <a [routerLink]="['/bookings',booking.id]" style="text-decoration: none">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      {{booking.isActive}} {{booking.confirmationCode}}
-      <span class="badge badge-primary badge-pill">{{booking.id}}</span>
-    </li>
+    <div class="list-group-item booking-item rounded">
+      <div class="main">
+
+        <div><span class="badge badge-primary badge-pill">{{booking.id}}</span>
+          Origin to Destination
+        </div>
+        <hr class="my-4">
+        <div class="d-flex alert alert-secondary">
+          <div class="p-2">Booker id</div>
+          <div class="p-2">Booker give_name</div>
+          <div class="p-2">Booker family_name</div>
+        </div>
+       <div class="d-flex">
+         <div class="card" style="max-width: 20rem;">
+           <div class="p-2">Origin</div>
+           <div class="card-body">
+             <div class="card-title d-flex">
+               <i class="fas fa-plane-departure mt-1 mr-2"></i>
+               <div >Departure time</div>
+             </div>
+             <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+           </div>
+         </div>
+         <div class="card ml-auto" style="max-width: 20rem;">
+           <div class="p-2">Destination</div>
+           <div class="card-body">
+             <div class="card-title d-flex">
+               <i class="fas fa-plane-arrival mt-1 mr-2"></i>
+               <div>Arrival time</div>
+             </div>
+             <p class="card-text text-secondary">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+           </div>
+         </div>
+       </div>
+        <div class="p-2 text-center">total fight time</div>
+
+
+      </div>
+      <div class="reserved " [ngClass]="(booking.isActive) ? 'text-success' : 'text-danger'">
+        <div>
+          {{booking.isActive ? 'Active' : 'Inactive'}}
+        </div>
+      </div>
+    </div>
   </a>
-</ul>
+</div>

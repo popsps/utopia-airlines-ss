@@ -1,15 +1,46 @@
 <p>booking works!</p>
-<p>{{booking.id}}</p>
-<p>{{booking.isActive}}</p>
-<p>{{booking.confirmationCode}}</p>
-<ul *ngFor="let passenger of booking.passengers">
-  <li>
-    <span class="m-2">{{passenger.id}}</span>
-    <span class="m-2">{{passenger.bookingId}}</span>
-    <span class="m-2">{{passenger.givenName}}</span>
-    <span class="m-2">{{passenger.familyName}}</span>
-    <span class="m-2">{{passenger.dob}}</span>
-    <span class="m-2">{{passenger.gender}}</span>
-    <span class="m-2">{{passenger.address}}</span>
-  </li>
-</ul>
+<div>
+  <div>
+    <div class="alert alert-info">{{booking.confirmationCode || 'confirmation code'}}</div>
+  </div>
+  <div class="d-flex">
+    <div>{{booking.id}}</div>
+    <div>{{booking.isActive ? 'Active' : 'Inactive'}}</div>
+    <div>Origin - Destination</div>
+  </div>
+  <div>
+    <div>Departure(time)</div>
+    <div>Arrival(time)</div>
+    <div>Total travel time</div>
+  </div>
+  <div>
+    <div class="h2">Flights(s) details</div>
+  </div>
+  <div>
+    <div class="h2">Passenger(s) details</div>
+    <div>
+      <span class="m-2">id</span>
+      <span class="m-2">bookingId</span>
+      <span class="m-2">first name</span>
+      <span class="m-2">last name</span>
+      <span class="m-2">dob</span>
+      <span class="m-2">gender</span>
+      <span class="m-2">address</span>
+    </div>
+    <div *ngFor="let passenger of booking.passengers">
+      <div>
+        <span class="m-2">{{passenger.id}}</span>
+        <span class="m-2">{{passenger.bookingId}}</span>
+        <span class="m-2">{{passenger.givenName}}</span>
+        <span class="m-2">{{passenger.familyName}}</span>
+        <span class="m-2">{{passenger.dob}}</span>
+        <span class="m-2">{{passenger.gender}}</span>
+        <span class="m-2">{{passenger.address}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
