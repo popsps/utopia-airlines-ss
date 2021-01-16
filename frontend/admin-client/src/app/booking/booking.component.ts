@@ -17,8 +17,6 @@ export class BookingComponent implements OnInit {
   getAllBookings(): void {
     this.bookingService.getAllBookings(environment.bookingApiUrl)
       .subscribe(bookings => {
-        console.log(typeof bookings[0]);
-        console.log(bookings);
         console.log(bookings);
         this.bookings = bookings;
       });
