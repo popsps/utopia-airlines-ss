@@ -1,12 +1,14 @@
 <p>booking works!</p>
 <div>
   <div>
-    <div class="alert alert-info">{{booking.confirmationCode || 'confirmation code'}}</div>
+    <div class="alert alert-warning">
+      {{booking.confirmationCode || 'confirmation code'}}
+      <div class="badge badge-success">{{booking.isActive ? 'Active' : 'Inactive'}}</div>
+    </div>
   </div>
   <div class="d-flex">
-    <div>{{booking.id}}</div>
-    <div>{{booking.isActive ? 'Active' : 'Inactive'}}</div>
-    <div>Origin - Destination</div>
+    <div >booking_id{{booking.id}}</div>
+    <div class="ml-4">Origin - Destination</div>
   </div>
   <div>
     <div>Departure(time)</div>
@@ -18,26 +20,30 @@
   </div>
   <div>
     <div class="h2">Passenger(s) details</div>
-    <div>
-      <span class="m-2">id</span>
-      <span class="m-2">bookingId</span>
-      <span class="m-2">first name</span>
-      <span class="m-2">last name</span>
-      <span class="m-2">dob</span>
-      <span class="m-2">gender</span>
-      <span class="m-2">address</span>
-    </div>
-    <div *ngFor="let passenger of booking.passengers">
-      <div>
-        <span class="m-2">{{passenger.id}}</span>
-        <span class="m-2">{{passenger.bookingId}}</span>
-        <span class="m-2">{{passenger.givenName}}</span>
-        <span class="m-2">{{passenger.familyName}}</span>
-        <span class="m-2">{{passenger.dob}}</span>
-        <span class="m-2">{{passenger.gender}}</span>
-        <span class="m-2">{{passenger.address}}</span>
-      </div>
-    </div>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">bookingId</th>
+        <th scope="col">first name</th>
+        <th scope="col">last name</th>
+        <th scope="col">dob</th>
+        <th scope="col">gender</th>
+        <th scope="col">address</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let passenger of booking.passengers">
+        <td>{{passenger.id}}</td>
+        <td>{{passenger.bookingId}}</td>
+        <td>{{passenger.givenName}}</td>
+        <td class="m-2">{{passenger.familyName}}</td>
+        <td class="m-2">{{passenger.dob}}</td>
+        <td class="m-2">{{passenger.gender}}</td>
+        <td class="m-2">{{passenger.address}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
