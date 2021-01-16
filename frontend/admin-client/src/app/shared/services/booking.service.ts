@@ -21,15 +21,15 @@ export class BookingService {
   }
 
   getBookingById(url: string, id: number): Observable<Booking> {
-    return this.http.get<Booking>(`url/${id}`);
+    return this.http.get<Booking>(`${url}/${id}`);
   }
 
   deleteBookingById(url: string, id: number): Observable<Booking> {
-    return this.http.delete<Booking>(`url/${id}`);
+    return this.http.delete<Booking>(`${url}/${id}`);
   }
 
   updateBookingById(url: string, id: number, payload: Booking): Observable<Booking> {
-    return this.http.put<Booking>(`url/${id}`, payload);
+    return this.http.put<Booking>(`${url}/${id}`, payload);
   }
 
   postABooking(url: string, payload: Booking): Observable<Booking> {

@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Booking} from '../shared/models/booking';
-import {BookingService} from '../shared/services/booking.service';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
+import {BookingService} from '../../shared/services/booking.service';
+import {Booking} from '../../shared/models/booking';
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss']
+  selector: 'app-booking-list',
+  templateUrl: './booking-list.component.html',
+  styleUrls: ['./booking-list.component.scss']
 })
-export class BookingComponent implements OnInit {
+export class BookingListComponent implements OnInit {
   bookings: Booking[] = null;
 
   constructor(private bookingService: BookingService) {
@@ -23,7 +23,6 @@ export class BookingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('start');
     this.getAllBookings();
   }
 

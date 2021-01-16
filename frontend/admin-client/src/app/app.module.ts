@@ -7,8 +7,9 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './layout/home/home.component';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {FooterComponent} from './layout/footer/footer.component';
-import {BookingComponent} from './booking/booking.component';
 import {LoginModalComponent} from './shared/components/login.modal/login.modal.component';
+import { BookingListComponent } from './bookings/booking-list/booking-list.component';
+import { BookingComponent } from './bookings/booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import {LoginModalComponent} from './shared/components/login.modal/login.modal.c
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    BookingComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    BookingListComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,

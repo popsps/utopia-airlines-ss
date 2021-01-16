@@ -1,0 +1,15 @@
+<p>booking works!</p>
+<p>{{booking.id}}</p>
+<p>{{booking.isActive}}</p>
+<p>{{booking.confirmationCode}}</p>
+<ul *ngFor="let passenger of booking.passengers">
+  <li>
+    <span class="m-2">{{passenger.id}}</span>
+    <span class="m-2">{{passenger.bookingId}}</span>
+    <span class="m-2">{{passenger.givenName}}</span>
+    <span class="m-2">{{passenger.familyName}}</span>
+    <span class="m-2">{{passenger.dob}}</span>
+    <span class="m-2">{{passenger.gender}}</span>
+    <span class="m-2">{{passenger.address}}</span>
+  </li>
+</ul>
