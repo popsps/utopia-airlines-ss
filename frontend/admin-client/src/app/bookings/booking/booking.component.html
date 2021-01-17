@@ -52,15 +52,15 @@
       </div>
     </div>
   </div>
-  <div class="d-flex">
+  <div class="d-flex justify-content-center">
     <button type="button" (click)="toggleEditForm()" [hidden]="!readonly"
-            class="btn btn-dark btn-lg btn-block m-5">Edit
+            class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Edit
     </button>
     <button type="button" (click)="toggleEditForm()" [hidden]="readonly"
-            class="btn btn-dark btn-lg btn-block m-5">Save
+            class="btn btn-success btn-lg btn-block m-5">Save
     </button>
     <button type="button" (click)="toggleEditForm()" [hidden]="readonly"
-            class="btn btn-dark btn-lg btn-block m-5">Cancel
+            class="btn btn-danger btn-lg btn-block m-5">Cancel
     </button>
   </div>
 </div>
