@@ -2,12 +2,12 @@
 <div>
   <div>
     <div class="alert alert-warning">
-      {{booking.confirmationCode || 'confirmation code'}}
-      <div class="badge badge-success">{{booking.isActive ? 'Active' : 'Inactive'}}</div>
+      {{booking?.confirmationCode || 'confirmation code'}}
+      <div class="badge badge-success">{{booking?.isActive ? 'Active' : 'Inactive'}}</div>
     </div>
   </div>
   <div class="d-flex">
-    <div >booking_id{{booking.id}}</div>
+    <div>booking_id{{booking?.id}}</div>
     <div class="ml-4">Origin - Destination</div>
   </div>
   <div>
@@ -20,30 +20,48 @@
   </div>
   <div>
     <div class="h4">Passenger(s) details</div>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">bookingId</th>
-        <th scope="col">first name</th>
-        <th scope="col">last name</th>
-        <th scope="col">dob</th>
-        <th scope="col">gender</th>
-        <th scope="col">address</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let passenger of booking.passengers">
-        <td>{{passenger.id}}</td>
-        <td>{{passenger.bookingId}}</td>
-        <td>{{passenger.givenName}}</td>
-        <td class="m-2">{{passenger.familyName}}</td>
-        <td class="m-2">{{passenger.dob}}</td>
-        <td class="m-2">{{passenger.gender}}</td>
-        <td class="m-2">{{passenger.address}}</td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="list-group m-3" *ngFor="let passenger of booking?.passengers">
+      <div class="list-group-item booking-item rounded">
+        <div class="form-group">
+          <label class="m-2">
+            ID<input [(ngModel)]="passenger.id" name="id" class="form-control" [readOnly]="readonly">
+          </label>
+          <label class="m-2">
+            bookingId<input [(ngModel)]="passenger.bookingId" name="bookingId" class="form-control"
+                            [readOnly]="readonly">
+          </label>
+          <label class="m-2">
+            Firstname<input [(ngModel)]="passenger.givenName" name="givenName" class="form-control"
+                            [readOnly]="readonly">
+          </label>
+          <label class="m-2">
+            Lastname<input [(ngModel)]="passenger.familyName" name="familyName" class="form-control"
+                           [readOnly]="readonly">
+          </label>
+          <label class="m-2">
+            DOB<input [(ngModel)]="passenger.dob" name="dob" class="form-control" [readOnly]="readonly">
+          </label>
+          <label class="m-2">
+            Gender<input [(ngModel)]="passenger.gender" name="gender" class="form-control" [readOnly]="readonly">
+          </label>
+          <label class="m-2">
+            Address<input [(ngModel)]="passenger.address" name="address" class="form-control" [readOnly]="readonly">
+          </label>
+        </div>
+        <hr class="my-4">
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <button type="button" (click)="toggleEditForm()" [hidden]="!readonly"
+            class="btn btn-dark btn-lg btn-block m-5">Edit
+    </button>
+    <button type="button" (click)="toggleEditForm()" [hidden]="readonly"
+            class="btn btn-dark btn-lg btn-block m-5">Save
+    </button>
+    <button type="button" (click)="toggleEditForm()" [hidden]="readonly"
+            class="btn btn-dark btn-lg btn-block m-5">Cancel
+    </button>
   </div>
 </div>
 

@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Booking} from '../../shared/models/booking';
 import {BookingService} from '../../shared/services/booking.service';
 import {environment} from '../../../environments/environment';
+import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -12,8 +13,11 @@ import {environment} from '../../../environments/environment';
 export class BookingComponent implements OnInit {
   booking: Booking;
   bookingId: number;
+  bookingForm: FormGroup;
+  readonly = true;
 
-  constructor(private  route: ActivatedRoute, private bookingService: BookingService) {
+  constructor(private  route: ActivatedRoute, private bookingService: BookingService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -24,6 +28,10 @@ export class BookingComponent implements OnInit {
         console.log(booking);
         this.booking = booking;
       });
+  }
+
+  toggleEditForm(): void {
+    this.readonly = !this.readonly;
   }
 
 }
