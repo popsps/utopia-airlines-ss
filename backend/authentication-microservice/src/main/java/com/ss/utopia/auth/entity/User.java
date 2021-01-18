@@ -11,33 +11,32 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
+
   @Column(name = "username", nullable = false)
   private String username;
+
   @Column(name = "password", nullable = false)
   @JsonIgnore
   private String password;
-  
+
   @Column(name = "given_name")
   private String givenName;
-  
+
   @Column(name = "family_name")
   private String familyName;
-  
+
   @Column(name = "email")
   private String email;
-  
+
   @Column(name = "phone")
   private String phone;
-
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "role_id", nullable = false)
   private UserRole role;
-  
+
   protected User() {
   }
-
-
 
   public User(Long id, String username, String password, UserRole role) {
     this.id = id;
@@ -46,7 +45,8 @@ public class User {
     this.role = role;
   }
 
-  public User(Long id, String username, String password, UserRole role, String givenName, String familyName, String email, String phone) {
+  public User(Long id, String username, String password, UserRole role, String givenName, String familyName,
+      String email, String phone) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -57,56 +57,39 @@ public class User {
     this.phone = phone;
   }
 
-
   public String getGivenName() {
-	return givenName;
-}
+    return givenName;
+  }
 
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
+  }
 
+  public String getFamilyName() {
+    return familyName;
+  }
 
-public void setGivenName(String givenName) {
-	this.givenName = givenName;
-}
+  public void setFamilyName(String familyName) {
+    this.familyName = familyName;
+  }
 
+  public String getEmail() {
+    return email;
+  }
 
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-public String getFamilyName() {
-	return familyName;
-}
+  public String getPhone() {
+    return phone;
+  }
 
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
 
-
-public void setFamilyName(String familyName) {
-	this.familyName = familyName;
-}
-
-
-
-public String getEmail() {
-	return email;
-}
-
-
-
-public void setEmail(String email) {
-	this.email = email;
-}
-
-
-
-public String getPhone() {
-	return phone;
-}
-
-
-
-public void setPhone(String phone) {
-	this.phone = phone;
-}
-
-
-
-public Long getId() {
+  public Long getId() {
     return id;
   }
 
