@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Booking} from '../models/booking';
@@ -29,6 +29,7 @@ export class BookingService {
   }
 
   updateBookingById(url: string, id: number, payload: Booking): Observable<Booking> {
+
     return this.http.put<Booking>(`${url}/${id}`, payload);
   }
 

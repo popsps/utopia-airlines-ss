@@ -10,16 +10,19 @@ import {Booking} from '../../shared/models/booking';
 })
 export class BookingListComponent implements OnInit {
   bookings: Booking[] = null;
+  loading = false;
 
   constructor(private bookingService: BookingService) {
   }
 
   getAllBookings(): void {
+    this.loading = true;
     this.bookingService.getAllBookings(environment.bookingApiUrl)
       .subscribe(bookings => {
         console.log(bookings);
         this.bookings = bookings;
-      });
+        this.loading = false;
+      }, error => this.loading = false);
   }
 
   ngOnInit(): void {

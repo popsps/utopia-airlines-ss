@@ -6,6 +6,8 @@ export class Booking implements Deserializable {
   isActive: boolean;
   confirmationCode: string;
   passengers: Passenger[];
+  // should be removed. Is here due to schema mismatch
+  bookerId: number;
 
   deserialize(input: any): this {
     Object.assign(this, input);
