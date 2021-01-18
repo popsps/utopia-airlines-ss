@@ -13,9 +13,9 @@ import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/form
 export class BookingComponent implements OnInit {
   booking: Booking;
   bookingId: number;
-  bookingForm: FormGroup;
   readonly = true;
   loading = false;
+  deleted = false;
   error = {isError: false, message: ''};
 
   constructor(private  route: ActivatedRoute, private bookingService: BookingService,
@@ -55,6 +55,7 @@ export class BookingComponent implements OnInit {
       .subscribe(booking => {
         console.log(booking);
         this.booking = booking;
+        this.deleted = true;
       }, error => console.log('error:', error));
   }
 

@@ -16,7 +16,7 @@ export class BookingFormComponent implements OnInit {
 
   initForm(): void {
     this.bForm = this.fb.group({
-      isActive: null,
+      isActive: true,
       passengers: this.fb.array([]),
       flights: this.fb.array([])
     });
