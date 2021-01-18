@@ -13,6 +13,7 @@ import {BookingComponent} from './bookings/booking/booking.component';
 import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BookingFormComponent } from './bookings/booking-form/booking-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FooterComponent,
     LoginModalComponent,
     BookingListComponent,
-    BookingComponent
+    BookingComponent,
+    BookingFormComponent
   ],
   imports: [
     BrowserModule,

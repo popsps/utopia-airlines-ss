@@ -8,7 +8,9 @@ export class Booking implements Deserializable {
   passengers: Passenger[];
   // should be removed. Is here due to schema mismatch
   bookerId: number;
-
+  public constructor(init?: Partial<Booking>) {
+    Object.assign(this, init);
+  }
   deserialize(input: any): this {
     Object.assign(this, input);
     try {
