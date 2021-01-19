@@ -3,7 +3,6 @@ package com.ss.utopia.auth.service;
 import com.ss.utopia.auth.dao.UserDao;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.entity.UserRole;
-import com.ss.utopia.auth.security.jwt.JwtProvider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
