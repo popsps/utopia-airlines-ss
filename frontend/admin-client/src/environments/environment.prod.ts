@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  utopiaAirlineApi: "http://localhost:8081",
+  userApiUrl: "/users"
 };
