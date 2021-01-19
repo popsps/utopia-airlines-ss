@@ -97,7 +97,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/{userId}")
-	public int deletUser(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
+	public int deleteUser(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
 		User user = userService.getUserById(userId);
 		if (user == null) {
 			throw new HttpServerErrorException(HttpStatus.NOT_FOUND, "User not found");
