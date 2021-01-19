@@ -32,7 +32,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     // Entry points
-    http.authorizeRequests().antMatchers(HttpMethod.POST, "/users/signin", "/users/signup").permitAll()
+    //TODO: remove "/users" and re-add HttpMethod.POST once authentication is added
+    http.authorizeRequests().antMatchers("/users/signin", "/users/signup", "/users").permitAll()
         // Disallow everything else
         .anyRequest().authenticated().and().addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
   }
