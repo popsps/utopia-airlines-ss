@@ -109,3 +109,4 @@ dist
 *.mwb.bak
 
 .vscode
+/.metadata/

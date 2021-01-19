@@ -117,7 +117,8 @@ public class UserController {
   }
   
   @GetMapping
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @CrossOrigin(origins = "http://localhost:4200")
+//  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public List<User> getAllUsers() {
     return userService.getAll();
   }

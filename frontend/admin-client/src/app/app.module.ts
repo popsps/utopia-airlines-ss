@@ -8,6 +8,9 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BookingComponent } from './booking/booking.component';
 import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
+import { UsersComponent } from './users/users.component';
+import { HttpService } from "./shared/services/http.service"
+import { HttpClientModule } from "@angular/common/http"
 
 @NgModule({
   declarations: [
@@ -16,13 +19,15 @@ import { LoginModalComponent } from './shared/components/login-modal/login-modal
     NavbarComponent,
     FooterComponent,
     BookingComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

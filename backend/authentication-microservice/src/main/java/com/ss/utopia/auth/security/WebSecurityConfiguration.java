@@ -33,7 +33,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     // Entry points
     http.authorizeRequests()
-      .antMatchers("/users/signin", "/users/signup").permitAll()
+      .antMatchers("/users/signin", "/users/signup", "/users").permitAll()
       // Disallow everything else
       .anyRequest().authenticated();
     // Disable CSRF (cross site request forgery)
