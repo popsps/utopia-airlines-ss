@@ -2,6 +2,7 @@ package com.ss.utopia.auth.security.jwt;
 
 import com.ss.utopia.auth.entity.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +11,17 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import java.security.KeyPair;
 import java.util.Date;
 import java.util.Optional;
 
 @Service
 public class JwtProvider {
-  @Value("${security.jwt.token.secret-key}")
-  private String secretKey;
   @Value("${security.jwt.token.expiration}")
   private long validityInMilliseconds;
+
+  @Autowired
+  private KeyPair jwtKeyPair;
 
   public Claims createUserClaims(final User user) {
     final Claims claims = Jwts.claims().setSubject(Long.toHexString(user.getId()));
@@ -36,12 +39,12 @@ public class JwtProvider {
     final Date now = new Date();
     final Date expiresAt = new Date(now.getTime() + validityInMilliseconds);
     return Jwts.builder().setClaims(claims).setIssuedAt(now).setExpiration(expiresAt)
-        .signWith(SignatureAlgorithm.HS256, secretKey).compact();
+        .signWith(SignatureAlgorithm.RS256, jwtKeyPair.getPrivate()).compact();
   }
 
   public Optional<Claims> validateToken(final String token) {
     try {
-      final Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+      final Claims claims = Jwts.parser().setSigningKey(jwtKeyPair.getPublic()).parseClaimsJws(token).getBody();
       if (claims.getExpiration().before(new Date()))
         throw new IllegalArgumentException();
       return Optional.of(claims);
