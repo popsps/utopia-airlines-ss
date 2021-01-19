@@ -10,7 +10,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { BookingComponent } from './booking/booking.component';
 import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
 import { UsersComponent } from './users/users.component';
-import { HttpService } from "./shared/services/http.service"
+import { HttpService } from "./shared/services/http.service";
+import { FlightsComponent } from './flights/flights.component'
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HttpService } from "./shared/services/http.service"
     FooterComponent,
     BookingComponent,
     LoginModalComponent,
-    UsersComponent
+    UsersComponent,
+    FlightsComponent
   ],
   imports: [
     BrowserModule,
