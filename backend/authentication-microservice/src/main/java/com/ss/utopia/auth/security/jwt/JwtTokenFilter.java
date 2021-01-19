@@ -45,18 +45,19 @@ public class JwtTokenFilter extends OncePerRequestFilter {
           .filter((cookie) -> /* cookie.isHttpOnly() && */ cookie.getPath() == null
               && cookie.getName().matches("^session$"))
           .findAny().ifPresent((sessionCookie) ->
+          // parse token
+          this.sessionCookieProvider.parseAuthJwt(sessionCookie).ifPresent(token ->
           // validate token
-          this.jwtProvider.validateToken(this.sessionCookieProvider.parseAuthJwt(sessionCookie)).ifPresent((claims) ->
+          this.jwtProvider.validateToken(token).ifPresent((claims) ->
           // get user by id
           this.userDao.findById(this.jwtProvider.getUserId(claims)).ifPresent((user) -> {
             // create user details from user
-            System.out.println(user.getRole().getAuthority());
             final UserDetails userDetails = withUsername(user.getUsername()).password(user.getPassword())
                 .authorities(user.getRole().getAuthority()).accountExpired(false).accountLocked(false)
                 .credentialsExpired(false).disabled(false).build();
             SecurityContextHolder.getContext().setAuthentication(
                 new PreAuthenticatedAuthenticationToken(userDetails, "", userDetails.getAuthorities()));
-          })));
+          }))));
     }
     filterChain.doFilter(request, response);
   }

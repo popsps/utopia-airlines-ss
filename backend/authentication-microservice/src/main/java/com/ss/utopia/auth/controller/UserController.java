@@ -40,7 +40,9 @@ public class UserController {
 	public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
 		final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
 				.orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
-		response.addCookie(sessionCookieProvider.createSessionCookie(user));
+		final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
+				.orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+		response.addCookie(sessionCookie);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
