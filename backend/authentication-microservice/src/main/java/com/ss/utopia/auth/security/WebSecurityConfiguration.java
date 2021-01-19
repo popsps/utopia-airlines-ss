@@ -1,8 +1,11 @@
 package com.ss.utopia.auth.security;
 
+import com.ss.utopia.auth.security.jwt.JwtTokenFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,31 +19,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Configuration file for web security
  */
 @Configuration
-//@EnableWebSecurity
+// @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  private final UtopiaUserDetailService utopiaUserDetailService;
-  private final JwtProvider jwtProvider;
-
   @Autowired
-  public WebSecurityConfiguration(UtopiaUserDetailService utopiaUserDetailService, JwtProvider jwtProvider) {
-    this.utopiaUserDetailService = utopiaUserDetailService;
-    this.jwtProvider = jwtProvider;
-  }
+  private JwtTokenFilter jwtTokenFilter;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    // Entry points
-    http.authorizeRequests()
-      .antMatchers("/users/signin", "/users/signup", "/users").permitAll()
-      // Disallow everything else
-      .anyRequest().authenticated();
-    // Disable CSRF (cross site request forgery)
+    // Disable (cross site request forgery)
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.addFilterBefore(new JwtTokenFilter(utopiaUserDetailService, jwtProvider),
-      UsernamePasswordAuthenticationFilter.class);
+    // Entry points
+    http.authorizeRequests().antMatchers(HttpMethod.POST, "/users/signin", "/users/signup").permitAll()
+        // Disallow everything else
+        .anyRequest().authenticated().and().addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean

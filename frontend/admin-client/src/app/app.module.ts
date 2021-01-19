@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +11,7 @@ import { BookingComponent } from './booking/booking.component';
 import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
 import { UsersComponent } from './users/users.component';
 import { HttpService } from "./shared/services/http.service"
-import { HttpClientModule } from "@angular/common/http"
+
 
 @NgModule({
   declarations: [
@@ -30,4 +31,5 @@ import { HttpClientModule } from "@angular/common/http"
   providers: [HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
