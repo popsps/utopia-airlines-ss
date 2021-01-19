@@ -2,7 +2,6 @@ package com.ss.utopia.auth.security.jwt;
 
 import java.security.KeyFactory;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -25,6 +24,8 @@ public class JwtConfiguration {
 
   private PrivateKey generatePrivateKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
     final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    privateKey = privateKey.replaceAll("-----BEGIN (.*)-----", "").replaceAll("-----END (.*)----", "")
+        .replaceAll("\r\n", "").replaceAll("\n", "").trim();
     final byte[] decodedPrivate = Base64.getDecoder().decode(privateKey);
     final KeySpec keySpec = new PKCS8EncodedKeySpec(decodedPrivate);
     return keyFactory.generatePrivate(keySpec);
@@ -32,6 +33,8 @@ public class JwtConfiguration {
 
   private PublicKey generatePublicKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
     final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    publicKey = publicKey.replaceAll("-----BEGIN (.*)-----", "").replaceAll("-----END (.*)----", "")
+        .replaceAll("\r\n", "").replaceAll("\n", "").trim();
     final byte[] decodedPublic = Base64.getDecoder().decode(publicKey);
     final KeySpec keySpec = new X509EncodedKeySpec(decodedPublic);
     return keyFactory.generatePublic(keySpec);
