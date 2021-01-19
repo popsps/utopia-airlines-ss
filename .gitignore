@@ -109,3 +109,6 @@ dist
 *.mwb.bak
 
 .vscode
+
+# RSA Keys
+*.pem
