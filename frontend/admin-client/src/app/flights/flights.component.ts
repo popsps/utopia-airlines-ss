@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import { environment } from "../../environments/environment";
+
 import { HttpService } from "../shared/services/http.service";
+
 import { Flight } from "../shared/models/Flight";
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -12,9 +16,11 @@ import { Flight } from "../shared/models/Flight";
 export class FlightsComponent implements OnInit {
   flights: {
     state: "pending" | "done" | "error";
-    error?: string;
+    error?: any;
     data?: Flight[];
   };
+  departureDate: Date;
+
   constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
@@ -23,12 +29,21 @@ export class FlightsComponent implements OnInit {
 
   loadFlights() {
     this.flights = { state: "pending" };
-    this.httpService.getAll(`${environment.flightApiUrl}`).subscribe((res: any[]) => {
-      this.flights = {
-        state: "done",
-        data: res.map(obj => new Flight().deserialize(obj))
-      };
-    });
+    this.httpService.getAll(`${environment.flightApiUrl}`).subscribe(
+      (res: any[]) => {
+        this.flights = {
+          state: "done",
+          data: res.map(obj => new Flight().deserialize(obj))
+        };
+      },
+      (error) => {
+        this.flights = {
+          state: "error",
+          error
+        };
+      },
+
+    );
   }
 
 }
