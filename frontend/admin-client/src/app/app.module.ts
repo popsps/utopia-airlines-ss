@@ -11,7 +11,8 @@ import { BookingComponent } from './booking/booking.component';
 import { LoginModalComponent } from './shared/components/login-modal/login-modal.component';
 import { UsersComponent } from './users/users.component';
 import { HttpService } from "./shared/services/http.service";
-import { FlightsComponent } from './flights/flights.component'
+import { FlightsComponent } from './flights/flights.component';
+import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe'
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FlightsComponent } from './flights/flights.component'
     BookingComponent,
     LoginModalComponent,
     UsersComponent,
-    FlightsComponent
+    FlightsComponent,
+    FlightDepartureDatePipe
   ],
   imports: [
     BrowserModule,
