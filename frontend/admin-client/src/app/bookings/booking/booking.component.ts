@@ -78,16 +78,19 @@ export class BookingComponent implements OnInit {
     });
     passengers.forEach(passenger => {
       const passengerForm = this.fb.group({
-        id: passenger.id,
-        bookingId: passenger.bookingId,
-        givenName: passenger.givenName,
-        familyName: passenger.familyName,
-        dob: passenger.dob,
-        gender: passenger.gender,
-        address: passenger.address
+        id: passenger?.id,
+        bookingId: passenger?.bookingId,
+        name: this.fb.group({
+          given: passenger?.name.given,
+          family: passenger?.name.family,
+        }),
+        dob: passenger?.dob,
+        gender: passenger?.gender,
+        address: passenger?.address
       });
       this.getPassengersForms().push(passengerForm);
     });
+    console.log('form:', this.bForm.value);
     this.bForm.valueChanges.subscribe(value => {
       this.booking = {...this.bForm.value};
       // this.booking = new Booking(this.bForm.value);

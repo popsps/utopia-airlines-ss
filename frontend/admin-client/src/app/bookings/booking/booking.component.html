@@ -37,14 +37,16 @@
                 bookingId<input formControlName="bookingId" class="form-control"
                                 [readOnly]="readonly">
               </label>
-              <label class="m-2">
-                Firstname<input formControlName="givenName" class="form-control"
-                                [readOnly]="readonly">
-              </label>
-              <label class="m-2">
-                Lastname<input formControlName="familyName" class="form-control"
-                               [readOnly]="readonly">
-              </label>
+              <div class="d-inline" formGroupName="name">
+                <label class="m-2">
+                  Firstname<input formControlName="given" class="form-control"
+                                  [readOnly]="readonly">
+                </label>
+                <label class="m-2">
+                  Lastname<input formControlName="family" class="form-control"
+                                 [readOnly]="readonly">
+                </label>
+              </div>
               <label class="m-2">
                 DOB<input formControlName="dob" class="form-control" [readOnly]="readonly">
               </label>
