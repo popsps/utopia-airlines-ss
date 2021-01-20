@@ -90,9 +90,7 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div class="alert alert-dismissible alert-danger" *ngIf="error.isError">
-  {{error.message}}
-</div>
+<app-error-message *ngIf="error?.isError" [error]="error"></app-error-message>
 <div class="alert alert-dismissible alert-success" *ngIf="deleted">
   Booking {{bookingId}} has been deleted Successfully
 </div>

@@ -11,6 +11,7 @@ import {Booking} from '../../shared/models/booking';
 export class BookingListComponent implements OnInit {
   bookings: Booking[] = null;
   loading = false;
+  error = {isError: false, message: '', status: null};
 
   constructor(private bookingService: BookingService) {
   }
@@ -24,6 +25,7 @@ export class BookingListComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
+        this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
         console.log(error);
       });
   }

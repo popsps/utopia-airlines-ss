@@ -17,7 +17,7 @@ export class BookingComponent implements OnInit {
   readonly = true;
   loading = false;
   deleted = false;
-  error = {isError: false, message: ''};
+  error = {isError: false, message: '', status: null};
 
   constructor(private  route: ActivatedRoute, private bookingService: BookingService,
               private fb: FormBuilder) {
@@ -35,7 +35,7 @@ export class BookingComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.error = {isError: true, message: error.message};
+        this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
         console.log('error', error);
       });
 
@@ -109,8 +109,10 @@ export class BookingComponent implements OnInit {
   addPassengerForm(): void {
     const passenger = this.fb.group({
       bookingId: this.booking.id,
-      givenName: '',
-      familyName: '',
+      name: this.fb.group({
+        given: '',
+        family: '',
+      }),
       dob: '',
       gender: '',
       address: ''

@@ -39,8 +39,10 @@ export class BookingFormComponent implements OnInit {
 
   addPassengerForm(): void {
     const passenger = this.fb.group({
-      givenName: '',
-      familyName: '',
+      name: this.fb.group({
+        given: '',
+        family: '',
+      }),
       dob: '',
       gender: '',
       address: ''

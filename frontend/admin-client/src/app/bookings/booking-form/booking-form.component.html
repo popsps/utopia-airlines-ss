@@ -10,10 +10,14 @@
          [formGroupName]="i">
       <div class="list-group-item booking-item rounded">
         <div class="form-group">
-          <label class="m-2"><input class="form-control" type="text" placeholder="Firstname"
-                                    formControlName="givenName"></label>
-          <label class="m-2"><input class="form-control" type="text" placeholder="Lastname"
-                                    formControlName="familyName"></label>
+          <div class="d-inline" formGroupName="name">
+            <label class="m-2">
+              Firstname<input formControlName="given" class="form-control" type="text" placeholder="Firstname">
+            </label>
+            <label class="m-2">
+              Lastname<input formControlName="family" class="form-control" type="text" placeholder="Lastname">
+            </label>
+          </div>
           <label class="m-2"><input class="form-control" type="text" placeholder="Date of Birth" formControlName="dob"></label>
           <label class="m-2"><input class="form-control" type="text" placeholder="Gender"
                                     formControlName="gender"></label>
