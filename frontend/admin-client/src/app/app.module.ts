@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,7 @@ import { LoginModalComponent } from './shared/components/login-modal/login-modal
 import { UsersComponent } from './users/users.component';
 import { HttpService } from "./shared/services/http.service";
 import { FlightsComponent } from './flights/flights.component';
-import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe'
+import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pi
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [HttpService],
