@@ -22,7 +22,10 @@ export class BookingListComponent implements OnInit {
         console.log(bookings);
         this.bookings = bookings;
         this.loading = false;
-      }, error => this.loading = false);
+      }, error => {
+        this.loading = false;
+        console.log(error);
+      });
   }
 
   ngOnInit(): void {

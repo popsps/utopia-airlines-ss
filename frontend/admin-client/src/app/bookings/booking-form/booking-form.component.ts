@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Booking} from '../../shared/models/booking';
+import {BookingService} from '../../shared/services/booking.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-booking-form',
@@ -11,7 +13,7 @@ export class BookingFormComponent implements OnInit {
   booking: Booking = new Booking();
   bForm: FormGroup;
 
-  constructor(private  fb: FormBuilder) {
+  constructor(private  fb: FormBuilder, private bookingService: BookingService) {
   }
 
   initForm(): void {
@@ -60,6 +62,10 @@ export class BookingFormComponent implements OnInit {
   }
 
   syncFrom(): void {
+  }
+
+  submit(): void {
+    this.bookingService.postABooking(environment.bookingApiUrl, this.booking);
   }
 
   ngOnInit(): void {

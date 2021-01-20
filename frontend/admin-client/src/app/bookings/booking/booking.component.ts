@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Booking} from '../../shared/models/booking';
 import {BookingService} from '../../shared/services/booking.service';
 import {environment} from '../../../environments/environment';
-import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, AbstractControl, FormArray} from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -12,6 +12,7 @@ import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/form
 })
 export class BookingComponent implements OnInit {
   booking: Booking;
+  bForm: FormGroup;
   bookingId: number;
   readonly = true;
   loading = false;
@@ -30,12 +31,14 @@ export class BookingComponent implements OnInit {
       .subscribe(booking => {
         console.log(booking);
         this.booking = booking;
+        this.initForm();
         this.loading = false;
       }, error => {
         this.loading = false;
         this.error = {isError: true, message: error.message};
         console.log('error', error);
       });
+
   }
 
   submitUpdate(): void {
@@ -63,4 +66,65 @@ export class BookingComponent implements OnInit {
     this.readonly = !this.readonly;
   }
 
+  initForm(): void {
+    const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
+    this.bForm = this.fb.group({
+      id,
+      isActive,
+      confirmationCode,
+      bookerId,
+      passengers: this.fb.array([]),
+      flights: this.fb.array([])
+    });
+    passengers.forEach(passenger => {
+      const passengerForm = this.fb.group({
+        id: passenger.id,
+        bookingId: passenger.bookingId,
+        givenName: passenger.givenName,
+        familyName: passenger.familyName,
+        dob: passenger.dob,
+        gender: passenger.gender,
+        address: passenger.address
+      });
+      this.getPassengersForms().push(passengerForm);
+    });
+    this.bForm.valueChanges.subscribe(value => {
+      this.booking = {...this.bForm.value};
+      // this.booking = new Booking(this.bForm.value);
+      console.log(this.booking);
+    });
+  }
+
+  getPassengersForms(): FormArray {
+    return this.bForm.get('passengers') as FormArray;
+  }
+
+  getFlightsForms(): FormArray {
+    return this.bForm.get('flights') as FormArray;
+  }
+
+  addPassengerForm(): void {
+    const passenger = this.fb.group({
+      bookingId: this.booking.id,
+      givenName: '',
+      familyName: '',
+      dob: '',
+      gender: '',
+      address: ''
+    });
+    this.getPassengersForms().push(passenger);
+  }
+
+  addFlightForm(): void {
+    const flight = this.fb.group({});
+    this.getFlightsForms().push(flight);
+  }
+
+  deletePassengerForm(i: number): void {
+    this.getPassengersForms().removeAt(i);
+  }
+
+  deleteFlightForm(i: number): void {
+    this.getFlightsForms().removeAt(i);
+  }
 }

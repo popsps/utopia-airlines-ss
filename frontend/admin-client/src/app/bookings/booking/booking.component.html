@@ -16,39 +16,53 @@
   </div>
   <div>
     <div class="h4">Flight(s) details</div>
+    <div class="d-flex justify-content-center">
+      <button type="button" [hidden]="readonly"
+              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Add Flights
+      </button>
+    </div>
   </div>
   <div>
-    <div class="h4">Passenger(s) details</div>
-    <div class="list-group m-3" *ngFor="let passenger of booking?.passengers">
-      <div class="list-group-item booking-item rounded">
-        <div class="form-group">
-          <label class="m-2">
-            ID<input [(ngModel)]="passenger.id" name="id" class="form-control" [readOnly]="readonly">
-          </label>
-          <label class="m-2">
-            bookingId<input [(ngModel)]="passenger.bookingId" name="bookingId" class="form-control"
-                            [readOnly]="readonly">
-          </label>
-          <label class="m-2">
-            Firstname<input [(ngModel)]="passenger.givenName" name="givenName" class="form-control"
-                            [readOnly]="readonly">
-          </label>
-          <label class="m-2">
-            Lastname<input [(ngModel)]="passenger.familyName" name="familyName" class="form-control"
-                           [readOnly]="readonly">
-          </label>
-          <label class="m-2">
-            DOB<input [(ngModel)]="passenger.dob" name="dob" class="form-control" [readOnly]="readonly">
-          </label>
-          <label class="m-2">
-            Gender<input [(ngModel)]="passenger.gender" name="gender" class="form-control" [readOnly]="readonly">
-          </label>
-          <label class="m-2">
-            Address<input [(ngModel)]="passenger.address" name="address" class="form-control" [readOnly]="readonly">
-          </label>
+    <div [formGroup]="bForm">
+      <div class="h4">Passenger(s) details</div>
+      <div formArrayName="passengers">
+        <div class="list-group m-3" *ngFor="let passenger of getPassengersForms().controls; let i=index"
+             [formGroupName]="i">
+          <div class="list-group-item booking-item rounded">
+            <div class="form-group">
+              <label class="m-2">
+                ID<input formControlName="id" class="form-control" [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                bookingId<input formControlName="bookingId" class="form-control"
+                                [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                Firstname<input formControlName="givenName" class="form-control"
+                                [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                Lastname<input formControlName="familyName" class="form-control"
+                               [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                DOB<input formControlName="dob" class="form-control" [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                Gender<input formControlName="gender" class="form-control" [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                Address<input formControlName="address" class="form-control" size="255" [readOnly]="readonly">
+              </label>
+            </div>
+          </div>
         </div>
-        <hr class="my-4">
       </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="button" [hidden]="readonly"
+              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Add Passenger
+      </button>
     </div>
   </div>
   <div class="d-flex justify-content-center">
@@ -67,8 +81,9 @@
   </div>
 </div>
 
+<!--loading-error-acknowledgment-->
 <div class="text-center" *ngIf="loading"
-     style="position: absolute; top: 50%; left:50%" >
+     style="position: absolute; top: 50%; left:50%">
   <div class="spinner-grow" role="status">
     <span class="sr-only">Loading...</span>
   </div>
