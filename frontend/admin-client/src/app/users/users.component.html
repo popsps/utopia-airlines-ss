@@ -27,42 +27,49 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="m-3">
+            <form class="m-2" [formGroup]="addUserForm">
                 <div class="form-group">
-                    <label for="usernameExample">Username</label>
-                    <input type="username" class="form-control" id="usernameExample" aria-describedby="usernameHelp"
-                        placeholder="Enter Username">
+                    <label for="username">Username</label>
+                    <input type="username" class="form-control" id="usernameInput" formControlName="username"
+                        aria-describedby="usernameHelp" placeholder="Enter Username">
                     <small id="usernameHelp" class="form-text text-muted">Enter a valid username</small>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter email">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="emailInput" formControlName="email"
+                        aria-describedby="emailHelp" placeholder="Enter email">
                     <small id="emailHelp" class="form-text text-muted">Enter a valid email address</small>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="passwordInput" formControlName="password"
+                        placeholder="Enter Password">
                 </div>
                 <div class="form-group">
-                    <label for="givenNameExample">Given Name</label>
-                    <input type="givenName" class="form-control" id="givenNameExample" aria-describedby="givenNameHelp"
-                        placeholder="Enter Given Name">
+                    <label for="givenName">Given Name</label>
+                    <input type="givenName" class="form-control" id="givenNameInput" formControlName="givenName"
+                        aria-describedby="givenNameHelp" placeholder="Enter Given Name">
                     <small id="givenNameHelp" class="form-text text-muted">Enter a valid given name</small>
                 </div>
                 <div class="form-group">
-                    <label for="familyNameExample">Family Name</label>
-                    <input type="familyName" class="form-control" id="familyNameExample"
+                    <label for="familyName">Family Name</label>
+                    <input type="familyName" class="form-control" id="familyNameInput" formControlName="familyName"
                         aria-describedby="familyNameHelp" placeholder="Enter Family Name">
                     <small id="familyNameHelp" class="form-text text-muted">Enter a valid family name</small>
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumberExample">Phone Number</label>
-                    <input type="phoneNumber" class="form-control" id="phoneNumberExample"
-                        aria-describedby="phoneNumberHelp" placeholder="Enter Phone Number">
-                    <small id="phoneNumberHelp" class="form-text text-muted">Enter a valid phone number</small>
+                    <label for="phone">Phone Number</label>
+                    <input type="phone" class="form-control" id="phoneInput" formControlName="phone"
+                        aria-describedby="phoneHelp" placeholder="Enter Phone Number">
+                    <small id="phoneHelp" class="form-text text-muted">Enter a valid phone number</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <label for="role" class="m-3">Choose a role:</label>
+                <select formControlName="role" id="role">
+                    <option value="CUSTOMER">CUSTOMER</option>
+                    <option value="AGENT">AGENT</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+                <button type="submit" class="btn btn-primary" (click)="addUser()">Submit</button>
             </form>
         </div>
     </div>
