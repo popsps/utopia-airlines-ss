@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   bookingApiUrl: '/api/bookings',
-  loginUrl: '/users/signin'
+  loginUrl: '/users/signin',
+  utopiaAirlineApi: 'http://localhost:8081',
+  userApiUrl: '/users'
 };
 
 /*
