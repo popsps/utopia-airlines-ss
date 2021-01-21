@@ -1,7 +1,7 @@
 package com.ss.utopia.auth.controller;
 
 import com.ss.utopia.auth.dto.LoginDto;
-import com.ss.utopia.auth.dto.SignUpDto;
+import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.security.SessionCookieProvider;
 import com.ss.utopia.auth.service.UserService;
@@ -46,66 +46,37 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-	/*
-	 * Samuel will be working here placeholder code You may need to replace loginDto
-	 * with your own Dto or add additional arbitrary information to the LoginDto or
-	 * You may want to create a signup DTO in the DTO package to pass all necessary
-	 * information regarding the user sign-up information as a class
-	 */
+//	TODO: remove @CrossOrigin for signup and getAll
+//	TODO: move try/catch to UserService to simplify meaning within UserController
 	@PostMapping("/signup")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User signup(@RequestBody @Valid SignUpDto signUpDto) {
-		try {
-			return userService.signup(signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(),
-					signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone()).get();
-		} catch (Exception e) {
-			String error = e.getMessage();
-			if (error.contains("user.phone_UNIQUE")) {
-				throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-			} else if (error.contains("user.username_UNIQUE")) {
-				throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-			} else if (error.contains("user.email_UNIQUE")) {
-				throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-			}
-		}
-		return null;
+	@CrossOrigin(origins = "http://localhost:4200")
+	public User signup(@RequestBody @Valid UserDto userDto) {
+			return userService.signup(userDto);
 	}
 
 	@DeleteMapping("/{userId}")
 	public int deleteUser(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
-		User user = userService.getUserById(userId);
-		if (user == null) {
-			throw new HttpServerErrorException(HttpStatus.NOT_FOUND, "User not found");
-		} else if (currentUser.getUsername().equals(user.getUsername())) {
-			return userService.deleteUser(userId);
-		} else {
-			throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Access denied");
-		}
+		User user = userService.getUserById(userId, currentUser);
+		return userService.deleteUser(userId);
 	}
   
   @PutMapping("/{userId}")
-  public User updateUser(@PathVariable Long userId, @RequestBody @Valid SignUpDto signUpDto,
+  public User updateUser(@PathVariable Long userId, @RequestBody @Valid UserDto userDto,
 		  				 @AuthenticationPrincipal UserDetails currentUser) {
-	  User user = userService.getUserById(userId);
-	  if(user == null) {
-		  throw new HttpServerErrorException(HttpStatus.NOT_FOUND, "User not Found");
-	  }
-	  else if(!user.getUsername().equals(currentUser.getUsername())) {
-		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized user");
-	  }
+	  User user = userService.getUserById(userId, currentUser);
 	  try {
-		  return userService.updateUser(userId, signUpDto.getUsername(), signUpDto.getPassword(), signUpDto.getGivenName(), 
-				  signUpDto.getFamilyName(), signUpDto.getEmail(), signUpDto.getPhone());
+		  return userService.updateUser(userId, userDto);
 	  }
 	  catch(Exception e) {
 		  String error = e.getMessage();
-		  if(error.contains("user.phone_UNIQUE")) {
+		  if(error.contains("user.email_UNIQUE")) {
 			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
 		  }
 		  else if(error.contains("user.username_UNIQUE")) {
 			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
 		  }
-		  else if(error.contains("user.email_UNIQUE")) {
+		  else if(error.contains("user.phone_UNIQUE")) {
 			  throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
 		  }
 	  }
@@ -121,7 +92,7 @@ public class UserController {
 
 	@GetMapping("/{userId}")
 	public User getUserById(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
-		User user = userService.getUserById(userId);
+		User user = userService.getUserById(userId, currentUser);
 		if (currentUser.getUsername().equals(user.getUsername()))
 			return user;
 		else
