@@ -7,11 +7,7 @@ import {
 } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
-// import { User } from '../shared/models/user';
 
-// temp fix
-type User = {
-};
 
 @Component({
   selector: 'app-users',
@@ -31,7 +27,6 @@ export class UsersComponent implements OnInit {
   email: string;
   phone: string;
   role: string;
-  user: User;
   apiUrl: string;
 
   constructor(
