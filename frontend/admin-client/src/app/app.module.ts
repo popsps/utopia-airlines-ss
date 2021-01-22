@@ -1,7 +1,7 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -17,6 +17,9 @@ import {ErrorMessageComponent} from './shared/components/error-message/error-mes
 import {UsersComponent} from './users/users.component';
 import {HttpService} from './shared/services/http.service';
 import {BookingService} from './shared/services/booking.service';
+import { FlightsComponent } from './flights/flights.component';
+import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe';
+import { FlightRoutePipe } from './shared/pipes/flight-route.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import {BookingService} from './shared/services/booking.service';
     NavbarComponent,
     FooterComponent,
     LoginModalComponent,
+    FlightsComponent,
+    FlightDepartureDatePipe,
+    FlightRoutePipe
     BookingListComponent,
     BookingComponent,
     BookingFormComponent,
