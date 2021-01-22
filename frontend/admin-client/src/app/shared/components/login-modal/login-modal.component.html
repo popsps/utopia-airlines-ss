@@ -19,20 +19,21 @@
           <div class="form-group">
             <div class="d-flex">
 
-              <label class="mr-1" style="display: flex; align-items: center" for="inputUsername">
+              <label class="mr-1 mt-2" style="display: flex; align-items: center" for="inputUsername">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </label>
-              <input type="text" class="form-control" id="inputUsername" aria-describedby="emailHelp"
-                     placeholder="Username">
+              <input type="text" class="form-control" id="inputUsername"
+                     name="username" aria-describedby="emailHelp"
+                     placeholder="Username" [(ngModel)]="user.username">
             </div>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <div class="d-flex">
-              <label class="mr-1" style="display: flex; align-items: center" for="inputPassword">
+              <label class="mr-1 mt-2" style="display: flex; align-items: center" for="inputPassword">
                 <i class="fa fa-lock mr-1" style="display: flex; align-items: center"></i>
               </label>
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              <input type="password" class="form-control" id="inputPassword"
+                     name="password" placeholder="Password" [(ngModel)]="user.password">
             </div>
 
           </div>
@@ -40,7 +41,9 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Remember me</label>
           </div>
-          <button type="button" class="btn  btn-outline-success btn-lg btn-block">Login</button>
+          <button type="button" class="btn btn-outline-success btn-lg btn-block" data-dismiss="modal"
+                  (click)="login()">Login
+          </button>
         </form>
 
       </div>

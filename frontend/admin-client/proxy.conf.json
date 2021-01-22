@@ -1,0 +1,10 @@
+{
+  "/users/signin": {
+    "target": "http://localhost:8081/",
+    "secure": false
+  },
+  "/api/bookings": {
+    "target": "http://localhost:3000/",
+    "secure": false
+  }
+}

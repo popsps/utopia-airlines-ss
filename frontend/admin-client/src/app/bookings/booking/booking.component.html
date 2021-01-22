@@ -1,0 +1,100 @@
+<div *ngIf="!error.isError && !loading && !deleted">
+  <div>
+    <div class="alert alert-warning">
+      confirmation code: <strong>{{booking?.confirmationCode || 'confirmation code'}}</strong>
+      <div class="badge badge-success ml-2">{{booking?.isActive ? 'Active' : 'Inactive'}}</div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div>booking_id{{booking?.id}}</div>
+    <div class="ml-4">Origin - Destination</div>
+  </div>
+  <div>
+    <div>Departure(time)</div>
+    <div>Arrival(time)</div>
+    <div>Total travel time</div>
+  </div>
+  <div>
+    <div class="h4">Flight(s) details</div>
+    <div class="d-flex justify-content-center">
+      <button type="button" [hidden]="readonly"
+              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Add Flights
+      </button>
+    </div>
+  </div>
+  <div>
+    <div [formGroup]="bForm">
+      <div class="h4">Passenger(s) details</div>
+      <div formArrayName="passengers">
+        <div class="list-group m-3" *ngFor="let passenger of getPassengersForms().controls; let i=index"
+             [formGroupName]="i">
+          <div class="list-group-item booking-item rounded">
+            <div class="form-group">
+              <label class="m-2">
+                ID<input formControlName="id" class="form-control" [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                bookingId<input formControlName="bookingId" class="form-control"
+                                [readOnly]="readonly">
+              </label>
+              <div class="d-inline" formGroupName="name">
+                <label class="m-2">
+                  Firstname<input formControlName="given" class="form-control"
+                                  [readOnly]="readonly">
+                </label>
+                <label class="m-2">
+                  Lastname<input formControlName="family" class="form-control"
+                                 [readOnly]="readonly">
+                </label>
+              </div>
+              <label class="m-2">
+                DOB<input formControlName="dob" class="form-control" [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                Gender<input formControlName="gender" class="form-control" [readOnly]="readonly">
+              </label>
+              <label class="m-2">
+                Address<input formControlName="address" class="form-control" size="255" [readOnly]="readonly">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="button" [hidden]="readonly"
+              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Add Passenger
+      </button>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="button" (click)="deleteBooking()" [hidden]="!readonly"
+            class="btn btn-danger btn-lg btn-block m-5 " style="max-width: 400px">Delete
+    </button>
+    <button type="button" (click)="toggleEditForm()" [hidden]="!readonly"
+            class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Edit
+    </button>
+    <button type="button" (click)="toggleEditForm()" [hidden]="readonly"
+            class="btn btn-danger btn-lg btn-block m-5">Cancel
+    </button>
+    <button type="button" (click)="submitUpdate()" [hidden]="readonly"
+            class="btn btn-success btn-lg btn-block m-5">Save
+    </button>
+  </div>
+</div>
+
+<!--loading-error-acknowledgment-->
+<div class="text-center" *ngIf="loading"
+     style="position: absolute; top: 50%; left:50%">
+  <div class="spinner-grow" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<app-error-message *ngIf="error?.isError" [error]="error"></app-error-message>
+<div class="alert alert-dismissible alert-success" *ngIf="deleted">
+  Booking {{bookingId}} has been deleted Successfully
+</div>
+
+
+
+

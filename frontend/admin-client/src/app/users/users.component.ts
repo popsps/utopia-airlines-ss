@@ -5,9 +5,9 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { environment } from "../../environments/environment"
-import { HttpService } from "../shared/services/http.service";
-import { User } from "../shared/models/user"
+import { environment } from '../../environments/environment';
+import { HttpService } from '../shared/services/http.service';
+
 
 @Component({
   selector: 'app-users',
@@ -27,7 +27,6 @@ export class UsersComponent implements OnInit {
   email: string;
   phone: string;
   role: string;
-  user: User;
   apiUrl: string;
 
   constructor(
@@ -46,7 +45,7 @@ export class UsersComponent implements OnInit {
       .getAll(this.apiUrl)
       .subscribe((res) => {
         this.users = res;
-        this.totalUsers = this.users.length
+        this.totalUsers = this.users.length;
       });
   }
 
@@ -59,11 +58,11 @@ export class UsersComponent implements OnInit {
       email: new FormControl(this.email, [Validators.required]),
       phone: new FormControl(this.password, [Validators.required]),
       role: new FormControl(this.role, [Validators.required])
-    })
+    });
   }
 
   addUser() {
-    this.userService.post(this.apiUrl.concat("/signup"), this.addUserForm.value).subscribe((res) => {
+    this.userService.post(this.apiUrl.concat('/signup'), this.addUserForm.value).subscribe((res) => {
       this.initializeUsers();
       this.initializeForm();
     });
