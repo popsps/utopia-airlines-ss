@@ -24,8 +24,7 @@ public class JwtConfiguration {
 
   private PrivateKey generatePrivateKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
     final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-    privateKey = privateKey.replaceAll("-----BEGIN (.*?)-----", "").replaceAll("-----END (.*)----", "")
-        .replaceAll("\r\n", "").replaceAll("\\\\n", "").trim();
+    privateKey = parseKey(privateKey);
     final byte[] decodedPrivate = Base64.getDecoder().decode(privateKey);
     final KeySpec keySpec = new PKCS8EncodedKeySpec(decodedPrivate);
     return keyFactory.generatePrivate(keySpec);
@@ -33,8 +32,7 @@ public class JwtConfiguration {
 
   private PublicKey generatePublicKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
     final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-    publicKey = publicKey.replaceAll("-----BEGIN (.*?)-----", "").replaceAll("-----END (.*)----", "")
-        .replaceAll("\r\n", "").replaceAll("\\\\n", "").trim();
+    publicKey = parseKey(publicKey);
     final byte[] decodedPublic = Base64.getDecoder().decode(publicKey);
     final KeySpec keySpec = new X509EncodedKeySpec(decodedPublic);
     return keyFactory.generatePublic(keySpec);
@@ -47,5 +45,15 @@ public class JwtConfiguration {
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
       return null;
     }
+  }
+
+  /**
+   *
+   * @param key
+   * @return Clean a public/private key string that is saved as env from \n and BEGIN, END
+   */
+  private String parseKey(String key) {
+    return key.replaceAll("-----BEGIN (.*?)-----", "").replaceAll("-----END (.*)----", "")
+      .replaceAll("\r\n", "").replaceAll("\\\\n", "").replaceAll("\n", "").trim();
   }
 }
