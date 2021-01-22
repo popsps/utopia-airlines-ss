@@ -14,6 +14,7 @@ import { UsersComponent } from './users/users.component';
 import { HttpService } from "./shared/services/http.service";
 import { FlightsComponent } from './flights/flights.component';
 import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe';
+import { FlightRoutePipe } from './shared/pipes/flight-route.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pi
     LoginModalComponent,
     UsersComponent,
     FlightsComponent,
-    FlightDepartureDatePipe
+    FlightDepartureDatePipe,
+    FlightRoutePipe
   ],
   imports: [
     BrowserModule,
