@@ -1,17 +1,19 @@
 package com.ss.utopia.auth.service;
 
 import com.ss.utopia.auth.dao.UserDao;
+import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.entity.UserRole;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.security.core.AuthenticationException;
 import static org.springframework.security.core.userdetails.User.withUsername;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -68,29 +70,49 @@ public class UserService implements UserDetailsService {
    * @param phone      Phone Number
    * @return Optional of the Java Web Token, empty if the user already exists.
    */
-  public Optional<User> signup(String username, String password, String givenName, String familyName, String email,
-      String phone) {
+  public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
-    Optional<User> user = Optional.empty();
-    if (!userDao.findByUsername(username).isPresent()) {
-      User createdUser = new User(8L, username, passwordEncoder.encode(password), new UserRole(2L, "CUSTOMER"),
-          givenName, familyName, email, phone);
+    User user = null;
+	Long roleId = 0L;
+	if(userDto.getRole().equals("ADMIN")) {
+		roleId = 1L;
+	}
+	else if(userDto.getRole().equals("CUSTOMER")) {
+		roleId = 2L;
+	}
+	else if(userDto.getRole().equals("AGENT")) {
+		roleId = 3L;
+	}
+	else {
+		throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+	}
+	User createdUser = new User(8L, userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
+		  userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
 
-      user = Optional.of(userDao.save(createdUser));
-    }
-    return user;
+	try {
+		user = userDao.save(createdUser);
+    } catch (Exception e) {
+		String error = e.getMessage();
+		if (error.contains("user.email_UNIQUE")) {
+			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+		} else if (error.contains("user.username_UNIQUE")) {
+			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+		} else if (error.contains("user.phone_UNIQUE")) {
+			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+		}
+	}
+	return user;
   }
 
-  public User updateUser(Long id, String username, String password, String givenName, String familyName, String email,
-      String phone) {
+  public User updateUser(Long id, UserDto userDto) {
     LOGGER.info("User attempting to update info");
     User user = userDao.findById(id).get();
-    user.setUsername(username);
-    user.setPassword(passwordEncoder.encode(password));
-    user.setGivenName(givenName);
-    user.setFamilyName(familyName);
-    user.setEmail(email);
-    user.setPhone(phone);
+    user.setUsername(userDto.getUsername());
+    user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    user.setGivenName(userDto.getGivenName());
+    user.setFamilyName(userDto.getFamilyName());
+    user.setEmail(userDto.getEmail());
+    user.setPhone(userDto.getPhone());
     userDao.save(user);
     return user;
   }
@@ -105,7 +127,11 @@ public class UserService implements UserDetailsService {
     return userDao.findAll();
   }
 
-  public User getUserById(Long id) {
-    return userDao.findById(id).orElse(null);
+  public User getUserById(Long id, UserDetails currentUser) {
+	  User user = userDao.findById(id).orElse(null);
+	  if(user == null || !user.getUsername().equals(currentUser.getUsername())){
+		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
+	  }
+	  return user;
   }
 }

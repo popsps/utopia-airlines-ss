@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  * @author Samnj
  *
  */
-public class SignUpDto {
+public class UserDto {
 
 	@NotBlank
 	@Size(min = 3)
@@ -34,6 +34,16 @@ public class SignUpDto {
 	@NotBlank
 	@Size(min = 10)
 	private String phone;
+	
+	private String role;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getUsername() {
 		return username;

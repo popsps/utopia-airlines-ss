@@ -33,8 +33,8 @@ import { FlightRoutePipe } from './shared/pipes/flight-route.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
