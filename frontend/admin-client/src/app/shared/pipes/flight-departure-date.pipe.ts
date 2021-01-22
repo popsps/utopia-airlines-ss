@@ -21,17 +21,17 @@ const isBetween = (date: Date, min: Date, max: Date) => isLessThan(min, date) &&
   pure: false
 })
 export class FlightDepartureDatePipe implements PipeTransform {
-  transform(values: Flight[], date1: Date | string, date2: Date | string): Flight[] {
+  transform(flights: Flight[], date1: Date | string, date2: Date | string): Flight[] {
     if (date1 != null && date2 != null)
     {
       const [from, to] = [floor(toDate(date1)), ceil(toDate(date2))];
-      return values.filter(flight => isBetween(flight.departureTime, from, to));
+      return flights.filter(flight => isBetween(flight.departureTime, from, to));
     }
     if (date1 != null && date2 == null)
     {
       const [dayStart, dayEnd] = [floor(toDate(date1)), ceil(toDate(date1))];
-      return values.filter(flight => isBetween(flight.departureTime, dayStart, dayEnd));
+      return flights.filter(flight => isBetween(flight.departureTime, dayStart, dayEnd));
     }
-    return values;
+    return flights;
   }
 }
