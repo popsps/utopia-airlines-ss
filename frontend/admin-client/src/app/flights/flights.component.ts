@@ -19,6 +19,8 @@ export class FlightsComponent implements OnInit {
     error?: any;
     data?: Flight[];
   };
+  origin: string;
+  destination: string;
   departureDate: Date;
 
   constructor(private httpService: HttpService) { }
