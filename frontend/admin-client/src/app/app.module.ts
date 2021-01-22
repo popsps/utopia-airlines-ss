@@ -16,6 +16,7 @@ import {BookingFormComponent} from './bookings/booking-form/booking-form.compone
 import {ErrorMessageComponent} from './shared/components/error-message/error-message.component';
 import {UsersComponent} from './users/users.component';
 import {HttpService} from './shared/services/http.service';
+import {BookingService} from './shared/services/booking.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {HttpService} from './shared/services/http.service';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService],
+  providers: [HttpService, BookingService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
