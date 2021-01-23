@@ -134,4 +134,29 @@ public class UserService implements UserDetailsService {
 	  }
 	  return user;
   }
+
+  /**
+   * Find a user by its id and return the user
+   * @param id
+   * @return
+   */
+  public User findUserById(Long id) {
+    User user = userDao.findById(id).orElse(null);
+    return user;
+  }
+
+  /**
+   * verify that if a user is the same user with the JWT token
+   * @param user
+   * @param currentUser parsed from the JWT token
+   * @return the user if true. throw exception otherwise
+   */
+  public User verifyOwnershipAndReturnOwner(User user, UserDetails currentUser) {
+    if (user == null)
+      throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
+    if (user.getUsername().equals(currentUser.getUsername()))
+      throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
+    return user;
+
+  }
 }
