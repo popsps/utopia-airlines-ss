@@ -23,32 +23,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private SessionCookieProvider sessionCookieProvider;
-
-	/**
-	 * Login user
-	 * 
-	 * @param loginDto
-	 * @return
-	 */
-	@PostMapping("/signin")
-	public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
-		final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
-				.orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
-		final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
-				.orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
-		response.addCookie(sessionCookie);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
-	}
 
 //	TODO: remove @CrossOrigin for signup and getAll
-//	TODO: move try/catch to UserService to simplify meaning within UserController
-	@PostMapping("/signup")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public User signup(@RequestBody @Valid UserDto userDto) {
@@ -84,7 +66,6 @@ public class UserController {
   }
   
   @GetMapping
-  @CrossOrigin(origins = "http://localhost:4200")
 //  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public List<User> getAllUsers() {
     return userService.getAll();
