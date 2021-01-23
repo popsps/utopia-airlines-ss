@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
   }
 
   addUser() {
-    this.userService.post(this.apiUrl.concat('/signup'), this.addUserForm.value).subscribe((res) => {
+    this.userService.post(this.apiUrl, this.addUserForm.value).subscribe((res) => {
       this.initializeUsers();
       this.initializeForm();
     });
