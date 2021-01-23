@@ -8,7 +8,9 @@ const { validateRequest, requireAuthentication } = require("@utopia-airlines-wss
 
 
 router.get("/",
-  requireAuthentication(),
+  requireAuthentication({
+    roles: ["ADMIN", "AGENT"],
+  }),
   bookingController.getAll
 );
 router.post("/",
