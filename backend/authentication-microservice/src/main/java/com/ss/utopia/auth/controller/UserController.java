@@ -1,9 +1,7 @@
 package com.ss.utopia.auth.controller;
 
-import com.ss.utopia.auth.dto.LoginDto;
 import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
-import com.ss.utopia.auth.security.SessionCookieProvider;
 import com.ss.utopia.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.validation.Valid;
 
 import java.util.List;
@@ -69,10 +66,11 @@ public class UserController {
 
 	@GetMapping("/{userId}")
 	public User getUserById(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
-		User user = userService.getUserById(userId, currentUser);
-		if (currentUser.getUsername().equals(user.getUsername()))
+		User user = userService.findUserById(userId);
+		if (userService.verifyOwnershipAndReturnOwner(user, currentUser) != null)
 			return user;
 		else
-			throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Access denied.");
+			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Bad Request");
 	}
+
 }

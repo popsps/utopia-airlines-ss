@@ -15,11 +15,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.security.core.AuthenticationException;
+
 import static org.springframework.security.core.userdetails.User.withUsername;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.servlet.http.Cookie;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,9 +39,9 @@ public class UserService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userDao.findByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException(String.format("User with name %s does not exist", username)));
+      .orElseThrow(() -> new UsernameNotFoundException(String.format("User with name %s does not exist", username)));
     return withUsername(user.getUsername()).password(user.getPassword()).authorities(user.getRole().getName())
-        .accountExpired(false).accountLocked(false).credentialsExpired(false).disabled(false).build();
+      .accountExpired(false).accountLocked(false).credentialsExpired(false).disabled(false).build();
   }
 
   /**
@@ -60,48 +63,38 @@ public class UserService implements UserDetailsService {
   }
 
   /**
-   * Create a new user in the database.
-   *
-   * @param username   username
-   * @param password   password
-   * @param givenName  First Name
-   * @param familyName Last Name
-   * @param email      Email
-   * @param phone      Phone Number
-   * @return Optional of the Java Web Token, empty if the user already exists.
+   * @param userDto
+   * @return
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
     User user = null;
-	Long roleId = 0L;
-	if(userDto.getRole().equals("ADMIN")) {
-		roleId = 1L;
-	}
-	else if(userDto.getRole().equals("CUSTOMER")) {
-		roleId = 2L;
-	}
-	else if(userDto.getRole().equals("AGENT")) {
-		roleId = 3L;
-	}
-	else {
-		throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
-	}
-	User createdUser = new User(8L, userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
-		  userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
+    Long roleId = 0L;
+    if (userDto.getRole().equals("ADMIN")) {
+      roleId = 1L;
+    } else if (userDto.getRole().equals("CUSTOMER")) {
+      roleId = 2L;
+    } else if (userDto.getRole().equals("AGENT")) {
+      roleId = 3L;
+    } else {
+      throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+    }
+    User createdUser = new User(8L, userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
+      userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
 
-	try {
-		user = userDao.save(createdUser);
+    try {
+      user = userDao.save(createdUser);
     } catch (Exception e) {
-		String error = e.getMessage();
-		if (error.contains("user.email_UNIQUE")) {
-			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-		} else if (error.contains("user.username_UNIQUE")) {
-			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-		} else if (error.contains("user.phone_UNIQUE")) {
-			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-		}
-	}
-	return user;
+      String error = e.getMessage();
+      if (error.contains("user.email_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+      } else if (error.contains("user.username_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+      } else if (error.contains("user.phone_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+      }
+    }
+    return user;
   }
 
   public User updateUser(Long id, UserDto userDto) {
@@ -128,15 +121,16 @@ public class UserService implements UserDetailsService {
   }
 
   public User getUserById(Long id, UserDetails currentUser) {
-	  User user = userDao.findById(id).orElse(null);
-	  if(user == null || !user.getUsername().equals(currentUser.getUsername())){
-		  throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
-	  }
-	  return user;
+    User user = userDao.findById(id).orElse(null);
+    if (user == null || !user.getUsername().equals(currentUser.getUsername())) {
+      throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
+    }
+    return user;
   }
 
   /**
    * Find a user by its id and return the user
+   *
    * @param id
    * @return
    */
@@ -147,6 +141,7 @@ public class UserService implements UserDetailsService {
 
   /**
    * verify that if a user is the same user with the JWT token
+   *
    * @param user
    * @param currentUser parsed from the JWT token
    * @return the user if true. throw exception otherwise
@@ -158,5 +153,21 @@ public class UserService implements UserDetailsService {
       throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
     return user;
 
+  }
+
+  /**
+   * Remove a jwt token from the session cookie and return an empty string
+   *
+   * @return
+   */
+  public Cookie removeCookie() {
+    final Cookie sessionCookie = new Cookie("session", null);
+    sessionCookie.setPath("/");
+    return sessionCookie;
+  }
+
+  public User getUserByUsername(String username) {
+    return userDao.findByUsername(username)
+      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User"));
   }
 }
