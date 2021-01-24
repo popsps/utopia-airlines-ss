@@ -150,7 +150,7 @@ public class UserService implements UserDetailsService {
   public User verifyOwnershipAndReturnOwner(User user, UserDetails currentUser) {
     if (user == null)
       throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
-    if (user.getUsername().equals(currentUser.getUsername()))
+    if (!user.getUsername().equals(currentUser.getUsername()))
       throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
     return user;
 
@@ -170,5 +170,25 @@ public class UserService implements UserDetailsService {
   public User getUserByUsername(String username) {
     return userDao.findByUsername(username)
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User"));
+  }
+
+  /**
+   * check whether the user is admin
+   *
+   * @param user
+   * @return
+   */
+  public boolean isUserAdmin(User user) {
+    return user.getRole().getId() == 1;
+  }
+
+  /**
+   * check whether the user is agent
+   *
+   * @param user
+   * @return
+   */
+  public boolean isUserAgent(User user) {
+    return user.getRole().getId() == 3;
   }
 }

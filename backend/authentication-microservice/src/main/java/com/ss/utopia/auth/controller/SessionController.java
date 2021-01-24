@@ -52,10 +52,12 @@ public class SessionController {
    */
   @PostMapping("/admin")
   @ResponseStatus(HttpStatus.CREATED)
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public void loginAdmin(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+    // if user is not admin
+    if (!userService.isUserAdmin(user))
+      throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed");
     final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     response.addCookie(sessionCookie);
@@ -69,10 +71,12 @@ public class SessionController {
    */
   @PostMapping("/agent")
   @ResponseStatus(HttpStatus.CREATED)
-  @PreAuthorize("hasRole('ROLE_AGENT')")
   public void loginAgent(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+    // if user is not agent
+    if (!userService.isUserAgent(user))
+      throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed");
     final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     response.addCookie(sessionCookie);
