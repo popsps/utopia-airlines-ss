@@ -16,18 +16,17 @@ const bookingController = {
   },
   async create(req, res, next) {
     try {
-      const booking = await bookingService.createBooking(
-        (({ user, body }) => {
-          switch (user?.role.name) {
-          case "CUSTOMER":
-            return { ...body, contact: user };
-          case "AGENT":
-            return { ...body, agent: user };
-          default:
-            return body;
-          }
-        })(req)
-      );
+      const data = (({ user, body }) => {
+        switch (user?.role.name) {
+        case "CUSTOMER":
+          return { ...body, contact: null, userId: user.id };
+        case "AGENT":
+          return { ...body, agent: user };
+        default:
+          return { ...body, userId: null };
+        }
+      })(req);
+      const booking = await bookingService.createBooking(data);
       res.status(201).json(booking);
     } catch (err) {
       next(err);
@@ -35,24 +34,14 @@ const bookingController = {
   },
   async getById(req, res, next) {
     try {
-      const booking = await bookingService.findBookingById(
-        (({ user, params: { id } }) => {
-          switch (user?.role.name) {
-          case "AGENT":
-          case "ADMIN":
-            return {
-              id,
-              userId: null,
-            };
-          case "CUSTOMER":
-            return {
-              id,
-              userId: user.id,
-            };
-          default:
-            return { id };
-          }
-        })(req));
+      const { user, params:{ id } } = req;
+      const booking = user 
+        ? await bookingService.findBookingById({
+          id,
+          userId: ["AGENT", "ADMIN"].includes(user?.role.name) ? null : user.id ?? 0,
+        })
+        : await bookingService.findGuestBookingById({ id });
+        
       res.json(booking);
     } catch (err) {
       next(err);
