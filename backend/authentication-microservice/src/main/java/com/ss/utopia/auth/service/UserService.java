@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.servlet.http.Cookie;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -70,11 +71,11 @@ public class UserService implements UserDetailsService {
     LOGGER.info("New user attempting to sign up");
     User user = null;
     Long roleId = 0L;
-    if (userDto.getRole().equals("ADMIN")) {
+    if (userDto.getRole().toUpperCase().equals("ADMIN")) {
       roleId = 1L;
-    } else if (userDto.getRole().equals("CUSTOMER")) {
+    } else if (userDto.getRole().toUpperCase().equals("CUSTOMER")) {
       roleId = 2L;
-    } else if (userDto.getRole().equals("AGENT")) {
+    } else if (userDto.getRole().toUpperCase().equals("AGENT")) {
       roleId = 3L;
     } else {
       throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
