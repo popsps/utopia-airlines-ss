@@ -19,10 +19,10 @@ class GuestBooking extends Model {
     });
   }
   toJSON(){
-    const values = Object.assign({}, this.get());
+    const { contactEmail: email, contactPhone: phone, ...values } = Object.assign({}, this.get());
     delete values.confirmationCode;
-    values.bookerId ?? delete values.bookerId;
-    return values;
+    values.agent ?? delete values.agentId;
+    return { type: "GUEST", ...values, guest: { email, phone } };
   }
 }
 
