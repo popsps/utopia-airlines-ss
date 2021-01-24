@@ -16,19 +16,23 @@ const bookingService = {
     if (useUserBooking) where.userId = userId;
     return await (useUserBooking ? UserBooking : Booking).findAll({
       where,
-      include: useUserBooking
-        ? [ "agent", "user" ]
-        : [
-          {
-            association: "agent",
-            include: "agent",
-          },
-          {
-            association: "user",
-            include: "user",
-          },
-          "guest",
-        ],
+      include: [
+        ...(useUserBooking
+          ? [ "agent", "user" ]
+          : [
+            {
+              association: "agent",
+              include: "agent",
+            },
+            {
+              association: "user",
+              include: "user",
+            },
+            "guest",
+          ]),
+        "flights",
+        "passengers",
+      ],
     });
   },
   async findBookingById({ id, userId }) {
@@ -59,10 +63,7 @@ const bookingService = {
       id,
       {
         include: [
-          {
-            association: "agent",
-            include: "agent",
-          },
+          "agent",
           "guest",
           "flights",
           "passengers",
