@@ -8,7 +8,7 @@ const sessionService = {
   async createSession({ username, password }) {
     const user = await User.findOne({ where: { username } });
     if (user && await user.comparePassword(password))
-      return await authJWTHandler.createJWT({ id: user.id });
+      return await authJWTHandler.createJWT({ sub: user.id });
     throw new BadRequestError("invalid credentials");
   },
 };
