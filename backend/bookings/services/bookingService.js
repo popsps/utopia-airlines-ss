@@ -64,7 +64,6 @@ const bookingService = {
       {
         include: [
           "agent",
-          "guest",
           "flights",
           "passengers",
         ],
