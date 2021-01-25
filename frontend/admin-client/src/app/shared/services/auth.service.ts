@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
-import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +40,9 @@ export class AuthService {
         withCredentials: true,
         observe: 'response'
       });
+  }
+
+  logout(url: string): Observable<any> {
+    return this.http.delete(url);
   }
 }

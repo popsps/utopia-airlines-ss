@@ -20,7 +20,7 @@ export class LoginFormComponent implements OnInit {
 
   user: User = {username: '', password: '', firstname: ''};
 
-  constructor(private http: HttpClient, public authService: AuthService,
+  constructor(public authService: AuthService,
               private router: Router) {
   }
 
