@@ -27,7 +27,9 @@ class GuestBooking extends Model {
   toJSON(){
     const { contactEmail: email, contactPhone: phone, ...values } = Object.assign({}, this.get());
     delete values.confirmationCode;
+    values.agentId ?? delete values.agentId;
     values.agent ?? delete values.agent;
+    if (values.agent) delete values.agentId;
     return { type: "GUEST", ...values, guest: { email, phone } };
   }
 }

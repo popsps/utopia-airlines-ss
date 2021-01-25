@@ -18,6 +18,11 @@ class Flight extends Model {
       as: "bookings",
     });
   }
+  toJSON(){
+    const values = this.get();
+    if (values.route) delete values.routeId;
+    return values;
+  }
 }
 
 Flight.init({
