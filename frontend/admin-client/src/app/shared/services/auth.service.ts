@@ -11,6 +11,7 @@ export class AuthService {
 
   isLoggedIn = false;
   loading = false;
+  error = false;
   user: User;
 
   constructor(private http: HttpClient) {
@@ -33,8 +34,8 @@ export class AuthService {
     return this.http.get<User>(url);
   }
 
-  public postSession(user): Observable<HttpResponse<User>> {
-    return this.http.post<User>(environment.sessionUrl,
+  public postSession(url, user): Observable<HttpResponse<User>> {
+    return this.http.post<User>(url,
       JSON.stringify(user), {
         headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'}),
         withCredentials: true,

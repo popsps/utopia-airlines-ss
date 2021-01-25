@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   utopiaAirlineApi: 'http://localhost:8081',
-  sessionUrl: '/api/session',
+  sessionInfoUrl: '/api/session',
+  loginUrl: '/api/session/admin',
   userApiUrl: '/api/users',
   bookingApiUrl: '/api/bookings',
   flightApiUrl: 'http://localhost:3001/api/flights'

@@ -16,7 +16,7 @@ export class LoginActivateService implements CanActivate {
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const {authService} = this;
     authService.loading = true;
-    authService.getSessionInfo(environment.sessionUrl).subscribe(
+    authService.getSessionInfo(environment.sessionInfoUrl).subscribe(
       user => {
         authService.isLoggedIn = true;
         authService.user = user;

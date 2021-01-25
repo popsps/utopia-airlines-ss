@@ -1,3 +1,4 @@
+<div class="text-danger text-center m-2" *ngIf="authService.error">Incorrect authentication credentials</div>
 <form>
   <div class="form-group">
     <div class="d-flex">
@@ -24,7 +25,7 @@
     <label class="form-check-label" for="exampleCheck1">Remember me</label>
   </div>
   <button type="button" class="btn btn-dark btn-lg btn-block"
-          style="margin-top: 155px;"
+          style="margin-top: 125px;"
           (click)="login()">Login
   </button>
 </form>

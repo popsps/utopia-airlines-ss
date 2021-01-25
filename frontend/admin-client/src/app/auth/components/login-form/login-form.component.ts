@@ -26,17 +26,14 @@ export class LoginFormComponent implements OnInit {
 
   login(): void {
     console.log('user:', this.user);
-    this.http.post(environment.sessionUrl,
-      JSON.stringify(this.user), {
-        headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'}),
-        withCredentials: true,
-        observe: 'response'
-      })
+    this.authService.postSession(environment.loginUrl, this.user)
       .subscribe(res => {
         console.log(res);
+        this.authService.error = false;
         this.authService.isLoggedIn = true;
         this.router.navigate(['']).then(() => console.log('redirect to dashboard'));
       }, error => {
+        this.authService.error = true;
         this.authService.isLoggedIn = false;
         console.log('error:', error);
       });
