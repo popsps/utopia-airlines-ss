@@ -2,8 +2,6 @@ const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking } = require("@utopia-airlines-wss/common/models");
 const {  NotFoundError,  handleMutationError   } = require("@utopia-airlines-wss/common/errors");
 
-const { userBookingService, guestBookingService } = require("./");
-
 const findBookingById = async (id, options) => {
   const booking = await Booking.findByPk(id, options);
   if (!booking) throw new NotFoundError("cannot find booking");
@@ -50,10 +48,6 @@ const bookingService = {
       }
     );
     return booking;
-  },
-  async createBooking({ flights, passengers, contact, userId, agentId }) {
-    if (userId == null) return guestBookingService.createGuestBooking({ flights, passengers, contact, agentId });
-    else return userBookingService.createUserBooking({ flights, passengers, userId, agentId });
   },
   async updateBooking(id, { isActive }) {
     const booking = await findBookingById(id);
