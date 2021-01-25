@@ -7,8 +7,8 @@
     <div class="text-secondary d-inline m-2">{{authService.user?.email}}</div>
     <div class="text-secondary d-inline m-2">{{authService.user?.role?.name}}</div>
   </div>
-  <div class="user-tasks">
-    <div class="h2"> There is no active task for today</div>
-  </div>
+</div>
+<div class="user-tasks" *ngIf="authService.isLoggedIn">
+  <div class="h2"> There is no active task for today</div>
 </div>
 
