@@ -37,4 +37,8 @@ router.route("/")
     userBookingController.create
   );
 
+router.route("/:id")
+  .get(requireAuthentication())
+  .get(userBookingController.getById);
+
 module.exports = router;
