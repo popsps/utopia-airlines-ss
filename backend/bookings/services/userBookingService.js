@@ -2,7 +2,7 @@ const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking, UserBooking } = require("@utopia-airlines-wss/common/models");
 const { StandardizedError, NotFoundError, handleMutationError, AuthorizationError   } = require("@utopia-airlines-wss/common/errors");
 
-const { flightService } = require("./");
+const { flightService } = require("./flightService");
 
 const userBookingService = {
   async findAllUserBookings({ isActive = true, userId } = {}) {
