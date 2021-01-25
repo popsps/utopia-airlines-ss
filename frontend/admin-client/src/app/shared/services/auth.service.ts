@@ -35,7 +35,7 @@ export class AuthService {
 
   public login(url: string, user): Observable<HttpResponse<User>> {
     return this.http.post<User>(url,
-      JSON.stringify(user), {
+      user, {
         headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'}),
         withCredentials: true,
         observe: 'response'
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   public signup(url: string, user: User): Observable<User> {
-    return this.http.post<User>(url, JSON.stringify(user));
+    return this.http.post<User>(url, user);
   }
 
   logout(url: string): Observable<any> {

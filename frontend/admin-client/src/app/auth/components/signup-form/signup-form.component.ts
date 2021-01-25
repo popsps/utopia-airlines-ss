@@ -53,13 +53,11 @@ export class SignupFormComponent implements OnInit {
     this.loading = true;
     this.authService.signup(environment.userApiUrl, this.newUser).subscribe(
       res => {
-        this.newUser = res;
         this.authService.error = false;
         // login
         const username = this.newUser?.username;
         const password = this.newUser?.password;
         this.login({username, password});
-
         this.loading = false;
       }, error => {
         this.loading = false;
