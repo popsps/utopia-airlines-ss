@@ -1,0 +1,35 @@
+.signup-page {
+  background-color : #F7F7F8;
+  display          : flex;
+  flex-direction   : column;
+  justify-content  : center;
+  align-items      : center;
+  min-height       : 100%;
+
+  .logo {
+    margin : 25px auto 25px;
+  }
+
+  .signup-form {
+    width            : 100%;
+    margin           : 0 auto 75px;
+    background-color : #ffffff;
+    padding          : 55px;
+    height           : 700px;
+    box-shadow       : rgb(194, 194, 194) 0 1px 2px;
+    @media screen and(min-width : 1000px) {
+      width : 45%;
+    }
+  }
+
+
+  @media screen and(min-width : 1300px) {
+    .welcome-utopia {font-size : 44px;}
+  }
+  @media screen and(min-width : 1000px) {
+    .welcome-utopia {
+      padding : 355px 20px 20px;
+      color   : #EBEBF0;
+    }
+  }
+}

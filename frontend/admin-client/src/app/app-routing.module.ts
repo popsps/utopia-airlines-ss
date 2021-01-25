@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'bookings/:id', component: BookingComponent, canActivate: [LoginActivateService]},
   {path: 'users', component: UsersComponent, canActivate: [LoginActivateService]},
   {path: 'flights', component: FlightsComponent, canActivate: [LoginActivateService]},
-  {path: '**', component: NotFoundComponent}
+  {path: '**', component: NotFoundComponent, canActivate: [LoginActivateService]}
 ];
 
 @NgModule({

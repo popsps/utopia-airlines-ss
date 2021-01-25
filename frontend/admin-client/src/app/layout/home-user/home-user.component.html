@@ -1,1 +1,13 @@
-<p>home-user works!</p>
+<div class="user-profile">
+  <div class="pic">
+    <i class="fas fa-user" style="font-size: 100px;"></i>
+  </div>
+  <div>
+    <h4 class="m-2">{{authService.user?.givenName}} {{authService.user?.familyName}}</h4>
+    <div class="text-secondary d-inline m-2">{{authService.user?.email}}</div>
+    <div class="text-secondary d-inline m-2">{{authService.user?.role?.name}}</div>
+  </div>
+</div>
+<div class="user-tasks">
+  <div class="h2"> There is no active task for today</div>
+</div>

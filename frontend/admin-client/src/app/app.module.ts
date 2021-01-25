@@ -29,6 +29,7 @@ import {HomeUserComponent} from './layout/home-user/home-user.component';
 import {LoginActivateService} from './shared/services/login-activate.service';
 import {NotFoundComponent} from './layout/not-found/not-found.component';
 import {SpinnerComponent} from './shared/components/spinner/spinner.component';
+import { LogoComponent } from './shared/components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {SpinnerComponent} from './shared/components/spinner/spinner.component';
     SignupFormComponent,
     HomeUserComponent,
     NotFoundComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,

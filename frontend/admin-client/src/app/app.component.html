@@ -1,7 +1,6 @@
 <div class="full-page">
   <app-navbar *ngIf="authService.isLoggedIn"></app-navbar>
-  <div class="container"
-       [ngStyle]="{'margin-top': (authService.isLoggedIn) ? '25px': '0'}">
+  <div class="full-page" [ngStyle]="{'margin-top': (authService.isLoggedIn) ? '25px': '0'}">
     <router-outlet></router-outlet>
   </div>
   <app-spinner *ngIf="authService.loading" [loading]="authService.loading"></app-spinner>
