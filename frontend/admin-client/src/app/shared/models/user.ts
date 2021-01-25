@@ -12,6 +12,7 @@ export class User implements Deserializable {
   email: string;
   phone: string;
   role: string;
+  password?: string;
 
   deserialize(input: any): this {
     Object.assign(this, input);

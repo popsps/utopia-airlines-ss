@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
 
   login(): void {
     console.log('user:', this.user);
-    this.authService.postSession(environment.loginUrl, this.user)
+    this.authService.login(environment.loginUrl, this.user)
       .subscribe(res => {
         console.log(res);
         this.authService.error = false;

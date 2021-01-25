@@ -2,12 +2,11 @@
   background-color : #F7F7F8;
   display          : flex;
   flex-direction   : column;
-  justify-content  : center;
+  justify-content  : flex-start;
   align-items      : center;
-  min-height       : 100%;
-
+  height           : calc(200vh - 64px);
   .logo {
-    margin : 25px auto 25px;
+    margin : 175px auto 25px;
   }
 
   .signup-form {
@@ -22,14 +21,4 @@
     }
   }
 
-
-  @media screen and(min-width : 1300px) {
-    .welcome-utopia {font-size : 44px;}
-  }
-  @media screen and(min-width : 1000px) {
-    .welcome-utopia {
-      padding : 355px 20px 20px;
-      color   : #EBEBF0;
-    }
-  }
 }

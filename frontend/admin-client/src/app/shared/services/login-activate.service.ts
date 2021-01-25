@@ -23,13 +23,17 @@ export class LoginActivateService implements CanActivate {
         console.log('url', state.url);
         if (state.url === '/home') {
           this.router.navigate(['']).then(r => authService.loading = false);
+        } else if (state.url === '/signup') {
+          this.router.navigate(['']).then(r => authService.loading = false);
         }
       },
       error => {
         authService.isLoggedIn = false;
         authService.user = null;
         authService.loading = false;
-        this.router.navigate(['home']).then(r => authService.loading = false);
+        if (state.url !== '/signup') {
+          this.router.navigate(['home']).then(r => authService.loading = false);
+        }
       }, () => {
         if (!authService.isLoggedIn) {
           console.log(authService.isLoggedIn);

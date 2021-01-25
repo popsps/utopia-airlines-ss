@@ -3,22 +3,23 @@
   border-bottom : 1px solid #e0e4e7;
   min-height    : 20vh;
   padding       : 20px;
-  color: #333333;
-  .pic{
-    color: #343A40;
-    display: flex;
-    justify-content: flex-end;
+  color         : #333333;
+
+  .pic {
+    color           : #343A40;
+    display         : flex;
+    justify-content : flex-end;
     //align-items: center;
-    min-width: 200px;
+    min-width       : 200px;
   }
 }
 
 .user-tasks {
-  display: flex;
+  display          : flex;
   position         : relative;
   background-color : #F7F7F8;
-  min-height       : calc(100vh - 64px);
-  color: #333333;
-  justify-content: center;
-  padding-top: 100px;
+  height           : calc(200vh - 64px);
+  color            : #333333;
+  justify-content  : center;
+  padding-top      : 100px;
 }

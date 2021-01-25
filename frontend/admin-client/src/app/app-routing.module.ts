@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: '', component: HomeUserComponent, canActivate: [LoginActivateService]},
   {path: 'home', component: HomeComponent, canActivate: [LoginActivateService]},
   {path: 'login', component: LoginPageComponent},
-  {path: 'signup', component: SignupPageComponent},
+  {path: 'signup', component: SignupPageComponent, canActivate: [LoginActivateService]},
   {path: 'bookings', component: BookingListComponent, canActivate: [LoginActivateService]},
   {path: 'bookings/add', component: BookingFormComponent, canActivate: [LoginActivateService]},
   {path: 'bookings/:id', component: BookingComponent, canActivate: [LoginActivateService]},
