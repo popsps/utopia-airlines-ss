@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class UserBooking extends Model {
-  static associate({ User, Passenger }) {
+  static associate({ User, Flight, Passenger }) {
     UserBooking.belongsTo(User, {
       foreignKey: {
         name: "userId",
@@ -18,6 +18,12 @@ class UserBooking extends Model {
       },
       as: "agent",
     });
+    UserBooking.belongsToMany(Flight, {
+      through: "flight_bookings",
+      foreignKey: "booking_id",
+      otherKey: "flight_id",
+      as: "flights",
+    });
     UserBooking.hasMany(Passenger, {
       foreignKey: {
         name: "bookingId",
@@ -30,9 +36,9 @@ class UserBooking extends Model {
   toJSON(){
     const values = Object.assign({}, this.get());
     delete values.confirmationCode;
-    values.user ?? delete values.userId;
-    values.agent ?? delete values.agentId;
-    return values;
+    values.user ?? delete values.user;
+    values.agent ?? delete values.agent;
+    return { type: "USER", ...values };
   }
 }
 
