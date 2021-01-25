@@ -1,6 +1,11 @@
-<!--<app-navbar *ngIf="isLoggedIn"></app-navbar>-->
-<app-navbar></app-navbar>
-<div class="container content" style="margin-top: 25px">
-  <router-outlet></router-outlet>
+<div class="full-page">
+  <app-navbar *ngIf="authService.isLoggedIn"></app-navbar>
+  <div class="container"
+       [ngStyle]="{'margin-top': (authService.isLoggedIn) ? '25px': '0'}">
+    <router-outlet></router-outlet>
+  </div>
+  <app-spinner *ngIf="authService.loading" [loading]="authService.loading"></app-spinner>
 </div>
+<div>isLoggedIn: {{authService.isLoggedIn}}</div>
 <app-footer></app-footer>
+

@@ -27,7 +27,7 @@ export class LoginModalComponent implements OnInit {
 
   login(): void {
     console.log('user:', this.user);
-    this.http.post(environment.loginUrl,
+    this.http.post(environment.sessionUrl,
       JSON.stringify(this.user), {
         headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'}),
         withCredentials: true,

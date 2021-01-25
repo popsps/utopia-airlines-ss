@@ -1,3 +1,14 @@
+.header {
+  position         : absolute;
+  top              : 0; left : 0; right : 0;
+  height           : 100px;
+  background-color : #343A40;
+  color            : #EBEBF0;
+  padding          : 20px;
+  font-size        : 44px;
+  font-weight      : bold;
+  line-height      : 46px;
+}
 
 .home-form {
   display        : flex;
@@ -5,8 +16,9 @@
 
   .login-form {
     width            : 100%;
+    margin-top       : 150px;
     background-color : #ffffff;
-    padding          : 25px;
+    padding          : 55px;
     height           : 500px;
     box-shadow       : rgb(194, 194, 194) 0 1px 2px;
     @media screen and(min-width : 1000px) {
@@ -29,7 +41,10 @@
   }
   @media screen and(min-width : 1000px) {
     flex-direction : row;
-    .welcome-utopia {padding : 225px 20px 20px;color : #ffffff;}
+    .welcome-utopia {
+      padding : 355px 20px 20px;
+      color   : #EBEBF0;
+    }
   }
 }
 
@@ -37,7 +52,7 @@
 .airplane-hero {
   position   : absolute;
   top        : 0; left : 0; right : 0;
-  margin-top : 50px;
+  margin-top : 100px;
   z-index    : -1;
 
   svg {display : none;}

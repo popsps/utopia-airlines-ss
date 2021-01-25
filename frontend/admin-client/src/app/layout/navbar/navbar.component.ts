@@ -7,10 +7,8 @@ import {AuthService} from '../../shared/services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn = false;
 
-  constructor(private authService: AuthService) {
-    this.isLoggedIn = authService.isLoggedIn;
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {

@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {AuthService} from '../../../shared/services/auth.service';
+import {Router} from '@angular/router';
 
-type Token = {
-  access_token: string;
-};
 type User = {
   username: string;
   password: string;
@@ -20,15 +18,15 @@ type User = {
 })
 export class LoginFormComponent implements OnInit {
 
-  token: Token = null;
   user: User = {username: '', password: '', firstname: ''};
 
-  constructor(private http: HttpClient, public authService: AuthService) {
+  constructor(private http: HttpClient, public authService: AuthService,
+              private router: Router) {
   }
 
   login(): void {
     console.log('user:', this.user);
-    this.http.post(environment.loginUrl,
+    this.http.post(environment.sessionUrl,
       JSON.stringify(this.user), {
         headers: new HttpHeaders({'Content-type': 'application/json ; charset=UTF-8'}),
         withCredentials: true,
@@ -36,7 +34,12 @@ export class LoginFormComponent implements OnInit {
       })
       .subscribe(res => {
         console.log(res);
-      }, error => console.log('error:', error));
+        this.authService.isLoggedIn = true;
+        this.router.navigate(['']).then(() => console.log('redirect to dashboard'));
+      }, error => {
+        this.authService.isLoggedIn = false;
+        console.log('error:', error);
+      });
   }
 
   ngOnInit(): void {

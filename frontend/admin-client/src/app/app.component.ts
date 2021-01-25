@@ -8,9 +8,7 @@ import {AuthService} from './shared/services/auth.service';
 })
 export class AppComponent {
   title = 'admin-client';
-  isLoggedIn = false;
 
-  constructor(private authService: AuthService) {
-    this.isLoggedIn = authService.isLoggedIn;
+  constructor(public authService: AuthService) {
   }
 }

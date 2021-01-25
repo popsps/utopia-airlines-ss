@@ -25,6 +25,10 @@ import {SignupPageComponent} from './auth/signup-page/signup-page.component';
 import {LoginFormComponent} from './auth/components/login-form/login-form.component';
 import {SignupFormComponent} from './auth/components/signup-form/signup-form.component';
 import {AuthService} from './shared/services/auth.service';
+import {HomeUserComponent} from './layout/home-user/home-user.component';
+import {LoginActivateService} from './shared/services/login-activate.service';
+import {NotFoundComponent} from './layout/not-found/not-found.component';
+import {SpinnerComponent} from './shared/components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import {AuthService} from './shared/services/auth.service';
     LoginPageComponent,
     SignupPageComponent,
     LoginFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    HomeUserComponent,
+    NotFoundComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,7 @@ import {AuthService} from './shared/services/auth.service';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService, BookingService, AuthService],
+  providers: [HttpService, BookingService, AuthService, LoginActivateService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
