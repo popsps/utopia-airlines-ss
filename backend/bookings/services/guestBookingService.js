@@ -11,7 +11,14 @@ const guestBookingService = {
       where,
       include: [
         "agent",
-        "flights",
+        {
+          association: "flights",
+          include: {
+            association: "route",
+            include: ["origin", "destination"],
+          },
+          through: { attributes: [] },
+        },
         "passengers",
       ],
     });
@@ -22,7 +29,14 @@ const guestBookingService = {
       {
         include: [
           "agent",
-          "flights",
+          {
+            association: "flights",
+            include: {
+              association: "route",
+              include: ["origin", "destination"],
+            },
+            through: { attributes: [] },
+          },
           "passengers",
         ],
       }

@@ -13,7 +13,14 @@ const userBookingService = {
       include: [
         "agent",
         "user",
-        "flights",
+        {
+          association: "flights",
+          include: {
+            association: "route",
+            include: ["origin", "destination"],
+          },
+          through: { attributes: [] },
+        },
         "passengers",
       ],
     });
@@ -25,7 +32,14 @@ const userBookingService = {
         include: [
           "agent",
           "user",
-          "flights",
+          {
+            association: "flights",
+            include: {
+              association: "route",
+              include: ["origin", "destination"],
+            },
+            through: { attributes: [] },
+          },
           "passengers",
         ],
       }
