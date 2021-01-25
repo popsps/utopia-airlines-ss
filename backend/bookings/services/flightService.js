@@ -3,7 +3,7 @@ const { Flight } = require("@utopia-airlines-wss/common/models");
 const { BadRequestError   } = require("@utopia-airlines-wss/common/errors");
 
 
-const fightService = {
+const flightService = {
   async validateFlights({ flights, passengerCount }) {
     const fullFlightCount = await Flight.count({
       where: {
@@ -16,4 +16,4 @@ const fightService = {
   },
 };
 
-module.exports = { fightService };
+module.exports = { flightService };
