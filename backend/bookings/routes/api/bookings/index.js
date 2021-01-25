@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const { bookingController } = require("../../../controllers/bookingController");
+const { bookingController } = require("../../../controllers");
 
 const { requireAuthentication } = require("@utopia-airlines-wss/common/middleware");
 
