@@ -33,9 +33,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     // Entry points
     //TODO: remove "/users" and re-add HttpMethod.POST once authentication is added
-    http.authorizeRequests().antMatchers("/users/signin", "/users/signup", "/users").permitAll()
-        // Disallow everything else
-        .anyRequest().authenticated().and().addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+    http.authorizeRequests().antMatchers("/api/session/**", "/api/users").permitAll()
+      // Disallow everything else
+      .anyRequest().authenticated().and().addFilterBefore(jwtTokenFilter,
+      UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean
