@@ -15,7 +15,7 @@ export class SignupFormComponent implements OnInit {
   loading = false;
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, public authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
