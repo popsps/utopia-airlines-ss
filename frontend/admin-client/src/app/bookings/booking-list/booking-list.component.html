@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container full-page">
   <div *ngIf="!loading">
     <div class="d-flex justify-content-center">
       <button type="button" routerLink="/bookings/add"
@@ -57,11 +57,11 @@
     </div>
   </div>
   <!--Acknowledgment-->
-  <!--<div class="text-center" *ngIf="loading">-->
-  <!--  <div class="spinner-grow" role="status">-->
-  <!--    <span class="sr-only">Loading...</span>-->
-  <!--  </div>-->
-  <!--</div>-->
+<!--  <div class="text-center" *ngIf="loading">-->
+<!--    <div class="spinner-grow" role="status">-->
+<!--      <span class="sr-only">Loading...</span>-->
+<!--    </div>-->
+<!--  </div>-->
   <app-spinner [loading]="loading" *ngIf="loading"></app-spinner>
   <app-error-message *ngIf="error?.isError" [error]="error"></app-error-message>
 </div>
