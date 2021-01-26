@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -121,12 +122,10 @@ public class UserService implements UserDetailsService {
     return userDao.findAll();
   }
 
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public User getUserById(Long id, UserDetails currentUser) {
-    User user = userDao.findById(id).orElse(null);
-    if (user == null || !user.getUsername().equals(currentUser.getUsername())) {
-      throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
-    }
-    return user;
+	String role = currentUser.getAuthorities().toString();
+	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
   }
 
   /**

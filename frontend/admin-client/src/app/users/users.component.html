@@ -1,76 +1,80 @@
-<h2>List of all Users. Total Users: {{ totalUsers }}</h2>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <td>Username</td>
-            <td>Given Name</td>
-            <td>Family Name</td>
-            <td>Role</td>
-            <td>Email</td>
-            <td>Phone Number</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users; let i=index">
-            <td>{{ user.username }}</td>
-            <td>{{ user.givenName }}</td>
-            <td>{{ user.familyName }}</td>
-            <td>{{ user.role.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
-        </tr>
-    </tbody>
-</table>
-<button type="addUser" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
-    data-target=".bd-example-modal-lg">Add User</button>
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form class="m-2" [formGroup]="addUserForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="username" class="form-control" id="usernameInput" formControlName="username"
-                        aria-describedby="usernameHelp" placeholder="Enter Username">
-                    <small id="usernameHelp" class="form-text text-muted">Enter a valid username</small>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="emailInput" formControlName="email"
-                        aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">Enter a valid email address</small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="passwordInput" formControlName="password"
-                        placeholder="Enter Password">
-                </div>
-                <div class="form-group">
-                    <label for="givenName">Given Name</label>
-                    <input type="givenName" class="form-control" id="givenNameInput" formControlName="givenName"
-                        aria-describedby="givenNameHelp" placeholder="Enter Given Name">
-                    <small id="givenNameHelp" class="form-text text-muted">Enter a valid given name</small>
-                </div>
-                <div class="form-group">
-                    <label for="familyName">Family Name</label>
-                    <input type="familyName" class="form-control" id="familyNameInput" formControlName="familyName"
-                        aria-describedby="familyNameHelp" placeholder="Enter Family Name">
-                    <small id="familyNameHelp" class="form-text text-muted">Enter a valid family name</small>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="phone" class="form-control" id="phoneInput" formControlName="phone"
-                        aria-describedby="phoneHelp" placeholder="Enter Phone Number">
-                    <small id="phoneHelp" class="form-text text-muted">Enter a valid phone number</small>
-                </div>
-                <label for="role" class="m-3">Choose a role:</label>
-                <select formControlName="role" id="role">
-                    <option value="CUSTOMER">CUSTOMER</option>
-                    <option value="AGENT">AGENT</option>
-                    <option value="ADMIN">ADMIN</option>
-                </select>
-                <button type="submit" class="btn btn-primary" (click)="addUser()">Submit</button>
-            </form>
+<div class="container full-page my-4">
+    <h2>List of all Users. Total Users: {{ totalUsers }}</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Given Name</td>
+                <td>Family Name</td>
+                <td>Role</td>
+                <td>Email</td>
+                <td>Phone Number</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; let i=index">
+                <td>{{ user.username }}</td>
+                <td>{{ user.givenName }}</td>
+                <td>{{ user.familyName }}</td>
+                <td>{{ user.role.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td><button type="button" class="btn btn-danger" (click)=deleteUser(user.id)>Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="addUser" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+        data-target=".bd-example-modal-lg">Add User</button>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="m-2" [formGroup]="addUserForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="username" class="form-control" id="usernameInput" formControlName="username"
+                            aria-describedby="usernameHelp" placeholder="Enter Username">
+                        <small id="usernameHelp" class="form-text text-muted">Enter a valid username</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="emailInput" formControlName="email"
+                            aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">Enter a valid email address</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="passwordInput" formControlName="password"
+                            placeholder="Enter Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="givenName">Given Name</label>
+                        <input type="givenName" class="form-control" id="givenNameInput" formControlName="givenName"
+                            aria-describedby="givenNameHelp" placeholder="Enter Given Name">
+                        <small id="givenNameHelp" class="form-text text-muted">Enter a valid given name</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="familyName">Family Name</label>
+                        <input type="familyName" class="form-control" id="familyNameInput" formControlName="familyName"
+                            aria-describedby="familyNameHelp" placeholder="Enter Family Name">
+                        <small id="familyNameHelp" class="form-text text-muted">Enter a valid family name</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="phone" class="form-control" id="phoneInput" formControlName="phone"
+                            aria-describedby="phoneHelp" placeholder="Enter Phone Number">
+                        <small id="phoneHelp" class="form-text text-muted">Enter a valid phone number</small>
+                    </div>
+                    <label for="role" class="m-3">Choose a role:</label>
+                    <select formControlName="role" id="role">
+                        <option value="CUSTOMER">CUSTOMER</option>
+                        <option value="AGENT">AGENT</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" (click)="addUser()">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -22,10 +22,8 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  //	TODO: remove @CrossOrigin for signup and getAll
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  @CrossOrigin(origins = "http://localhost:4200")
   public User signup(@RequestBody @Valid UserDto userDto) {
     return userService.signup(userDto);
   }
