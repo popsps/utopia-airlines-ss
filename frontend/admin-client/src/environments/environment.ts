@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  utopiaAirlineApi: "http://localhost:8081",
-  loginUrl: '/api/session',
+  utopiaAirlineApi: 'http://localhost:8081',
+  sessionInfoUrl: '/api/session',
+  loginUrl: '/api/session/admin',
   userApiUrl: '/api/users',
-  bookingApiUrl: 'http://localhost:3000/api/bookings',
+  bookingApiUrl: '/api/bookings',
   flightApiUrl: 'http://localhost:3001/api/flights'
 };
 

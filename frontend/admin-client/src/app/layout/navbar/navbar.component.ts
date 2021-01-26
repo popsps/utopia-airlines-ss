@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../shared/services/auth.service';
+import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    this.authService.logout(environment.sessionInfoUrl)
+      .subscribe(res => {
+        this.authService.isLoggedIn = false;
+        this.router.navigate(['/home']).then(() => console.log('redirect to dashboard'));
+      }, error => {
+        console.log('something went wrong');
+      });
+  }
 }
