@@ -85,8 +85,9 @@ public class SessionController {
   @GetMapping
   public User getSession(@AuthenticationPrincipal UserDetails currentUser) {
     if (currentUser == null)
-      throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
-    return userService.getUserByUsername(currentUser.getUsername());
+      return null;
+    else
+      return userService.getUserByUsername(currentUser.getUsername());
   }
 
   @DeleteMapping
