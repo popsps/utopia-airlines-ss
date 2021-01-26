@@ -18,14 +18,23 @@ export class LoginActivateService implements CanActivate {
     authService.loading = true;
     authService.getSessionInfo(environment.sessionInfoUrl).subscribe(
       user => {
-        authService.isLoggedIn = true;
-        authService.user = user;
-        console.log('url', state.url);
-        if (state.url === '/home') {
-          this.router.navigate(['']).then(r => authService.loading = false);
-        } else if (state.url === '/signup') {
-          this.router.navigate(['']).then(r => authService.loading = false);
+        // session does not exist or expired or invalid
+        if (user == null) {
+          authService.isLoggedIn = false;
+          authService.user = null;
+          if (state.url !== '/signup') {
+            this.router.navigate(['home']).then(r => authService.loading = false);
+          }
+        } else { // session exists and is valid
+          authService.isLoggedIn = true;
+          authService.user = user;
+          if (state.url === '/home') {
+            this.router.navigate(['']).then(r => authService.loading = false);
+          } else if (state.url === '/signup') {
+            this.router.navigate(['']).then(r => authService.loading = false);
+          }
         }
+
       },
       error => {
         authService.isLoggedIn = false;
@@ -35,11 +44,6 @@ export class LoginActivateService implements CanActivate {
           this.router.navigate(['home']).then(r => authService.loading = false);
         }
       }, () => {
-        if (!authService.isLoggedIn) {
-          console.log(authService.isLoggedIn);
-          this.router.navigate(['home']).then(r => authService.loading = false);
-        }
-        console.log('never get here');
         authService.loading = false;
       });
     return true;

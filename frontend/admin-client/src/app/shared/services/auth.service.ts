@@ -16,19 +16,10 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-
-  public getSessionCookie(): string {
-    const cookies = document.cookie.split(';');
-    const session = cookies.filter(value => value.startsWith('session='));
-    if (session.length > 0) {
-      console.log(session[0].slice(8));
-      return session[0].slice(8);
-    } else {
-      return null;
-    }
-  }
-
-
+  // auth functions api calls
+  /**
+   * get session info the verify the connection and get user info
+   */
   public getSessionInfo(url: string): Observable<User> {
     return this.http.get<User>(url);
   }
@@ -48,5 +39,24 @@ export class AuthService {
 
   logout(url: string): Observable<any> {
     return this.http.delete(url);
+  }
+
+  // auth functions cookies and local storage
+  public getSessionCookie(): string {
+    const cookies = document.cookie.split(';');
+    const session = cookies.filter(value => value.startsWith('session='));
+    if (session.length > 0) {
+      console.log(session[0].slice(8));
+      return session[0].slice(8);
+    } else {
+      return null;
+    }
+  }
+
+  public getRememberMe(): void {
+    const RememberMe = JSON.parse(localStorage.getItem('RememberMe'));
+    if (RememberMe !== null && RememberMe === true) {
+
+    }
   }
 }
