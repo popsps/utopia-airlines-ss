@@ -12,12 +12,14 @@ class Passenger extends Model {
       as: "booking",
     });
   }
-  toJSON(role){
-    const { givenName: given, familyName: family, ...values } = Object.assign({}, this.get());
-    if (role !== "ADMIN") return { name: { given, family } };
+  toJSON(type){
+    const { id, bookingId, givenName: given, familyName: family, ...values } = this.get();
+    if (type !== "full") return { name: { given, family } };
     return  {
-      ...values,
+      id,
+      bookingId,
       name: { given, family },
+      ...values,
     };
   }
 }
