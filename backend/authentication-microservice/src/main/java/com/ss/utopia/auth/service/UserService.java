@@ -122,8 +122,15 @@ public class UserService implements UserDetailsService {
   }
 
   public User getUserById(Long id, UserDetails currentUser) {
+	String role = currentUser.getAuthorities().toString();
     User user = userDao.findById(id).orElse(null);
-    if (user == null || !user.getUsername().equals(currentUser.getUsername())) {
+    if(user == null) {
+    	throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Missing User");
+    }
+    else if(role.contains("ADMIN")) {
+		return user;
+	}
+	else if (!user.getUsername().equals(currentUser.getUsername())) {
       throw new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User");
     }
     return user;

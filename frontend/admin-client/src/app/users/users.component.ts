@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.apiUrl = `${environment.utopiaAirlineApi}${environment.userApiUrl}`;
+    this.apiUrl = `${environment.userApiUrl}`;
     this.initializeUsers();
     this.initializeForm();
   }
@@ -66,5 +66,12 @@ export class UsersComponent implements OnInit {
       this.initializeUsers();
       this.initializeForm();
     });
+  }
+
+  deleteUser(userId: number) {
+    this.userService.delete(this.apiUrl.concat("/" + userId)).subscribe((res) => {
+      this.initializeUsers();
+    });
+    alert("Deleted");
   }
 }
