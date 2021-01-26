@@ -8,10 +8,15 @@ const findBookingById = async (id, options) => {
   return booking;
 };
 
+const replacer = (key, value) =>  key === "passengers"
+  ? value.map((passenger) => passenger.toJSON("full"))
+  : value;
+
+
 const bookingService = {
   async findAllBookings({ isActive = true } = {}) {
     const where = { isActive };
-    return await Booking.findAll({
+    const bookings = await Booking.findAll({
       where,
       include: [
         {
@@ -34,6 +39,8 @@ const bookingService = {
         "passengers",
       ],
     });
+
+    return JSON.parse(JSON.stringify(bookings, replacer));
   },
   async findBookingById({ id }) {
     const booking = await findBookingById(
@@ -61,7 +68,7 @@ const bookingService = {
         ],
       }
     );
-    return booking;
+    return JSON.parse(JSON.stringify(booking, replacer));
   },
   async updateBooking(id, { isActive }) {
     const booking = await findBookingById(id);
@@ -78,7 +85,6 @@ const bookingService = {
       await transaction.rollback();
       handleMutationError(err);
     }
-
   },
   async deleteBookingById(id) {
     const booking = await findBookingById(id);
