@@ -46,7 +46,7 @@ const userController = {
   },
   async createSession(req, res, next) {
     if (req.user)
-      next(new StateConflictError("session already exists"));
+      return next(new StateConflictError("session already exists"));
     try {
       req.session.jwt = await sessionService.createSession(req.body);
       res.sendStatus(201);

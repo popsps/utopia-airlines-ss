@@ -5,62 +5,18 @@ const bookingController = {
     try {
       const bookings = await bookingService.findAllBookings({
         ...req.query,
-        userId: req.user?.role.name === "CUSTOMER"
-          ? req.user?.id
-          :  null,
       });
       res.json(bookings);
     } catch (err) {
       next(err);
     }
   },
-  async create(req, res, next) {
-    try {
-      const booking = await bookingService.createBooking(
-        (({ user, body }) => {
-          switch (user?.role.name) {
-          case "CUSTOMER":
-            return { ...body, contact: user };
-          case "AGENT":
-            return { ...body, agent: user };
-          default:
-            return body;
-          }
-        })(req)
-      );
-      res.status(201).json(booking);
-    } catch (err) {
-      next(err);
-    }
-  },
   async getById(req, res, next) {
     try {
-      const booking = await bookingService.findBookingById(
-        (({ user, params: { id } }) => {
-          switch (user?.role.name) {
-          case "AGENT":
-          case "ADMIN":
-            return {
-              id,
-              userId: null,
-            };
-          case "CUSTOMER":
-            return {
-              id,
-              userId: user.id,
-            };
-          default:
-            return { id };
-          }
-        })(req));
-      res.json(booking);
-    } catch (err) {
-      next(err);
-    }
-  },
-  async updateById(req, res, next) {
-    try {
-      const booking = await bookingService.updateBooking(req.params.id, req.body);
+      const { params:{ id } } = req;
+      const booking = await bookingService.findBookingById({
+        id,
+      });
       res.json(booking);
     } catch (err) {
       next(err);

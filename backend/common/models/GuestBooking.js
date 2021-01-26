@@ -2,13 +2,19 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class GuestBooking extends Model {
-  static associate({ User, Passenger }) {
+  static associate({ User, Flight, Passenger }) {
     GuestBooking.belongsTo(User, {
       foreignKey: {
         name: "agentId",
         field: "agent_id",
       },
       as: "agent",
+    });
+    GuestBooking.belongsToMany(Flight, {
+      through: "flight_bookings",
+      foreignKey: "booking_id",
+      otherKey: "flight_id",
+      as: "flights",
     });
     GuestBooking.hasMany(Passenger, {
       foreignKey: {
@@ -19,10 +25,12 @@ class GuestBooking extends Model {
     });
   }
   toJSON(){
-    const values = Object.assign({}, this.get());
+    const { contactEmail: email, contactPhone: phone, ...values } = Object.assign({}, this.get());
     delete values.confirmationCode;
-    values.bookerId ?? delete values.bookerId;
-    return values;
+    values.agentId ?? delete values.agentId;
+    values.agent ?? delete values.agent;
+    if (values.agent) delete values.agentId;
+    return { type: "GUEST", ...values, guest: { email, phone } };
   }
 }
 
