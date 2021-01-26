@@ -72,6 +72,6 @@ export class UsersComponent implements OnInit {
     this.userService.delete(this.apiUrl.concat("/" + userId)).subscribe((res) => {
       this.initializeUsers();
     });
-    alert("Deleted");
+    // alert("Deleted");
   }
 }
