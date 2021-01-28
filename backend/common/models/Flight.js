@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class Flight extends Model {
-  static associate({ Route, Booking }) {
+  static associate({ Route, Airplane, Booking }) {
     Flight.belongsTo(Route, {
       foreignKey: {
         name: "routeId",
@@ -10,6 +10,14 @@ class Flight extends Model {
         allowNull: false,
       },
       as: "route",
+    });
+    Flight.belongsTo(Airplane, {
+      foreignKey: {
+        name: "airplaneId",
+        field: "airplane_id",
+        allowNull: false,
+      },
+      as: "airplane",
     });
     Flight.belongsToMany(Booking, {
       through: "flight_bookings",
