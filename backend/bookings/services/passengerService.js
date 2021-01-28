@@ -15,13 +15,13 @@ const passengerService = {
     if (!passenger) throw new NotFoundError("cannot find passenger");
     try {
       const data = Object.entries({
-        givenName:name?.given,
-        familyName:name?.family,
+        givenName: name?.given,
+        familyName: name?.family,
         dob,
         gender,
         address,
       }).filter(([_key, value]) => value != null)
-        .reduce((data, [key, value]) => data[key] = value, {});
+        .reduce((data, [key, value]) => (data[key] = value, data), {});
       await passenger.update(data);
       return passenger.toJSON("full");
     } catch(err) {
