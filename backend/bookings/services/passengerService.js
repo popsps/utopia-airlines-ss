@@ -1,26 +1,30 @@
 const { Passenger } = require("@utopia-airlines-wss/common/models");
-const {  NotFoundError   } = require("@utopia-airlines-wss/common/errors");
-
+const {  NotFoundError, BadRequestError  } = require("@utopia-airlines-wss/common/errors");
 
 const passengerService = {
   async findAllPassengers() {
-    return  await Passenger.findAll({});
+    return  (await Passenger.findAll({})).map((passenger) => passenger.toJSON("full"));
   },
   async findPassengerById({ id }) {
     const passenger = await Passenger.findByPk(id);
     if (!passenger) throw new NotFoundError("cannot find passenger");
-    return passenger;
+    return passenger.toJSON("full");
   },
   async updatePassenger(id, { name, dob, gender, address } = {}) {
-    const data = {};
-    if (name?.given != null) data.givenName = name.given;
-    if (name?.family != null) data.familyName = name.family;
-    if (dob != null) data.dob = name.dob;
-    if (gender != null) data.gender = name.gender;
-    if (address != null) data.address = name.address;
-    const passenger = await Passenger.update(data, { where: { id } });
+    const passenger = await Passenger.findOne({ where: { id }, limit: 1 });
     if (!passenger) throw new NotFoundError("cannot find passenger");
-    return passenger;
+    try {
+      const data = {};
+      if (name?.given != null) data.givenName = name.given;
+      if (name?.family != null) data.familyName = name.family;
+      if (dob != null) data.dob = name.dob;
+      if (gender != null) data.gender = name.gender;
+      if (address != null) data.address = name.address;
+      await passenger.update(data);
+      return passenger.toJSON("full");
+    } catch(err) {
+      throw new BadRequestError();
+    }
   },
 };
 
