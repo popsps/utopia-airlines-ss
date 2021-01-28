@@ -14,12 +14,14 @@ const passengerService = {
     const passenger = await Passenger.findOne({ where: { id }, limit: 1 });
     if (!passenger) throw new NotFoundError("cannot find passenger");
     try {
-      const data = {};
-      if (name?.given != null) data.givenName = name.given;
-      if (name?.family != null) data.familyName = name.family;
-      if (dob != null) data.dob = name.dob;
-      if (gender != null) data.gender = name.gender;
-      if (address != null) data.address = name.address;
+      const data = Object.entries({
+        givenName:name?.given,
+        familyName:name?.family,
+        dob,
+        gender,
+        address,
+      }).filter(([_key, value]) => value != null)
+        .reduce((data, [key, value]) => data[key] = value, {});
       await passenger.update(data);
       return passenger.toJSON("full");
     } catch(err) {
