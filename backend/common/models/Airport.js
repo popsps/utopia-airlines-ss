@@ -1,4 +1,4 @@
-const { Model, STRING } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class Airport extends Model {
@@ -28,11 +28,11 @@ class Airport extends Model {
 
 Airport.init({
   iataId: {
-    type: STRING,
+    type: DataTypes.STRING,
     primaryKey: true,
   },
   city: {
-    type: STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, { 
