@@ -18,6 +18,7 @@
   .login-form-wrapper {
     width  : 100%;
     margin : 150px 0 0;
+
     .admin-portal {
       font-size     : 34px;
       font-weight   : bold;
@@ -47,21 +48,34 @@
 
   .welcome-utopia {
     flex        : 1;
-    //background-color : #343A40;
     padding     : 50px 20px 20px;
     font-size   : 34px;
     font-weight : bold;
     line-height : 46px;
+
+    div {
+      display : none;
+    }
   }
 
   @media screen and(min-width : 1300px) {
-    .welcome-utopia {font-size : 44px;}
+    .welcome-utopia {
+      font-size : 44px;
+
+      div {
+        display : block;
+      }
+    }
   }
   @media screen and(min-width : 1000px) {
     flex-direction : row;
     .welcome-utopia {
       padding : 355px 20px 20px;
       color   : #EBEBF0;
+
+      div {
+        display : block;
+      }
     }
   }
 }
