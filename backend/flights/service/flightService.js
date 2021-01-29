@@ -1,8 +1,5 @@
-const { Flight } = require("@utopia-airlines-wss/common/models");
-// const { Booking } = require("@utopia-airlines-wss/common/models");
-// const { Passenger } = require("@utopia-airlines-wss/common/models");
+const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
-const { sequelize } = require("../../common/db");
 
 const flightService = {
   async findAllFlights({ origin, destination, departure } = {}){
@@ -13,14 +10,23 @@ const flightService = {
     if(destination != null) routeQuery.destinationId = destination;
     return Flight.findAll({
       where: flightQuery,
-      include: [ { 
-        association: "route",
-        where: routeQuery, 
-      }],
+      include: [ 
+        { 
+          association: "route",
+          where: routeQuery, 
+        },
+        "airplane",
+      ],
     });
   },
   async findFlightById(id) {
-    const flight = await Flight.findByPk(id, { include: "route" });
+    const flight = await Flight.findByPk(id,
+      {
+        include: [
+          "route",
+          "airplane",
+        ],
+      });
     if(!flight) throw new NotFoundError("cannot find flight");
     return flight;
   },
@@ -44,33 +50,26 @@ const flightService = {
   //     include: [],
   //   });
   // },
-  async createFlight({ id, routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
-    const transaction = await sequelize.transaction();
+  async createFlight({ routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
     try {
-      const flight = await Flight.create({ id, routeId, airplaneId, departureTime, reservedSeats, seatPrice });
-      await transaction.commit();
-      return flight;
+      return await FlightRaw.create({ routeId, airplaneId, departureTime, reservedSeats, seatPrice });
     } catch(err) {
-      await transaction.rollback();
       handleMutationError(err);
     }
   },
   async updateFlight(id, { routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
     const flight = await flightService.findFlightById(id);
     if(!flight) throw new NotFoundError("cannot find flight");
-    const transaction = await sequelize.transaction();
     try {
       const newFlightInfo = {
-        id: id,
-        routeId: routeId,
-        airplaneId: airplaneId,
-        departureTime: departureTime,
-        reservedSeats: reservedSeats,
-        seatPrice: seatPrice,
+        routeId,
+        airplaneId,
+        departureTime,
+        reservedSeats,
+        seatPrice,
       };
       flight.update(newFlightInfo);
     } catch(err) {
-      await transaction.rollback();
       handleMutationError(err);
     }
   },

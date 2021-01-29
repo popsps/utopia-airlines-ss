@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
-class Flight extends Model {
+class FlightRaw extends Model {
   static associate({ Route, Airplane, Booking }) {
-    Flight.belongsTo(Route, {
+    FlightRaw.belongsTo(Route, {
       foreignKey: {
         name: "routeId",
         field: "route_id",
@@ -11,7 +11,7 @@ class Flight extends Model {
       },
       as: "route",
     });
-    Flight.belongsTo(Airplane, {
+    FlightRaw.belongsTo(Airplane, {
       foreignKey: {
         name: "airplaneId",
         field: "airplane_id",
@@ -19,7 +19,7 @@ class Flight extends Model {
       },
       as: "airplane",
     });
-    Flight.belongsToMany(Booking, {
+    FlightRaw.belongsToMany(Booking, {
       through: "flight_bookings",
       foreignKey: "flight_id",
       otherKey: "booking_id",
@@ -33,32 +33,23 @@ class Flight extends Model {
   }
 }
 
-Flight.init({
+FlightRaw.init({
   departureTime: {
     type: DataTypes.DATE,
+    allowNull: false,
+  },
+  reservedSeats: {
+    type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
   },
   seatPrice: {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  maxCapacity: {
-    type: DataTypes.INTEGER.UNSIGNED,
-  },
-  reservedSeats: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
-  },
-  passengerCount: {
-    type: DataTypes.INTEGER.UNSIGNED,
-  },
-  availableSeats: {
-    type: DataTypes.INTEGER.UNSIGNED,
-  },
 }, {
-  tableName: "flight_status",
+  tableName: "flight",
   freezeTableName: true,
   sequelize,
 });
 
-module.exports = { Flight };
+module.exports = { FlightRaw };

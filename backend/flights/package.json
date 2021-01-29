@@ -13,10 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "@utopia-airlines-wss/common": "file:../common",
-    "cors": "^2.8.5",
+    "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "install": "^0.13.0",
+    "morgan": "^1.10.0",
     "sequelize": "^6.3.5"
   }
 }

@@ -1,7 +1,9 @@
 const models = {
   ...require("./Airport"),
   ...require("./Route"),
+  ...require("./Airplane"),
   ...require("./Flight"),
+  ...require("./FlightRaw"),
   ...require("./UserRole"),
   ...require("./User"),
   ...require("./Booking"),
