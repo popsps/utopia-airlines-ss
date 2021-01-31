@@ -6,7 +6,8 @@
   .main {
     flex    : 1;
     padding : 0.75rem 1.25rem;
-    color: #333333;
+    color   : #333333;
+
     .booker {
       margin           : auto;
       background-color : white;
@@ -29,7 +30,8 @@
     border           : none;
     background-color : #F7F7F8;
     box-shadow       : rgb(194, 194, 194) 0 1px 2px;
-    transition : box-shadow 0.2s linear;
+    transition       : box-shadow 0.2s linear;
+
     &:hover, &:active, &:focus {
       border     : 0.04rem solid rgba(0, 0, 0, 0.2);
       box-shadow : 2px 2px 5px 0 rgba(0, 0, 0, 0.2);
@@ -50,7 +52,11 @@
   padding          : 0.45rem;
 }
 
-.title{
-  font-weight: 500;
-  color: #333333;
+.title {
+  font-weight : 500;
+  color       : #333333;
+}
+
+.text-light-black {
+  color : #989595;
 }
