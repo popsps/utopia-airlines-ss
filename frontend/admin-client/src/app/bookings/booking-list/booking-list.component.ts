@@ -20,7 +20,14 @@ export class BookingListComponent implements OnInit {
     this.loading = true;
     this.bookingService.getAllBookings(environment.bookingApiUrl)
       .subscribe(bookings => {
-        console.log(bookings);
+        console.log('all bookings:', bookings);
+        bookings.forEach(booking => {
+          booking?.flights.forEach(flight => {
+            flight.departureTime = new Date(flight.departureTime);
+            flight.arrivalTime = new Date(flight.departureTime);
+            flight.arrivalTime.setHours(Math.random() * 8 + 2 + flight.arrivalTime.getHours());
+          });
+        });
         this.bookings = bookings;
         this.loading = false;
       }, error => {

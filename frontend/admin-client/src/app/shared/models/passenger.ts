@@ -1,6 +1,5 @@
 export class Passenger {
   id: number;
-  bookingId: bigint;
   name: {
     given: string;
     family: string;

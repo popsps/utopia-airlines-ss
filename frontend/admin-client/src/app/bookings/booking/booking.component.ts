@@ -30,6 +30,11 @@ export class BookingComponent implements OnInit {
     this.bookingService.getBookingById(environment.bookingApiUrl, this.bookingId)
       .subscribe(booking => {
         console.log(booking);
+        booking?.flights.forEach(flight => {
+          flight.departureTime = new Date(flight.departureTime);
+          flight.arrivalTime = new Date(flight.departureTime);
+          flight.arrivalTime.setHours(Math.random() * 8 + 2 + flight.arrivalTime.getHours());
+        });
         this.booking = booking;
         this.initForm();
         this.loading = false;
@@ -43,7 +48,7 @@ export class BookingComponent implements OnInit {
 
   submitUpdate(): void {
     console.log(JSON.stringify(this.booking));
-    this.booking.bookerId = this.booking.id;
+    // this.booking.bookerId = this.booking.id;
     this.bookingService.updateBookingById(environment.bookingApiUrl, this.bookingId, this.booking)
       .subscribe(booking => {
         console.log(booking);
@@ -53,7 +58,7 @@ export class BookingComponent implements OnInit {
   }
 
   deleteBooking(): void {
-    this.booking.bookerId = this.booking.id;
+    // this.booking.bookerId = this.booking.id;
     this.bookingService.deleteBookingById(environment.bookingApiUrl, this.bookingId)
       .subscribe(booking => {
         console.log(booking);
@@ -67,19 +72,20 @@ export class BookingComponent implements OnInit {
   }
 
   initForm(): void {
-    const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
+    // const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
+    const {id, isActive, passengers} = this.booking;
     this.bForm = this.fb.group({
       id,
       isActive,
-      confirmationCode,
-      bookerId,
+      // confirmationCode,
+      // bookerId,
       passengers: this.fb.array([]),
       flights: this.fb.array([])
     });
     passengers.forEach(passenger => {
       const passengerForm = this.fb.group({
         id: passenger?.id,
-        bookingId: passenger?.bookingId,
+        // bookingId: passenger?.bookingId,
         name: this.fb.group({
           given: passenger?.name.given,
           family: passenger?.name.family,
