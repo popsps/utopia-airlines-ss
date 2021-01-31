@@ -4,8 +4,8 @@ import { FlightFilter } from "../../shared/models/FlightFilter";
 
 @Component({
   selector: 'app-flight-search-form',
-  templateUrl: './search-form.component.html',
-  styleUrls: ['./search-form.component.scss']
+  templateUrl: './flight-search-form.component.html',
+  styleUrls: ['./flight-search-form.component.scss']
 })
 export class FlightSearchFormComponent implements OnInit {
   filterFormControls: FormGroup;
