@@ -7,7 +7,7 @@ const getCurrentUser = async (req, res, next) => {
   try {
     if (req.session?.jwt) {
       const payload = await authJWTHandler.verifyJWT(req.session.jwt);
-      req.user = await User.findByPk(payload.sub, { include: ["role"] });
+      req.user = await User.findByPk(Number.parseInt(payload.sub, 16), { include: ["role"] });
     }
     next();
   } catch (err) {
