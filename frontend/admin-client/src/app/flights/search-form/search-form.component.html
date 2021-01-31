@@ -1,0 +1,15 @@
+<form class="row">
+  <div class="col-md">
+    <label class="form-label" for="origin-input">Origin</label>
+    <input id="origin-input" class="form-control" type="text" name="origin" [(ngModel)]="filter.origin">
+  </div>
+  <div class="col-md">
+    <label class="form-label" for="destination-input">Destination</label>
+    <input id="destination-input" class="form-control" type="text" name="destination" [(ngModel)]="filter.destination">
+  </div>
+  <div class="col-md">
+    <label class="form-label" for="departure-date-input">Departure Date</label>
+    <input id="departure-date-input" class="form-control" type="date" name="departureDate"
+      [(ngModel)]="filter.departureDate[0]">
+  </div>
+</form>
