@@ -5,7 +5,7 @@ import { environment } from "../../environments/environment";
 import { HttpService } from "../shared/services/http.service";
 
 import { Flight } from "../shared/models/Flight";
-import { FormControl } from '@angular/forms';
+import { FlightFilter } from '../shared/models/FlightFilter';
 
 
 @Component({
@@ -19,9 +19,8 @@ export class FlightsComponent implements OnInit {
     error?: any;
     data?: Flight[];
   };
-  origin: string;
-  destination: string;
-  departureDate: Date;
+
+  filter: FlightFilter;
 
   constructor(private httpService: HttpService) { }
 
@@ -35,7 +34,7 @@ export class FlightsComponent implements OnInit {
       (res: any[]) => {
         this.flights = {
           state: "done",
-          data: res.map(obj => new Flight().deserialize(obj))
+          data: res.slice(0, 10).map(obj => new Flight().deserialize(obj))
         };
       },
       (error) => {

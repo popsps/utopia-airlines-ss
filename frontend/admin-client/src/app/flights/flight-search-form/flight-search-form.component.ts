@@ -7,7 +7,7 @@ import { FlightFilter } from "../../shared/models/FlightFilter";
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.scss']
 })
-export class SearchFormComponent implements OnInit {
+export class FlightSearchFormComponent implements OnInit {
   filterFormControls: FormGroup;
   filter: FlightFilter = {
     departureDateRange: []
