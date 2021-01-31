@@ -74,7 +74,7 @@ export class BookingComponent implements OnInit {
 
   initForm(): void {
     // const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
-    const {id, isActive, passengers} = this.booking;
+    const {id, isActive, passengers, flights} = this.booking;
     this.bForm = this.fb.group({
       id,
       isActive,
@@ -138,5 +138,17 @@ export class BookingComponent implements OnInit {
 
   deleteFlightForm(i: number): void {
     this.getFlightsForms().removeAt(i);
+  }
+
+  toggleEdit(i: number): void {
+    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+  }
+
+  updatePassenger(i: number): void {
+    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+  }
+
+  deletePassenger(i: number): void {
+    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
   }
 }

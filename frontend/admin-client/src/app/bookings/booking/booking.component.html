@@ -1,4 +1,4 @@
-<div class="container full-page" *ngIf="!error.isError && !loading && !deleted">
+<div [formGroup]="bForm" class="container full-page" *ngIf="!error.isError && !loading && !deleted">
   <!--  booking information-->
   <div class="d-flex">
     <div class="font-weight-bold">BOOKING ID: {{booking?.id}}</div>
@@ -87,56 +87,108 @@
     </div>
   </div>
   <!--  passenger information-->
-  <div class="mt-3">
+<!--  <div class="mt-3">-->
+<!--    <div class="h4">Passenger(s) details</div>-->
+<!--    <div class="list-group m-3" *ngFor="let passenger of booking.passengers; let i=index; let editable=false;">-->
+<!--      <div class="list-group-item booking-item rounded">-->
+<!--        <div class="main m-2">-->
+<!--          <div class="my-2">-->
+<!--            <span class="mr-1 text-center" style="color: #E6B6E6">{{i + 1}}</span>-->
+<!--          </div>-->
+<!--          <div class="d-flex">-->
+<!--            <div class="m-2 flex-fill">-->
+<!--              <div class="title">FIRST NAME</div>-->
+<!--              <div class="gray-box my-1">{{passenger.name.given}}</div>-->
+<!--            </div>-->
+<!--            <div class="m-2 flex-fill">-->
+<!--              <div class="title">LAST NAME</div>-->
+<!--              <div class="gray-box my-1" contenteditable="false">{{passenger.name.family}}</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="d-flex">-->
+<!--            <div class="m-2 flex-fill">-->
+<!--              <div class="title">DOB</div>-->
+<!--              <div class="gray-box my-1">{{passenger.dob}}</div>-->
+<!--            </div>-->
+<!--            <div class="m-2 flex-fill">-->
+<!--              <div class="title">GENDER</div>-->
+<!--              <div class="gray-box my-1">{{passenger.gender}}</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="d-flex">-->
+<!--            <div class="m-2 flex-fill">-->
+<!--              <div class="title">ADDRESS</div>-->
+<!--              <div class="gray-box my-1">{{passenger.address}}</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="d-flex edit-toolbox m-2">-->
+<!--            <div><i class="fa fa-trash" *ngIf="passenger.editable" (click)="deletePassenger(i)"></i></div>-->
+<!--            <div class="ml-auto">-->
+<!--              <i class="fas fa-edit" *ngIf="!passenger.editable" (click)="toggleEdit(i)"></i>-->
+<!--              <i class="fas fa-check" *ngIf="passenger.editable" (click)="updatePassenger(i)"></i>-->
+<!--              <i class="fa fa-times" *ngIf="passenger.editable" (click)="toggleEdit(i)"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+  <div formArrayName="passengers" class="mt-3">
     <div class="h4">Passenger(s) details</div>
-    <div class="list-group m-3" *ngFor="let passenger of booking.passengers; let i=index;">
+    <div class="list-group m-3" [formGroupName]="i"
+         *ngFor="let passenger of booking.passengers; let i=index;">
       <div class="list-group-item booking-item rounded">
         <div class="main m-2">
           <div class="my-2">
             <span class="mr-1 text-center" style="color: #E6B6E6">{{i + 1}}</span>
           </div>
-          <div class="d-flex">
+          <div class="d-flex" formGroupName="name">
             <div class="m-2 flex-fill">
               <div class="title">FIRST NAME</div>
-              <div class="gray-box my-1">{{passenger.name.given}}</div>
+              <input class="gray-box my-1" [class.gray-box-input]="passenger.editable"
+                     formControlName="given" [readOnly]="!passenger.editable">
             </div>
             <div class="m-2 flex-fill">
               <div class="title">LAST NAME</div>
-              <div class="gray-box my-1" contenteditable="false">{{passenger.name.family}}</div>
+              <input class="gray-box my-1" [class.gray-box-input]="passenger.editable"
+                     formControlName="family" [readOnly]="!passenger.editable">
             </div>
           </div>
           <div class="d-flex">
             <div class="m-2 flex-fill">
               <div class="title">DOB</div>
-              <div class="gray-box my-1">{{passenger.dob}}</div>
+              <input class="gray-box my-1" [class.gray-box-input]="passenger.editable"
+                     formControlName="dob" [readOnly]="!passenger.editable">
             </div>
             <div class="m-2 flex-fill">
               <div class="title">GENDER</div>
-              <div class="gray-box my-1">{{passenger.gender}}</div>
+              <input class="gray-box my-1" [class.gray-box-input]="passenger.editable"
+                     formControlName="gender" [readOnly]="!passenger.editable">
             </div>
           </div>
           <div class="d-flex">
             <div class="m-2 flex-fill">
               <div class="title">ADDRESS</div>
-              <div class="gray-box my-1">{{passenger.address}}</div>
+              <input class="gray-box my-1" [class.gray-box-input]="passenger.editable"
+                     formControlName="address" [readOnly]="!passenger.editable">
+            </div>
+          </div>
+          <div class="d-flex edit-toolbox m-2">
+            <div><i class="fa fa-trash" *ngIf="passenger.editable" (click)="deletePassenger(i)"></i></div>
+            <div class="ml-auto">
+              <i class="fas fa-edit" *ngIf="!passenger.editable" (click)="toggleEdit(i)"></i>
+              <i class="fas fa-check" *ngIf="passenger.editable" (click)="updatePassenger(i)"></i>
+              <i class="fa fa-times" *ngIf="passenger.editable" (click)="toggleEdit(i)"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!--  Command center-->
   <div class="d-flex justify-content-center">
     <button type="button" (click)="deleteBooking()" [hidden]="!readonly"
             class="btn btn-danger btn-lg btn-block m-5 " style="max-width: 400px">Delete
-    </button>
-    <button type="button" (click)="toggleEditForm()" [hidden]="!readonly"
-            class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 400px">Edit
-    </button>
-    <button type="button" (click)="toggleEditForm()" [hidden]="readonly"
-            class="btn btn-danger btn-lg btn-block m-5">Cancel
-    </button>
-    <button type="button" (click)="submitUpdate()" [hidden]="readonly"
-            class="btn btn-success btn-lg btn-block m-5">Save
     </button>
   </div>
 </div>

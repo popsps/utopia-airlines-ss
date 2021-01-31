@@ -4,9 +4,20 @@ import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Booking} from '../models/booking';
 
+type Passenger = {
+  name?: {
+    given?: string;
+    family?: string;
+  };
+  dob?: string;
+  gender?: string;
+  address?: string;
+};
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class BookingService {
 
   constructor(private http: HttpClient) {
@@ -35,5 +46,9 @@ export class BookingService {
 
   postABooking(url: string, payload: Booking): Observable<Booking> {
     return this.http.post<Booking>(url, payload);
+  }
+
+  updatePassengerById(url: string, payload: Passenger): Observable<Passenger> {
+    return this.http.put<Passenger>(url, payload);
   }
 }
