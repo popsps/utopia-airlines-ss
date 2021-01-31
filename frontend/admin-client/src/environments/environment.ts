@@ -9,7 +9,7 @@ export const environment = {
   loginUrl: '/api/session/admin',
   userApiUrl: '/api/users',
   bookingApiUrl: '/api/bookings',
-  flightApiUrl: 'http://localhost:3001/api/flights'
+  flightApiUrl: '/api/flights'
 };
 
 /*

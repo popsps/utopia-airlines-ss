@@ -14,5 +14,9 @@
   "/api/users": {
     "target": "http://localhost:8081/",
     "secure": false
+  },
+  "/api/flights": {
+    "target": "http://localhost:3001/",
+    "secure": false
   }
 }
