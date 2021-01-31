@@ -40,7 +40,8 @@ export class BookingComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
+        // this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
+        this.error = {isError: true, message: 'NO such a booking exists', status: 404};
         console.log('error', error);
       });
 
