@@ -1,22 +1,7 @@
 <main class="container">
-  <div class="row">
-    <div class="col">
-      <label class="form-label" for="origin-input">Origin</label>
-      <input id="origin-input" class="form-control" type="text" name="origin" [(ngModel)]="origin">
-    </div>
-    <div class="col">
-      <label class="form-label" for="destination-input">Destination</label>
-      <input id="destination-input" class="form-control" type="text" name="destination" [(ngModel)]="destination">
-    </div>
-    <div class="col">
-      <label class="form-label" for="departure-date-input">Departure Date</label>
-      <input id="departure-date-input" class="form-control" type="date" name="departureDate"
-        [(ngModel)]="departureDate">
-    </div>
-  </div>
+  <app-flight-search-form></app-flight-search-form>
   <ul class="list-group list-group-flush" *ngIf="flights.state==='done'">
-    <li class="list-group-item my-2"
-      *ngFor="let flight of (flights.data | flightRoute:origin:destination  | flightDepartureDate:departureDate);">
+    <li class="list-group-item my-2" *ngFor="let flight of (flights.data);">
       <div class="row">
         <div class="col-md">
           <h3>UAW{{flight.id}} &#x01C1; {{flight.route.originId}} &#10095; {{flight.route.destinationId}}</h3>
