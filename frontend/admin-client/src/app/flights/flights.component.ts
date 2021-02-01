@@ -36,7 +36,7 @@ export class FlightsComponent implements OnInit {
       (res: any[]) => {
         this.flights = {
           state: "done",
-          data: res.map(obj => new Flight().deserialize(obj))
+          data: res.map(obj => new Flight().deserialize(obj)).sort((a, b) => a.departureTime.getTime() - b.departureTime.getTime())
         };
       },
       (error) => {

@@ -2,6 +2,6 @@
   <app-flight-search-form (filterChanged)="onFilterChange($event)"></app-flight-search-form>
   <app-spinner *ngIf="flights.state==='pending'"></app-spinner>
   <app-flight-result-list *ngIf="flights.state==='done'"
-    [flights]="(flights.data | flightRoute:filter.origin:filter.destination | flightDepartureDate:filter.departureDateRange[0]).slice(0, 10)">
+    [flights]="(flights.data | flightRoute:filter.origin:filter.destination | flightDepartureDate:filter.departureDateRange[0]).slice(0, 100)">
   </app-flight-result-list>
 </main>
