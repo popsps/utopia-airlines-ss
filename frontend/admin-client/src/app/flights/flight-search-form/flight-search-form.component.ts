@@ -9,9 +9,6 @@ import { FlightFilter } from "../../shared/models/FlightFilter";
 })
 export class FlightSearchFormComponent implements OnInit {
   filterFormControls: FormGroup;
-  filter: FlightFilter = {
-    departureDateRange: []
-  };
   @Output() filterChanged = new EventEmitter<FlightFilter>();
   constructor(private formBuilder: FormBuilder) { };
 
@@ -24,47 +21,19 @@ export class FlightSearchFormComponent implements OnInit {
         end: new FormControl(""),
       })
     });
-    this.filterFormControls.valueChanges.subscribe(({ origin, destination, departureDateRange }) => {
-      let changed = this.setOrigin(origin.toUpperCase())
-        || this.setDestination(destination.toUpperCase())
-        || this.setDepartureDateRange(departureDateRange);
-      if (changed) this.filterChanged.emit(this.filter);
+    this.filterFormControls.valueChanges.subscribe((formValues) => {
+      this.filterChanged.emit(this.buildFilter(formValues));
     });
   }
-
-  setOrigin(origin: string): boolean {
-    if (this.filter.origin !== origin)
-    {
-      this.filter.origin = origin;
-      return true;
-    }
-    return false;
+  buildFilter(formValues): FlightFilter {
+    const { origin, destination, departureDateRange } = formValues;
+    return {
+      origin: origin?.toUpperCase(),
+      destination: destination?.toUpperCase(),
+      departureDateRange: <[Date?, Date?]>[
+        departureDateRange.start ? new Date(departureDateRange.start) : null,
+        departureDateRange.end ? new Date(departureDateRange.end) : null,
+      ].filter(date => date)
+    };
   }
-
-  setDestination(destination: string): boolean {
-    if (this.filter.destination !== destination)
-    {
-      this.filter.destination = destination;
-      return true;
-    }
-    return false;
-  }
-
-  setDepartureDateRange(departureDateRange): boolean {
-    let updated = false;
-    const start = new Date(departureDateRange.start);
-    const end = new Date(departureDateRange.end);
-    if (start.getTime() !== this.filter.departureDateRange[0]?.getTime())
-    {
-      this.filter.departureDateRange[0] = start;
-      updated = true;
-    }
-    if (end.getTime() !== this.filter.departureDateRange[1]?.getTime())
-    {
-      this.filter.departureDateRange[0] = end;
-      updated = true;
-    }
-    return updated;
-  }
-
 }
