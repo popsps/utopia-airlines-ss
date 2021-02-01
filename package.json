@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "postinstall": "npm-run-all -p *:install",
+    "postinstall": "npm-run-all *:install",
     "start": "npm-run-all -p *:start",
+    "common:install": "cd ./backend/common && npm ci",
     "bookings:install": "cd ./backend/bookings && npm ci",
-    "bookings:start": "cd ./backend/bookings && npm start 3000",
     "airports:install": "cd ./backend/airports && npm ci",
-    "airports:start": "cd ./backend/airports && npm start 3002",
     "flights:install": "cd ./backend/flights && npm ci",
-    "flights:start": "cd ./backend/flights && npm start 3001"
+    "bookings:start": "cd ./backend/bookings && npm start 3000",
+    "flights:start": "cd ./backend/flights && npm start 3001",
+    "airports:start": "cd ./backend/airports && npm start 3002"
   },
   "repository": {
     "type": "git",
