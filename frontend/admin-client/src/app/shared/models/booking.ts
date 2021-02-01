@@ -39,6 +39,11 @@ type User = {
 };
 
 export class Booking implements Deserializable {
+
+  public constructor(init?: Partial<Booking>) {
+    Object.assign(this, init);
+  }
+
   id: number;
   isActive: boolean;
   // "USER" | "GUEST"
@@ -49,8 +54,19 @@ export class Booking implements Deserializable {
   passengers: Passenger[];
   flights: Flight[];
 
-  public constructor(init?: Partial<Booking>) {
-    Object.assign(this, init);
+  static createFrom(booking: Booking, newBooking: any): Booking {
+    console.log('init', newBooking);
+    booking.id = newBooking.id;
+    booking.isActive = newBooking.isActive;
+    // booking.user = newBooking.user;
+    // booking.agent = newBooking.agent;
+    // booking.guest = newBooking.guest;
+    // booking.type = newBooking.type;
+    booking.passengers = newBooking.passengers.map(passenger => {
+      delete passenger?.editable;
+      return passenger;
+    });
+    return booking;
   }
 
   deserialize(input: any): this {
