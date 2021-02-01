@@ -25,7 +25,6 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(param => this.bookingId = param.id);
-    console.log(this.bookingId);
     this.loading = true;
     this.bookingService.getBookingById(environment.bookingApiUrl, this.bookingId)
       .subscribe(booking => {
@@ -73,13 +72,10 @@ export class BookingComponent implements OnInit {
   }
 
   initForm(): void {
-    // const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
     const {id, isActive, passengers, flights} = this.booking;
     this.bForm = this.fb.group({
       id,
       isActive,
-      // confirmationCode,
-      // bookerId,
       passengers: this.fb.array([]),
       flights: this.fb.array([])
     });
@@ -93,15 +89,16 @@ export class BookingComponent implements OnInit {
         }),
         dob: passenger?.dob,
         gender: passenger?.gender,
-        address: passenger?.address
+        address: passenger?.address,
+        editable: false
       });
       this.getPassengersForms().push(passengerForm);
     });
-    console.log('form:', this.bForm.value);
+    // console.log('form:', this.bForm.value);
     this.bForm.valueChanges.subscribe(value => {
-      this.booking = {...this.bForm.value};
-      // this.booking = new Booking(this.bForm.value);
-      console.log(this.booking);
+      // this.booking = {...this.bForm.value};
+      this.booking = Booking.createFrom(this.booking, this.bForm.value);
+      console.log('new booking:', this.booking);
     });
   }
 
@@ -141,14 +138,25 @@ export class BookingComponent implements OnInit {
   }
 
   toggleEdit(i: number): void {
-    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+    const editable = (this.bForm.get('passengers') as FormArray).at(i).get('editable');
+    console.log(editable.value);
+    editable.setValue(!editable.value);
+    console.log(editable.value);
+    // this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
   }
 
   updatePassenger(i: number): void {
-    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+    let passenger = this.booking.passengers[i];
+    const passengerId = passenger.id;
+    this.bookingService.updatePassengerById(environment.passengerApiUrl, passengerId, passenger)
+      .subscribe(res => {
+        passenger = res;
+      }, error1 => {
+      });
+    // this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
   }
 
   deletePassenger(i: number): void {
-    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+    // this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
   }
 }

@@ -3,16 +3,17 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Booking} from '../models/booking';
+import {Passenger} from '../models/passenger';
 
-type Passenger = {
-  name?: {
-    given?: string;
-    family?: string;
-  };
-  dob?: string;
-  gender?: string;
-  address?: string;
-};
+// type Passenger = {
+//   name?: {
+//     given?: string;
+//     family?: string;
+//   };
+//   dob?: string;
+//   gender?: string;
+//   address?: string;
+// };
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class BookingService {
     return this.http.post<Booking>(url, payload);
   }
 
-  updatePassengerById(url: string, payload: Passenger): Observable<Passenger> {
-    return this.http.put<Passenger>(url, payload);
+  updatePassengerById(url: string, id: number, payload: Passenger): Observable<Passenger> {
+    return this.http.put<Passenger>(`${url}/${id}`, payload);
   }
 }

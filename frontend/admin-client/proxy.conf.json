@@ -11,6 +11,10 @@
     "target": "http://localhost:3000/",
     "secure": false
   },
+  "/api/passengers": {
+    "target": "http://localhost:3000/",
+    "secure": false
+  },
   "/api/users": {
     "target": "http://localhost:8081/",
     "secure": false
