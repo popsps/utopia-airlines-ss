@@ -10,12 +10,16 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(url: string): Observable<object> {
+  get(url: string): Observable<object> {
     return this.http.get(url);
   }
 
   post(url: string, payload: object): Observable<object> {
     return this.http.post(url, payload);
+  }
+
+  update(url: string, payload: object): Observable<object> {
+    return this.http.put(url, payload);
   }
 
   delete(url: string): Observable<object> {

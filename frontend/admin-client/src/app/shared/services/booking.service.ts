@@ -3,10 +3,12 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Booking} from '../models/booking';
+import {Passenger} from '../models/passenger';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class BookingService {
 
   constructor(private http: HttpClient) {
@@ -35,5 +37,9 @@ export class BookingService {
 
   postABooking(url: string, payload: Booking): Observable<Booking> {
     return this.http.post<Booking>(url, payload);
+  }
+
+  updatePassengerById(url: string, id: number, payload: Passenger): Observable<Passenger> {
+    return this.http.put<Passenger>(`${url}/${id}`, payload);
   }
 }

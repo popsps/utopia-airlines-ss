@@ -33,6 +33,8 @@ import { LogoComponent } from './shared/components/logo/logo.component';
 import { FlightSearchFormComponent } from './flights/flight-search-form/flight-search-form.component';
 import { FlightResultListComponent } from './flights/flight-result-list/flight-result-list.component';
 import { FlightCreationModalComponent } from './flights/flight-creation-modal/flight-creation-modal.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { PhonePipe } from './shared/pipes/phone.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { FlightCreationModalComponent } from './flights/flight-creation-modal/fl
     LogoComponent,
     FlightSearchFormComponent,
     FlightResultListComponent,
-    FlightCreationModalComponent
+    FlightCreationModalComponent,
+    UserPageComponent,
+    PhonePipe
   ],
   imports: [
     BrowserModule,
