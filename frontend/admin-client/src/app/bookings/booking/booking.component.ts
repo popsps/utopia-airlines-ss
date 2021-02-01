@@ -3,7 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Booking} from '../../shared/models/booking';
 import {BookingService} from '../../shared/services/booking.service';
 import {environment} from '../../../environments/environment';
-import {FormGroup, FormBuilder, Validators, AbstractControl, FormArray} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, AbstractControl, FormArray, FormControl} from '@angular/forms';
+import {Passenger} from "../../shared/models/passenger";
 
 @Component({
   selector: 'app-booking',
@@ -82,7 +83,6 @@ export class BookingComponent implements OnInit {
     passengers.forEach(passenger => {
       const passengerForm = this.fb.group({
         id: passenger?.id,
-        // bookingId: passenger?.bookingId,
         name: this.fb.group({
           given: passenger?.name.given,
           family: passenger?.name.family,
@@ -90,20 +90,41 @@ export class BookingComponent implements OnInit {
         dob: passenger?.dob,
         gender: passenger?.gender,
         address: passenger?.address,
-        editable: false
+        editable: false,
+        loading: false,
+        error: false
       });
       this.getPassengersForms().push(passengerForm);
     });
     // console.log('form:', this.bForm.value);
-    this.bForm.valueChanges.subscribe(value => {
-      // this.booking = {...this.bForm.value};
-      this.booking = Booking.createFrom(this.booking, this.bForm.value);
-      console.log('new booking:', this.booking);
-    });
+    // this.bForm.valueChanges.subscribe(value => {
+    //   // this.booking = {...this.bForm.value};
+    //   this.booking = Booking.createFrom(this.booking, this.bForm.value);
+    //   console.log('new booking:', this.booking);
+    // });
   }
 
   getPassengersForms(): FormArray {
     return this.bForm.get('passengers') as FormArray;
+  }
+
+  updatePassengerForm(i: number, passenger: Passenger): AbstractControl {
+    const passengerForm = this.getPassengersForms().at(i);
+    const newPassengerForm = this.fb.group({
+      id: passenger?.id,
+      name: this.fb.group({
+        given: passenger?.name.given,
+        family: passenger?.name.family,
+      }),
+      dob: passenger?.dob,
+      gender: passenger?.gender,
+      address: passenger?.address,
+      editable: true,
+      loading: false,
+      error: false
+    });
+    passengerForm.setValue(newPassengerForm.value);
+    return passengerForm;
   }
 
   getFlightsForms(): FormArray {
@@ -139,24 +160,34 @@ export class BookingComponent implements OnInit {
 
   toggleEdit(i: number): void {
     const editable = (this.bForm.get('passengers') as FormArray).at(i).get('editable');
-    console.log(editable.value);
-    editable.setValue(!editable.value);
-    console.log(editable.value);
+    editable.patchValue(!editable.value);
     // this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
   }
 
   updatePassenger(i: number): void {
-    let passenger = this.booking.passengers[i];
+    this.getPassengersForms().at(i).get('loading').setValue(true);
+    const passenger: Passenger = new Passenger(this.bForm.value.passengers[i]);
+    passenger.dropEditable();
+    console.log('passenger:', passenger);
     const passengerId = passenger.id;
     this.bookingService.updatePassengerById(environment.passengerApiUrl, passengerId, passenger)
       .subscribe(res => {
-        passenger = res;
+        this.booking.passengers[i] = new Passenger(res);
+        this.getPassengersForms().at(i).get('loading').setValue(false);
       }, error1 => {
+        this.getPassengersForms().at(i).get('loading').setValue(false);
+        this.getPassengersForms().at(i).get('error').setValue(true);
+        console.log('cannot update passenger', passengerId);
       });
-    // this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+    this.toggleEdit(i);
   }
 
   deletePassenger(i: number): void {
-    // this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+  }
+
+  cancelEdit(i: number): void {
+    const p = this.updatePassengerForm(i, this.booking.passengers[i]);
+    // console.log('bform passenger', p.value);
+    this.toggleEdit(i);
   }
 }
