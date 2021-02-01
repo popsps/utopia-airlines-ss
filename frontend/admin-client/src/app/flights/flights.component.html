@@ -1,37 +1,6 @@
 <main class="container">
-  <app-flight-search-form></app-flight-search-form>
-  <ul class="list-group list-group-flush" *ngIf="flights.state==='done'">
-    <li class="list-group-item my-2" *ngFor="let flight of (flights.data);">
-      <div class="row">
-        <div class="col-md">
-          <h3>UAW{{flight.id}} &#x01C1; {{flight.route.originId}} &#10095; {{flight.route.destinationId}}</h3>
-        </div>
-        <div class="col-md text-md-right">
-          <h4>{{flight.departureTime.toLocaleString("en-US")}}</h4>
-        </div>
-      </div>
-      <div class="row">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Max Capacity</th>
-              <th scope="col">Reserved Seats</th>
-              <th scope="col">Passenger Count</th>
-              <th scope="col">Available Seats</th>
-              <th scope="col">Seat Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{flight.maxCapacity}}</td>
-              <td>{{flight.reservedSeats}}</td>
-              <td>{{flight.passengerCount}}</td>
-              <td>{{flight.availableSeats}}</td>
-              <td>${{flight.seatPrice}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </li>
-  </ul>
+  <app-flight-search-form (filterChanged)="onFilterChange($event)"></app-flight-search-form>
+  <app-flight-result-list *ngIf="flights.state==='done'"
+    [flights]="(flights.data | flightRoute:filter.origin:filter.destination | flightDepartureDate:filter.departureDateRange[0]).slice(0, 10)">
+  </app-flight-result-list>
 </main>

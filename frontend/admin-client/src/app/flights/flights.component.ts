@@ -20,7 +20,9 @@ export class FlightsComponent implements OnInit {
     data?: Flight[];
   };
 
-  filter: FlightFilter;
+  filter: FlightFilter = {
+    departureDateRange: []
+  };
 
   constructor(private httpService: HttpService) { }
 
@@ -34,7 +36,7 @@ export class FlightsComponent implements OnInit {
       (res: any[]) => {
         this.flights = {
           state: "done",
-          data: res.slice(0, 10).map(obj => new Flight().deserialize(obj))
+          data: res.map(obj => new Flight().deserialize(obj))
         };
       },
       (error) => {
@@ -45,6 +47,10 @@ export class FlightsComponent implements OnInit {
       },
 
     );
+  }
+
+  onFilterChange(filter) {
+    this.filter = filter;
   }
 
 }
