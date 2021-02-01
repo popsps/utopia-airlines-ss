@@ -10,9 +10,11 @@ export class Passenger {
   editable?: boolean;
   error?: boolean;
   loading?: boolean;
+
   public constructor(init?: Partial<Passenger>) {
     Object.assign(this, init);
   }
+
   deserialize(input: any): this {
     Object.assign(this, input);
     return this;
