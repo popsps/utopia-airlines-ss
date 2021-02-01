@@ -32,6 +32,7 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
 import { LogoComponent } from './shared/components/logo/logo.component';
 import { FlightSearchFormComponent } from './flights/flight-search-form/flight-search-form.component';
 import { FlightResultListComponent } from './flights/flight-result-list/flight-result-list.component';
+import { FlightCreationModalComponent } from './flights/flight-creation-modal/flight-creation-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FlightResultListComponent } from './flights/flight-result-list/flight-r
     SpinnerComponent,
     LogoComponent,
     FlightSearchFormComponent,
-    FlightResultListComponent
+    FlightResultListComponent,
+    FlightCreationModalComponent
   ],
   imports: [
     BrowserModule,
