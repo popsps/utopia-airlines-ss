@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { environment } from "../../environments/environment";
-
 import { FlightService } from "../shared/services/flight.service";
 
 import { Flight } from "../shared/models/Flight";
