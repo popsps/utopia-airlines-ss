@@ -21,7 +21,6 @@ export class Passenger {
   }
 
   dropEditable(): this {
-    console.log('this', this);
     delete this?.editable;
     delete this?.error;
     delete this?.loading;
