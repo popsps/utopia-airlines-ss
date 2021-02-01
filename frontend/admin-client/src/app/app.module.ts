@@ -30,6 +30,7 @@ import {LoginActivateService} from './shared/services/login-activate.service';
 import {NotFoundComponent} from './layout/not-found/not-found.component';
 import {SpinnerComponent} from './shared/components/spinner/spinner.component';
 import { LogoComponent } from './shared/components/logo/logo.component';
+import { PhonePipe } from './shared/pipes/phone.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { LogoComponent } from './shared/components/logo/logo.component';
     HomeUserComponent,
     NotFoundComponent,
     SpinnerComponent,
-    LogoComponent
+    LogoComponent,
+    PhonePipe
   ],
   imports: [
     BrowserModule,

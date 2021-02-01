@@ -33,3 +33,6 @@ build/
 .vscode/
 bin/
 .metadata/
+
+src/main/resources/application-dev.properties
+
