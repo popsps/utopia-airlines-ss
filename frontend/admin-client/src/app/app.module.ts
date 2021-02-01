@@ -16,6 +16,7 @@ import { BookingFormComponent } from './bookings/booking-form/booking-form.compo
 import { ErrorMessageComponent } from './shared/components/error-message/error-message.component';
 import { UsersComponent } from './users/users.component';
 import { HttpService } from './shared/services/http.service';
+import { FlightService } from './shared/services/flight.service';
 import { BookingService } from './shared/services/booking.service';
 import { FlightsComponent } from './flights/flights.component';
 import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe';
@@ -73,7 +74,13 @@ import { PhonePipe } from './shared/pipes/phone.pipe';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService, BookingService, AuthService, LoginActivateService],
+  providers: [
+    HttpService,
+    BookingService,
+    FlightService,
+    AuthService,
+    LoginActivateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

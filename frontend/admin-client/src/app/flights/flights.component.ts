@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { environment } from "../../environments/environment";
 
-import { HttpService } from "../shared/services/http.service";
+import { FlightService } from "../shared/services/flight.service";
 
 import { Flight } from "../shared/models/Flight";
 import { FlightFilter } from '../shared/models/FlightFilter';
@@ -24,7 +24,7 @@ export class FlightsComponent implements OnInit {
     departureDateRange: []
   };
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: FlightService) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -32,11 +32,11 @@ export class FlightsComponent implements OnInit {
 
   loadFlights() {
     this.flights = { state: "pending" };
-    this.httpService.get(`${environment.flightApiUrl}`).subscribe(
+    this.httpService.getAll().subscribe(
       (res: any[]) => {
         this.flights = {
           state: "done",
-          data: res.map(obj => new Flight().deserialize(obj)).sort((a, b) => a.departureTime.getTime() - b.departureTime.getTime())
+          data: res.sort((a, b) => a.departureTime.getTime() - b.departureTime.getTime())
         };
       },
       (error) => {
