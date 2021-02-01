@@ -33,22 +33,22 @@ class SessionControllerTest {
   }
 
   @Test
-  @DisplayName("Test login as an admin")
+  @DisplayName("Test login as an admin; Post HttpStatus.CREATED")
   void loginAdmin() {
   }
 
   @Test
-  @DisplayName("Test login as an agent")
+  @DisplayName("Test login as an agent; Post HttpStatus.CREATED")
   void loginAgent() {
   }
 
   @Test
-  @DisplayName("Test get session iformation")
+  @DisplayName("Test get session information; Get")
   void getSession() {
   }
 
   @Test
-  @DisplayName("Test logout")
+  @DisplayName("Test logout; delete; HttpStatus.NO_CONTENT")
   void logout() {
   }
 }
