@@ -31,6 +31,7 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { LogoComponent } from './shared/components/logo/logo.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { PhonePipe } from './shared/pipes/phone.pipe';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UserPageComponent } from './user-page/user-page.component';
     SpinnerComponent,
     LogoComponent,
     UserPageComponent
+    PhonePipe
   ],
   imports: [
     BrowserModule,

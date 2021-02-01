@@ -30,12 +30,18 @@ export class BookingComponent implements OnInit {
     this.bookingService.getBookingById(environment.bookingApiUrl, this.bookingId)
       .subscribe(booking => {
         console.log(booking);
+        booking?.flights.forEach(flight => {
+          flight.departureTime = new Date(flight.departureTime);
+          flight.arrivalTime = new Date(flight.departureTime);
+          flight.arrivalTime.setHours(Math.random() * 8 + 2 + flight.arrivalTime.getHours());
+        });
         this.booking = booking;
         this.initForm();
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
+        // this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
+        this.error = {isError: true, message: 'NO such a booking exists', status: 404};
         console.log('error', error);
       });
 
@@ -43,7 +49,7 @@ export class BookingComponent implements OnInit {
 
   submitUpdate(): void {
     console.log(JSON.stringify(this.booking));
-    this.booking.bookerId = this.booking.id;
+    // this.booking.bookerId = this.booking.id;
     this.bookingService.updateBookingById(environment.bookingApiUrl, this.bookingId, this.booking)
       .subscribe(booking => {
         console.log(booking);
@@ -53,7 +59,7 @@ export class BookingComponent implements OnInit {
   }
 
   deleteBooking(): void {
-    this.booking.bookerId = this.booking.id;
+    // this.booking.bookerId = this.booking.id;
     this.bookingService.deleteBookingById(environment.bookingApiUrl, this.bookingId)
       .subscribe(booking => {
         console.log(booking);
@@ -67,19 +73,20 @@ export class BookingComponent implements OnInit {
   }
 
   initForm(): void {
-    const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
+    // const {id, isActive, bookerId, confirmationCode, passengers} = this.booking;
+    const {id, isActive, passengers, flights} = this.booking;
     this.bForm = this.fb.group({
       id,
       isActive,
-      confirmationCode,
-      bookerId,
+      // confirmationCode,
+      // bookerId,
       passengers: this.fb.array([]),
       flights: this.fb.array([])
     });
     passengers.forEach(passenger => {
       const passengerForm = this.fb.group({
         id: passenger?.id,
-        bookingId: passenger?.bookingId,
+        // bookingId: passenger?.bookingId,
         name: this.fb.group({
           given: passenger?.name.given,
           family: passenger?.name.family,
@@ -131,5 +138,17 @@ export class BookingComponent implements OnInit {
 
   deleteFlightForm(i: number): void {
     this.getFlightsForms().removeAt(i);
+  }
+
+  toggleEdit(i: number): void {
+    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+  }
+
+  updatePassenger(i: number): void {
+    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
+  }
+
+  deletePassenger(i: number): void {
+    this.booking.passengers[i].editable = !this.booking.passengers[i].editable;
   }
 }

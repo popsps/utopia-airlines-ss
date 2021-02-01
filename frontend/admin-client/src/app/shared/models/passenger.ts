@@ -1,6 +1,5 @@
 export class Passenger {
   id: number;
-  bookingId: bigint;
   name: {
     given: string;
     family: string;
@@ -8,6 +7,7 @@ export class Passenger {
   dob: string;
   gender: string;
   address: string;
+  editable = false;
 
   deserialize(input: any): this {
     Object.assign(this, input);
