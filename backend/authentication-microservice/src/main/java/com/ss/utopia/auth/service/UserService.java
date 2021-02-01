@@ -1,6 +1,7 @@
 package com.ss.utopia.auth.service;
 
 import com.ss.utopia.auth.dao.UserDao;
+import com.ss.utopia.auth.dto.UpdateUserDto;
 import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.entity.UserRole;
@@ -99,16 +100,33 @@ public class UserService implements UserDetailsService {
     return user;
   }
 
-  public User updateUser(Long id, UserDto userDto) {
+  public User updateUser(Long id, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
     User user = userDao.findById(id).get();
-    user.setUsername(userDto.getUsername());
-    user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    user.setGivenName(userDto.getGivenName());
-    user.setFamilyName(userDto.getFamilyName());
-    user.setEmail(userDto.getEmail());
-    user.setPhone(userDto.getPhone());
-    userDao.save(user);
+    if(userDto.getUsername() != null)
+    	user.setUsername(userDto.getUsername());
+    if(userDto.getPassword() != null)
+    	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    if(userDto.getGivenName() != null)
+    	user.setGivenName(userDto.getGivenName());
+    if(userDto.getFamilyName() != null)
+    	user.setFamilyName(userDto.getFamilyName());
+    if(userDto.getEmail() != null)
+    	user.setEmail(userDto.getEmail());
+    if(userDto.getPhone() != null)
+    	user.setPhone(userDto.getPhone());
+    try {
+    	userDao.save(user);
+    } catch (Exception e) {
+        String error = e.getMessage();
+        if (error.contains("user.email_UNIQUE")) {
+          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+        } else if (error.contains("user.username_UNIQUE")) {
+          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+        } else if (error.contains("user.phone_UNIQUE")) {
+          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+        }
+    }
     return user;
   }
 
@@ -122,21 +140,14 @@ public class UserService implements UserDetailsService {
     return userDao.findAll();
   }
 
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public User getUserById(Long id, UserDetails currentUser) {
-	String role = currentUser.getAuthorities().toString();
-	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
-  }
-
   /**
-   * Find a user by its id and return the user
+   * Get a user by its id and return the user
    *
    * @param id
    * @return
    */
-  public User findUserById(Long id) {
-    User user = userDao.findById(id).orElse(null);
-    return user;
+  public User getUserById(Long id) {
+	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
   }
 
   /**
