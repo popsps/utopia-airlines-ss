@@ -5,16 +5,6 @@ import {catchError, map} from 'rxjs/operators';
 import {Booking} from '../models/booking';
 import {Passenger} from '../models/passenger';
 
-// type Passenger = {
-//   name?: {
-//     given?: string;
-//     family?: string;
-//   };
-//   dob?: string;
-//   gender?: string;
-//   address?: string;
-// };
-
 @Injectable({
   providedIn: 'root'
 })
