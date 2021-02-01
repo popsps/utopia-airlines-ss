@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -66,12 +66,5 @@ export class UsersComponent implements OnInit {
       this.initializeUsers();
       this.initializeForm();
     });
-  }
-
-  deleteUser(userId: number) {
-    this.userService.delete(this.apiUrl.concat("/" + userId)).subscribe((res) => {
-      this.initializeUsers();
-    });
-    // alert("Deleted");
   }
 }

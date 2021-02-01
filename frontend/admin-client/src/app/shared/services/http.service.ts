@@ -14,8 +14,16 @@ export class HttpService {
     return this.http.get(url);
   }
 
+  getById(url: string): Observable<object> {
+    return this.http.get(url);
+  }
+
   post(url: string, payload: object): Observable<object> {
     return this.http.post(url, payload);
+  }
+
+  update(url: string, payload: object): Observable<object> {
+    return this.http.put(url, payload);
   }
 
   delete(url: string): Observable<object> {

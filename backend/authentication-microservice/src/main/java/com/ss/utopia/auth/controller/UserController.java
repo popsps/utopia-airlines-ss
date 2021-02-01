@@ -1,5 +1,6 @@
 package com.ss.utopia.auth.controller;
 
+import com.ss.utopia.auth.dto.UpdateUserDto;
 import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.service.UserService;
@@ -29,15 +30,17 @@ public class UserController {
   }
 
   @DeleteMapping("/{userId}")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public int deleteUser(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
-    User user = userService.getUserById(userId, currentUser);
+    User user = userService.getUserById(userId);
     return userService.deleteUser(userId);
   }
 
   @PutMapping("/{userId}")
-  public User updateUser(@PathVariable Long userId, @RequestBody @Valid UserDto userDto,
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  public User updateUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserDto userDto,
                          @AuthenticationPrincipal UserDetails currentUser) {
-    User user = userService.getUserById(userId, currentUser);
+    User user = userService.getUserById(userId);
     try {
       return userService.updateUser(userId, userDto);
     } catch (Exception e) {
@@ -60,12 +63,9 @@ public class UserController {
   }
 
   @GetMapping("/{userId}")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public User getUserById(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
-    User user = userService.findUserById(userId);
-    if (userService.verifyOwnershipAndReturnOwner(user, currentUser) != null)
-      return user;
-    else
-      throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Bad Request");
+    return userService.getUserById(userId);
   }
 
 }
