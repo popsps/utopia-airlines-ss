@@ -45,7 +45,7 @@ export class UserPageComponent implements OnInit {
   initializeUser() {
     this.userId = this.router.url.substring(7);
     this.apiUrl = environment.userApiUrl + "/" + this.userId;
-    this.userService.getById(this.apiUrl).subscribe((res) => {
+    this.userService.get(this.apiUrl).subscribe((res) => {
       this.user = res;
     });
   }

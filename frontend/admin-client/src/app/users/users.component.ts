@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
 
   initializeUsers() {
     this.userService
-      .getAll(this.apiUrl)
+      .get(this.apiUrl)
       .subscribe((res) => {
         this.users = res;
         this.totalUsers = this.users.length;

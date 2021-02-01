@@ -10,11 +10,7 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(url: string): Observable<object> {
-    return this.http.get(url);
-  }
-
-  getById(url: string): Observable<object> {
+  get(url: string): Observable<object> {
     return this.http.get(url);
   }
 

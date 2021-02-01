@@ -33,7 +33,7 @@ public class UserController {
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   public int deleteUser(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
     User user = userService.getUserById(userId);
-    return userService.deleteUser(userId);
+    return userService.deleteUser(user.getId());
   }
 
   @PutMapping("/{userId}")
@@ -41,19 +41,7 @@ public class UserController {
   public User updateUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserDto userDto,
                          @AuthenticationPrincipal UserDetails currentUser) {
     User user = userService.getUserById(userId);
-    try {
-      return userService.updateUser(userId, userDto);
-    } catch (Exception e) {
-      String error = e.getMessage();
-      if (error.contains("user.email_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-      } else if (error.contains("user.username_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-      } else if (error.contains("user.phone_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-      }
-    }
-    return null;
+    return userService.updateUser(user.getId(), userDto);
   }
 
   @GetMapping

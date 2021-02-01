@@ -103,25 +103,30 @@ public class UserService implements UserDetailsService {
   public User updateUser(Long id, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
     User user = userDao.findById(id).get();
-    if(userDto.getUsername() != null) {
+    if(userDto.getUsername() != null)
     	user.setUsername(userDto.getUsername());
-    }
-    if(userDto.getPassword() != null) {
+    if(userDto.getPassword() != null)
     	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    }
-    if(userDto.getGivenName() != null) {
+    if(userDto.getGivenName() != null)
     	user.setGivenName(userDto.getGivenName());
-    }
-    if(userDto.getFamilyName() != null) {
+    if(userDto.getFamilyName() != null)
     	user.setFamilyName(userDto.getFamilyName());
-    }
-    if(userDto.getEmail() != null) {
+    if(userDto.getEmail() != null)
     	user.setEmail(userDto.getEmail());
-    }
-    if(userDto.getPhone() != null) {
+    if(userDto.getPhone() != null)
     	user.setPhone(userDto.getPhone());
+    try {
+    	userDao.save(user);
+    } catch (Exception e) {
+        String error = e.getMessage();
+        if (error.contains("user.email_UNIQUE")) {
+          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+        } else if (error.contains("user.username_UNIQUE")) {
+          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+        } else if (error.contains("user.phone_UNIQUE")) {
+          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+        }
     }
-    userDao.save(user);
     return user;
   }
 
