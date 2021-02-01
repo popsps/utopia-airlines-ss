@@ -8,6 +8,8 @@ export class Passenger {
   gender?: string;
   address?: string;
   editable?: boolean;
+  error?: boolean;
+  loading?: boolean;
   public constructor(init?: Partial<Passenger>) {
     Object.assign(this, init);
   }
@@ -17,7 +19,10 @@ export class Passenger {
   }
 
   dropEditable(): this {
-    delete this.editable;
+    console.log('this', this);
+    delete this?.editable;
+    delete this?.error;
+    delete this?.loading;
     return this;
   }
 }
