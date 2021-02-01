@@ -12,7 +12,8 @@
             <div class="my-2">
               <span class="mr-2 text-center" style="background-color: white; border-radius: 0.25rem; padding: 0.25rem;">
                 {{booking?.id}}</span>
-              <span class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</span> to
+              <span class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</span>
+              <span *ngIf="booking.flights && booking.flights.length"> to </span>
               <span class="font-weight-bold">{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}</span>
             </div>
             <!--            <hr class="my-4">-->
@@ -48,7 +49,7 @@
                 </div>
               </div>
             </div>
-<!--            <div class="p-2 text-center">Total travel time</div>-->
+            <!--            <div class="p-2 text-center">Total travel time</div>-->
 
 
           </div>
