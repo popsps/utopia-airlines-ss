@@ -31,17 +31,16 @@ public class UserController {
 
   @DeleteMapping("/{userId}")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public int deleteUser(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
+  public int deleteUser(@PathVariable("userId") Long userId) {
     User user = userService.getUserById(userId);
     return userService.deleteUser(user.getId());
   }
 
   @PutMapping("/{userId}")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public User updateUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserDto userDto,
-                         @AuthenticationPrincipal UserDetails currentUser) {
+  public User updateUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserDto userDto) {
     User user = userService.getUserById(userId);
-    return userService.updateUser(user.getId(), userDto);
+    return userService.updateUser(user, userDto);
   }
 
   @GetMapping
@@ -52,7 +51,7 @@ public class UserController {
 
   @GetMapping("/{userId}")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public User getUserById(@PathVariable("userId") Long userId, @AuthenticationPrincipal UserDetails currentUser) {
+  public User getUserById(@PathVariable("userId") Long userId) {
     return userService.getUserById(userId);
   }
 
