@@ -1,4 +1,5 @@
-<div [formGroup]="bForm" class="container full-page" *ngIf="!error.isError && !loading && !deleted">
+<div [formGroup]="bForm" class="container full-page" *ngIf="!error.isError && !loading && !deleted"
+     xmlns="http://www.w3.org/1999/html">
   <!--  booking information-->
   <div class="d-flex">
     <div class="font-weight-bold">BOOKING ID: {{booking?.id}}</div>
@@ -81,7 +82,7 @@
               </div>
             </div>
           </div>
-<!--          <div class="p-2 text-center">Total fight time</div>-->
+          <!--          <div class="p-2 text-center">Total fight time</div>-->
         </div>
       </div>
     </div>
@@ -132,7 +133,7 @@
           </div>
           <div class="d-flex edit-toolbox m-2">
             <div>
-<!--              <i class="fa fa-trash" *ngIf="editable.value ==='true'" (click)="deletePassenger(i)"></i>-->
+              <!--              <i class="fa fa-trash" *ngIf="editable.value ==='true'" (click)="deletePassenger(i)"></i>-->
             </div>
             <div class="flex-fill text-center text-danger" *ngIf="error.value === 'true'">something went wrong</div>
             <div class="flex-fill text-center" *ngIf="loading.value === 'true'">
@@ -141,9 +142,12 @@
               </div>
             </div>
             <div class="ml-auto">
-              <i class="fas fa-edit" *ngIf="editable.value ==='false'" (click)="toggleEdit(i)"></i>
-              <i class="fas fa-check" *ngIf="editable.value ==='true'" (click)="updatePassenger(i)"></i>
-              <i class="fa fa-times" *ngIf="editable.value ==='true'" (click)="cancelEdit(i)"></i>
+              <button class="sbtn" *ngIf="editable.value ==='false'" (click)="toggleEdit(i)"><i class="fas fa-edit"></i>
+              </button>
+              <button class="sbtn" [disabled]="!bForm.valid" *ngIf="editable.value ==='true'"
+                      (click)="updatePassenger(i)"><i class="fas fa-check"></i></button>
+              <button class="sbtn" *ngIf="editable.value ==='true'" (click)="cancelEdit(i)"><i class="fa fa-times"></i>
+              </button>
             </div>
           </div>
         </div>

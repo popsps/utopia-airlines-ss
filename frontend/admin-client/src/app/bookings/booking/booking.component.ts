@@ -84,12 +84,12 @@ export class BookingComponent implements OnInit {
       const passengerForm = this.fb.group({
         id: passenger?.id,
         name: this.fb.group({
-          given: passenger?.name.given,
-          family: passenger?.name.family,
+          given: [passenger?.name.given, [Validators.required, Validators.minLength(3)]],
+          family: [passenger?.name.family, [Validators.required, Validators.minLength(3)]],
         }),
-        dob: passenger?.dob,
-        gender: passenger?.gender,
-        address: passenger?.address,
+        dob: [passenger?.dob, [Validators.required, Validators.minLength(3)]],
+        gender: [passenger?.gender, [Validators.required, Validators.minLength(3)]],
+        address: [passenger?.address, [Validators.required, Validators.minLength(3)]],
         editable: false,
         loading: false,
         error: false
@@ -97,11 +97,9 @@ export class BookingComponent implements OnInit {
       this.getPassengersForms().push(passengerForm);
     });
     // console.log('form:', this.bForm.value);
-    // this.bForm.valueChanges.subscribe(value => {
-    //   // this.booking = {...this.bForm.value};
-    //   this.booking = Booking.createFrom(this.booking, this.bForm.value);
-    //   console.log('new booking:', this.booking);
-    // });
+    this.bForm.valueChanges.subscribe(value => {
+
+    });
   }
 
   getPassengersForms(): FormArray {
@@ -113,17 +111,17 @@ export class BookingComponent implements OnInit {
     const newPassengerForm = this.fb.group({
       id: passenger?.id,
       name: this.fb.group({
-        given: passenger?.name.given,
-        family: passenger?.name.family,
+        given: [passenger?.name.given, [Validators.required, Validators.minLength(3)]],
+        family: [passenger?.name.family, [Validators.required, Validators.minLength(3)]],
       }),
-      dob: passenger?.dob,
-      gender: passenger?.gender,
-      address: passenger?.address,
+      dob: [passenger?.dob, [Validators.required, Validators.minLength(5)]],
+      gender: [passenger?.gender, [Validators.required, Validators.minLength(4)]],
+      address: [passenger?.address, [Validators.required, Validators.minLength(5)]],
       editable: true,
       loading: false,
       error: false
     });
-    passengerForm.setValue(newPassengerForm.value);
+    passengerForm.patchValue(newPassengerForm.value);
     return passengerForm;
   }
 
@@ -165,20 +163,23 @@ export class BookingComponent implements OnInit {
   }
 
   updatePassenger(i: number): void {
-    this.getPassengersForms().at(i).get('loading').setValue(true);
-    const passenger: Passenger = new Passenger(this.bForm.value.passengers[i]);
-    passenger.dropEditable();
-    console.log('passenger:', passenger);
-    const passengerId = passenger.id;
-    this.bookingService.updatePassengerById(environment.passengerApiUrl, passengerId, passenger)
-      .subscribe(res => {
-        this.booking.passengers[i] = new Passenger(res);
-        this.getPassengersForms().at(i).get('loading').setValue(false);
-      }, error1 => {
-        this.getPassengersForms().at(i).get('loading').setValue(false);
-        this.getPassengersForms().at(i).get('error').setValue(true);
-        console.log('cannot update passenger', passengerId);
-      });
+    if (this.bForm.valid) {
+      this.getPassengersForms().at(i).get('loading').setValue(true);
+      console.log('Is valid');
+      const passenger: Passenger = new Passenger(this.bForm.value.passengers[i]);
+      passenger.dropEditable();
+      console.log('passenger:', passenger);
+      const passengerId = passenger.id;
+      this.bookingService.updatePassengerById(environment.passengerApiUrl, passengerId, passenger)
+        .subscribe(res => {
+          this.booking.passengers[i] = new Passenger(res);
+          this.getPassengersForms().at(i).get('loading').setValue(false);
+        }, error1 => {
+          this.getPassengersForms().at(i).get('loading').setValue(false);
+          this.getPassengersForms().at(i).get('error').setValue(true);
+          console.log('cannot update passenger', passengerId);
+        });
+    }
     this.toggleEdit(i);
   }
 
