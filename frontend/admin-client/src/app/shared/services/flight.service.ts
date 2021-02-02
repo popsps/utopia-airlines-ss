@@ -16,4 +16,8 @@ export class FlightService {
   getAll(): Observable<Flight[]> {
     return FlightService.parseFlights(this.http.get(environment.flightApiUrl));
   }
+
+  post(flight: any) {
+    return this.http.post(environment.flightApiUrl, flight, { headers: { "Content-Type": "application/json" } });
+  }
 }
