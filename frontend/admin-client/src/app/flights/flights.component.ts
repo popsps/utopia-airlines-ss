@@ -31,7 +31,7 @@ export class FlightsComponent implements OnInit {
 
   loadFlights() {
     this.flights = { state: "pending" };
-    this.httpService.getAll(`${environment.flightApiUrl}`).subscribe(
+    this.httpService.get(`${environment.flightApiUrl}`).subscribe(
       (res: any[]) => {
         this.flights = {
           state: "done",

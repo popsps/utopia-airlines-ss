@@ -1,18 +1,19 @@
 <div class="container full-page">
   <div *ngIf="!loading">
-    <div class="d-flex justify-content-center">
-      <button type="button" routerLink="/bookings/add"
-              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 500px">ADD BOOKING
-      </button>
-    </div>
-    <div class="list-group m-3" *ngFor="let booking of bookings">
+<!--    <div class="d-flex justify-content-center">-->
+<!--      <button type="button" routerLink="/bookings/add"-->
+<!--              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 500px">ADD BOOKING-->
+<!--      </button>-->
+<!--    </div>-->
+    <div class="list-group m-3" *ngFor="let booking of bookings.slice(0,100)">
       <a [routerLink]="['/bookings',booking.id]" style="text-decoration: none">
         <div class="list-group-item booking-item rounded">
           <div class="main m-2">
             <div class="my-2">
               <span class="mr-2 text-center" style="background-color: white; border-radius: 0.25rem; padding: 0.25rem;">
                 {{booking?.id}}</span>
-              <span class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</span> to
+              <span class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</span>
+              <span *ngIf="booking.flights && booking.flights.length"> to </span>
               <span class="font-weight-bold">{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}</span>
             </div>
             <!--            <hr class="my-4">-->
@@ -30,7 +31,7 @@
             </div>
             <div class="d-flex">
               <div class="m-3" style="max-width: 20rem;">
-                <div>{{booking?.flights[0]?.route?.origin?.city}}</div>
+                <div class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</div>
                 <div>
                   <div class="d-flex my-3">
                     <i class="fas fa-plane-departure mt-1 mr-2"></i>
@@ -39,7 +40,7 @@
                 </div>
               </div>
               <div class="m-3 ml-auto" style="max-width: 20rem;">
-                <div>{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}</div>
+                <div class="font-weight-bold">{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}</div>
                 <div>
                   <div class="d-flex my-3">
                     <i class="fas fa-plane-arrival mt-1 mr-2"></i>
@@ -48,7 +49,7 @@
                 </div>
               </div>
             </div>
-            <div class="p-2 text-center">Total travel time</div>
+            <!--            <div class="p-2 text-center">Total travel time</div>-->
 
 
           </div>
