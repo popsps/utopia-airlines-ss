@@ -56,7 +56,7 @@ import { PhonePipe } from './shared/pipes/phone.pipe';
     NotFoundComponent,
     SpinnerComponent,
     LogoComponent,
-    UserPageComponent
+    UserPageComponent,
     PhonePipe
   ],
   imports: [
