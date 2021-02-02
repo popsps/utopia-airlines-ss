@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.client.HttpServerErrorException;
 
 import javax.servlet.http.Cookie;
@@ -39,6 +40,12 @@ public class UserServiceTest {
 
   @Test
   void loadUserByUsername() {
+    User expectedUser = new User(1L, "admin32434", "password", new UserRole(1L, "ADMIN"), "fname", "lname",
+        "flcust@gmail.com", "2028769868");
+    Mockito.when(userDao.findByUsername("admin32434")).thenReturn(Optional.of(expectedUser));
+    Mockito.when(userDao.findByUsername("tim")).thenReturn(Optional.empty());
+    assertEquals(userService.loadUserByUsername("admin32434").getUsername(), expectedUser.getUsername());
+    assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername("tim"));
   }
 
   @Test
@@ -65,19 +72,19 @@ public class UserServiceTest {
 
   @Test
   void getUserById() {
-    final User testUser = new User(1l, "admin32434", "password", new UserRole(1L, "ADMIN"), "fname", "lname",
+    final User expectedUser = new User(1l, "admin32434", "password", new UserRole(1L, "ADMIN"), "fname", "lname",
         "flcust@gmail.com", "2028769868");
-    Mockito.when(userDao.findById(1l)).thenReturn(Optional.of(testUser));
+    Mockito.when(userDao.findById(1l)).thenReturn(Optional.of(expectedUser));
     Mockito.when(userDao.findById(2l)).thenReturn(Optional.empty());
-    assertEquals(userService.getUserById(1l), testUser);
+    assertEquals(userService.getUserById(1l), expectedUser);
     assertThrows(HttpServerErrorException.class, () -> userService.getUserById(2l));
   }
 
   @Test
   void verifyOwnershipAndReturnOwner() {
-    final User testUser = new User(1l, "admin32434", "password", new UserRole(1L, "ADMIN"), "fname", "lname",
+    final User expectedUser = new User(1l, "admin32434", "password", new UserRole(1L, "ADMIN"), "fname", "lname",
         "flcust@gmail.com", "2028769868");
-    final UserDetails testUserDetails1 = new UserDetails() {
+    final UserDetails invalidUserDetails = new UserDetails() {
       @Override
       public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -113,7 +120,7 @@ public class UserServiceTest {
         return false;
       }
     };
-    final UserDetails testUserDetails2 = new UserDetails() {
+    final UserDetails validUserDetails = new UserDetails() {
       @Override
       public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -151,8 +158,8 @@ public class UserServiceTest {
     };
     assertThrows(HttpServerErrorException.class, () -> userService.verifyOwnershipAndReturnOwner(null, null));
     assertThrows(HttpServerErrorException.class,
-        () -> userService.verifyOwnershipAndReturnOwner(testUser, testUserDetails1));
-    assertEquals(userService.verifyOwnershipAndReturnOwner(testUser, testUserDetails2), testUser);
+        () -> userService.verifyOwnershipAndReturnOwner(expectedUser, invalidUserDetails));
+    assertEquals(userService.verifyOwnershipAndReturnOwner(expectedUser, validUserDetails), expectedUser);
   }
 
   @Test
