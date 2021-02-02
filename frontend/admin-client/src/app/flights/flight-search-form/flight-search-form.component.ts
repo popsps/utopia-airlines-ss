@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlightFilter } from "../../shared/models/FlightFilter";
 
 @Component({
@@ -18,7 +18,7 @@ export class FlightSearchFormComponent implements OnInit {
       destination: [""],
       departureDateRange: this.formBuilder.group({
         start: [""],
-        end: new FormControl(""),
+        end: [""],
       })
     });
     this.filterFormControls.valueChanges.subscribe((formValues) => {
