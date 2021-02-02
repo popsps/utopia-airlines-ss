@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, OperatorFunction } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from "../../../environments/environment";
@@ -10,11 +10,10 @@ import { Flight } from "../models/Flight";
   providedIn: 'root'
 })
 export class FlightService {
-
+  private static parseFlights: OperatorFunction<any, Flight[]> = map((flights: any) => flights.map(obj => new Flight().deserialize(obj)));
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Flight[]> {
-    const parseFlights = map((flights: any) => flights.map(obj => new Flight().deserialize(obj)));
-    return parseFlights(this.http.get(environment.flightApiUrl));
+    return FlightService.parseFlights(this.http.get(environment.flightApiUrl));
   }
 }
