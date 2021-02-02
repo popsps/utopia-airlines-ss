@@ -4,7 +4,7 @@ import {Booking} from '../../shared/models/booking';
 import {BookingService} from '../../shared/services/booking.service';
 import {environment} from '../../../environments/environment';
 import {FormGroup, FormBuilder, Validators, AbstractControl, FormArray, FormControl} from '@angular/forms';
-import {Passenger} from "../../shared/models/passenger";
+import {Passenger} from '../../shared/models/passenger';
 
 @Component({
   selector: 'app-booking',
@@ -41,7 +41,7 @@ export class BookingComponent implements OnInit {
       }, error => {
         this.loading = false;
         // this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
-        this.error = {isError: true, message: 'NO such a booking exists', status: 404};
+        this.error = {isError: true, message: 'No such a booking exists', status: 404};
         console.log('error', error);
       });
 
