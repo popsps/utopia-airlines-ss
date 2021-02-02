@@ -4,7 +4,7 @@
       <div class="modal-body">
         <form id="flight-creation-form" [formGroup]="flightCreationFormControls" (ngSubmit)="onSubmit($event)">
           <div class="form-row">
-            <div class="col">
+            <div class="col-md col-xs-12">
               <label for="route-id-input">Route ID</label>
               <input id="route-id-input" class="form-control" type="text" formControlName="routeId"
                 [ngClass]="{'is-invalid':controlIsInvalid('routeId'), 'is-valid': controlValid('routeId')}">
@@ -12,7 +12,7 @@
                 <div *ngIf="getControlErrors('routeId').required">Route ID is required.</div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-md col-xs-12">
               <label for="airplane-id-input">Airplane ID</label>
               <input id="airplane-id-input" class="form-control" type="text" formControlName="airplaneId"
                 [ngClass]="{'is-invalid':controlIsInvalid('airplaneId'), 'is-valid': controlValid('airplaneId')}">
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="col">
+            <div class="col-md col-xs-12">
               <label for="reserved-seats-input">Reserved Seats</label>
               <input id="reserved-seats-input" class="form-control" type="text" formControlName="reservedSeats"
                 [ngClass]="{'is-invalid':controlIsInvalid('reservedSeats'), 'is-valid': controlValid('reservedSeats')}">
@@ -41,7 +41,7 @@
                 <div *ngIf="getControlErrors('reservedSeats').required">Route ID is required.</div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-md col-xs-12">
               <label for="seat-price-input">Seat Price</label>
               <input id="seat-price-input" class="form-control" type="text" formControlName="seatPrice"
                 [ngClass]="{'is-invalid':controlIsInvalid('seatPrice'), 'is-valid': controlValid('seatPrice')}">
