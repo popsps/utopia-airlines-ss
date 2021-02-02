@@ -1,18 +1,61 @@
 <div id="flight-creation-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
+        <form id="flight-creation-form" [formGroup]="flightCreationFormControls" (ngSubmit)="onSubmit($event)">
+          <div class="form-row">
+            <div class="col">
+              <label for="route-id-input">Route ID</label>
+              <input id="route-id-input" class="form-control" type="text" formControlName="routeId"
+                [ngClass]="{'is-invalid':controlIsInvalid('routeId'), 'is-valid': controlValid('routeId')}">
+              <div *ngIf="controlIsInvalid('routeId')" class="invalid-feedback">
+                <div *ngIf="getControlErrors('routeId').required">Route ID is required.</div>
+              </div>
+            </div>
+            <div class="col">
+              <label for="airplane-id-input">Airplane ID</label>
+              <input id="airplane-id-input" class="form-control" type="text" formControlName="airplaneId"
+                [ngClass]="{'is-invalid':controlIsInvalid('airplaneId'), 'is-valid': controlValid('airplaneId')}">
+              <div *ngIf="controlIsInvalid('airplaneId')" class="invalid-feedback">
+                <div *ngIf="getControlErrors('airplaneId').required">Route ID is required.</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="departure-time-input">Departure Time</label>
+              <input id="departure-time-input" class="form-control" type="datetime-local"
+                formControlName="departureTime"
+                [ngClass]="{'is-invalid':controlIsInvalid('departureTime'), 'is-valid': controlValid('departureTime')}">
+              <div *ngIf="controlIsInvalid('departureTime')" class="invalid-feedback">
+                <div *ngIf="getControlErrors('departureTime').required">Route ID is required.</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="reserved-seats-input">Reserved Seats</label>
+              <input id="reserved-seats-input" class="form-control" type="text" formControlName="reservedSeats"
+                [ngClass]="{'is-invalid':controlIsInvalid('reservedSeats'), 'is-valid': controlValid('reservedSeats')}">
+              <div *ngIf="controlIsInvalid('reservedSeats')" class="invalid-feedback">
+                <div *ngIf="getControlErrors('reservedSeats').required">Route ID is required.</div>
+              </div>
+            </div>
+            <div class="col">
+              <label for="seat-price-input">Seat Price</label>
+              <input id="seat-price-input" class="form-control" type="text" formControlName="seatPrice"
+                [ngClass]="{'is-invalid':controlIsInvalid('seatPrice'), 'is-valid': controlValid('seatPrice')}">
+              <div *ngIf="controlIsInvalid('seatPrice')" class="invalid-feedback">
+                <div *ngIf="getControlErrors('seatPrice').required">Seat Price is required.</div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button class="btn btn-dark" type="submit" form="flight-creation-form"
+          [disabled]="flightCreationFormControls?.invalid">Create</button>
+        <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
