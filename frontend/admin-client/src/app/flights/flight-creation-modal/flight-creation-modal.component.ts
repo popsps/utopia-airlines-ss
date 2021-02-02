@@ -9,7 +9,6 @@ import { FlightService } from 'src/app/shared/services/flight.service';
 })
 export class FlightCreationModalComponent implements OnInit {
   flightCreationFormControls: FormGroup;
-  @Input() show = false;
   constructor(private formBuilder: FormBuilder, private flightService: FlightService) { }
 
   ngOnInit(): void {
@@ -58,8 +57,14 @@ export class FlightCreationModalComponent implements OnInit {
   onSubmit(e: any) {
     const flight = this.flightCreationFormControls.value;
     flight.airplaneId = 1;
-    this.flightService.post(this.flightCreationFormControls.value).subscribe((res) => {
-      console.log(res);
-    });
+    this.flightService.post(flight).subscribe(
+      (res) => {
+        //@ts-ignore
+        $('#flight-creation-modal').modal('hide');
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 }
