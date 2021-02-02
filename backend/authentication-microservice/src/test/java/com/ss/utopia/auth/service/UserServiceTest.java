@@ -75,6 +75,84 @@ public class UserServiceTest {
 
   @Test
   void verifyOwnershipAndReturnOwner() {
+    final User testUser = new User(1l, "admin32434", "password", new UserRole(1L, "ADMIN"), "fname", "lname",
+        "flcust@gmail.com", "2028769868");
+    final UserDetails testUserDetails1 = new UserDetails() {
+      @Override
+      public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+      }
+
+      @Override
+      public String getPassword() {
+        return null;
+      }
+
+      @Override
+      public String getUsername() {
+        return null;
+      }
+
+      @Override
+      public boolean isAccountNonExpired() {
+        return false;
+      }
+
+      @Override
+      public boolean isAccountNonLocked() {
+        return false;
+      }
+
+      @Override
+      public boolean isCredentialsNonExpired() {
+        return false;
+      }
+
+      @Override
+      public boolean isEnabled() {
+        return false;
+      }
+    };
+    final UserDetails testUserDetails2 = new UserDetails() {
+      @Override
+      public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+      }
+
+      @Override
+      public String getPassword() {
+        return null;
+      }
+
+      @Override
+      public String getUsername() {
+        return "admin32434";
+      }
+
+      @Override
+      public boolean isAccountNonExpired() {
+        return false;
+      }
+
+      @Override
+      public boolean isAccountNonLocked() {
+        return false;
+      }
+
+      @Override
+      public boolean isCredentialsNonExpired() {
+        return false;
+      }
+
+      @Override
+      public boolean isEnabled() {
+        return false;
+      }
+    };
+    assertThrows(HttpServerErrorException.class, () -> userService.verifyOwnershipAndReturnOwner(null, null));
+    assertThrows(HttpServerErrorException.class,
+        () -> userService.verifyOwnershipAndReturnOwner(testUser, testUserDetails1));
+    assertEquals(userService.verifyOwnershipAndReturnOwner(testUser, testUserDetails2), testUser);
   }
 
   @Test
