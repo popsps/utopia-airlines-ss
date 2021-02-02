@@ -22,7 +22,7 @@ export class FlightsComponent implements OnInit {
     departureDateRange: []
   };
 
-  constructor(private httpService: FlightService) { }
+  constructor(private flightService: FlightService) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -30,7 +30,7 @@ export class FlightsComponent implements OnInit {
 
   loadFlights() {
     this.flights = { state: "pending" };
-    this.httpService.getAll().subscribe(
+    this.flightService.getAll().subscribe(
       (res: any[]) => {
         this.flights = {
           state: "done",
