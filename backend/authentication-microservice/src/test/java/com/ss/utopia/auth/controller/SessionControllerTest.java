@@ -16,37 +16,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
 import javax.servlet.http.Cookie;
-
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-//    formLogin().user("customer32434").password("password");
-//    this.mockMvc = MockMvcBuilders
-//      .webAppContextSetup(webApplicationContext).apply(springSecurity()).build();
 
 @WebMvcTest(SessionController.class)
 class SessionControllerTest {
   private final static String URI = "/api/session";
   @Autowired
   private MockMvc mockMvc;
-  @Autowired
-  private WebApplicationContext webApplicationContext;
+
   @MockBean
   private UserService userService;
   @MockBean
@@ -77,6 +62,7 @@ class SessionControllerTest {
     when(sessionCookieProvider.createSessionCookie(any())).thenReturn(Optional.of(cookie));
     ObjectMapper objectMapper = new ObjectMapper();
     LoginDto loginDto = new LoginDto("customer32434", "password");
+    // request body with username and password
     String loginDtoJson = objectMapper.writeValueAsString(loginDto);
 
 
@@ -102,6 +88,7 @@ class SessionControllerTest {
     when(userService.isUserAdmin(any())).thenReturn(true);
     ObjectMapper objectMapper = new ObjectMapper();
     LoginDto loginDto = new LoginDto("admin32434", "password");
+    // request body with username and password
     String loginDtoJson = objectMapper.writeValueAsString(loginDto);
 
 
@@ -127,6 +114,7 @@ class SessionControllerTest {
     when(userService.isUserAgent(any())).thenReturn(true);
     ObjectMapper objectMapper = new ObjectMapper();
     LoginDto loginDto = new LoginDto("agent32434", "password");
+    // request body with username and password
     String loginDtoJson = objectMapper.writeValueAsString(loginDto);
 
 
