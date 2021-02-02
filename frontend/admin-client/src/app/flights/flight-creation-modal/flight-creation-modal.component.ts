@@ -56,6 +56,10 @@ export class FlightCreationModalComponent implements OnInit {
   }
 
   onSubmit(e: any) {
-    console.log(this.flightCreationFormControls?.valid);
+    const flight = this.flightCreationFormControls.value;
+    flight.airplaneId = 1;
+    this.flightService.post(this.flightCreationFormControls.value).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
