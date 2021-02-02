@@ -16,6 +16,7 @@ import { BookingFormComponent } from './bookings/booking-form/booking-form.compo
 import { ErrorMessageComponent } from './shared/components/error-message/error-message.component';
 import { UsersComponent } from './users/users.component';
 import { HttpService } from './shared/services/http.service';
+import { FlightService } from './shared/services/flight.service';
 import { BookingService } from './shared/services/booking.service';
 import { FlightsComponent } from './flights/flights.component';
 import { FlightDepartureDatePipe } from './shared/pipes/flight-departure-date.pipe';
@@ -30,6 +31,9 @@ import { LoginActivateService } from './shared/services/login-activate.service';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { LogoComponent } from './shared/components/logo/logo.component';
+import { FlightSearchFormComponent } from './flights/flight-search-form/flight-search-form.component';
+import { FlightResultListComponent } from './flights/flight-result-list/flight-result-list.component';
+import { FlightCreationModalComponent } from './flights/flight-creation-modal/flight-creation-modal.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { PhonePipe } from './shared/pipes/phone.pipe';
 
@@ -56,7 +60,10 @@ import { PhonePipe } from './shared/pipes/phone.pipe';
     NotFoundComponent,
     SpinnerComponent,
     LogoComponent,
-    UserPageComponent
+    FlightSearchFormComponent,
+    FlightResultListComponent,
+    FlightCreationModalComponent,
+    UserPageComponent,
     PhonePipe
   ],
   imports: [
@@ -67,7 +74,13 @@ import { PhonePipe } from './shared/pipes/phone.pipe';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [HttpService, BookingService, AuthService, LoginActivateService],
+  providers: [
+    HttpService,
+    BookingService,
+    FlightService,
+    AuthService,
+    LoginActivateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

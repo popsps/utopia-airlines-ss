@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { environment } from "../../environments/environment";
-
-import { HttpService } from "../shared/services/http.service";
+import { FlightService } from "../shared/services/flight.service";
 
 import { Flight } from "../shared/models/Flight";
-import { FormControl } from '@angular/forms';
+import { FlightFilter } from '../shared/models/FlightFilter';
 
 
 @Component({
@@ -19,11 +17,12 @@ export class FlightsComponent implements OnInit {
     error?: any;
     data?: Flight[];
   };
-  origin: string;
-  destination: string;
-  departureDate: Date;
 
-  constructor(private httpService: HttpService) { }
+  filter: FlightFilter = {
+    departureDateRange: []
+  };
+
+  constructor(private httpService: FlightService) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -31,11 +30,11 @@ export class FlightsComponent implements OnInit {
 
   loadFlights() {
     this.flights = { state: "pending" };
-    this.httpService.get(`${environment.flightApiUrl}`).subscribe(
+    this.httpService.getAll().subscribe(
       (res: any[]) => {
         this.flights = {
           state: "done",
-          data: res.map(obj => new Flight().deserialize(obj))
+          data: res.sort((a, b) => a.departureTime.getTime() - b.departureTime.getTime())
         };
       },
       (error) => {
@@ -46,6 +45,10 @@ export class FlightsComponent implements OnInit {
       },
 
     );
+  }
+
+  onFilterChange(filter) {
+    this.filter = filter;
   }
 
 }

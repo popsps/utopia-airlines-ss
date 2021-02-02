@@ -9,8 +9,8 @@ export const environment = {
   loginUrl: '/api/session/admin',
   userApiUrl: '/api/users',
   bookingApiUrl: '/api/bookings',
+  flightApiUrl: '/api/flights',
   passengerApiUrl: '/api/passengers',
-  flightApiUrl: 'http://localhost:3001/api/flights'
 };
 
 /*
