@@ -10,7 +10,7 @@ public class LoginDto {
   @NotBlank
   private String password;
 
-  protected LoginDto() {
+  public LoginDto() {
   }
 
   public LoginDto(@NotBlank String username, @NotBlank String password) {
