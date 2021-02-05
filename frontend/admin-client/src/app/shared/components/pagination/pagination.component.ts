@@ -23,12 +23,8 @@ export class PaginationComponent implements OnInit {
     console.log('number of bookings', this.collectionSize);
     this.pages = Array(this.collectionSize).fill(0).map((v, i) => i + 1);
     this.buildActivePages();
-    // this.activePages = this.pages.slice(0, this.maxSize);
     console.log('pages', this.collectionSize, this.pages);
-    this.pageChange.subscribe(p => {
-      this.buildActivePages();
-      console.log('page now is', this.page);
-    });
+    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   goNextPage(): void {
