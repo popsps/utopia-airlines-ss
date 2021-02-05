@@ -1,31 +1,27 @@
 <nav>
   <ul class="pagination">
     <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
-      <i class="page-link fas fa-angle-double-left" style="cursor: pointer" (click)="goFirstPage()"></i>
+      <i class="page-link fas fa-angle-double-left" (click)="goFirstPage()"></i>
     </li>
     <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
-      <i class="fas fa-angle-left page-link" style="cursor: pointer" (click)="goPrevPage()"></i>
+      <i class="fas fa-angle-left page-link" (click)="goPrevPage()"></i>
     </li>
     <li class="page-item disabled" *ngIf="activePages[0] != 1">
-      <a class="page-link">
-        ...
-      </a>
+      <i class="page-link fas fa-ellipsis-h"></i>
     </li>
     <li *ngFor="let p of activePages;" class="page-item" [ngClass]="(p === page) ? 'active': ''">
-      <a class="page-link" style="cursor: pointer" (click)="goToPage(p)">
+      <a class="page-link" (click)="goToPage(p)">
         {{p}}
       </a>
     </li>
     <li class="page-item disabled" *ngIf="activePages.slice(-1)[0] !== collectionSize">
-      <a class="page-link">
-        ...
-      </a>
+      <i class="page-link fas fa-ellipsis-h"></i>
     </li>
     <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
-      <i class="page-link fas fa-angle-right" style="cursor: pointer" (click)="goNextPage()"></i>
+      <i class="page-link fas fa-angle-right" (click)="goNextPage()"></i>
     </li>
     <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
-      <i class="page-link fas fa-angle-double-right" style="cursor: pointer" (click)="goLastPage()"></i>
+      <i class="page-link fas fa-angle-double-right" (click)="goLastPage()"></i>
     </li>
   </ul>
 </nav>
