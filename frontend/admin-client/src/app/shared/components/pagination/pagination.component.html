@@ -1,10 +1,10 @@
 <nav>
   <ul class="pagination">
     <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
-      <a class="page-link" style="cursor: pointer" (click)="goFirstPage()">First</a>
+      <i class="page-link fas fa-angle-double-left" style="cursor: pointer" (click)="goFirstPage()"></i>
     </li>
     <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
-      <a class="page-link" style="cursor: pointer" (click)="goPrevPage()">Previous</a>
+      <i class="fas fa-angle-left page-link" style="cursor: pointer" (click)="goPrevPage()"></i>
     </li>
     <li class="page-item disabled" *ngIf="activePages[0] != 1">
       <a class="page-link">
@@ -22,12 +22,10 @@
       </a>
     </li>
     <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
-      <a class="page-link" style="cursor: pointer" (click)="goNextPage()">
-        Next
-      </a>
+      <i class="page-link fas fa-angle-right" style="cursor: pointer" (click)="goNextPage()"></i>
     </li>
     <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
-      <a class="page-link" style="cursor: pointer" (click)="goLastPage()">Last</a>
+      <i class="page-link fas fa-angle-double-right" style="cursor: pointer" (click)="goLastPage()"></i>
     </li>
   </ul>
 </nav>
