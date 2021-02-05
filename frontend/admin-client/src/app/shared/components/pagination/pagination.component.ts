@@ -20,36 +20,36 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('number of bookings', this.collectionSize);
     this.pages = Array(this.collectionSize).fill(0).map((v, i) => i + 1);
     this.buildActivePages();
     // this.activePages = this.pages.slice(0, this.maxSize);
     console.log('pages', this.collectionSize, this.pages);
+    this.pageChange.subscribe(p => {
+      this.buildActivePages();
+      console.log('page now is', this.page);
+    });
   }
 
   goNextPage(): void {
     this.pageChange.emit(this.page + 1);
-    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   goPrevPage(): void {
     this.pageChange.emit(this.page - 1);
-    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   goFirstPage(): void {
     this.pageChange.emit(1);
-    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   goLastPage(): void {
     this.pageChange.emit(this.collectionSize);
-    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   goToPage(n: number): void {
     console.log('go to page', n);
     this.pageChange.emit(n);
-    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   private buildActivePages(): void {

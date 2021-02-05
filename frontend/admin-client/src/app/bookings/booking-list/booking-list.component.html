@@ -1,6 +1,6 @@
 <div class="container full-page">
   <app-pagination *ngIf="!loading"
-                  [collectionSize]="totalBookings"
+                  [collectionSize]="pager.totalPages"
                   [maxSize]="5"
                   [(page)]="pager.currentPage"
                   (pageChange)="setPage($event)"
