@@ -1,0 +1,35 @@
+<nav>
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
+      <a class="page-link" style="cursor: pointer" (click)="goFirstPage()">First</a>
+    </li>
+    <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
+      <a class="page-link" style="cursor: pointer" (click)="goPrevPage()">Previous</a>
+    </li>
+    <li class="page-item disabled" *ngIf="activePages[0] != 1">
+      <a class="page-link">
+        ...
+      </a>
+    </li>
+    <li *ngFor="let p of activePages;" class="page-item" [ngClass]="(p === page) ? 'active': ''">
+      <a class="page-link" style="cursor: pointer" (click)="goToPage(p)">
+        {{p}}
+      </a>
+    </li>
+    <li class="page-item disabled" *ngIf="activePages.slice(-1)[0] !== collectionSize">
+      <a class="page-link">
+        ...
+      </a>
+    </li>
+    <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
+      <a class="page-link" style="cursor: pointer" (click)="goNextPage()">
+        Next
+      </a>
+    </li>
+    <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
+      <a class="page-link" style="cursor: pointer" (click)="goLastPage()">Last</a>
+    </li>
+  </ul>
+</nav>
+
+<!--<li class="page-item active"><a class="page-link" href="#">2</a></li>-->
