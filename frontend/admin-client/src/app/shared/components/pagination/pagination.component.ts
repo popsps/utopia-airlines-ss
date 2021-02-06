@@ -20,10 +20,9 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('number of bookings', this.collectionSize);
     this.pages = Array(this.collectionSize).fill(0).map((v, i) => i + 1);
     this.buildActivePages();
-    console.log('pages', this.collectionSize, this.pages);
+    console.log('pages', this.collectionSize);
     this.pageChange.subscribe(p => this.buildActivePages());
   }
 
@@ -44,14 +43,10 @@ export class PaginationComponent implements OnInit {
   }
 
   goToPage(n: number): void {
-    console.log('go to page', n);
     this.pageChange.emit(n);
   }
 
   private buildActivePages(): void {
-    // if current page is first
-    // if current page is last
-    // if current page is in the middle
     // if number of pages to show is less than the collection size
     if (this.maxSize > this.collectionSize) {
       this.activePages = this.pages;
@@ -77,6 +72,5 @@ export class PaginationComponent implements OnInit {
       }
     }
     this.activePages.sort((a, b) => a - b);
-    console.log('active pages', this.activePages);
   }
 }
