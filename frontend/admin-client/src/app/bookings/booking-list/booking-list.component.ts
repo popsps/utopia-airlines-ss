@@ -105,7 +105,10 @@ export class BookingListComponent implements OnInit {
           page = Math.floor(page);
         }
         if (page < 1) {
-          page = 1;
+          this.error.isError = true;
+          this.error.message = 'No booking found';
+          console.log(page);
+          return;
         } else if (page > Math.ceil(this.totalBookings / limit)) {
           page = Math.ceil(this.totalBookings / limit);
           this.error.isError = true;
