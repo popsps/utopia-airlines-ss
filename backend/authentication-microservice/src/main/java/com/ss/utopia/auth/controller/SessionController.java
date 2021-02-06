@@ -3,6 +3,7 @@ package com.ss.utopia.auth.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +24,8 @@ public class SessionController {
   @Autowired
   private SessionCookieProvider sessionCookieProvider;
 
+  // TODO: 2/6/2021 split HttpServerErrorException to 2 types of error  
+  // Todo: create login
   /**
    * Login a user using loginDto
    *
@@ -35,7 +38,7 @@ public class SessionController {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie creation failed"));
     response.addCookie(sessionCookie);
   }
 
@@ -58,6 +61,7 @@ public class SessionController {
     response.addCookie(sessionCookie);
   }
 
+  // TODO: 2/6/2021 take this out 
   /**
    * Login only an agent user using loginDto
    *
@@ -77,6 +81,7 @@ public class SessionController {
     response.addCookie(sessionCookie);
   }
 
+  // TODO: 2/6/2021 /api/sessions/users/user/getsession
   @GetMapping
   public User getSession(@AuthenticationPrincipal UserDetails currentUser) {
     if (currentUser == null)
@@ -85,10 +90,13 @@ public class SessionController {
       return userService.getUserByUsername(currentUser.getUsername());
   }
 
+  // TODO: 2/6/2021 POST /api/sessions/users/user/logout
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void logout(HttpServletResponse response) {
     final Cookie sessionCookie = userService.removeCookie();
+    if (sessionCookie == null)
+      new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed");
     response.addCookie(sessionCookie);
   }
 }
