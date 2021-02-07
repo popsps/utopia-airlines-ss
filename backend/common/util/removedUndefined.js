@@ -1,7 +1,10 @@
 const removeUndefined = query => {
   return Object.entries(query)
     .filter(([,value]) => value != null)
-    .reduce((query, [key, value]) => ({ ...query, [key]: value }), {});
+    .reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {});
 };
 
 module.exports = { removeUndefined };
