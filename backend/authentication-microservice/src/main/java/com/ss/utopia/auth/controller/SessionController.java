@@ -96,7 +96,7 @@ public class SessionController {
   public void logout(HttpServletResponse response) {
     final Cookie sessionCookie = userService.removeCookie();
     if (sessionCookie == null)
-      new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed");
+      throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed");
     response.addCookie(sessionCookie);
   }
 }

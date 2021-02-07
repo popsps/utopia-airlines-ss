@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +25,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.servlet.http.Cookie;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -59,7 +57,7 @@ public class UserService implements UserDetailsService {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     } catch (AuthenticationException e) {
-      LOGGER.info("Log in failed for user {}", username);
+      LOGGER.error("Log in authentication failed for user {}", username);
       return Optional.empty();
     }
     return userDao.findByUsername(username);
@@ -146,7 +144,7 @@ public class UserService implements UserDetailsService {
    * @return
    */
   public User getUserById(Long id) {
-	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
+    return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
   }
 
   /**
@@ -165,15 +163,22 @@ public class UserService implements UserDetailsService {
 
   }
 
+  // TODO: 2/6/2021 return Optional.empty()
+
   /**
    * Remove a jwt token from the session cookie and return an empty string
    *
    * @return
    */
   public Cookie removeCookie() {
-    final Cookie sessionCookie = new Cookie("session", null);
-    sessionCookie.setPath("/");
-    return sessionCookie;
+    try {
+      final Cookie sessionCookie = new Cookie("session", null);
+      sessionCookie.setPath("/");
+      return sessionCookie;
+    } catch (IllegalArgumentException e) {
+      LOGGER.error("Cookie Illegal Argument Exception", e.getMessage());
+      return null;
+    }
   }
 
   public User getUserByUsername(String username) {
