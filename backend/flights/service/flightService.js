@@ -7,8 +7,8 @@ const flightService = {
   async findAllFlights({ offset, limit, origin, destination, departureTime } = {}){
     return Flight.findAll({
       where: buildQuery({ departureTime }),
-      offset: Math.max(offset ?? 0, 0),
-      limit: Math.max(limit ?? 10, 1),
+      offset: offset ?? 0,
+      limit: limit ?? 10,
       include: [ 
         { 
           association: "route",
@@ -42,13 +42,6 @@ const flightService = {
     });
     return bookings;
   },
-  // async findFlightPassengers(id) {
-  //   const query = {};
-  //   return Flight.findAll({
-  //     where: query,
-  //     include: [],
-  //   });
-  // },
   async createFlight({ routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
     try {
       return await FlightRaw.create({ routeId, airplaneId, departureTime, reservedSeats, seatPrice });
