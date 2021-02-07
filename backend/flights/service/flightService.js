@@ -42,9 +42,15 @@ const flightService = {
     });
     return bookings;
   },
-  async createFlight({ routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
+  async createFlight({ routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     try {
-      return await FlightRaw.create({ routeId, airplaneId, departureTime, reservedSeats, seatPrice });
+      return await FlightRaw.create({
+        routeId,
+        airplaneId,
+        departureTime,
+        reservedSeats: reserved,
+        seatPrice: price,
+      });
     } catch(err) {
       handleMutationError(err);
     }
