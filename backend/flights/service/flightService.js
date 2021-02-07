@@ -29,19 +29,6 @@ const flightService = {
     if(!flight) throw new NotFoundError("cannot find flight");
     return flight;
   },
-  async findFlightBookings(id) {
-    const query = {};
-    const { bookings } = await Flight.findByPk(id, {
-      where: query,
-      attributes: [],
-      include: [{
-        association: "bookings", 
-        include: "passengers", 
-        through: { attributes: [] },
-      }],
-    });
-    return bookings;
-  },
   async createFlight({ routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     try {
       return await FlightRaw.create({

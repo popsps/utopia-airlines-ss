@@ -17,8 +17,4 @@ router.route("/:id")
   .put(flightController.updateById)
   .delete(flightController.deleteById);
 
-router.route("/:id/bookings")
-  .all(requireAuthentication({ roles: ["ADMIN"] }))
-  .get(flightController.getFlightBookings);
-
 module.exports = router;

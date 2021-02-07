@@ -15,13 +15,6 @@ const flightController = {
       next(err);
     }
   },
-  async getFlightBookings(req, res, next) {
-    try{
-      res.json(await flightService.findFlightBookings(req.params.id));
-    } catch(err){
-      next(err);
-    }
-  },
   async create(req, res, next) {
     try{
       const flight = await flightService.createFlight(req.body);
