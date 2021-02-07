@@ -6,7 +6,6 @@ const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 const getDateRange = date => {
   const startTime = new Date(date.getTime());
   startTime.setHours(0, 0, 0, 0);
-  startTime.setDate(startTime.getDate() + 1);
   const endTime = new Date(startTime.getTime());
   endTime.setDate(endTime.getDate() + 1);
   return [startTime, endTime];
