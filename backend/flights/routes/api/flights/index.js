@@ -21,8 +21,4 @@ router.route("/:id/bookings")
   .all(requireAuthentication({ roles: ["ADMIN"] }))
   .get(flightController.getFlightBookings);
 
-// router.route("/:id/passengers")
-//   .all(requireAuthentication({ roles: ["ADMIN"] }))
-//   .get(flightController.getFlightPassengers);
-
 module.exports = router;
