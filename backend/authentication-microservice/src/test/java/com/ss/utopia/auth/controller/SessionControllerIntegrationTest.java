@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.servlet.http.Cookie;
 
+import java.util.Optional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -249,7 +251,7 @@ class SessionControllerIntegrationTest {
   @DisplayName("Test logging out someone while removing cookie failed")
   void logoutExceptionRemovingSessionCookie() throws Exception {
     //Mock userService removeCookie to return null
-    Mockito.when(userService.removeCookie()).thenReturn(null);
+    Mockito.when(userService.removeCookie()).thenReturn(Optional.empty());
     System.out.println("remove Cookie:" + userService.removeCookie());
     // mock api calls
     String sessionCookie = login();

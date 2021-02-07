@@ -167,7 +167,7 @@ public class UserServiceTest {
   void removeCookie() {
     Cookie expectedCookie = new Cookie("session", null);
     expectedCookie.setPath("/");
-    Cookie actualCookie = userService.removeCookie();
+    Cookie actualCookie = userService.removeCookie().get();
     assertEquals(expectedCookie.getName(), actualCookie.getName());
     assertEquals(expectedCookie.getValue(), actualCookie.getValue());
     assertEquals(expectedCookie.getPath(), actualCookie.getPath());

@@ -150,7 +150,7 @@ class SessionControllerTest {
     String cookieString = "eyJqd3QiOiJleUpoYkdjaU9pSlNVekkxTmlKOS5leUp6ZFdJaU9pSXpaVGtpTENKcFlYUWlPakUyTVRJeU1Ua3dOREFzSW1WNGNDSTZNVFl4TXpReU9EWTBNSDAucV9DYk41UnFDTk10MXZOdDdBQWktczE2NXhhUE5PR2h1MDllY0xzV0tZdHk0bkhIWUZpcW55cWkzdXhUVk9SQm1DLVlIbE12YmlqS2t2V1lVemR1SWFqT3paU1o1NVd1QkVOdnRFOXFEQkdtajJjOS15NHBIMUVZR3VNSVNoWHppV1dXbG1oWFdwOWktaUZpUkpmYjVZN1pkN1YxUkJydHpsVWRsNlg5am5VLThTUUNibVZsZlNxZ0czRk9mcWl3ZFZDOVljaTdjMWFBLXRHQlRBRFIxRkFRcE1UOVdDM3k2dGJCYm01emplQ0tfa3NfT1VSVV9rYUVEamU3NW0tTXNIaExqZ0JKRTJkUzBjLVlsLWgzY3hLZUdRR05kT2NzdGdwTlJpLTNIR3hGUkdzWW45WlZmNGNoZEVrOG5LTngtQkFtZmJlcDFaVG52NEJnanpqU0hRIn0%3D";
     Cookie cookie = new Cookie("session", cookieString);
     cookie.setPath("/");
-    when(userService.removeCookie()).thenReturn(cookie);
+    when(userService.removeCookie()).thenReturn(Optional.of(cookie));
     this.mockMvc
       .perform(MockMvcRequestBuilders.delete(URI).contentType(MediaType.APPLICATION_JSON))
       .andExpect(status().isNoContent())

@@ -15,6 +15,8 @@ import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.security.SessionCookieProvider;
 import com.ss.utopia.auth.service.UserService;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/session")
@@ -26,6 +28,7 @@ public class SessionController {
 
   // TODO: 2/6/2021 split HttpServerErrorException to 2 types of error  
   // Todo: create login
+
   /**
    * Login a user using loginDto
    *
@@ -62,6 +65,7 @@ public class SessionController {
   }
 
   // TODO: 2/6/2021 take this out 
+
   /**
    * Login only an agent user using loginDto
    *
@@ -94,9 +98,8 @@ public class SessionController {
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void logout(HttpServletResponse response) {
-    final Cookie sessionCookie = userService.removeCookie();
-    if (sessionCookie == null)
-      throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed");
+    final Cookie sessionCookie = userService.removeCookie()
+      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed"));
     response.addCookie(sessionCookie);
   }
 }

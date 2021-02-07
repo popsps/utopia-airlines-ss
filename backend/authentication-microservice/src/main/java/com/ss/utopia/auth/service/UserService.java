@@ -100,29 +100,29 @@ public class UserService implements UserDetailsService {
 
   public User updateUser(User user, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
-    if(userDto.getUsername() != null)
-    	user.setUsername(userDto.getUsername());
-    if(userDto.getPassword() != null)
-    	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    if(userDto.getGivenName() != null)
-    	user.setGivenName(userDto.getGivenName());
-    if(userDto.getFamilyName() != null)
-    	user.setFamilyName(userDto.getFamilyName());
-    if(userDto.getEmail() != null)
-    	user.setEmail(userDto.getEmail());
-    if(userDto.getPhone() != null)
-    	user.setPhone(userDto.getPhone());
+    if (userDto.getUsername() != null)
+      user.setUsername(userDto.getUsername());
+    if (userDto.getPassword() != null)
+      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    if (userDto.getGivenName() != null)
+      user.setGivenName(userDto.getGivenName());
+    if (userDto.getFamilyName() != null)
+      user.setFamilyName(userDto.getFamilyName());
+    if (userDto.getEmail() != null)
+      user.setEmail(userDto.getEmail());
+    if (userDto.getPhone() != null)
+      user.setPhone(userDto.getPhone());
     try {
-    	userDao.save(user);
+      userDao.save(user);
     } catch (Exception e) {
-        String error = e.getMessage();
-        if (error.contains("user.email_UNIQUE")) {
-          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-        } else if (error.contains("user.username_UNIQUE")) {
-          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-        } else if (error.contains("user.phone_UNIQUE")) {
-          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-        }
+      String error = e.getMessage();
+      if (error.contains("user.email_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
+      } else if (error.contains("user.username_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
+      } else if (error.contains("user.phone_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
+      }
     }
     return user;
   }
@@ -163,21 +163,19 @@ public class UserService implements UserDetailsService {
 
   }
 
-  // TODO: 2/6/2021 return Optional.empty()
-
   /**
    * Remove a jwt token from the session cookie and return an empty string
    *
    * @return
    */
-  public Cookie removeCookie() {
+  public Optional<Cookie> removeCookie() {
     try {
       final Cookie sessionCookie = new Cookie("session", null);
       sessionCookie.setPath("/");
-      return sessionCookie;
+      return Optional.of(sessionCookie);
     } catch (IllegalArgumentException e) {
       LOGGER.error("Cookie Illegal Argument Exception", e.getMessage());
-      return null;
+      return Optional.empty();
     }
   }
 
