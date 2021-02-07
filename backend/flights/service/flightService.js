@@ -1,18 +1,18 @@
 const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
-const { buildQuery } = require("@utopia-airlines-wss/common/util");
+const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 
 
 const flightService = {
   async findAllFlights({ offset, limit, origin, destination, departureTime } = {}){
     return Flight.findAll({
-      where: buildQuery({ departureTime }),
+      where: removeUndefined({ departureTime }),
       offset: offset ?? 0,
       limit: limit ?? 10,
       include: [ 
         { 
           association: "route",
-          where: buildQuery({ origin, destination }), 
+          where: removeUndefined({ origin, destination }), 
         },
         "airplane",
       ],
@@ -49,7 +49,7 @@ const flightService = {
       handleMutationError(err);
     }
   },
-  async updateFlight(id, { routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
+  async updateFlight(id, { routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     const flight = await flightService.findFlightById(id);
     if(!flight) throw new NotFoundError("cannot find flight");
     try {
@@ -57,8 +57,8 @@ const flightService = {
         routeId,
         airplaneId,
         departureTime,
-        reservedSeats,
-        seatPrice,
+        reservedSeats: reserved,
+        seatPrice: price,
       };
       flight.update(newFlightInfo);
     } catch(err) {
