@@ -1,4 +1,4 @@
 module.exports = {
   ...require("./createJWTHandler"),
-  ...require("./buildQuery"),
+  ...require("./removedUndefined"),
 };
