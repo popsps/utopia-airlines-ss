@@ -1,18 +1,37 @@
+const { Op } = require("sequelize");
 const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 
+const getDateRange = date => {
+  const startTime = new Date(date.getTime());
+  startTime.setHours(0, 0, 0, 0);
+  startTime.setDate(startTime.getDate() + 1);
+  const endTime = new Date(startTime.getTime());
+  endTime.setDate(endTime.getDate() + 1);
+  return [startTime, endTime];
+};
 
 const flightService = {
-  async findAllFlights({ offset, limit, origin, destination, departureTime } = {}){
+  async findAllFlights({ offset, limit, origin, destination, departureDate } = {}){
     return Flight.findAll({
-      where: removeUndefined({ departureTime }),
+      where: removeUndefined({ 
+        departureTime: (() => {
+          if (!departureDate) return null;
+          return {
+            [Op.between]: getDateRange(new Date(departureDate)),
+          };
+        })(),
+      }),
       offset: offset ?? 0,
       limit: limit ?? 10,
       include: [ 
         { 
           association: "route",
-          where: removeUndefined({ origin, destination }), 
+          where: removeUndefined({
+            originId: origin?.toUpperCase(),
+            destinationId: destination?.toUpperCase(),
+          }), 
         },
         "airplane",
       ],
