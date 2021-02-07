@@ -27,15 +27,12 @@ class FlightRaw extends Model {
     });
   }
   toJSON(){
-    const { seatPrice, maxCapacity, reservedSeats, passengerCount, availableSeats, ...values } = this.get();
+    const { seatPrice, reservedSeats, ...values } = this.get();
     if (values.route) delete values.routeId;
     return {
       ...values,
       seats: {
-        total: maxCapacity,
         reserved: reservedSeats,
-        booked : passengerCount,
-        available: availableSeats,
         price: seatPrice,
       },
     };
