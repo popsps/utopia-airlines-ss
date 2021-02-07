@@ -1,19 +1,18 @@
 const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
+const { buildQuery } = require("@utopia-airlines-wss/common/util");
+
 
 const flightService = {
-  async findAllFlights({ origin, destination, departure } = {}){
-    const flightQuery = {};
-    if(departure != null) flightQuery.departureTime = departure;
-    const routeQuery = {};
-    if(origin != null) routeQuery.originId = origin;
-    if(destination != null) routeQuery.destinationId = destination;
+  async findAllFlights({ offset, limit, origin, destination, departureTime } = {}){
     return Flight.findAll({
-      where: flightQuery,
+      where: buildQuery({ departureTime }),
+      offset: Math.max(offset ?? 0, 0),
+      limit: Math.max(limit ?? 10, 1),
       include: [ 
         { 
           association: "route",
-          where: routeQuery, 
+          where: buildQuery({ origin, destination }), 
         },
         "airplane",
       ],
