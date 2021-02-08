@@ -12,18 +12,17 @@ const getDateRange = date => {
 };
 
 const flightService = {
-  async findAllFlights({ origin, destination, departureDate } = {}, { offset, limit }){
+  async findAllFlights({ origin, destination, departureDate } = {}, { offset = 0, limit = 10 }){
     const flights = await Flight.findAll({
       where: removeUndefined({ 
-        departureTime: (() => {
-          if (!departureDate) return null;
-          return {
+        departureTime: departureDate
+          ? null
+          : {
             [Op.between]: getDateRange(new Date(departureDate)),
-          };
-        })(),
+          },
       }),
-      offset: offset ?? 0,
-      limit: limit ?? 10,
+      offset: offset,
+      limit: limit,
       include: [ 
         { 
           association: "route",
