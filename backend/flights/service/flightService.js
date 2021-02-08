@@ -16,10 +16,10 @@ const flightService = {
     const flights = await Flight.findAll({
       where: removeUndefined({ 
         departureTime: departureDate
-          ? null
-          : {
+          ? {
             [Op.between]: getDateRange(new Date(departureDate)),
-          },
+          }
+          : null,
       }),
       offset: offset,
       limit: limit,
