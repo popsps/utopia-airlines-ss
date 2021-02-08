@@ -13,15 +13,10 @@ const guestBookingController = {
   },
   async create(req, res, next) {
     try {
-      const data = (({ user, body }) => {
-        switch (user?.role.name) {
-        case "ADMIN":
-        case "AGENT":
-          return { ...body, userId: null, agentId: user.id };
-        default:
-          return { ...body, userId: null, agentId: null  };
-        }
-      })(req);
+      const { user, body } = req;
+      const data = ["ADMIN", "AGENT"].includes(user?.role.name)
+        ? { ...body, agentId: user.id }
+        : { ...body, agentId: null };
       const booking = await guestBookingService.createGuestBooking(data);
       res.status(201).json(booking);
     } catch (err) {
