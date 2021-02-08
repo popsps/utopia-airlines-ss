@@ -4,7 +4,7 @@ const sendJson = ({ req, res, status = 200, data, toJSON: { type } = {} }) => {
   res.status(status).end(JSON.stringify(
     data,
     createReplacer({
-      type: type ?? ["ADMIN", "AGENT"].includes(req?.user.role.name) ? "full" : "slim",
+      type: type ?? ["ADMIN", "AGENT"].includes(req.user?.role.name) ? "full" : "slim",
     })
   ));
 };
