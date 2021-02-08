@@ -1,6 +1,6 @@
 const {sequelize} = require("@utopia-airlines-wss/common/db");
 const {Booking} = require("@utopia-airlines-wss/common/models");
-const {NotFoundError, handleMutationError} = require("@utopia-airlines-wss/common/errors");
+const {NotFoundError, handleMutationError, BadRequestError} = require("@utopia-airlines-wss/common/errors");
 
 const findBookingById = async (id, options) => {
   const booking = await Booking.findByPk(id, options);
@@ -16,12 +16,12 @@ const bookingService = {
   async findAllBookings(
     {isActive = true, offset = 0, limit = 10} = {}) {
     const where = {isActive};
-    limit = limit ? Math.min(+limit, 40) : 10;
-    offset = offset ? offset * limit : 0;
+    if(limit > 10000)
+      throw new BadRequestError("Limit exceeds maximum of 10000");
     const bookings = await Booking.findAndCountAll({
       where,
-      limit,
-      offset,
+      limit: +limit,
+      offset: +offset,
       distinct: true,
       include: [
         {

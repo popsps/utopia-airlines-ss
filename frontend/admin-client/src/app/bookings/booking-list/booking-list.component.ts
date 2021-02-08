@@ -20,14 +20,14 @@ export class BookingListComponent implements OnInit {
   limit = 10;
   error = {isError: false, message: '', status: null};
 
-  constructor(private bookingService: BookingService,
-              private  pagerService: PagerService,
+  constructor(private bookingService: BookingService, private  pagerService: PagerService,
               private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   getBookings(page = 1): void {
     this.loading = true;
-    this.bookingService.getAllBookings(`${environment.bookingApiUrl}?offset=${page - 1}&limit=${this.limit}`)
+    const offset = (page - 1) * this.limit;
+    this.bookingService.getAllBookings(`${environment.bookingApiUrl}?offset=${offset}&limit=${this.limit}`)
       .subscribe(bookings => {
         console.log('bookings:', bookings);
         bookings.forEach(booking => {
@@ -75,6 +75,7 @@ export class BookingListComponent implements OnInit {
     // this.pagedBookings = this.bookings.slice(this.pager.startIndex, this.pager.endIndex + 1);
     // console.log('paged bookings:', this.pagedBookings);
     this.pagedBookings = this.bookings;
+    console.log('paged booking', this.pagedBookings);
   }
 
   /**
