@@ -12,8 +12,8 @@ const getDateRange = date => {
 };
 
 const flightService = {
-  async findAllFlights({ offset, limit, origin, destination, departureDate } = {}){
-    return Flight.findAll({
+  async findAllFlights({ origin, destination, departureDate } = {}, { offset, limit }){
+    const flights = await Flight.findAll({
       where: removeUndefined({ 
         departureTime: (() => {
           if (!departureDate) return null;
@@ -35,6 +35,7 @@ const flightService = {
         "airplane",
       ],
     });
+    return flights; 
   },
   async findFlightById(id) {
     const flight = await Flight.findByPk(id,
@@ -45,7 +46,7 @@ const flightService = {
         ],
       });
     if(!flight) throw new NotFoundError("cannot find flight");
-    return flight;
+    return flight; 
   },
   async createFlight({ routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     try {
