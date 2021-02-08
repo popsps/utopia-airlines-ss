@@ -1,8 +1,11 @@
 package com.ss.utopia.auth.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "USER")
@@ -46,7 +49,7 @@ public class User {
   }
 
   public User(Long id, String username, String password, UserRole role, String givenName, String familyName,
-  String email, String phone) {
+              String email, String phone) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -58,7 +61,7 @@ public class User {
   }
 
   public User(String username, String password, UserRole role, String givenName, String familyName,
-      String email, String phone) {
+              String email, String phone) {
     this.username = username;
     this.password = password;
     this.role = role;
@@ -130,5 +133,23 @@ public class User {
 
   public void setRole(UserRole role) {
     this.role = role;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof User)) return false;
+    User user = (User) o;
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(11);
+
+    return getId().equals(user.getId()) && getUsername().equals(user.getUsername())
+      && passwordEncoder.matches(getPassword(), user.getPassword()) &&
+      getGivenName().equals(user.getGivenName()) && getFamilyName().equals(user.getFamilyName())
+      && getEmail().equals(user.getEmail()) && getPhone().equals(user.getPhone()) && getRole().equals(user.getRole());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getUsername(), getPassword(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getRole());
   }
 }

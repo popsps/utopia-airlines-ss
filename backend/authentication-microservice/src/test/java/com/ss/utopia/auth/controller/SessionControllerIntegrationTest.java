@@ -78,15 +78,15 @@ class SessionControllerIntegrationTest {
   }
 
   private String buildAgentUser() throws JsonProcessingException {
-    User admin = new User(1001L, "admin", "password", new UserRole(1L, "ADMIN"),
-      "Admin", "Admin", "admin@utopia.com", "56760989888");
+    User admin = new User(332L, "aeggleton97", "password", new UserRole(3L, "AGENT"),
+      "Alix", "Eggleton", "aeggleton97@ucla.edu", "9241933200");
     ObjectMapper objectMapper = new ObjectMapper();
     return objectMapper.writeValueAsString(admin);
   }
 
   private String buildCustomerUser() throws JsonProcessingException {
-    User admin = new User(1001L, "admin", "password", new UserRole(1L, "ADMIN"),
-      "Admin", "Admin", "admin@utopia.com", "56760989888");
+    User admin = new User(2L, "tmckernan1", "password", new UserRole(2L, "CUSTOMER"),
+      "Trever", "McKernan", "tmckernan1@hibu.com", "1138845977");
     ObjectMapper objectMapper = new ObjectMapper();
     return objectMapper.writeValueAsString(admin);
   }
