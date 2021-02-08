@@ -1,3 +1,4 @@
+const { sendJson } = require("@utopia-airlines-wss/common/util");
 const { userBookingService } = require("../services");
 
 const userBookingController = {
@@ -9,19 +10,11 @@ const userBookingController = {
           ? req.user?.id
           :  null,
       });
-      res.json(bookings);
-    } catch (err) {
-      next(err);
-    }
-  },
-  async create(req, res, next) {
-    try {
-      const { user, body } = req;
-      const data = ["ADMIN", "AGENT"].includes(user?.role.name)
-        ? { ...body, agentId: user.id }
-        : { ...body, userId: user.id, agentId: null };
-      const booking = await userBookingService.createUserBooking(data);
-      res.status(201).json(booking);
+      sendJson({
+        req,
+        res,
+        data: bookings,
+      });
     } catch (err) {
       next(err);
     }
@@ -33,8 +26,28 @@ const userBookingController = {
         id,
         userId: ["AGENT", "ADMIN"].includes(user?.role.name) ? null : user.id ?? 0,
       });
-        
-      res.json(booking);
+      sendJson({
+        req,
+        res,
+        data: booking,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+  async create(req, res, next) {
+    try {
+      const { user, body } = req;
+      const data = ["ADMIN", "AGENT"].includes(user?.role.name)
+        ? { ...body, agentId: user.id }
+        : { ...body, userId: user.id, agentId: null };
+      const booking = await userBookingService.createUserBooking(data);
+      sendJson({
+        req,
+        res,
+        data: booking,
+        status: 201,
+      });
     } catch (err) {
       next(err);
     }
