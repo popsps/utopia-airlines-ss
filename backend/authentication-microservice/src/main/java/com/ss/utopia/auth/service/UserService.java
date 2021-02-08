@@ -71,62 +71,26 @@ public class UserService implements UserDetailsService {
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
-    User user = null;
-    Long roleId = 0L;
-    if (userDto.getRole().toUpperCase().equals("ADMIN")) {
-      roleId = 1L;
-    } else if (userDto.getRole().toUpperCase().equals("CUSTOMER")) {
-      roleId = 2L;
-    } else if (userDto.getRole().toUpperCase().equals("AGENT")) {
-      roleId = 3L;
-    } else {
-      throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
-    }
-    User createdUser = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
+    User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(userDto.getRole()),
       userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
-
-    try {
-      user = userDao.save(createdUser);
-    } catch (Exception e) {
-      String error = e.getMessage();
-      if (error.contains("user.email_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-      } else if (error.contains("user.username_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-      } else if (error.contains("user.phone_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-      }
-    }
-    return user;
+    return submitUser(user);
   }
 
   public User updateUser(User user, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
-    if(userDto.getUsername() != null)
+    if(userDto.getUsername() != null && userDto.getUsername() != "")
     	user.setUsername(userDto.getUsername());
-    if(userDto.getPassword() != null)
+    if(userDto.getPassword() != null && userDto.getPassword() != "")
     	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    if(userDto.getGivenName() != null)
+    if(userDto.getGivenName() != null && userDto.getGivenName() != "")
     	user.setGivenName(userDto.getGivenName());
-    if(userDto.getFamilyName() != null)
+    if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
     	user.setFamilyName(userDto.getFamilyName());
-    if(userDto.getEmail() != null)
+    if(userDto.getEmail() != null && userDto.getEmail() != "")
     	user.setEmail(userDto.getEmail());
-    if(userDto.getPhone() != null)
+    if(userDto.getPhone() != null && userDto.getPhone() != "")
     	user.setPhone(userDto.getPhone());
-    try {
-    	userDao.save(user);
-    } catch (Exception e) {
-        String error = e.getMessage();
-        if (error.contains("user.email_UNIQUE")) {
-          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-        } else if (error.contains("user.username_UNIQUE")) {
-          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-        } else if (error.contains("user.phone_UNIQUE")) {
-          throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-        }
-    }
-    return user;
+    return submitUser(user);
   }
 
   public int deleteUser(Long userId) {
@@ -146,7 +110,7 @@ public class UserService implements UserDetailsService {
    * @return
    */
   public User getUserById(Long id) {
-	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
+	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Unable to find User"));
   }
 
   /**
@@ -199,5 +163,21 @@ public class UserService implements UserDetailsService {
    */
   public boolean isUserAgent(User user) {
     return user.getRole().getId() == 3;
+  }
+  
+  private User submitUser(User user) {
+	    try {
+	    	return userDao.save(user);
+	    } catch (Exception e) {
+	        String error = e.getMessage();
+	        if (error.contains("user.email_UNIQUE")) {
+	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Email is taken");
+	        } else if (error.contains("user.username_UNIQUE")) {
+	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Username is taken");
+	        } else if (error.contains("user.phone_UNIQUE")) {
+	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Phone number is taken");
+	        }
+	    }
+	    return user;
   }
 }

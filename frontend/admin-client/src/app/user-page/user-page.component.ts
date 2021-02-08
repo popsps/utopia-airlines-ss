@@ -6,8 +6,7 @@ import { AuthService } from '../shared/services/auth.service';
 import {
   FormGroup,
   FormBuilder,
-  FormControl,
-  Validators,
+  Validators
 } from '@angular/forms';
 
 @Component({
@@ -28,16 +27,20 @@ export class UserPageComponent implements OnInit {
   email: string;
   phone: string;
   updatedUser: any;
+  isError: boolean;
+  error: any;
 
   constructor(
     private authService: AuthService,
     private userService: HttpService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.apiUrl = `${environment.userApiUrl}`;
     this.edit = false;
+    this.isError = false;
     this.initializeUser();
     this.initializeForms();
   }
@@ -46,18 +49,22 @@ export class UserPageComponent implements OnInit {
     this.userId = this.router.url.substring(7);
     this.apiUrl = environment.userApiUrl + "/" + this.userId;
     this.userService.get(this.apiUrl).subscribe((res) => {
+      this.isError = false;
       this.user = res;
+    }, (err) => {
+      this.isError = true;
+      this.error = err.error;
     });
   }
 
   initializeForms() {
-    this.updateUserForm = new FormGroup({
-      username: new FormControl(this.username, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
-      password: new FormControl(this.password, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
-      givenName: new FormControl(this.givenName, [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
-      familyName: new FormControl(this.familyName, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-      email: new FormControl(this.email, [Validators.required]),
-      phone: new FormControl(this.password, [Validators.required]),
+    this.updateUserForm = this.formBuilder.group({
+      username: [''],
+      password: [''],
+      givenName: [''],
+      familyName: [''],
+      email: [''],
+      phone: [''],
     });
   }
 
@@ -66,17 +73,25 @@ export class UserPageComponent implements OnInit {
   }
 
   updateUser() {
-    this.toggleEdit();
     console.log(this.updateUserForm.value);
     this.userService.update(this.apiUrl, this.updateUserForm.value).subscribe((res) => {
+      this.toggleEdit();
+      this.isError = false;
       this.initializeForms();
       this.initializeUser();
+    }, (err) => {
+      this.isError = true;
+      this.error = err.error;
     });
   }
 
   deleteUser() {
     this.userService.delete(this.apiUrl).subscribe((res) => {
       this.router.navigate
+    }, (err) => {
+      this.isError = true;
+      this.error = err.error;
+      this.error.message = "Unable to delete User";
     });
   }
 }
