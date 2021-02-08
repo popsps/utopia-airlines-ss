@@ -1,6 +1,6 @@
-const {sequelize} = require("@utopia-airlines-wss/common/db");
-const {Booking} = require("@utopia-airlines-wss/common/models");
-const {NotFoundError, handleMutationError, BadRequestError} = require("@utopia-airlines-wss/common/errors");
+const { sequelize } = require("@utopia-airlines-wss/common/db");
+const { Booking } = require("@utopia-airlines-wss/common/models");
+const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 
 const findBookingById = async (id, options) => {
   const booking = await Booking.findByPk(id, options);
@@ -39,14 +39,14 @@ const bookingService = {
             association: "route",
             include: ["origin", "destination"],
           },
-          through: {attributes: []},
+          through: { attributes: [] },
         },
         "passengers",
       ],
     });
     return JSON.parse(JSON.stringify(bookings, replacer));
   },
-  async findBookingById({id}) {
+  async findBookingById({ id }) {
     const booking = await findBookingById(
       id,
       {
@@ -66,7 +66,7 @@ const bookingService = {
               association: "route",
               include: ["origin", "destination"],
             },
-            through: {attributes: []},
+            through: { attributes: [] },
           },
           "passengers",
         ],
@@ -74,7 +74,7 @@ const bookingService = {
     );
     return JSON.parse(JSON.stringify(booking, replacer));
   },
-  async updateBooking(id, {isActive}) {
+  async updateBooking(id, { isActive }) {
     const booking = await findBookingById(id);
     const transaction = await sequelize.transaction();
     try {
@@ -96,4 +96,4 @@ const bookingService = {
   },
 };
 
-module.exports = {bookingService};
+module.exports = { bookingService };
