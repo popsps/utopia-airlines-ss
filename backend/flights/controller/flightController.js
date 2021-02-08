@@ -1,20 +1,17 @@
+const { sendJson } = require("@utopia-airlines-wss/common/util");
+
 const { flightService } = require("../service");
-
-
-const replacer = (type) => (_key, value) => value.toJSON?.length === 1
-  ? value.toJSON(type)
-  : value;
 
 const flightController = {
   async getAll(req, res, next) {
     try{
       const { offset, limit, ...query } = req.query;
       const flights = await flightService.findAllFlights(query, { offset, limit });
-      res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify(
-        flights,
-        replacer(["ADMIN", "AGENT"].includes(req?.user.role.name) ? "full" : "slim")
-      ));
+      sendJson({
+        req,
+        res,
+        data: flights,
+      });
     } catch(err){
       next(err);
     }
@@ -22,11 +19,11 @@ const flightController = {
   async getById(req, res, next){
     try{
       const flight = await flightService.findFlightById(req.params.id);
-      res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify(
-        flight,
-        replacer(["ADMIN", "AGENT"].includes(req?.user.role.name) ? "full" : "slim")
-      ));
+      sendJson({
+        req,
+        res,
+        data: flight,
+      });
     } catch(err){
       next(err);
     }
