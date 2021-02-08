@@ -37,6 +37,8 @@ import { FlightCreationModalComponent } from './flights/flight-creation-modal/fl
 import { UserPageComponent } from './user-page/user-page.component';
 import { PhonePipe } from './shared/pipes/phone.pipe';
 import { FlightResultItemComponent } from './flights/flight-result-list/flight-result-item/flight-result-item.component';
+import { DatePipe } from '@angular/common';
+import { PaginationComponent } from './shared/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { FlightResultItemComponent } from './flights/flight-result-list/flight-r
     FlightCreationModalComponent,
     UserPageComponent,
     PhonePipe,
-    FlightResultItemComponent
+    FlightResultItemComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,8 @@ import { FlightResultItemComponent } from './flights/flight-result-list/flight-r
     BookingService,
     FlightService,
     AuthService,
-    LoginActivateService
+    LoginActivateService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

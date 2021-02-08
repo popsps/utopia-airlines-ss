@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
     } else {
       throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
     }
-    User createdUser = new User(8L, userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
+    User createdUser = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
       userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
 
     try {
@@ -100,9 +100,8 @@ public class UserService implements UserDetailsService {
     return user;
   }
 
-  public User updateUser(Long id, UpdateUserDto userDto) {
+  public User updateUser(User user, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
-    User user = userDao.findById(id).get();
     if(userDto.getUsername() != null)
     	user.setUsername(userDto.getUsername());
     if(userDto.getPassword() != null)

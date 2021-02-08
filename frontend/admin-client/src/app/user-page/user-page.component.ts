@@ -78,6 +78,5 @@ export class UserPageComponent implements OnInit {
     this.userService.delete(this.apiUrl).subscribe((res) => {
       this.router.navigate
     });
-    // alert("Deleted");
   }
 }

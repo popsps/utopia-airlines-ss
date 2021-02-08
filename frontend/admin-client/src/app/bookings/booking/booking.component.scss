@@ -91,11 +91,38 @@
 
   }
 
+  //i {
+  //  font-size : 1.2rem;
+  //
+  //  &:hover, &:active, &:focus {
+  //    color : lighten(#333333, 30%);
+  //  }
+  //}
+}
+
+.sbtn {
+  display         : inline-block;
+  border          : none;
+  margin          : 0;
+  text-decoration : none;
+  background      : transparent;
+  font-size       : 1rem;
+  cursor          : pointer;
+  text-align      : center;
+  outline         : none;
+  box-shadow      : none;
+
+  &:hover, &:active, &:focus {
+    color : lighten(#333333, 30%);
+  }
+
+  &:disabled {
+    color : lighten(#333333, 60%);
+  }
+
   i {
     font-size : 1.2rem;
 
-    &:hover, &:active, &:focus {
-      color : lighten(#333333, 30%);
-    }
   }
+
 }

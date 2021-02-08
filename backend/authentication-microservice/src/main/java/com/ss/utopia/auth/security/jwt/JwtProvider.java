@@ -31,15 +31,14 @@ public class JwtProvider {
   /**
    * Create A JWT Token based on username and roles associated to the user
    *
-   * @param userId
-   * @param roles
+   * @param claims
    * @return
    */
   public String createToken(final Claims claims) {
     final Date now = new Date();
     final Date expiresAt = new Date(now.getTime() + validityInMilliseconds);
     return Jwts.builder().setClaims(claims).setIssuedAt(now).setExpiration(expiresAt)
-        .signWith(SignatureAlgorithm.RS256, jwtKeyPair.getPrivate()).compact();
+      .signWith(SignatureAlgorithm.RS256, jwtKeyPair.getPrivate()).compact();
   }
 
   public Optional<Claims> validateToken(final String token) {

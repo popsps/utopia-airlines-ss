@@ -1,6 +1,6 @@
 const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking } = require("@utopia-airlines-wss/common/models");
-const {  NotFoundError,  handleMutationError   } = require("@utopia-airlines-wss/common/errors");
+const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 
 const findBookingById = async (id, options) => {
   const booking = await Booking.findByPk(id, options);
@@ -8,12 +8,16 @@ const findBookingById = async (id, options) => {
   return booking;
 };
 
-
 const bookingService = {
-  async findAllBookings({ isActive = true } = {}) {
+  async findAllBookings({ isActive = true, offset = 0, limit = 10 } = {}) {
     const where = { isActive };
-    const bookings = await Booking.findAll({
+    limit = limit ? Math.min(+limit, 40) : 10;
+    offset = offset ? offset * limit : 0;
+    const bookings = await Booking.findAndCountAll({
       where,
+      limit,
+      offset,
+      distinct: true,
       include: [
         {
           association: "agent",
@@ -69,7 +73,7 @@ const bookingService = {
     const booking = await findBookingById(id);
     const transaction = await sequelize.transaction();
     try {
-      await booking.update({ 
+      await booking.update({
         isActive,
       }, {
         transaction,
