@@ -18,8 +18,8 @@ const userBookingController = {
     try {
       const { user, body } = req;
       const data = ["ADMIN", "AGENT"].includes(user?.role.name)
-        ? { ...body, agentId: user.id, contact: null }
-        : { ...body, userId: user.id, agentId: null, contact: null  };
+        ? { ...body, agentId: user.id }
+        : { ...body, userId: user.id, agentId: null };
       const booking = await userBookingService.createUserBooking(data);
       res.status(201).json(booking);
     } catch (err) {
