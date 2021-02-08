@@ -16,15 +16,10 @@ const userBookingController = {
   },
   async create(req, res, next) {
     try {
-      const data = (({ user, body }) => {
-        switch (user?.role.name) {
-        case "ADMIN":
-        case "AGENT":
-          return { ...body, agentId: user.id, contact: null };
-        default:
-          return { ...body, userId: user.id, agentId: null, contact: null  };
-        }
-      })(req);
+      const { user, body } = req;
+      const data = ["ADMIN", "AGENT"].includes(user?.role.name)
+        ? { ...body, agentId: user.id, contact: null }
+        : { ...body, userId: user.id, agentId: null, contact: null  };
       const booking = await userBookingService.createUserBooking(data);
       res.status(201).json(booking);
     } catch (err) {
