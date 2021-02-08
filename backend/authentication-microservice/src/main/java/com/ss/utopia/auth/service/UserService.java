@@ -37,6 +37,7 @@ public class UserService implements UserDetailsService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userDao.findByUsername(username)

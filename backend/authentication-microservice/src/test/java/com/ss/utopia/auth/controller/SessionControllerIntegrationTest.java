@@ -99,7 +99,7 @@ class SessionControllerIntegrationTest {
    * @return
    * @throws JsonProcessingException
    */
-  private String buildLoginDto(String username, String password) throws JsonProcessingException {
+  private String getLoginDto(String username, String password) throws JsonProcessingException {
     // create request body with username and password
     ObjectMapper objectMapper = new ObjectMapper();
     LoginDto loginDto = new LoginDto(username, password);
@@ -112,7 +112,7 @@ class SessionControllerIntegrationTest {
   void loginUnauthorized() throws Exception {
     // create request body with username and password
     // create JSON string of loginDto
-    String loginDtoJson = buildLoginDto("invalidUsername2423r3rfgr", "password");
+    String loginDtoJson = getLoginDto("invalidUsername2423r3rfgr", "password");
     // mock api call
     this.mockMvc
       .perform(MockMvcRequestBuilders.post(URI).contentType(MediaType.APPLICATION_JSON).content(loginDtoJson))
@@ -126,7 +126,7 @@ class SessionControllerIntegrationTest {
   void loginAuthorized() throws Exception {
     // create request body with username and password
     // create JSON string of loginDto
-    String loginDtoJson = buildLoginDto("admin", "password");
+    String loginDtoJson = getLoginDto("admin", "password");
     // mock api call
     this.mockMvc
       .perform(MockMvcRequestBuilders.post(URI).contentType(MediaType.APPLICATION_JSON).content(loginDtoJson))
@@ -140,7 +140,7 @@ class SessionControllerIntegrationTest {
   void loginAdmin() throws Exception {
     // create request body with username and password
     // create JSON string of loginDto
-    String loginDtoJson = buildLoginDto("admin", "password");
+    String loginDtoJson = getLoginDto("admin", "password");
     // mock api call
     this.mockMvc
       .perform(MockMvcRequestBuilders.post(URI + "/admin").contentType(MediaType.APPLICATION_JSON).content(loginDtoJson))
@@ -154,7 +154,7 @@ class SessionControllerIntegrationTest {
   void loginAdminCustomer() throws Exception {
     // create request body with username and password
     // create JSON string of loginDto
-    String loginDtoJson = buildLoginDto("acrackettl7", "password");
+    String loginDtoJson = getLoginDto("acrackettl7", "password");
 
     // mock api call
     this.mockMvc
@@ -168,7 +168,7 @@ class SessionControllerIntegrationTest {
   void loginAgent() throws Exception {
     // create request body with username and password
     // create JSON string of loginDto
-    String loginDtoJson = buildLoginDto("hfortey72", "password");
+    String loginDtoJson = getLoginDto("hfortey72", "password");
     // mock api call
     this.mockMvc
       .perform(MockMvcRequestBuilders.post(URI + "/agent").contentType(MediaType.APPLICATION_JSON).content(loginDtoJson))
@@ -182,7 +182,7 @@ class SessionControllerIntegrationTest {
   void loginAgentAsAdmin() throws Exception {
     // create request body with username and password
     // create JSON string of loginDto
-    String loginDtoJson = buildLoginDto("admin", "password");
+    String loginDtoJson = getLoginDto("admin", "password");
     // mock api call
     this.mockMvc
       .perform(MockMvcRequestBuilders.post(URI + "/agent").contentType(MediaType.APPLICATION_JSON).content(loginDtoJson))

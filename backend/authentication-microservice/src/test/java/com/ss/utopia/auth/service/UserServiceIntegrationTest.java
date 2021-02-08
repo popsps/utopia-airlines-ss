@@ -4,34 +4,41 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ss.utopia.auth.AuthApplication;
 import com.ss.utopia.auth.dao.UserDao;
+import com.ss.utopia.auth.dto.LoginDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.entity.UserRole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.web.client.HttpServerErrorException;
+
+import javax.servlet.http.Cookie;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.core.userdetails.User.withUsername;
 
-@SpringBootTest(
-  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-  classes = AuthApplication.class
-)
+@SpringBootTest(classes = AuthApplication.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
 class UserServiceIntegrationTest {
 
-  @Autowired
+  @SpyBean
   private UserService userService;
-  @Autowired
-  PasswordEncoder passwordEncoder;
-//  @SpyBean
-//  private UserDao userDao;
 
   private User getAdminUser() throws JsonProcessingException {
     return new User(1001L, "admin", "password", new UserRole(1L, "ADMIN"),
@@ -48,6 +55,12 @@ class UserServiceIntegrationTest {
       "Trever", "McKernan", "tmckernan1@hibu.com", "1138845977");
   }
 
+  private User getFakeUser() throws JsonProcessingException {
+    return new User(-432L, "gretmcgrekegerrnan1", "password", new UserRole(2L, "CUSTOMER"),
+      "Trever", "McKernan", "grekegernan1@hibu.com", "1137145977");
+  }
+
+
   @BeforeEach
   void setUp() {
   }
@@ -57,13 +70,36 @@ class UserServiceIntegrationTest {
   }
 
   @Test
-  @DisplayName("")
-  void loadUserByUsername() {
+  @DisplayName("Test load and getting userDetails by username; username is found")
+  void loadUserByUsername() throws JsonProcessingException {
+    User expectedUser = getAdminUser();
+    UserDetails expectedUserDetails = withUsername(expectedUser.getUsername()).password(expectedUser.getPassword()).authorities(expectedUser.getRole().getName())
+      .accountExpired(false).accountLocked(false).credentialsExpired(false).disabled(false).build();
+    String username = expectedUser.getUsername();
+    UserDetails actualUserDetails = userService.loadUserByUsername(username);
+    assertEquals(expectedUserDetails, actualUserDetails);
   }
 
   @Test
-  @DisplayName("")
-  void loadAuthenticatedUser() {
+  @DisplayName("Test load and getting userDetails by username; username is not found")
+  void loadUserByUsernameNotExist() throws JsonProcessingException {
+    String fakeUsername = getFakeUser().getUsername();
+    assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername(fakeUsername));
+  }
+
+
+  @Test
+  @DisplayName("Test whether the user that is trying to login is authenticated; authenticated")
+  void loadAuthenticatedUser() throws JsonProcessingException {
+    User user = getCustomerUser();
+    assertEquals(user, userService.loadAuthenticatedUser(user.getUsername(), user.getPassword()).get());
+  }
+
+  @Test
+  @DisplayName("Test whether the user that is trying to login is authenticated; not authenticated")
+  void loadAuthenticatedUserFake() throws JsonProcessingException {
+    User user = getFakeUser();
+    assertFalse(userService.loadAuthenticatedUser(user.getUsername(), user.getPassword()).isPresent());
   }
 
   @Test
@@ -87,8 +123,26 @@ class UserServiceIntegrationTest {
   }
 
   @Test
-  @DisplayName("")
-  void getUserById() {
+  @DisplayName("Test finding a user in the database by its id; the id exists")
+  void getUserById() throws JsonProcessingException {
+    User expectedUser = getCustomerUser();
+    Long userID = expectedUser.getId();
+    User actualUser = userService.getUserById(userID);
+    assertEquals(expectedUser, actualUser);
+  }
+
+  @Test
+  @DisplayName("Test finding a user in the database by its id; the id does not exist")
+  void getUserByIdFake() throws JsonProcessingException {
+    Long fakeId = getFakeUser().getId();
+    assertThrows(HttpServerErrorException.class, () -> userService.getUserById(fakeId));
+  }
+
+  @Test
+  @DisplayName("Test finding a user in the database by its id; the id is invalid(null)")
+  void getUserByIdInvalidId() throws JsonProcessingException {
+    Long illegalId = null;
+    assertThrows(InvalidDataAccessApiUsageException.class, () -> userService.getUserById(illegalId));
   }
 
   @Test
@@ -97,8 +151,20 @@ class UserServiceIntegrationTest {
   }
 
   @Test
-  @DisplayName("")
+  @DisplayName("Test removing the cookie; expect a cookie with key: session, value:null, path:'/'")
   void removeCookie() {
+    Cookie actualCookie = userService.removeCookie().get();
+    assertAll(
+      () -> assertEquals("session", actualCookie.getName()),
+      () -> assertEquals(null, actualCookie.getValue()),
+      () -> assertEquals("/", actualCookie.getPath()));
+  }
+
+  @Test
+  @DisplayName("Test removing the cookie; an error happened while setting the cookie")
+  void removeCookieError() {
+    Mockito.when(userService.removeCookie()).thenReturn(Optional.empty());
+    assertEquals(Optional.empty(), userService.removeCookie());
   }
 
   @Test
@@ -111,12 +177,37 @@ class UserServiceIntegrationTest {
   }
 
   @Test
-  @DisplayName("")
-  void isUserAdmin() {
+  @DisplayName("Test finding a user in the database by its user name; the username does not exist")
+  void getUserByUsernameFakeUser() throws JsonProcessingException {
+    String fakeUsername = getFakeUser().getUsername();
+    assertThrows(HttpServerErrorException.class, () -> userService.getUserByUsername(fakeUsername));
   }
 
   @Test
-  @DisplayName("")
-  void isUserAgent() {
+  @DisplayName("Test whether an admin user is successfully marked as an admin")
+  void isUserAdmin() throws JsonProcessingException {
+    User adminUser = getAdminUser();
+    assertEquals(true, userService.isUserAdmin(adminUser));
+  }
+
+  @Test
+  @DisplayName("Test whether an customer user is caught as non-admin")
+  void isUserAdminCustomer() throws JsonProcessingException {
+    User customerUser = getCustomerUser();
+    assertEquals(false, userService.isUserAdmin(customerUser));
+  }
+
+  @Test
+  @DisplayName("Test whether an agent user is successfully marked as an agent")
+  void isUserAgent() throws JsonProcessingException {
+    User agentUser = getAgentUser();
+    assertEquals(true, userService.isUserAgent(agentUser));
+  }
+
+  @Test
+  @DisplayName("Test whether an customer user is caught as non-agent")
+  void isUserAgentCustomer() throws JsonProcessingException {
+    User customerUser = getCustomerUser();
+    assertEquals(false, userService.isUserAgent(customerUser));
   }
 }
