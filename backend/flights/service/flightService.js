@@ -31,10 +31,10 @@ const flightService = {
           association: "route",
           where: removeUndefined({
             originId: origin && {
-              [Op.regexp]: origin.toUpperCase(),
+              [Op.substring]: origin,
             },
             destinationId: destination && {
-              [Op.regexp]: destination.toUpperCase(),
+              [Op.substring]: destination,
             },
           }), 
         },
