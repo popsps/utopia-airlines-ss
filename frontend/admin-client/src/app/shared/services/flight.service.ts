@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from "../../../environments/environment";
 import { Flight } from "../models/Flight";
+import { FlightFilter } from '../models/FlightFilter';
 
 export interface PaginatedFlightResult {
   total: number;
@@ -23,8 +24,12 @@ export class FlightService {
   }));
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<PaginatedFlightResult> {
-    return FlightService.parseFlights(this.http.get(environment.flightApiUrl));
+  getAll(query: FlightFilter & { offset?: number, limit: number; }): Observable<PaginatedFlightResult> {
+    const queryStr = Object.entries(query)
+      .filter(([, value]) => value)
+      .map((pair) => pair.join("="))
+      .join("&");
+    return FlightService.parseFlights(this.http.get(environment.flightApiUrl + "?" + queryStr));
   };
 
   post(flight: any) {
