@@ -12,6 +12,6 @@
     <app-flight-result-list [flights]="flights.data.results">
     </app-flight-result-list>
     <app-pagination [(currentPage)]="pageNum" [totalPageCount]="getTotalPageCount()" [visiblePageCount]="5"
-      (pageChange)="loadFlights()"></app-pagination>
+      (pageChange)="onPageNumChange($event)"></app-pagination>
   </ng-container>
 </main>

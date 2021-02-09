@@ -70,4 +70,9 @@ export class FlightsComponent implements OnInit {
     this.loadFlights();
   }
 
+  onPageNumChange(pageNum) {
+    this.pageNum = pageNum;
+    this.loadFlights();
+  }
+
 }
