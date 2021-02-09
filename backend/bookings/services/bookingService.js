@@ -9,14 +9,15 @@ const findBookingById = async (id, options) => {
 };
 
 const bookingService = {
-  async findAllBookings({ isActive = true, offset = 0, limit = 10 } = {}) {
-    const where = { isActive };
-    limit = limit ? Math.min(+limit, 40) : 10;
-    offset = offset ? offset * limit : 0;
+  async findAllBookings(
+    {isActive = true, offset = 0, limit = 10} = {}) {
+    const where = {isActive};
+    if(limit > 10000)
+      throw new BadRequestError("Limit exceeds maximum of 10000");
     const bookings = await Booking.findAndCountAll({
       where,
-      limit,
-      offset,
+      limit: +limit,
+      offset: +offset,
       distinct: true,
       include: [
         {
