@@ -37,7 +37,7 @@ import static org.springframework.security.core.userdetails.User.withUsername;
 @TestPropertySource(locations = "classpath:application-test.properties")
 class UserServiceIntegrationTest {
 
-  @SpyBean
+  @Autowired
   private UserService userService;
 
   private User getAdminUser() throws JsonProcessingException {
@@ -158,13 +158,6 @@ class UserServiceIntegrationTest {
       () -> assertEquals("session", actualCookie.getName()),
       () -> assertEquals(null, actualCookie.getValue()),
       () -> assertEquals("/", actualCookie.getPath()));
-  }
-
-  @Test
-  @DisplayName("Test removing the cookie; an error happened while setting the cookie")
-  void removeCookieError() {
-    Mockito.when(userService.removeCookie()).thenReturn(Optional.empty());
-    assertEquals(Optional.empty(), userService.removeCookie());
   }
 
   @Test
