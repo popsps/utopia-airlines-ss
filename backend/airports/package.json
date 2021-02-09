@@ -10,6 +10,9 @@
   },
   "jest": {
     "setupFiles": [
+      "./test/setupEnv.js"
+    ],
+    "setupFilesAfterEnv": [
       "./test/setup.js"
     ]
   },
