@@ -13,7 +13,7 @@ const getDateRange = date => {
 
 const flightService = {
   async findAllFlights({ origin, destination, departureDate } = {}, { offset = 0, limit = 10 }){
-    const flights = await Flight.findAll({
+    const { count, rows } = await Flight.findAndCountAll({
       where: removeUndefined({ 
         departureTime: departureDate
           ? {
@@ -23,6 +23,9 @@ const flightService = {
       }),
       offset: +offset,
       limit: +limit,
+      order: [
+        ["departureTime", "ASC"],
+      ],
       include: [ 
         { 
           association: "route",
@@ -34,7 +37,12 @@ const flightService = {
         "airplane",
       ],
     });
-    return flights; 
+    return {
+      total: count,
+      offset,
+      count: rows.length,
+      results: rows,
+    }; 
   },
   async findFlightById(id) {
     const flight = await Flight.findByPk(id,
