@@ -21,8 +21,8 @@ const flightService = {
           }
           : null,
       }),
-      offset: offset,
-      limit: limit,
+      offset: +offset,
+      limit: +limit,
       include: [ 
         { 
           association: "route",
