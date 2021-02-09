@@ -8,7 +8,10 @@
   <app-flight-creation-modal></app-flight-creation-modal>
   <app-flight-search-form (filterChanged)="onFilterChange($event)"></app-flight-search-form>
   <app-spinner *ngIf="flights.state==='pending'"></app-spinner>
-  <app-flight-result-list *ngIf="flights.state==='done'"
-    [flights]="(flights.data | flightRoute:filter.origin:filter.destination | flightDepartureDate:filter.departureDateRange[0]).slice(0, 100)">
-  </app-flight-result-list>
+  <ng-container *ngIf="flights.state==='done'">
+    <app-flight-result-list [flights]="flights.data.results">
+    </app-flight-result-list>
+    <app-pagination [collectionSize]="flight.data.total" [maxSize]="getPageSize()" [(page)]="pageNum"
+      (pageChange)="navigate($event)"></app-pagination>
+  </ng-container>
 </main>
