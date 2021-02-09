@@ -26,7 +26,7 @@ export class FlightService {
 
   getAll(query: FlightFilter & { offset?: number, limit?: number; }): Observable<PaginatedFlightResult> {
     const queryStr = Object.entries(query)
-      .filter(([, value]) => value != null)
+      .filter(([, value]) => value)
       .map((pair) => pair.join("="))
       .join("&");
     return FlightService.parseFlights(this.http.get(environment.flightApiUrl + "?" + queryStr));
