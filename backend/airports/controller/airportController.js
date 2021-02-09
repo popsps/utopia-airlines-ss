@@ -3,7 +3,7 @@ const { airportService } = require("../service");
 const airportController = {
   async getAll(req, res, next) {
     try{
-      res.json(await airportService.findAllAirports());
+      res.json(await airportService.findAllAirports(req.query));
     } catch(err){
       next(err);
     }
