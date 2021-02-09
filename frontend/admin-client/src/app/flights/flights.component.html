@@ -11,7 +11,7 @@
   <ng-container *ngIf="flights.state==='done'">
     <app-flight-result-list [flights]="flights.data.results">
     </app-flight-result-list>
-    <app-pagination [collectionSize]="getTotalPageCount()" [maxSize]="getPageSize()" [(page)]="pageNum"
+    <app-pagination [(currentPage)]="pageNum" [totalPageCount]="getTotalPageCount()" [visiblePageCount]="5"
       (pageChange)="loadFlights()"></app-pagination>
   </ng-container>
 </main>
