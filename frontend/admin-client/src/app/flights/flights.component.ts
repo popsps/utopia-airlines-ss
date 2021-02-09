@@ -19,6 +19,8 @@ export class FlightsComponent implements OnInit {
     data?: PaginatedFlightResult;
   };
 
+  filter: FlightFilter = {};
+
   constructor(private flightService: FlightService) {
     this.flights = {
       state: "pending",
@@ -26,13 +28,12 @@ export class FlightsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadFlights({});
+    this.loadFlights();
   }
 
-  loadFlights(filter: FlightFilter) {
-    this.flights.state = "pending";
+  loadFlights() {
     this.flightService.getAll({
-      ...filter,
+      ...this.filter,
       offset: (this.pageNum - 1) * FlightsComponent.PAGE_SIZE, limit: FlightsComponent.PAGE_SIZE
     }).subscribe(
       (data) => {
@@ -53,17 +54,19 @@ export class FlightsComponent implements OnInit {
     );
   }
 
-  onFilterChange(filter) {
-    this.pageNum = 0;
-    this.loadFlights(filter);
-  }
-
   getPageSize() {
     return FlightsComponent.PAGE_SIZE;
   }
 
-  setPageNum(pageNum) {
-    this.pageNum = pageNum;
+  getTotalPageCount() {
+    if (this.flights.state !== "done") return 1;
+    return Math.ceil(this.flights.data.total / FlightsComponent.PAGE_SIZE);
+  }
+
+  onFilterChange(filter) {
+    this.pageNum = 0;
+    this.filter = filter;
+    this.loadFlights();
   }
 
 }
