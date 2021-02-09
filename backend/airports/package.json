@@ -9,8 +9,8 @@
     "test:watch": "jest --watch"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "./test/setup.ts"
+    "setupFiles": [
+      "./test/setup.js"
     ]
   },
   "keywords": [
