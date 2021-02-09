@@ -65,7 +65,7 @@ export class FlightsComponent implements OnInit {
   }
 
   onFilterChange(filter) {
-    this.pageNum = 0;
+    this.pageNum = 1;
     this.filter = filter;
     this.loadFlights();
   }
