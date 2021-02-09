@@ -34,7 +34,8 @@ export class FlightsComponent implements OnInit {
   loadFlights() {
     this.flightService.getAll({
       ...this.filter,
-      offset: (this.pageNum - 1) * FlightsComponent.PAGE_SIZE, limit: FlightsComponent.PAGE_SIZE
+      offset: (this.pageNum - 1) * FlightsComponent.PAGE_SIZE,
+      limit: FlightsComponent.PAGE_SIZE
     }).subscribe(
       (data) => {
         this.flights = {
