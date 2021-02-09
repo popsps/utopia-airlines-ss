@@ -1,23 +1,52 @@
+const { Op } = require("sequelize");
 const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
+const { removeUndefined } = require("@utopia-airlines-wss/common/util");
+
+const getDateRange = date => {
+  const startTime = new Date(date.getTime());
+  startTime.setHours(0, 0, 0, 0);
+  const endTime = new Date(startTime.getTime());
+  endTime.setDate(endTime.getDate() + 1);
+  return [startTime, endTime];
+};
 
 const flightService = {
-  async findAllFlights({ origin, destination, departure } = {}){
-    const flightQuery = {};
-    if(departure != null) flightQuery.departureTime = departure;
-    const routeQuery = {};
-    if(origin != null) routeQuery.originId = origin;
-    if(destination != null) routeQuery.destinationId = destination;
-    return Flight.findAll({
-      where: flightQuery,
+  async findAllFlights({ origin, destination, departureDate } = {}, { offset = 0, limit = 10 }){
+    const { count, rows } = await Flight.findAndCountAll({
+      where: removeUndefined({ 
+        departureTime: departureDate
+          ? {
+            [Op.between]: getDateRange(new Date(departureDate)),
+          }
+          : null,
+      }),
+      offset: +offset,
+      limit: +limit,
+      order: [
+        ["departureTime", "ASC"],
+      ],
       include: [ 
         { 
           association: "route",
-          where: routeQuery, 
+          where: removeUndefined({
+            originId: origin && {
+              [Op.regexp]: origin.toUpperCase(),
+            },
+            destinationId: destination && {
+              [Op.regexp]: destination.toUpperCase(),
+            },
+          }), 
         },
         "airplane",
       ],
     });
+    return {
+      total: count,
+      offset,
+      count: rows.length,
+      results: rows,
+    }; 
   },
   async findFlightById(id) {
     const flight = await Flight.findByPk(id,
@@ -28,36 +57,22 @@ const flightService = {
         ],
       });
     if(!flight) throw new NotFoundError("cannot find flight");
-    return flight;
+    return flight; 
   },
-  async findFlightBookings(id) {
-    const query = {};
-    const { bookings } = await Flight.findByPk(id, {
-      where: query,
-      attributes: [],
-      include: [{
-        association: "bookings", 
-        include: "passengers", 
-        through: { attributes: [] },
-      }],
-    });
-    return bookings;
-  },
-  // async findFlightPassengers(id) {
-  //   const query = {};
-  //   return Flight.findAll({
-  //     where: query,
-  //     include: [],
-  //   });
-  // },
-  async createFlight({ routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
+  async createFlight({ routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     try {
-      return await FlightRaw.create({ routeId, airplaneId, departureTime, reservedSeats, seatPrice });
+      return await FlightRaw.create({
+        routeId,
+        airplaneId,
+        departureTime,
+        reservedSeats: reserved,
+        seatPrice: price,
+      });
     } catch(err) {
       handleMutationError(err);
     }
   },
-  async updateFlight(id, { routeId, airplaneId, departureTime, reservedSeats, seatPrice } = {}) {
+  async updateFlight(id, { routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     const flight = await flightService.findFlightById(id);
     if(!flight) throw new NotFoundError("cannot find flight");
     try {
@@ -65,8 +80,8 @@ const flightService = {
         routeId,
         airplaneId,
         departureTime,
-        reservedSeats,
-        seatPrice,
+        reservedSeats: reserved,
+        seatPrice: price,
       };
       flight.update(newFlightInfo);
     } catch(err) {

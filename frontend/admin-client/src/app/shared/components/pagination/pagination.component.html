@@ -1,26 +1,30 @@
 <nav>
   <ul class="pagination">
-    <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === 1 }">
       <i class="page-link fas fa-angle-double-left" (click)="goFirstPage()"></i>
     </li>
-    <li class="page-item" [ngClass]="(page === 1) ? 'disabled': ''">
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === 1 }">
       <i class="fas fa-angle-left page-link" (click)="goPrevPage()"></i>
     </li>
-    <li class="page-item disabled" *ngIf="activePages[0] != 1">
-      <i class="page-link fas fa-ellipsis-h"></i>
-    </li>
-    <li *ngFor="let p of activePages;" class="page-item" [ngClass]="(p === page) ? 'active': ''">
-      <a class="page-link" (click)="goToPage(p)">
-        {{p}}
+    <ng-container *ngIf="currentPage > visiblePageCount + 1">
+      <li class="page-item disabled">
+        <i class="page-link fas fa-ellipsis-h"></i>
+      </li>
+    </ng-container>
+    <li *ngFor="let page of getPagesToDisplay();" class="page-item" [ngClass]="{ 'active' : page === currentPage }">
+      <a class="page-link" (click)="goToPage(page)">
+        {{page}}
       </a>
     </li>
-    <li class="page-item disabled" *ngIf="activePages.slice(-1)[0] !== collectionSize">
-      <i class="page-link fas fa-ellipsis-h"></i>
-    </li>
-    <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
+    <ng-container *ngIf="currentPage < totalPageCount - visiblePageCount - 1">
+      <li class="page-item disabled">
+        <i class="page-link fas fa-ellipsis-h"></i>
+      </li>
+    </ng-container>
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === totalPageCount }">
       <i class="page-link fas fa-angle-right" (click)="goNextPage()"></i>
     </li>
-    <li class="page-item" [ngClass]="(page === collectionSize) ? 'disabled': ''">
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === totalPageCount }">
       <i class="page-link fas fa-angle-double-right" (click)="goLastPage()"></i>
     </li>
   </ul>
