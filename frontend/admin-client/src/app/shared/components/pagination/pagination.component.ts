@@ -13,17 +13,11 @@ export class PaginationComponent implements OnInit {
   @Input() boundaryLinks: boolean;
   @Output() pageChange = new EventEmitter<number>(true);
 
-  pages: number[];
-  activePages: number[];
-
   constructor() {
   }
 
   ngOnInit(): void {
-    this.pages = Array(this.totalPageCount).fill(0).map((v, i) => i + 1);
-    this.buildActivePages();
     console.log('pages', this.totalPageCount);
-    this.pageChange.subscribe(p => this.buildActivePages());
   }
 
   goNextPage(): void {
@@ -47,35 +41,18 @@ export class PaginationComponent implements OnInit {
     console.log(n);
   }
 
-  private buildActivePages(): void {
+  getPagesToDisplay(): number[] {
     // if number of pages to show is less than the collection size
-    if (this.visiblePageCount > this.totalPageCount)
+    if (this.totalPageCount < this.visiblePageCount)
     {
-      this.activePages = this.pages;
-      return;
+      return Array(this.totalPageCount).fill(0).map((_, i) => i + 1);
     }
-    this.activePages = [];
-    let size = this.visiblePageCount;
-    const currentPage = this.currentPage;
-    this.activePages.push(currentPage);
-    size--;
-    let prev = (currentPage > 1) ? currentPage - 1 : null;
-    let next = (currentPage < this.totalPageCount) ? currentPage + 1 : null;
-    while (size !== 0)
-    {
-      if (prev)
-      {
-        this.activePages.push(prev);
-        prev = (prev > 1) ? prev - 1 : null;
-        size--;
-      }
-      if (next)
-      {
-        this.activePages.push(next);
-        next = (next < this.totalPageCount) ? next + 1 : null;
-        size--;
-      }
-    }
-    this.activePages.sort((a, b) => a - b);
+    const start = this.currentPage <= this.visiblePageCount
+      ? 0
+      : Math.min(
+        this.currentPage - this.visiblePageCount,
+        this.totalPageCount - 2 * this.visiblePageCount
+      ) - 1;
+    return Array(2 * this.visiblePageCount + 1).fill(0).map((_, i) => i + start + 1);
   }
 }
