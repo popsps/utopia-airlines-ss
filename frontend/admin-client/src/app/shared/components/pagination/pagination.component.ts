@@ -38,7 +38,6 @@ export class PaginationComponent implements OnInit {
 
   goToPage(n: number): void {
     this.pageChange.emit(n);
-    console.log(n);
   }
 
   getPagesToDisplay(): number[] {
