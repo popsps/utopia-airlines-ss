@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FlightService } from "../shared/services/flight.service";
+import { FlightService, PaginatedFlightResult } from "../shared/services/flight.service";
 
-import { Flight } from "../shared/models/Flight";
 import { FlightFilter } from '../shared/models/FlightFilter';
-
 
 @Component({
   selector: 'app-flights',
@@ -12,33 +10,41 @@ import { FlightFilter } from '../shared/models/FlightFilter';
   styleUrls: ['./flights.component.scss']
 })
 export class FlightsComponent implements OnInit {
+  private static PAGE_SIZE = 10;
+
+  pageNum = 1;
   flights: {
     state: "pending" | "done" | "error";
     error?: any;
-    data?: Flight[];
+    data?: PaginatedFlightResult;
   };
 
-  filter: FlightFilter = {
-    departureDateRange: []
-  };
-
-  constructor(private flightService: FlightService) { }
-
-  ngOnInit(): void {
-    this.loadFlights();
+  constructor(private flightService: FlightService) {
+    this.flights = {
+      state: "pending",
+    };
   }
 
-  loadFlights() {
-    this.flights = { state: "pending" };
-    this.flightService.getAll().subscribe(
-      (res: any[]) => {
+  ngOnInit(): void {
+    this.loadFlights({});
+  }
+
+  loadFlights(filter: FlightFilter) {
+    this.flights.state = "pending";
+    this.flightService.getAll({
+      ...filter,
+      offset: (this.pageNum - 1) * FlightsComponent.PAGE_SIZE, limit: FlightsComponent.PAGE_SIZE
+    }).subscribe(
+      (data) => {
         this.flights = {
+          ...this.flights,
           state: "done",
-          data: res.sort((a, b) => a.departureTime.getTime() - b.departureTime.getTime())
+          data
         };
       },
       (error) => {
         this.flights = {
+          ...this.flights,
           state: "error",
           error
         };
@@ -48,7 +54,16 @@ export class FlightsComponent implements OnInit {
   }
 
   onFilterChange(filter) {
-    this.filter = filter;
+    this.pageNum = 0;
+    this.loadFlights(filter);
+  }
+
+  getPageSize() {
+    return FlightsComponent.PAGE_SIZE;
+  }
+
+  setPageNum(pageNum) {
+    this.pageNum = pageNum;
   }
 
 }
