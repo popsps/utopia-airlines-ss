@@ -1,4 +1,4 @@
-import {Deserializable} from './Deserializable';
+import { Deserializable } from './Deserializable';
 
 export class User implements Deserializable {
   id: number;
