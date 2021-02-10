@@ -36,6 +36,16 @@ public class UserDto {
 	private String phone;
 	
 	private String role;
+	
+	public UserDto(String username, String password, String givenName, String familyName, String email, String phone, String role) {
+		this.username = username;
+		this.password = password;
+		this.givenName = givenName;
+		this.familyName = familyName;
+		this.email = email;
+		this.phone = phone;
+		this.role = role;
+	}
 
 	public String getRole() {
 		return role;

@@ -6,7 +6,7 @@
     <li class="page-item" [ngClass]="{ 'disabled' : currentPage === 1 }">
       <i class="fas fa-angle-left page-link" (click)="goPrevPage()"></i>
     </li>
-    <ng-container *ngIf="currentPage > visiblePageCount + 1">
+    <ng-container *ngIf="currentPage > displayedPageRange + 1">
       <li class="page-item disabled">
         <i class="page-link fas fa-ellipsis-h"></i>
       </li>
@@ -16,7 +16,7 @@
         {{page}}
       </a>
     </li>
-    <ng-container *ngIf="currentPage < totalPageCount - visiblePageCount - 1">
+    <ng-container *ngIf="currentPage < totalPageCount - displayedPageRange - 1">
       <li class="page-item disabled">
         <i class="page-link fas fa-ellipsis-h"></i>
       </li>

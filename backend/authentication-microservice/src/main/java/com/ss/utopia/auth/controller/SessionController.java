@@ -6,19 +6,17 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
-
 import com.ss.utopia.auth.dto.LoginDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.security.SessionCookieProvider;
 import com.ss.utopia.auth.service.UserService;
 
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/session")
@@ -27,6 +25,9 @@ public class SessionController {
   private UserService userService;
   @Autowired
   private SessionCookieProvider sessionCookieProvider;
+
+  // TODO: 2/6/2021 split HttpServerErrorException to 2 types of error  
+  // Todo: create login
 
   /**
    * Login a user using loginDto
@@ -40,7 +41,7 @@ public class SessionController {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
       .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie creation failed"));
     response.addCookie(sessionCookie);
   }
 
@@ -63,6 +64,8 @@ public class SessionController {
     response.addCookie(sessionCookie);
   }
 
+  // TODO: 2/6/2021 take this out 
+
   /**
    * Login only an agent user using loginDto
    *
@@ -82,6 +85,7 @@ public class SessionController {
     response.addCookie(sessionCookie);
   }
 
+  // TODO: 2/6/2021 /api/sessions/users/user/getsession
   @GetMapping
   public User getSession(@AuthenticationPrincipal UserDetails currentUser) {
     if (currentUser == null)
@@ -90,10 +94,12 @@ public class SessionController {
       return userService.getUserByUsername(currentUser.getUsername());
   }
 
+  // TODO: 2/6/2021 POST /api/sessions/users/user/logout
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void logout(HttpServletResponse response) {
-    final Cookie sessionCookie = userService.removeCookie();
+    final Cookie sessionCookie = userService.removeCookie()
+      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed"));
     response.addCookie(sessionCookie);
   }
 }
