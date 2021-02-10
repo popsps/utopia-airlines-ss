@@ -75,7 +75,7 @@ public class UserService implements UserDetailsService {
     userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
     User user = new User(userDto);
     
-    if(user.getRole().equals(null))
+    if(user.getRole().getId().equals(null))
     	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
     
     return submitUser(user);
