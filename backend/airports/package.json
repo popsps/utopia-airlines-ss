@@ -4,7 +4,17 @@
   "description": "Controller, Service, and Dao for Airpots",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/setupEnv.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/setup.js"
+    ]
   },
   "keywords": [
     "airports"
@@ -14,7 +24,6 @@
   "dependencies": {
     "@utopia-airlines-wss/common": "file:../common",
     "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-generator": "^4.16.1",
@@ -24,7 +33,11 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
+    "@types/jest": "^26.0.20",
     "@types/node": "^14.14.17",
-    "@types/sequelize": "^4.28.9"
+    "@types/sequelize": "^4.28.9",
+    "@types/supertest": "^2.0.10",
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
   }
 }
