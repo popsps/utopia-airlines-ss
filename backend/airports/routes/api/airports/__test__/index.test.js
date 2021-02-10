@@ -85,5 +85,21 @@ describe("/api/airports/:id", () => {
       );
       
     });
+    it("responds with 404 errors if an id does not exist with that id", async () => {
+      const id = "4";
+      const res = await request(app)
+        .get("/api/airports/" + id)
+        .expect(404);
+      expect(res.body).toEqual(
+        expect.objectContaining({ 
+          message: "Not Found",
+          errors: expect.arrayContaining([
+            expect.objectContaining({
+              message: expect.any(String),
+            }),
+          ]),
+        })
+      );
+    });
   });
 });
