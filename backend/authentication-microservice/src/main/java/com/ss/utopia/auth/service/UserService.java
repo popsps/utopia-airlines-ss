@@ -72,6 +72,7 @@ public class UserService implements UserDetailsService {
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
+    userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
     User user = new User(userDto);
     
     if(user.getRole().equals(null))
