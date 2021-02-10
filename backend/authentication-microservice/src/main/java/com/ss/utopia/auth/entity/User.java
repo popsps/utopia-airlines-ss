@@ -3,6 +3,8 @@ package com.ss.utopia.auth.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.ss.utopia.auth.dto.UserDto;
+
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -69,6 +71,17 @@ public class User {
     this.familyName = familyName;
     this.email = email;
     this.phone = phone;
+  }
+  
+  public User(UserDto userDto) {
+	  this.username = userDto.getUsername();
+	  this.password = userDto.getPassword();
+	  this.role = new UserRole(userDto.getRole());
+	  this.givenName = userDto.getGivenName();
+	  this.familyName = userDto.getFamilyName();
+	  this.email = userDto.getEmail();
+	  this.phone = userDto.getPhone();
+
   }
 
   public String getGivenName() {

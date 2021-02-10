@@ -1,7 +1,10 @@
 package com.ss.utopia.auth.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.client.HttpServerErrorException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +25,24 @@ public class UserRole implements GrantedAuthority {
   public UserRole(Long id, String name) {
     this.id = id;
     this.name = name;
+  }
+  
+  public UserRole(String name) {
+	  String role = name.toUpperCase();
+	  switch(role) {
+	  	case "ADMIN": 
+	  		this.id = 1L;
+	  		break;
+	  	case "Customer":
+	  		this.id = 2L;
+	  		break;
+	  	case "AGENT":
+	  		this.id = 3L;
+	  		break;
+	  	default:
+	  		this.id = null;
+	  };
+	  this.name = name;
   }
 
   protected UserRole() {

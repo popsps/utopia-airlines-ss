@@ -9,6 +9,7 @@ import com.ss.utopia.auth.entity.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -70,70 +71,45 @@ public class UserService implements UserDetailsService {
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
-    User user = null;
-    Long roleId = 0L;
-    if (userDto.getRole().toUpperCase().equals("ADMIN")) {
-      roleId = 1L;
-    } else if (userDto.getRole().toUpperCase().equals("CUSTOMER")) {
-      roleId = 2L;
-    } else if (userDto.getRole().toUpperCase().equals("AGENT")) {
-      roleId = 3L;
-    } else {
-      throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
-    }
-    User createdUser = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(roleId, userDto.getRole()),
-      userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
-
-    try {
-      user = userDao.save(createdUser);
-    } catch (Exception e) {
-      String error = e.getMessage();
-      if (error.contains("user.email_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-      } else if (error.contains("user.username_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-      } else if (error.contains("user.phone_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-      }
-    }
-    return user;
+    userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    User user = new User(userDto);
+    
+    if(user.getRole().getId().equals(null))
+    	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+    
+    return submitUser(user);
   }
 
+  /**
+   * check whether the user is agent
+   *
+   * @param user
+   * @return
+   */
   public User updateUser(User user, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
-    if (userDto.getUsername() != null)
-      user.setUsername(userDto.getUsername());
-    if (userDto.getPassword() != null)
-      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    if (userDto.getGivenName() != null)
-      user.setGivenName(userDto.getGivenName());
-    if (userDto.getFamilyName() != null)
-      user.setFamilyName(userDto.getFamilyName());
-    if (userDto.getEmail() != null)
-      user.setEmail(userDto.getEmail());
-    if (userDto.getPhone() != null)
-      user.setPhone(userDto.getPhone());
-    try {
-      userDao.save(user);
-    } catch (Exception e) {
-      String error = e.getMessage();
-      if (error.contains("user.email_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Email is taken");
-      } else if (error.contains("user.username_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Username is taken");
-      } else if (error.contains("user.phone_UNIQUE")) {
-        throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Phone number is taken");
-      }
-    }
-    return user;
+    return submitUser(updateUserInfo(user, userDto));
+
   }
 
+  /**
+   * Try to delete the User from the database
+   *
+   * @param user
+   * @return
+   */
   public int deleteUser(Long userId) {
     LOGGER.info("User attempting to delete profile");
     userDao.deleteById(userId);
     return 1;
   }
 
+  /**
+   * Get a list of users
+   *
+   * @param 
+   * @return List<User>
+   */
   public List<User> getAll() {
     return userDao.findAll();
   }
@@ -142,10 +118,11 @@ public class UserService implements UserDetailsService {
    * Get a user by its id and return the user
    *
    * @param id
-   * @return
+   * @return User
    */
   public User getUserById(Long id) {
-    return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Missing User"));
+	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Unable to find User"));
+
   }
 
   /**
@@ -204,4 +181,43 @@ public class UserService implements UserDetailsService {
   public boolean isUserAgent(User user) {
     return user.getRole().getId() == 3;
   }
+  
+  /**
+   * check whether the user can be saved to the database
+   *
+   * @param user
+   * @return
+   */
+  private User submitUser(User user) {
+	    try {
+	    	return userDao.save(user);
+	    } catch (DataIntegrityViolationException e) {
+	        String error = e.getMessage();
+	        if (error.contains("user.email_UNIQUE")) {
+	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Email is taken");
+	        } else if (error.contains("user.username_UNIQUE")) {
+	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Username is taken");
+	        } else if (error.contains("user.phone_UNIQUE")) {
+	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Phone number is taken");
+	        }
+	    }
+	    return user;
+  }
+  
+  private User updateUserInfo(User user, UpdateUserDto userDto) {
+	  if(userDto.getUsername() != null && userDto.getUsername() != "")
+	      user.setUsername(userDto.getUsername());
+	  if(userDto.getPassword() != null && userDto.getPassword() != "")
+	      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+	  if(userDto.getGivenName() != null && userDto.getGivenName() != "")
+	      user.setGivenName(userDto.getGivenName());
+	  if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
+		  user.setFamilyName(userDto.getFamilyName());
+	  if(userDto.getEmail() != null && userDto.getEmail() != "")
+		  user.setEmail(userDto.getEmail());
+	  if(userDto.getPhone() != null && userDto.getPhone() != "")
+		  user.setPhone(userDto.getPhone());
+	  return user;
+  }
+  
 }
