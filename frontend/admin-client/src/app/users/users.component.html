@@ -1,5 +1,5 @@
 <div *ngIf="users" class="container full-page my-4">
-    <h2>List of all Users. Total Users: {{ totalUsers }}</h2>
+    <!-- <h2>List of all Users. Total Users: {{ totalUsers }}</h2> -->
     <button type="addUser" class="btn btn-dark btn-lg btn-block" data-toggle="modal"
         data-target=".bd-example-modal-lg">Add User</button>
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -9,38 +9,50 @@
                 <form class="m-2" [formGroup]="addUserForm">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="username" class="form-control" id="usernameInput" formControlName="username"
-                            aria-describedby="usernameHelp" placeholder="Enter Username">
+                        <input required type="username" class="form-control" id="usernameInput"
+                            formControlName="username" placeholder="Enter Username"
+                            [ngClass]="{'is-invalid': isError && error.message.includes('Username')}">
                         <small id="usernameHelp" class="form-text text-muted">Enter a valid username</small>
+                        <div *ngIf="isError && error.message.includes('Username')" class="invalid-feedback">
+                            <div>{{ error.message }}</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="emailInput" formControlName="email"
-                            aria-describedby="emailHelp" placeholder="Enter email">
+                        <input required type="email" class="form-control" id="emailInput" formControlName="email"
+                            placeholder="Enter email"
+                            [ngClass]="{'is-invalid': isError && error.message.includes('Email')}">
                         <small id="emailHelp" class="form-text text-muted">Enter a valid email address</small>
+                        <div *ngIf="isError && error.message.includes('Email')" class="invalid-feedback">
+                            <div>{{ error.message }}</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="passwordInput" formControlName="password"
-                            placeholder="Enter Password">
+                        <input required type="password" class="form-control" id="passwordInput"
+                            formControlName="password" placeholder="Enter Password">
                     </div>
                     <div class="form-group">
                         <label for="givenName">Given Name</label>
-                        <input type="givenName" class="form-control" id="givenNameInput" formControlName="givenName"
-                            aria-describedby="givenNameHelp" placeholder="Enter Given Name">
+                        <input required type="givenName" class="form-control" id="givenNameInput"
+                            formControlName="givenName" placeholder="Enter Given Name">
                         <small id="givenNameHelp" class="form-text text-muted">Enter a valid given name</small>
                     </div>
                     <div class="form-group">
                         <label for="familyName">Family Name</label>
-                        <input type="familyName" class="form-control" id="familyNameInput" formControlName="familyName"
-                            aria-describedby="familyNameHelp" placeholder="Enter Family Name">
+                        <input required type="familyName" class="form-control" id="familyNameInput"
+                            formControlName="familyName" placeholder="Enter Family Name">
                         <small id="familyNameHelp" class="form-text text-muted">Enter a valid family name</small>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="phone" class="form-control" id="phoneInput" formControlName="phone"
-                            aria-describedby="phoneHelp" placeholder="Enter Phone Number">
+                        <input required type="phone" class="form-control" id="phoneInput" formControlName="phone"
+                            placeholder="Enter Phone Number"
+                            [ngClass]="{'is-invalid': isError && error.message.includes('Phone')}">
                         <small id="phoneHelp" class="form-text text-muted">Enter a valid phone number</small>
+                        <div *ngIf="isError && error.message.includes('Phone')" class="invalid-feedback">
+                            <div>{{ error.message }}</div>
+                        </div>
                     </div>
                     <label for="role" class="m-3">Choose a role:</label>
                     <select formControlName="role" id="role">
@@ -79,4 +91,5 @@
     </div>
 
 </div>
-<app-spinner *ngIf="!users"></app-spinner>
+<app-spinner *ngIf="!users && !isError"></app-spinner>
+<app-error-message *ngIf="!users && isError" [error]="error"></app-error-message>

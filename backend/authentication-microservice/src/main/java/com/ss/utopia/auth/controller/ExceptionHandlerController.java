@@ -18,6 +18,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -35,7 +36,7 @@ public class ExceptionHandlerController {
       public Map<String, Object> getErrorAttributes(
         WebRequest webRequest,
         ErrorAttributeOptions options) {
-        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
+        Map<String, Object> errorAttributes = new HashMap<String, Object>();
         Object errorMessage = webRequest.getAttribute(RequestDispatcher.ERROR_MESSAGE, RequestAttributes.SCOPE_REQUEST);
         if (errorMessage != null) {
           errorAttributes.put("message", errorMessage);
