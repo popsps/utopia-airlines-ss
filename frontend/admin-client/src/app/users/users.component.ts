@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
+import { User } from '../shared/models/user';
 
 
 @Component({
@@ -14,8 +15,8 @@ import { HttpService } from '../shared/services/http.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  // TODO: Add Typescript type instead of any
   users: any;
-  totalUsers: number;
   searchString: string;
   searchUsersForm: FormGroup;
   addUserForm: FormGroup;
@@ -28,6 +29,7 @@ export class UsersComponent implements OnInit {
   role: string;
   apiUrl: string;
   isError: boolean;
+  // TODO: Create Error Entity
   error: any;
 
   constructor(
@@ -48,7 +50,6 @@ export class UsersComponent implements OnInit {
       .subscribe((res) => {
         this.isError = false;
         this.users = res;
-        this.totalUsers = this.users.length;
       }, (err) => {
         this.isError = true;
         this.error = err.error;

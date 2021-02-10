@@ -9,6 +9,7 @@ import com.ss.utopia.auth.entity.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -71,34 +72,38 @@ public class UserService implements UserDetailsService {
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
-    User user = new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), new UserRole(userDto.getRole()),
-      userDto.getGivenName(), userDto.getFamilyName(), userDto.getEmail(), userDto.getPhone());
-    return submitUser(user);
+    return submitUser(new User(userDto));
   }
 
+  /**
+   * check whether the user is agent
+   *
+   * @param user
+   * @return
+   */
   public User updateUser(User user, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
-    if(userDto.getUsername() != null && userDto.getUsername() != "")
-    	user.setUsername(userDto.getUsername());
-    if(userDto.getPassword() != null && userDto.getPassword() != "")
-    	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    if(userDto.getGivenName() != null && userDto.getGivenName() != "")
-    	user.setGivenName(userDto.getGivenName());
-    if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
-    	user.setFamilyName(userDto.getFamilyName());
-    if(userDto.getEmail() != null && userDto.getEmail() != "")
-    	user.setEmail(userDto.getEmail());
-    if(userDto.getPhone() != null && userDto.getPhone() != "")
-    	user.setPhone(userDto.getPhone());
-    return submitUser(user);
+    return submitUser(updateUserInfo(user, userDto));
   }
 
+  /**
+   * Try to delete the User from the database
+   *
+   * @param user
+   * @return
+   */
   public int deleteUser(Long userId) {
     LOGGER.info("User attempting to delete profile");
     userDao.deleteById(userId);
     return 1;
   }
 
+  /**
+   * Get a list of users
+   *
+   * @param 
+   * @return List<User>
+   */
   public List<User> getAll() {
     return userDao.findAll();
   }
@@ -107,7 +112,7 @@ public class UserService implements UserDetailsService {
    * Get a user by its id and return the user
    *
    * @param id
-   * @return
+   * @return User
    */
   public User getUserById(Long id) {
 	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Unable to find User"));
@@ -165,10 +170,16 @@ public class UserService implements UserDetailsService {
     return user.getRole().getId() == 3;
   }
   
+  /**
+   * check whether the user can be saved to the database
+   *
+   * @param user
+   * @return
+   */
   private User submitUser(User user) {
 	    try {
 	    	return userDao.save(user);
-	    } catch (Exception e) {
+	    } catch (DataIntegrityViolationException e) {
 	        String error = e.getMessage();
 	        if (error.contains("user.email_UNIQUE")) {
 	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Email is taken");
@@ -180,4 +191,21 @@ public class UserService implements UserDetailsService {
 	    }
 	    return user;
   }
+  
+  private User updateUserInfo(User user, UpdateUserDto userDto) {
+	  if(userDto.getUsername() != null && userDto.getUsername() != "")
+	    	user.setUsername(userDto.getUsername());
+	    if(userDto.getPassword() != null && userDto.getPassword() != "")
+	    	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+	    if(userDto.getGivenName() != null && userDto.getGivenName() != "")
+	    	user.setGivenName(userDto.getGivenName());
+	    if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
+	    	user.setFamilyName(userDto.getFamilyName());
+	    if(userDto.getEmail() != null && userDto.getEmail() != "")
+	    	user.setEmail(userDto.getEmail());
+	    if(userDto.getPhone() != null && userDto.getPhone() != "")
+	    	user.setPhone(userDto.getPhone());
+	    return user;
+  }
+  
 }

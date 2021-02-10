@@ -27,15 +27,20 @@ public class UserRole implements GrantedAuthority {
   }
   
   public UserRole(String name) {
-	  if (name.toUpperCase().equals("ADMIN")) {
-	      this.id = 1L;
-	    } else if (name.toUpperCase().equals("CUSTOMER")) {
-	      this.id = 2L;
-	    } else if (name.toUpperCase().equals("AGENT")) {
-	      this.id = 3L;
-	    } else {
-	      throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
-	    }
+	  String role = name.toUpperCase();
+	  switch(role) {
+	  	case "ADMIN": 
+	  		this.id = 1L;
+	  		break;
+	  	case "Customer":
+	  		this.id = 2L;
+	  		break;
+	  	case "AGENT":
+	  		this.id = 3L;
+	  		break;
+	  	default:
+	  		throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+	  };
 	  this.name = name;
   }
 

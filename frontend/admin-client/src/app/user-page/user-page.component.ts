@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
 import { AuthService } from '../shared/services/auth.service';
+import { User } from '../shared/models/user';
 import {
   FormGroup,
   FormBuilder,
@@ -15,6 +16,7 @@ import {
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
+  // TODO: Add Typescript type instead of any
   userId: string;
   user: any;
   apiUrl: string;
@@ -26,8 +28,10 @@ export class UserPageComponent implements OnInit {
   familyName: string;
   email: string;
   phone: string;
+  // TODO: Add Typescript type instead of any
   updatedUser: any;
   isError: boolean;
+  // TODO: Create Error Entity
   error: any;
 
   constructor(
@@ -73,7 +77,7 @@ export class UserPageComponent implements OnInit {
   }
 
   updateUser() {
-    console.log(this.updateUserForm.value);
+    // console.log(this.updateUserForm.value);
     this.userService.update(this.apiUrl, this.updateUserForm.value).subscribe((res) => {
       this.toggleEdit();
       this.isError = false;
