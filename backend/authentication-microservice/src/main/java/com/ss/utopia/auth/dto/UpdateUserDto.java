@@ -15,6 +15,15 @@ public class UpdateUserDto {
 	private String phone;
 	
 	private String role;
+	
+	public UpdateUserDto(String username, String password, String givenName, String familyName, String email, String phone) {
+		this.username = username;
+		this.password = password;
+		this.givenName = givenName;
+		this.familyName = familyName;
+		this.email = email;
+		this.phone = phone;
+	}
 
 	public String getRole() {
 		return role;

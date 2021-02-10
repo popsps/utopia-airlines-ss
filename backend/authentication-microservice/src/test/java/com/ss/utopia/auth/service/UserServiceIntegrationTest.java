@@ -91,22 +91,26 @@ class UserServiceIntegrationTest {
   }
 
   @Test
-  @DisplayName("")
+  @DisplayName("Test whether a user can be created")
+
   void signup() {
   }
 
   @Test
-  @DisplayName("")
+  @DisplayName("Test whether a user's information can be updated")
+
   void updateUser() {
   }
 
   @Test
-  @DisplayName("")
+  @DisplayName("Test whether a user can be deleted")
+
   void deleteUser() {
   }
 
   @Test
-  @DisplayName("")
+  @DisplayName("Test whether we can get a list of all users")
+
   void getAll() {
   }
 

@@ -9,6 +9,11 @@ import com.ss.utopia.auth.dto.UserDto;
 import javax.persistence.*;
 import java.util.Objects;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Objects;
+
 @Entity
 @Table(name = "USER")
 public class User {

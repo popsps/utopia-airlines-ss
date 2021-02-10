@@ -204,6 +204,8 @@ public class UserService implements UserDetailsService {
 	    return user;
   }
   
+  
+//  TODO: Research Strings class to simplify strings
   private User updateUserInfo(User user, UpdateUserDto userDto) {
 	  if(userDto.getUsername() != null && userDto.getUsername() != "")
 	      user.setUsername(userDto.getUsername());
