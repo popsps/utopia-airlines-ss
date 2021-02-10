@@ -97,4 +97,14 @@
 
 }
 
+.page-long {
+  min-height : 500vh;
+  @media screen and(min-height : 600px) {
+    min-height : 200vh;
+  }
+  @media screen and(min-height : 1100px) {
+    min-height : 120vh;
+  }
+
+}
 

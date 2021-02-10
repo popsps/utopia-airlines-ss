@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +26,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.servlet.http.Cookie;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -39,6 +37,7 @@ public class UserService implements UserDetailsService {
   private AuthenticationManager authenticationManager;
   @Autowired
   private PasswordEncoder passwordEncoder;
+
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -60,7 +59,7 @@ public class UserService implements UserDetailsService {
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     } catch (AuthenticationException e) {
-      LOGGER.info("Log in failed for user {}", username);
+      LOGGER.error("Log in authentication failed for user {}", username);
       return Optional.empty();
     }
     return userDao.findByUsername(username);
@@ -72,6 +71,7 @@ public class UserService implements UserDetailsService {
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
+    userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
     User user = new User(userDto);
     
     if(user.getRole().equals(null))
@@ -144,10 +144,15 @@ public class UserService implements UserDetailsService {
    *
    * @return
    */
-  public Cookie removeCookie() {
-    final Cookie sessionCookie = new Cookie("session", null);
-    sessionCookie.setPath("/");
-    return sessionCookie;
+  public Optional<Cookie> removeCookie() {
+    try {
+      final Cookie sessionCookie = new Cookie("session", null);
+      sessionCookie.setPath("/");
+      return Optional.of(sessionCookie);
+    } catch (IllegalArgumentException e) {
+      LOGGER.error("Cookie Illegal Argument Exception", e.getMessage());
+      return Optional.empty();
+    }
   }
 
   public User getUserByUsername(String username) {
@@ -197,6 +202,8 @@ public class UserService implements UserDetailsService {
 	    return user;
   }
   
+  
+//  TODO: Research Strings class to simplify strings
   private User updateUserInfo(User user, UpdateUserDto userDto) {
 	  if(userDto.getUsername() != null && userDto.getUsername() != "")
 	      user.setUsername(userDto.getUsername());

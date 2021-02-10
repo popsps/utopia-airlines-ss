@@ -36,6 +36,7 @@ import { FlightResultListComponent } from './flights/flight-result-list/flight-r
 import { FlightCreationModalComponent } from './flights/flight-creation-modal/flight-creation-modal.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { PhonePipe } from './shared/pipes/phone.pipe';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PhonePipe } from './shared/pipes/phone.pipe';
     BookingService,
     FlightService,
     AuthService,
-    LoginActivateService
+    LoginActivateService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
