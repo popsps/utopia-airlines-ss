@@ -71,7 +71,8 @@ describe("/api/airports/:id", () => {
         Array(2**id.length).fill()
           .map((_,i) => {
             return id.split("")
-              .map((char,j) => i>>j | 1 ? char.toLowerCase() : char);
+              .map((char,j) => i>>j | 1 ? char.toLowerCase() : char)
+              .join("");
           })
           .map(async (permutation) => {
             const res = await request(app)
