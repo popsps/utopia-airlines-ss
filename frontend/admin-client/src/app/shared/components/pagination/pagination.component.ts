@@ -9,7 +9,7 @@ export class PaginationComponent implements OnInit {
 
   @Input() currentPage: number;
   @Input() totalPageCount: number;
-  @Input() visiblePageCount: number;
+  @Input() displayedPageRange: number;
   @Input() boundaryLinks: boolean;
   @Output() pageChange = new EventEmitter<number>(true);
 
@@ -42,16 +42,16 @@ export class PaginationComponent implements OnInit {
 
   getPagesToDisplay(): number[] {
     // if number of pages to show is less than the collection size
-    if (this.totalPageCount < this.visiblePageCount)
+    if (this.totalPageCount < this.displayedPageRange)
     {
       return Array(this.totalPageCount).fill(0).map((_, i) => i + 1);
     }
-    const start = this.currentPage <= this.visiblePageCount
+    const start = this.currentPage <= this.displayedPageRange
       ? 0
       : Math.min(
-        this.currentPage - this.visiblePageCount,
-        this.totalPageCount - 2 * this.visiblePageCount
+        this.currentPage - this.displayedPageRange,
+        this.totalPageCount - 2 * this.displayedPageRange
       ) - 1;
-    return Array(2 * this.visiblePageCount + 1).fill(0).map((_, i) => i + start + 1);
+    return Array(2 * this.displayedPageRange + 1).fill(0).map((_, i) => i + start + 1);
   }
 }
