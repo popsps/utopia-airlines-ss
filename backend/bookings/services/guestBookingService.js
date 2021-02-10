@@ -6,9 +6,8 @@ const { flightService } = require("./flightService");
 
 const guestBookingService = {
   async findAllGuestBookings({ isActive = true } = {}) {
-    const where = { isActive };
     return await GuestBooking.findAll({
-      where,
+      where: { isActive },
       include: [
         "agent",
         {

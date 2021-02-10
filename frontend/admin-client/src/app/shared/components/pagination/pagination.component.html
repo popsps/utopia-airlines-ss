@@ -1,0 +1,31 @@
+<nav>
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === 1 }">
+      <i class="page-link fas fa-angle-double-left" (click)="goFirstPage()"></i>
+    </li>
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === 1 }">
+      <i class="fas fa-angle-left page-link" (click)="goPrevPage()"></i>
+    </li>
+    <ng-container *ngIf="currentPage > displayedPageRange + 1">
+      <li class="page-item disabled">
+        <i class="page-link fas fa-ellipsis-h"></i>
+      </li>
+    </ng-container>
+    <li *ngFor="let page of getPagesToDisplay();" class="page-item" [ngClass]="{ 'active' : page === currentPage }">
+      <a class="page-link" (click)="goToPage(page)">
+        {{page}}
+      </a>
+    </li>
+    <ng-container *ngIf="currentPage < totalPageCount - displayedPageRange - 1">
+      <li class="page-item disabled">
+        <i class="page-link fas fa-ellipsis-h"></i>
+      </li>
+    </ng-container>
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === totalPageCount }">
+      <i class="page-link fas fa-angle-right" (click)="goNextPage()"></i>
+    </li>
+    <li class="page-item" [ngClass]="{ 'disabled' : currentPage === totalPageCount }">
+      <i class="page-link fas fa-angle-double-right" (click)="goLastPage()"></i>
+    </li>
+  </ul>
+</nav>

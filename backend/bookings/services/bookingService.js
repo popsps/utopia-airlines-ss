@@ -1,6 +1,6 @@
 const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking } = require("@utopia-airlines-wss/common/models");
-const {  NotFoundError,  handleMutationError   } = require("@utopia-airlines-wss/common/errors");
+const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 
 const findBookingById = async (id, options) => {
   const booking = await Booking.findByPk(id, options);
@@ -8,16 +8,17 @@ const findBookingById = async (id, options) => {
   return booking;
 };
 
-const replacer = (key, value) =>  key === "passengers"
-  ? value.map((passenger) => passenger.toJSON("full"))
-  : value;
-
-
 const bookingService = {
-  async findAllBookings({ isActive = true } = {}) {
-    const where = { isActive };
-    const bookings = await Booking.findAll({
+  async findAllBookings(
+    {isActive = true, offset = 0, limit = 10} = {}) {
+    const where = {isActive};
+    if(limit > 10000)
+      throw new BadRequestError("Limit exceeds maximum of 10000");
+    const bookings = await Booking.findAndCountAll({
       where,
+      limit: +limit,
+      offset: +offset,
+      distinct: true,
       include: [
         {
           association: "agent",
@@ -38,9 +39,8 @@ const bookingService = {
         },
         "passengers",
       ],
-    });
-
-    return JSON.parse(JSON.stringify(bookings, replacer));
+    }); 
+    return bookings;
   },
   async findBookingById({ id }) {
     const booking = await findBookingById(
@@ -68,13 +68,13 @@ const bookingService = {
         ],
       }
     );
-    return JSON.parse(JSON.stringify(booking, replacer));
+    return booking;
   },
   async updateBooking(id, { isActive }) {
     const booking = await findBookingById(id);
     const transaction = await sequelize.transaction();
     try {
-      await booking.update({ 
+      await booking.update({
         isActive,
       }, {
         transaction,

@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
+const { removeUndefined } = require("../util");
 
 class Flight extends Model {
   static associate({ Route, Airplane, Booking }) {
@@ -25,11 +26,26 @@ class Flight extends Model {
       otherKey: "booking_id",
       as: "bookings",
     });
+    Flight.belongsToMany(Booking, {
+      through: "flight_passengers",
+      foreignKey: "flight_id",
+      as: "passengers",
+    });
   }
-  toJSON(){
-    const values = this.get();
+  toJSON(type){
+    const { seatPrice, maxCapacity, reservedSeats, passengerCount, availableSeats, passengers, ...values } = this.get();
     if (values.route) delete values.routeId;
-    return values;
+    if (passengers && type === "full") values.passengers = passengers;
+    return {
+      ...values,
+      seats: removeUndefined({
+        total: maxCapacity,
+        reserved: type === "full" ? reservedSeats : null,
+        booked : type === "full" ? passengerCount : null,
+        available: availableSeats,
+        price: seatPrice,
+      }),
+    };
   }
 }
 

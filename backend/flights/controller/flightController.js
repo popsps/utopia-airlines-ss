@@ -1,34 +1,33 @@
+const { sendJson } = require("@utopia-airlines-wss/common/util");
+
 const { flightService } = require("../service");
 
 const flightController = {
   async getAll(req, res, next) {
     try{
-      res.json(await flightService.findAllFlights(req.query));
+      const { offset, limit, ...query } = req.query;
+      const flights = await flightService.findAllFlights(query, { offset, limit });
+      sendJson({
+        req,
+        res,
+        data: flights,
+      });
     } catch(err){
       next(err);
     }
   },
   async getById(req, res, next){
     try{
-      res.json(await flightService.findFlightById(req.params.id));
+      const flight = await flightService.findFlightById(req.params.id);
+      sendJson({
+        req,
+        res,
+        data: flight,
+      });
     } catch(err){
       next(err);
     }
   },
-  async getFlightBookings(req, res, next) {
-    try{
-      res.json(await flightService.findFlightBookings(req.params.id));
-    } catch(err){
-      next(err);
-    }
-  },
-  // async getFlightPassengers(req, res, next) {
-  //   try{
-  //     res.json(await flightService.findFlightPassengers(req.params.id));
-  //   } catch(err){
-  //     next(err);
-  //   }
-  // },
   async create(req, res, next) {
     try{
       const flight = await flightService.createFlight(req.body);

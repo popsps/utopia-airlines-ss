@@ -21,8 +21,15 @@ class Airport extends Model {
     });
   }
   toJSON(){
-    const values = Object.assign({}, this.get());
-    return values;
+    const { latitude, longitude, altitude, ...values } = Object.assign({}, this.get());
+    return {
+      ...values,
+      coords: {
+        latitude,
+        longitude,
+        altitude,
+      },
+    };
   }
 }
 
@@ -31,8 +38,32 @@ Airport.init({
     type: DataTypes.STRING,
     primaryKey: true,
   },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   city: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  country: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  latitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+  },
+  longitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+  },
+  altitude: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+  },
+  timezone: {
+    type: DataTypes.DECIMAL,
     allowNull: false,
   },
 }, { 

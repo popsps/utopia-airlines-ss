@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FlightFilter } from "../../shared/models/FlightFilter";
 
 @Component({
@@ -18,7 +18,7 @@ export class FlightSearchFormComponent implements OnInit {
       destination: [""],
       departureDateRange: this.formBuilder.group({
         start: [""],
-        end: new FormControl(""),
+        end: [""],
       })
     });
     this.filterFormControls.valueChanges.subscribe((formValues) => {
@@ -30,10 +30,7 @@ export class FlightSearchFormComponent implements OnInit {
     return {
       origin: origin?.toUpperCase(),
       destination: destination?.toUpperCase(),
-      departureDateRange: <[Date?, Date?]>[
-        departureDateRange.start ? new Date(departureDateRange.start) : null,
-        departureDateRange.end ? new Date(departureDateRange.end) : null,
-      ].filter(date => date)
+      departureDate: departureDateRange.start ? new Date(departureDateRange.start) : null
     };
   }
 }
