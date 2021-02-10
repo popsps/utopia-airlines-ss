@@ -39,7 +39,7 @@ public class UserRole implements GrantedAuthority {
 	  		this.id = 3L;
 	  		break;
 	  	default:
-	  		throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+	  		this.id = null;
 	  };
 	  this.name = name;
   }

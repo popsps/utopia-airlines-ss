@@ -72,7 +72,12 @@ public class UserService implements UserDetailsService {
    */
   public User signup(UserDto userDto) {
     LOGGER.info("New user attempting to sign up");
-    return submitUser(new User(userDto));
+    User user = new User(userDto);
+    
+    if(user.getRole().equals(null))
+    	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+    
+    return submitUser(user);
   }
 
   /**
@@ -194,18 +199,18 @@ public class UserService implements UserDetailsService {
   
   private User updateUserInfo(User user, UpdateUserDto userDto) {
 	  if(userDto.getUsername() != null && userDto.getUsername() != "")
-	    	user.setUsername(userDto.getUsername());
-	    if(userDto.getPassword() != null && userDto.getPassword() != "")
-	    	user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-	    if(userDto.getGivenName() != null && userDto.getGivenName() != "")
-	    	user.setGivenName(userDto.getGivenName());
-	    if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
-	    	user.setFamilyName(userDto.getFamilyName());
-	    if(userDto.getEmail() != null && userDto.getEmail() != "")
-	    	user.setEmail(userDto.getEmail());
-	    if(userDto.getPhone() != null && userDto.getPhone() != "")
-	    	user.setPhone(userDto.getPhone());
-	    return user;
+	      user.setUsername(userDto.getUsername());
+	  if(userDto.getPassword() != null && userDto.getPassword() != "")
+	      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+	  if(userDto.getGivenName() != null && userDto.getGivenName() != "")
+	      user.setGivenName(userDto.getGivenName());
+	  if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
+		  user.setFamilyName(userDto.getFamilyName());
+	  if(userDto.getEmail() != null && userDto.getEmail() != "")
+		  user.setEmail(userDto.getEmail());
+	  if(userDto.getPhone() != null && userDto.getPhone() != "")
+		  user.setPhone(userDto.getPhone());
+	  return user;
   }
   
 }
