@@ -7,11 +7,13 @@ export class Flight implements Deserializable {
   route: Route;
   airplaneId: number;
   departureTime: Date;
-  maxCapacity: number;
-  reservedSeats: number;
-  passengerCount: number;
-  availableSeats: number;
-  seatPrice: number;
+  seats: {
+    total: number;
+    reserved?: number;
+    booked?: number;
+    available: number;
+    price: number;
+  };
 
   deserialize(input: any): this {
     const { route, departureTime, ...rest } = input;

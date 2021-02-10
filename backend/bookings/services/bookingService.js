@@ -8,10 +8,6 @@ const findBookingById = async (id, options) => {
   return booking;
 };
 
-const replacer = (key, value) => key === "passengers"
-  ? value.map((passenger) => passenger.toJSON("full"))
-  : value;
-
 const bookingService = {
   async findAllBookings(
     {isActive = true, offset = 0, limit = 10} = {}) {
@@ -43,8 +39,8 @@ const bookingService = {
         },
         "passengers",
       ],
-    });
-    return JSON.parse(JSON.stringify(bookings, replacer));
+    }); 
+    return bookings;
   },
   async findBookingById({ id }) {
     const booking = await findBookingById(
@@ -72,7 +68,7 @@ const bookingService = {
         ],
       }
     );
-    return JSON.parse(JSON.stringify(booking, replacer));
+    return booking;
   },
   async updateBooking(id, { isActive }) {
     const booking = await findBookingById(id);

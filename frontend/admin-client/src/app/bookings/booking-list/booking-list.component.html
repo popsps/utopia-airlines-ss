@@ -13,8 +13,9 @@
           <div class="list-group-item booking-item rounded">
             <div class="main m-2">
               <div class="my-2">
-              <span class="mr-2 text-center" style="background-color: white; border-radius: 0.25rem; padding: 0.25rem;">
-                {{booking?.id}}</span>
+                <span class="mr-2 text-center"
+                  style="background-color: white; border-radius: 0.25rem; padding: 0.25rem;">
+                  {{booking?.id}}</span>
                 <span class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</span>
                 <span *ngIf="booking.flights && booking.flights.length"> to </span>
                 <span class="font-weight-bold">{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}</span>
@@ -66,13 +67,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-center" style="margin: 150px">
-      <app-pagination *ngIf="pager.totalPages && pager.currentPage"
-        [collectionSize]="pager.totalPages"
-        [maxSize]="5"
-        [(page)]="pager.currentPage"
-        (pageChange)="navigate($event)"
-
-      ></app-pagination>
+      <app-pagination *ngIf="pager.totalPages && pager.currentPage" [(currentPage)]="pager.currentPage"
+        [totalPageCount]="pager.totalPages" [visiblePageCount]="5" (pageChange)="navigate($event)"></app-pagination>
     </div>
   </ng-container>
 

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FlightService } from "../shared/services/flight.service";
+import { FlightService, PaginatedFlightResult } from "../shared/services/flight.service";
 
-import { Flight } from "../shared/models/Flight";
 import { FlightFilter } from '../shared/models/FlightFilter';
-
 
 @Component({
   selector: 'app-flights',
@@ -12,33 +10,43 @@ import { FlightFilter } from '../shared/models/FlightFilter';
   styleUrls: ['./flights.component.scss']
 })
 export class FlightsComponent implements OnInit {
+  private static PAGE_SIZE = 10;
+
+  pageNum = 1;
   flights: {
     state: "pending" | "done" | "error";
     error?: any;
-    data?: Flight[];
+    data?: PaginatedFlightResult;
   };
 
-  filter: FlightFilter = {
-    departureDateRange: []
-  };
+  filter: FlightFilter = {};
 
-  constructor(private httpService: FlightService) { }
+  constructor(private flightService: FlightService) {
+    this.flights = {
+      state: "pending",
+    };
+  }
 
   ngOnInit(): void {
     this.loadFlights();
   }
 
   loadFlights() {
-    this.flights = { state: "pending" };
-    this.httpService.getAll().subscribe(
-      (res: any[]) => {
+    this.flightService.getAll({
+      ...this.filter,
+      offset: (this.pageNum - 1) * FlightsComponent.PAGE_SIZE,
+      limit: FlightsComponent.PAGE_SIZE
+    }).subscribe(
+      (data) => {
         this.flights = {
+          ...this.flights,
           state: "done",
-          data: res.sort((a, b) => a.departureTime.getTime() - b.departureTime.getTime())
+          data
         };
       },
       (error) => {
         this.flights = {
+          ...this.flights,
           state: "error",
           error
         };
@@ -47,8 +55,24 @@ export class FlightsComponent implements OnInit {
     );
   }
 
+  getPageSize() {
+    return FlightsComponent.PAGE_SIZE;
+  }
+
+  getTotalPageCount() {
+    if (this.flights.state !== "done") return 1;
+    return Math.ceil(this.flights.data.total / FlightsComponent.PAGE_SIZE);
+  }
+
   onFilterChange(filter) {
+    this.pageNum = 1;
     this.filter = filter;
+    this.loadFlights();
+  }
+
+  onPageNumChange(pageNum) {
+    this.pageNum = pageNum;
+    this.loadFlights();
   }
 
 }

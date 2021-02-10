@@ -1,3 +1,4 @@
+const { sendJson } = require("@utopia-airlines-wss/common/util");
 const { bookingService } = require("../services");
 
 const bookingController = {
@@ -6,7 +7,14 @@ const bookingController = {
       const bookings = await bookingService.findAllBookings({
         ...req.query,
       });
-      res.json(bookings);
+      sendJson({
+        req,
+        res,
+        data: bookings,
+        toJSON: {
+          type: "full",
+        },
+      });
     } catch (err) {
       next(err);
     }
@@ -17,7 +25,14 @@ const bookingController = {
       const booking = await bookingService.findBookingById({
         id,
       });
-      res.json(booking);
+      sendJson({
+        req,
+        res,
+        data: booking,
+        toJSON: {
+          type: "full",
+        },
+      });
     } catch (err) {
       next(err);
     }

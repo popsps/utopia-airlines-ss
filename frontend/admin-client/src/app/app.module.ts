@@ -36,7 +36,8 @@ import { FlightResultListComponent } from './flights/flight-result-list/flight-r
 import { FlightCreationModalComponent } from './flights/flight-creation-modal/flight-creation-modal.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { PhonePipe } from './shared/pipes/phone.pipe';
-import {DatePipe} from '@angular/common';
+import { FlightResultItemComponent } from './flights/flight-result-list/flight-result-item/flight-result-item.component';
+import { DatePipe } from '@angular/common';
 import { PaginationComponent } from './shared/components/pagination/pagination.component';
 
 @NgModule({
@@ -67,6 +68,7 @@ import { PaginationComponent } from './shared/components/pagination/pagination.c
     FlightCreationModalComponent,
     UserPageComponent,
     PhonePipe,
+    FlightResultItemComponent,
     PaginationComponent
   ],
   imports: [
