@@ -74,7 +74,7 @@ public class UserService implements UserDetailsService {
     userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
     User user = new User(userDto);
     
-    if(user.getRole().equals(null))
+    if(user.getRole().getId().equals(null))
     	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
     
     return submitUser(user);
@@ -89,6 +89,7 @@ public class UserService implements UserDetailsService {
   public User updateUser(User user, UpdateUserDto userDto) {
     LOGGER.info("User attempting to update info");
     return submitUser(updateUserInfo(user, userDto));
+
   }
 
   /**
@@ -121,6 +122,7 @@ public class UserService implements UserDetailsService {
    */
   public User getUserById(Long id) {
 	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Unable to find User"));
+
   }
 
   /**

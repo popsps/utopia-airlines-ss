@@ -37,6 +37,7 @@ import { FlightCreationModalComponent } from './flights/flight-creation-modal/fl
 import { UserPageComponent } from './user-page/user-page.component';
 import { PhonePipe } from './shared/pipes/phone.pipe';
 import {DatePipe} from '@angular/common';
+import { PaginationComponent } from './shared/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {DatePipe} from '@angular/common';
     FlightResultListComponent,
     FlightCreationModalComponent,
     UserPageComponent,
-    PhonePipe
+    PhonePipe,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
