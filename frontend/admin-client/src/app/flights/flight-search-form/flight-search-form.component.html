@@ -1,0 +1,16 @@
+<form class="row" [formGroup]="filterFormControls">
+  <div class="col-md">
+    <label class="form-label" for="origin-input">Origin</label>
+    <input id="origin-input" class="form-control text-uppercase" type="text" formControlName="origin">
+  </div>
+  <div class="col-md">
+    <label class="form-label" for="destination-input">Destination</label>
+    <input id="destination-input" class="form-control text-uppercase" type="text" formControlName="destination">
+  </div>
+  <div class="col-md">
+    <div formGroupName="departureDateRange">
+      <label class="form-label" for="departure-date-input">Departure Date</label>
+      <input id="departure-date-input" class="form-control" type="date" formControlName="start">
+    </div>
+  </div>
+</form>
