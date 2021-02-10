@@ -5,10 +5,11 @@ const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 
 const airportService = {
   async findAirportById(iataId) {
-    const airport = await Airport.findByPk(iataId, {
-      include: ["departureRoutes", "arrivalRoutes" ],
-    });
-    if(!airport) throw NotFoundError("cannot find airport");
+    const airport = await Airport.findByPk(
+      iataId.toUpperCase(),
+      { include: ["departureRoutes", "arrivalRoutes" ] }
+    );
+    if(!airport) throw new NotFoundError("cannot find airport");
     return airport;
   },
   async findAllAirports({ query } = {}) {
