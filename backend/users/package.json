@@ -11,7 +11,7 @@
   "author": "Wesley Clements <wesley.clements@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@utopia-airlines-wss/common": "file:../common",
+    "@utopia-airlines-wss/common": "^0.1.0",
     "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
