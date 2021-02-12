@@ -9,19 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ss.utopia.auth.dao.UserDao;
-import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.security.SessionCookieProvider;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Optional;
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
@@ -36,35 +35,29 @@ public class JwtTokenFilter extends OncePerRequestFilter {
   private UserDao userDao;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-      throws ServletException, IOException {
+  protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+      final FilterChain filterChain) throws ServletException, IOException {
     LOGGER.info("Process request to check for a JSON Web Token");
-    final Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-      Arrays.stream(cookies)
-          // get session cookie
-          .filter((cookie) -> cookie.getName().matches("^session$") && cookie.isHttpOnly()
-              && (cookie.getPath() == null || cookie.getPath().equals("/")))
-          .findAny().ifPresent((sessionCookie) ->
-          // parse token
-          this.sessionCookieProvider.parseAuthJwt(sessionCookie).ifPresent(token ->
-          // validate token
-          this.jwtProvider.validateToken(token).ifPresent((claims) -> {
-            try {
-              // get user by id
-              final User user = this.userDao.findById(this.jwtProvider.getUserId(claims)).orElseThrow();
-              // create user details from user
-              final UserDetails userDetails = withUsername(user.getUsername()).password(user.getPassword())
-                  .authorities(user.getRole().getAuthority()).accountExpired(false).accountLocked(false)
-                  .credentialsExpired(false).disabled(false).build();
-              SecurityContextHolder.getContext().setAuthentication(
-                  new PreAuthenticatedAuthenticationToken(userDetails, "", userDetails.getAuthorities()));
-
-            } catch (Exception e) {
-              LOGGER.error(e.getMessage(), e);
-            }
-          })));
-    }
+    System.out.println(request.getHeader("Cookie"));
+    Optional.ofNullable(WebUtils.getCookie(request, "session")).ifPresent((sessionCookie) ->
+    // parse token
+    this.sessionCookieProvider.parseAuthJwt(sessionCookie).ifPresent(token ->
+    // validate token
+    this.jwtProvider.validateToken(token).ifPresent((claims) -> {
+      try {
+        // get user by id
+        this.userDao.findById(this.jwtProvider.getUserId(claims)).ifPresent((user) -> {
+          // create user details from user
+          final UserDetails userDetails = withUsername(user.getUsername()).password(user.getPassword())
+              .authorities(user.getRole().getAuthority()).accountExpired(false).accountLocked(false)
+              .credentialsExpired(false).disabled(false).build();
+          SecurityContextHolder.getContext().setAuthentication(
+              new PreAuthenticatedAuthenticationToken(userDetails, "", userDetails.getAuthorities()));
+        });
+      } catch (Exception e) {
+        LOGGER.error(e.getMessage(), e);
+      }
+    })));
     filterChain.doFilter(request, response);
   }
 }
