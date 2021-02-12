@@ -33,9 +33,7 @@ public class ExceptionHandlerController {
     // Hide exceptions field in the return object
     return new DefaultErrorAttributes() {
       @Override
-      public Map<String, Object> getErrorAttributes(
-        WebRequest webRequest,
-        ErrorAttributeOptions options) {
+      public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
         Map<String, Object> errorAttributes = new HashMap<String, Object>();
         Object errorMessage = webRequest.getAttribute(RequestDispatcher.ERROR_MESSAGE, RequestAttributes.SCOPE_REQUEST);
         if (errorMessage != null) {
@@ -47,27 +45,25 @@ public class ExceptionHandlerController {
   }
 
   @ExceptionHandler(InsufficientAuthenticationException.class)
-  public void handleInsufficientAuthenticationException(InsufficientAuthenticationException ex,
-                                                        HttpServletResponse res) throws IOException {
+  public void handleInsufficientAuthenticationException(InsufficientAuthenticationException ex, HttpServletResponse res)
+      throws IOException {
     LOGGER.error("Handled Insufficient Authentication Exception", ex);
     res.sendError(HttpStatus.FORBIDDEN.value(), "Insufficient Authentication");
   }
 
   @ExceptionHandler(AccessDeniedException.class)
-  public void handleAccessDeniedException(AccessDeniedException ex,
-                                          HttpServletResponse res) throws IOException {
+  public void handleAccessDeniedException(AccessDeniedException ex, HttpServletResponse res) throws IOException {
     res.sendError(HttpStatus.FORBIDDEN.value(), "Access denied");
   }
 
   @ExceptionHandler(HttpServerErrorException.class)
-  public void handleHttpServerErrorException(HttpServerErrorException ex,
-                                             HttpServletResponse res) throws IOException {
+  public void handleHttpServerErrorException(HttpServerErrorException ex, HttpServletResponse res) throws IOException {
     res.sendError(ex.getStatusCode().value(), ex.getStatusText());
   }
 
-//  @ExceptionHandler(Exception.class)
-//  public void handleException(Exception ex, HttpServletResponse res) throws IOException {
-//    LOGGER.error("Handled Exception", ex);
-//    res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
-//  }
+  @ExceptionHandler(Exception.class)
+  public void handleException(Exception ex, HttpServletResponse res) throws IOException {
+    LOGGER.error("Handled Exception", ex.getMessage());
+    res.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Something went wrong");
+  }
 }
