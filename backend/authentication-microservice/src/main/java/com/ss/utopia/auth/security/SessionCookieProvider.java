@@ -28,7 +28,7 @@ public class SessionCookieProvider {
       sessionCookieDto.setJwt(token);
       final Cookie sessionCookie = new Cookie("session", encode(objectMapper.writeValueAsString(sessionCookieDto)));
       sessionCookie.setPath("/");
-      // sessionCookie.setHttpOnly(true);
+      sessionCookie.setHttpOnly(true);
       return Optional.of(sessionCookie);
     } catch (JsonProcessingException e) {
       return Optional.empty();
