@@ -4,7 +4,6 @@ import com.ss.utopia.auth.dao.UserDao;
 import com.ss.utopia.auth.dto.UpdateUserDto;
 import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
-import com.ss.utopia.auth.entity.UserRole;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +37,12 @@ public class UserService implements UserDetailsService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userDao.findByUsername(username)
-      .orElseThrow(() -> new UsernameNotFoundException(String.format("User with name %s does not exist", username)));
+        .orElseThrow(() -> new UsernameNotFoundException(String.format("User with name %s does not exist", username)));
     return withUsername(user.getUsername()).password(user.getPassword()).authorities(user.getRole().getName())
-      .accountExpired(false).accountLocked(false).credentialsExpired(false).disabled(false).build();
+        .accountExpired(false).accountLocked(false).credentialsExpired(false).disabled(false).build();
   }
 
   /**
@@ -73,10 +71,10 @@ public class UserService implements UserDetailsService {
     LOGGER.info("New user attempting to sign up");
     userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
     User user = new User(userDto);
-    
-    if(user.getRole().getId().equals(null))
-    	throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
-    
+
+    if (user.getRole().getId().equals(null))
+      throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Unauthorized Role");
+
     return submitUser(user);
   }
 
@@ -107,7 +105,7 @@ public class UserService implements UserDetailsService {
   /**
    * Get a list of users
    *
-   * @param 
+   * @param
    * @return List<User>
    */
   public List<User> getAll() {
@@ -121,7 +119,8 @@ public class UserService implements UserDetailsService {
    * @return User
    */
   public User getUserById(Long id) {
-	return userDao.findById(id).orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Unable to find User"));
+    return userDao.findById(id)
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.NOT_FOUND, "Unable to find User"));
 
   }
 
@@ -159,7 +158,7 @@ public class UserService implements UserDetailsService {
 
   public User getUserByUsername(String username) {
     return userDao.findByUsername(username)
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User"));
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.FORBIDDEN, "Unauthorized User"));
   }
 
   /**
@@ -181,7 +180,7 @@ public class UserService implements UserDetailsService {
   public boolean isUserAgent(User user) {
     return user.getRole().getId() == 3;
   }
-  
+
   /**
    * check whether the user can be saved to the database
    *
@@ -189,37 +188,36 @@ public class UserService implements UserDetailsService {
    * @return
    */
   private User submitUser(User user) {
-	    try {
-	    	return userDao.save(user);
-	    } catch (DataIntegrityViolationException e) {
-	        String error = e.getMessage();
-	        if (error.contains("user.email_UNIQUE")) {
-	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Email is taken");
-	        } else if (error.contains("user.username_UNIQUE")) {
-	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Username is taken");
-	        } else if (error.contains("user.phone_UNIQUE")) {
-	          throw new HttpServerErrorException(HttpStatus.CONFLICT, "Phone number is taken");
-	        }
-	    }
-	    return user;
+    try {
+      return userDao.save(user);
+    } catch (DataIntegrityViolationException e) {
+      String error = e.getMessage();
+      if (error.contains("user.email_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.CONFLICT, "Email is taken");
+      } else if (error.contains("user.username_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.CONFLICT, "Username is taken");
+      } else if (error.contains("user.phone_UNIQUE")) {
+        throw new HttpServerErrorException(HttpStatus.CONFLICT, "Phone number is taken");
+      }
+    }
+    return user;
   }
-  
-  
-//  TODO: Research Strings class to simplify strings
+
+  // TODO: Research Strings class to simplify strings
   private User updateUserInfo(User user, UpdateUserDto userDto) {
-	  if(userDto.getUsername() != null && userDto.getUsername() != "")
-	      user.setUsername(userDto.getUsername());
-	  if(userDto.getPassword() != null && userDto.getPassword() != "")
-	      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-	  if(userDto.getGivenName() != null && userDto.getGivenName() != "")
-	      user.setGivenName(userDto.getGivenName());
-	  if(userDto.getFamilyName() != null && userDto.getFamilyName() != "")
-		  user.setFamilyName(userDto.getFamilyName());
-	  if(userDto.getEmail() != null && userDto.getEmail() != "")
-		  user.setEmail(userDto.getEmail());
-	  if(userDto.getPhone() != null && userDto.getPhone() != "")
-		  user.setPhone(userDto.getPhone());
-	  return user;
+    if (userDto.getUsername() != null && userDto.getUsername() != "")
+      user.setUsername(userDto.getUsername());
+    if (userDto.getPassword() != null && userDto.getPassword() != "")
+      user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    if (userDto.getGivenName() != null && userDto.getGivenName() != "")
+      user.setGivenName(userDto.getGivenName());
+    if (userDto.getFamilyName() != null && userDto.getFamilyName() != "")
+      user.setFamilyName(userDto.getFamilyName());
+    if (userDto.getEmail() != null && userDto.getEmail() != "")
+      user.setEmail(userDto.getEmail());
+    if (userDto.getPhone() != null && userDto.getPhone() != "")
+      user.setPhone(userDto.getPhone());
+    return user;
   }
-  
+
 }

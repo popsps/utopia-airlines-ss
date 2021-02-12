@@ -15,9 +15,6 @@ import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.security.SessionCookieProvider;
 import com.ss.utopia.auth.service.UserService;
 
-import java.util.Optional;
-
-
 @RestController
 @RequestMapping("/api/session")
 public class SessionController {
@@ -26,7 +23,7 @@ public class SessionController {
   @Autowired
   private SessionCookieProvider sessionCookieProvider;
 
-  // TODO: 2/6/2021 split HttpServerErrorException to 2 types of error  
+  // TODO: 2/6/2021 split HttpServerErrorException to 2 types of error
   // Todo: create login
 
   /**
@@ -39,9 +36,9 @@ public class SessionController {
   @ResponseStatus(HttpStatus.CREATED)
   public void login(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
-    final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie creation failed"));
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+    final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user).orElseThrow(
+        () -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie creation failed"));
     response.addCookie(sessionCookie);
   }
 
@@ -55,16 +52,16 @@ public class SessionController {
   @ResponseStatus(HttpStatus.CREATED)
   public void loginAdmin(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     // if user is not admin
     if (!userService.isUserAdmin(user))
       throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed");
     final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     response.addCookie(sessionCookie);
   }
 
-  // TODO: 2/6/2021 take this out 
+  // TODO: 2/6/2021 take this out
 
   /**
    * Login only an agent user using loginDto
@@ -76,12 +73,12 @@ public class SessionController {
   @ResponseStatus(HttpStatus.CREATED)
   public void loginAgent(@RequestBody @Valid LoginDto loginDto, HttpServletResponse response) {
     final User user = userService.loadAuthenticatedUser(loginDto.getUsername(), loginDto.getPassword())
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     // if user is not agent
     if (!userService.isUserAgent(user))
       throw new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed");
     final Cookie sessionCookie = sessionCookieProvider.createSessionCookie(user)
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
+        .orElseThrow(() -> new HttpServerErrorException(HttpStatus.UNAUTHORIZED, "Login Failed"));
     response.addCookie(sessionCookie);
   }
 
@@ -98,8 +95,8 @@ public class SessionController {
   @DeleteMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void logout(HttpServletResponse response) {
-    final Cookie sessionCookie = userService.removeCookie()
-      .orElseThrow(() -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed"));
+    final Cookie sessionCookie = userService.removeCookie().orElseThrow(
+        () -> new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Session cookie invalidation failed"));
     response.addCookie(sessionCookie);
   }
 }
