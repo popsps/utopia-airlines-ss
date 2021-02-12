@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ss.utopia.auth.dao.UserDao;
+import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.security.SessionCookieProvider;
 
 import java.io.IOException;
@@ -42,22 +43,27 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     if (cookies != null) {
       Arrays.stream(cookies)
           // get session cookie
-          .filter((cookie) -> /* cookie.isHttpOnly() && */ cookie.getPath() == null
-              && cookie.getName().matches("^session$"))
+          .filter((cookie) -> cookie.getName().matches("^session$") && cookie.isHttpOnly()
+              && (cookie.getPath() == null || cookie.getPath().equals("/")))
           .findAny().ifPresent((sessionCookie) ->
           // parse token
           this.sessionCookieProvider.parseAuthJwt(sessionCookie).ifPresent(token ->
           // validate token
-          this.jwtProvider.validateToken(token).ifPresent((claims) ->
-          // get user by id
-          this.userDao.findById(this.jwtProvider.getUserId(claims)).ifPresent((user) -> {
-            // create user details from user
-            final UserDetails userDetails = withUsername(user.getUsername()).password(user.getPassword())
-                .authorities(user.getRole().getAuthority()).accountExpired(false).accountLocked(false)
-                .credentialsExpired(false).disabled(false).build();
-            SecurityContextHolder.getContext().setAuthentication(
-                new PreAuthenticatedAuthenticationToken(userDetails, "", userDetails.getAuthorities()));
-          }))));
+          this.jwtProvider.validateToken(token).ifPresent((claims) -> {
+            try {
+              // get user by id
+              final User user = this.userDao.findById(this.jwtProvider.getUserId(claims)).orElseThrow();
+              // create user details from user
+              final UserDetails userDetails = withUsername(user.getUsername()).password(user.getPassword())
+                  .authorities(user.getRole().getAuthority()).accountExpired(false).accountLocked(false)
+                  .credentialsExpired(false).disabled(false).build();
+              SecurityContextHolder.getContext().setAuthentication(
+                  new PreAuthenticatedAuthenticationToken(userDetails, "", userDetails.getAuthorities()));
+
+            } catch (Exception e) {
+              LOGGER.error(e.getMessage(), e);
+            }
+          })));
     }
     filterChain.doFilter(request, response);
   }
