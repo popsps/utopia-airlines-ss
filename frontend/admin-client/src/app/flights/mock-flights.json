@@ -1,0 +1,9349 @@
+{
+  "total": 519,
+  "offset": "0",
+  "count": 519,
+  "results": [
+    {
+      "id": 376,
+      "departureTime": "2020-01-31T17:29:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 88,
+        "originId": "YTM",
+        "destinationId": "IGB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 263.84
+      }
+    },
+    {
+      "id": 179,
+      "departureTime": "2020-01-31T19:32:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 277,
+        "originId": "SEY",
+        "destinationId": "AGB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 284.07
+      }
+    },
+    {
+      "id": 887,
+      "departureTime": "2020-02-01T17:04:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 314,
+        "originId": "VAN",
+        "destinationId": "TOU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 224.13
+      }
+    },
+    {
+      "id": 564,
+      "departureTime": "2020-02-01T17:41:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 532,
+        "originId": "DYL",
+        "destinationId": "COJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 207.49
+      }
+    },
+    {
+      "id": 210,
+      "departureTime": "2020-02-01T18:23:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 295,
+        "originId": "VHV",
+        "destinationId": "OLC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 329.96
+      }
+    },
+    {
+      "id": 221,
+      "departureTime": "2020-02-02T04:05:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 22,
+        "originId": "CMR",
+        "destinationId": "HNM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 251.98
+      }
+    },
+    {
+      "id": 304,
+      "departureTime": "2020-02-02T13:19:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 572,
+        "originId": "XYE",
+        "destinationId": "PIX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 337.51
+      }
+    },
+    {
+      "id": 847,
+      "departureTime": "2020-02-03T02:48:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 862,
+        "originId": "PLS",
+        "destinationId": "RIZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 213.24
+      }
+    },
+    {
+      "id": 243,
+      "departureTime": "2020-02-03T05:01:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 761,
+        "originId": "STB",
+        "destinationId": "ELS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 366.66
+      }
+    },
+    {
+      "id": 863,
+      "departureTime": "2020-02-04T21:14:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 895,
+        "originId": "MWQ",
+        "destinationId": "PPP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 302.35
+      }
+    },
+    {
+      "id": 921,
+      "departureTime": "2020-02-05T20:12:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 734,
+        "originId": "TID",
+        "destinationId": "ZAC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 391.2
+      }
+    },
+    {
+      "id": 569,
+      "departureTime": "2020-02-06T14:02:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 622,
+        "originId": "YGK",
+        "destinationId": "COX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 259.43
+      }
+    },
+    {
+      "id": 134,
+      "departureTime": "2020-02-06T17:18:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 284,
+        "originId": "ESS",
+        "destinationId": "RUN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 366.93
+      }
+    },
+    {
+      "id": 188,
+      "departureTime": "2020-02-06T18:42:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 80,
+        "originId": "SUG",
+        "destinationId": "SKP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 200.94
+      }
+    },
+    {
+      "id": 888,
+      "departureTime": "2020-02-07T19:06:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 372,
+        "originId": "HOT",
+        "destinationId": "SPD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 251.05
+      }
+    },
+    {
+      "id": 403,
+      "departureTime": "2020-02-07T19:15:54.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 539,
+        "originId": "GAD",
+        "destinationId": "CRM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 370.32
+      }
+    },
+    {
+      "id": 857,
+      "departureTime": "2020-02-07T21:29:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 886,
+        "originId": "CHA",
+        "destinationId": "FBE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 148,
+        "price": 235.18
+      }
+    },
+    {
+      "id": 889,
+      "departureTime": "2020-02-08T22:23:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 118,
+        "originId": "YGO",
+        "destinationId": "IXJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 123,
+        "price": 257.63
+      }
+    },
+    {
+      "id": 88,
+      "departureTime": "2020-02-09T09:06:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 722,
+        "originId": "HSS",
+        "destinationId": "RTS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 267.44
+      }
+    },
+    {
+      "id": 264,
+      "departureTime": "2020-02-09T09:14:51.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 257,
+        "originId": "CDJ",
+        "destinationId": "SCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 398.74
+      }
+    },
+    {
+      "id": 313,
+      "departureTime": "2020-02-09T13:11:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 607,
+        "originId": "HRK",
+        "destinationId": "YPO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 240.22
+      }
+    },
+    {
+      "id": 739,
+      "departureTime": "2020-02-09T15:32:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 741,
+        "originId": "UII",
+        "destinationId": "SBM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 254.19
+      }
+    },
+    {
+      "id": 995,
+      "departureTime": "2020-02-09T16:10:06.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 841,
+        "originId": "FIK",
+        "destinationId": "CWB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 369.07
+      }
+    },
+    {
+      "id": 482,
+      "departureTime": "2020-02-12T14:40:15.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 834,
+        "originId": "ART",
+        "destinationId": "RBV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 340.19
+      }
+    },
+    {
+      "id": 753,
+      "departureTime": "2020-02-13T00:44:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 780,
+        "originId": "ESE",
+        "destinationId": "DBN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 260.09
+      }
+    },
+    {
+      "id": 345,
+      "departureTime": "2020-02-14T07:41:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 159,
+        "originId": "CTS",
+        "destinationId": "LUR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 375.12
+      }
+    },
+    {
+      "id": 334,
+      "departureTime": "2020-02-17T09:30:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 241,
+        "originId": "KDT",
+        "destinationId": "KTQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 283.91
+      }
+    },
+    {
+      "id": 22,
+      "departureTime": "2020-02-18T07:04:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 560,
+        "originId": "BIY",
+        "destinationId": "WTN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 264.47
+      }
+    },
+    {
+      "id": 650,
+      "departureTime": "2020-02-19T05:57:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 950,
+        "originId": "VAD",
+        "destinationId": "NPR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 242.77
+      }
+    },
+    {
+      "id": 761,
+      "departureTime": "2020-02-19T17:38:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 831,
+        "originId": "SMZ",
+        "destinationId": "PYY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 336.81
+      }
+    },
+    {
+      "id": 580,
+      "departureTime": "2020-02-20T12:53:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 413,
+        "originId": "YLJ",
+        "destinationId": "LHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 329.31
+      }
+    },
+    {
+      "id": 933,
+      "departureTime": "2020-02-21T19:59:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 780,
+        "originId": "ESE",
+        "destinationId": "DBN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 383.23
+      }
+    },
+    {
+      "id": 73,
+      "departureTime": "2020-02-23T12:44:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 778,
+        "originId": "TQD",
+        "destinationId": "CLY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 297.43
+      }
+    },
+    {
+      "id": 811,
+      "departureTime": "2020-02-23T21:03:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 872,
+        "originId": "QLF",
+        "destinationId": "CWL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 387.5
+      }
+    },
+    {
+      "id": 604,
+      "departureTime": "2020-02-24T22:02:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 352,
+        "originId": "MDL",
+        "destinationId": "HUT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 246.28
+      }
+    },
+    {
+      "id": 352,
+      "departureTime": "2020-02-25T00:58:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 852,
+        "originId": "MEB",
+        "destinationId": "EVX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 271.71
+      }
+    },
+    {
+      "id": 689,
+      "departureTime": "2020-02-25T06:59:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 783,
+        "originId": "TCN",
+        "destinationId": "MHG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 267.09
+      }
+    },
+    {
+      "id": 479,
+      "departureTime": "2020-02-26T11:16:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 155,
+        "originId": "DUM",
+        "destinationId": "SDK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 246.59
+      }
+    },
+    {
+      "id": 745,
+      "departureTime": "2020-02-26T12:21:32.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 815,
+        "originId": "OKK",
+        "destinationId": "CPA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 253.71
+      }
+    },
+    {
+      "id": 76,
+      "departureTime": "2020-02-26T16:55:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 531,
+        "originId": "NKM",
+        "destinationId": "PQI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 355.01
+      }
+    },
+    {
+      "id": 775,
+      "departureTime": "2020-02-27T17:31:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 977,
+        "originId": "SWF",
+        "destinationId": "DTI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 264.05
+      }
+    },
+    {
+      "id": 55,
+      "departureTime": "2020-02-28T06:28:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 199,
+        "originId": "TOF",
+        "destinationId": "ERS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 214.77
+      }
+    },
+    {
+      "id": 392,
+      "departureTime": "2020-02-28T08:20:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 954,
+        "originId": "FDH",
+        "destinationId": "BKK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 241.28
+      }
+    },
+    {
+      "id": 82,
+      "departureTime": "2020-02-29T22:27:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 731,
+        "originId": "WAT",
+        "destinationId": "RBE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 271.08
+      }
+    },
+    {
+      "id": 849,
+      "departureTime": "2020-03-01T02:56:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 961,
+        "originId": "LUF",
+        "destinationId": "MOV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 250.07
+      }
+    },
+    {
+      "id": 143,
+      "departureTime": "2020-03-01T09:35:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 958,
+        "originId": "SVB",
+        "destinationId": "RYK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 232.53
+      }
+    },
+    {
+      "id": 829,
+      "departureTime": "2020-03-01T16:40:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 848,
+        "originId": "DOD",
+        "destinationId": "UKX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 356.5
+      }
+    },
+    {
+      "id": 219,
+      "departureTime": "2020-03-02T12:02:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 699,
+        "originId": "BRI",
+        "destinationId": "FLG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 385.1
+      }
+    },
+    {
+      "id": 972,
+      "departureTime": "2020-03-04T10:15:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 638,
+        "originId": "BPC",
+        "destinationId": "UBB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 325.54
+      }
+    },
+    {
+      "id": 698,
+      "departureTime": "2020-03-04T16:36:06.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 775,
+        "originId": "BAR",
+        "destinationId": "BCO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 223.18
+      }
+    },
+    {
+      "id": 778,
+      "departureTime": "2020-03-05T03:04:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 956,
+        "originId": "TYR",
+        "destinationId": "GDX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 300.7
+      }
+    },
+    {
+      "id": 253,
+      "departureTime": "2020-03-06T23:17:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 758,
+        "originId": "TIV",
+        "destinationId": "THF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 369.77
+      }
+    },
+    {
+      "id": 607,
+      "departureTime": "2020-03-08T23:30:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 13,
+        "originId": "KUT",
+        "destinationId": "CYU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 148,
+        "price": 253.8
+      }
+    },
+    {
+      "id": 971,
+      "departureTime": "2020-03-09T08:03:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 62,
+        "originId": "OPS",
+        "destinationId": "URE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 124,
+        "price": 325.89
+      }
+    },
+    {
+      "id": 629,
+      "departureTime": "2020-03-09T14:12:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 63,
+        "originId": "YPC",
+        "destinationId": "PMY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 251.62
+      }
+    },
+    {
+      "id": 92,
+      "departureTime": "2020-03-11T00:17:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 170,
+        "originId": "HAW",
+        "destinationId": "CKH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 305.68
+      }
+    },
+    {
+      "id": 641,
+      "departureTime": "2020-03-11T14:18:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 767,
+        "originId": "TDD",
+        "destinationId": "HGH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 204.22
+      }
+    },
+    {
+      "id": 774,
+      "departureTime": "2020-03-12T02:42:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 25,
+        "originId": "ONP",
+        "destinationId": "NQT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 288.42
+      }
+    },
+    {
+      "id": 306,
+      "departureTime": "2020-03-13T06:17:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 675,
+        "originId": "VUS",
+        "destinationId": "MYZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 206.13
+      }
+    },
+    {
+      "id": 823,
+      "departureTime": "2020-03-13T18:35:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 541,
+        "originId": "LRA",
+        "destinationId": "OBO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 286.68
+      }
+    },
+    {
+      "id": 281,
+      "departureTime": "2020-03-14T18:54:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 705,
+        "originId": "WUT",
+        "destinationId": "WKA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 232.87
+      }
+    },
+    {
+      "id": 842,
+      "departureTime": "2020-03-16T02:31:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 450,
+        "originId": "PMQ",
+        "destinationId": "LIQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 394.74
+      }
+    },
+    {
+      "id": 362,
+      "departureTime": "2020-03-16T18:14:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 753,
+        "originId": "BYC",
+        "destinationId": "WPU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 389.18
+      }
+    },
+    {
+      "id": 729,
+      "departureTime": "2020-03-17T15:47:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 352,
+        "originId": "MDL",
+        "destinationId": "HUT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 202.62
+      }
+    },
+    {
+      "id": 206,
+      "departureTime": "2020-03-18T12:21:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 721,
+        "originId": "IQM",
+        "destinationId": "QYD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 356.18
+      }
+    },
+    {
+      "id": 645,
+      "departureTime": "2020-03-18T17:49:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 982,
+        "originId": "OUD",
+        "destinationId": "ARV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 209.71
+      }
+    },
+    {
+      "id": 203,
+      "departureTime": "2020-03-18T21:50:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 131,
+        "originId": "NCU",
+        "destinationId": "KAT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 332.35
+      }
+    },
+    {
+      "id": 381,
+      "departureTime": "2020-03-19T05:34:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 479,
+        "originId": "QLR",
+        "destinationId": "PMO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 227.02
+      }
+    },
+    {
+      "id": 86,
+      "departureTime": "2020-03-20T00:13:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 675,
+        "originId": "VUS",
+        "destinationId": "MYZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 282.14
+      }
+    },
+    {
+      "id": 576,
+      "departureTime": "2020-03-21T22:48:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 889,
+        "originId": "WNR",
+        "destinationId": "GPA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 286.83
+      }
+    },
+    {
+      "id": 491,
+      "departureTime": "2020-03-22T07:56:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 146,
+        "originId": "NJK",
+        "destinationId": "REZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 368.64
+      }
+    },
+    {
+      "id": 108,
+      "departureTime": "2020-03-23T05:05:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 16,
+        "originId": "SFN",
+        "destinationId": "NSE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 298.93
+      }
+    },
+    {
+      "id": 948,
+      "departureTime": "2020-03-23T22:30:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 936,
+        "originId": "JQA",
+        "destinationId": "XFN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 398.77
+      }
+    },
+    {
+      "id": 471,
+      "departureTime": "2020-03-25T10:37:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 720,
+        "originId": "PIA",
+        "destinationId": "ABY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 369.39
+      }
+    },
+    {
+      "id": 80,
+      "departureTime": "2020-03-29T22:13:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 374,
+        "originId": "SRY",
+        "destinationId": "YZS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 289.3
+      }
+    },
+    {
+      "id": 893,
+      "departureTime": "2020-03-29T23:22:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 611,
+        "originId": "BDR",
+        "destinationId": "BGG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 282.94
+      }
+    },
+    {
+      "id": 957,
+      "departureTime": "2020-03-30T12:22:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 808,
+        "originId": "NVT",
+        "destinationId": "CYP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 218.21
+      }
+    },
+    {
+      "id": 340,
+      "departureTime": "2020-03-30T21:13:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 126,
+        "originId": "QUO",
+        "destinationId": "THZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 328.64
+      }
+    },
+    {
+      "id": 633,
+      "departureTime": "2020-03-31T18:44:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 978,
+        "originId": "BJP",
+        "destinationId": "LUR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 299.28
+      }
+    },
+    {
+      "id": 923,
+      "departureTime": "2020-04-01T03:46:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 270,
+        "originId": "FMI",
+        "destinationId": "NLF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 218.06
+      }
+    },
+    {
+      "id": 20,
+      "departureTime": "2020-04-01T04:37:51.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 684,
+        "originId": "PQC",
+        "destinationId": "TIE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 308.75
+      }
+    },
+    {
+      "id": 546,
+      "departureTime": "2020-04-05T22:20:06.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 171,
+        "originId": "CMI",
+        "destinationId": "JDF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 333.44
+      }
+    },
+    {
+      "id": 66,
+      "departureTime": "2020-04-06T04:39:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 622,
+        "originId": "YGK",
+        "destinationId": "COX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 236.01
+      }
+    },
+    {
+      "id": 543,
+      "departureTime": "2020-04-07T12:52:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 142,
+        "originId": "MUD",
+        "destinationId": "MJF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 223.8
+      }
+    },
+    {
+      "id": 98,
+      "departureTime": "2020-04-07T17:12:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 732,
+        "originId": "TBS",
+        "destinationId": "SSF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 295.06
+      }
+    },
+    {
+      "id": 153,
+      "departureTime": "2020-04-09T14:09:54.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 300,
+        "originId": "GAL",
+        "destinationId": "TRR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 366.41
+      }
+    },
+    {
+      "id": 930,
+      "departureTime": "2020-04-11T02:23:51.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 377,
+        "originId": "CDA",
+        "destinationId": "QSR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 310.18
+      }
+    },
+    {
+      "id": 657,
+      "departureTime": "2020-04-11T18:02:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 462,
+        "originId": "YHR",
+        "destinationId": "CDW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 237.52
+      }
+    },
+    {
+      "id": 524,
+      "departureTime": "2020-04-12T06:17:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 166,
+        "originId": "TGR",
+        "destinationId": "NVT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 315.83
+      }
+    },
+    {
+      "id": 209,
+      "departureTime": "2020-04-12T06:44:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 919,
+        "originId": "KID",
+        "destinationId": "ZAR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 294.65
+      }
+    },
+    {
+      "id": 184,
+      "departureTime": "2020-04-12T11:17:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 579,
+        "originId": "SZT",
+        "destinationId": "DMD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 397.04
+      }
+    },
+    {
+      "id": 367,
+      "departureTime": "2020-04-14T13:54:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 934,
+        "originId": "RVD",
+        "destinationId": "KMI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 217.07
+      }
+    },
+    {
+      "id": 71,
+      "departureTime": "2020-04-14T22:17:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 827,
+        "originId": "WBG",
+        "destinationId": "ALJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 306.07
+      }
+    },
+    {
+      "id": 758,
+      "departureTime": "2020-04-15T05:29:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 180,
+        "originId": "FMA",
+        "destinationId": "SRE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 299.18
+      }
+    },
+    {
+      "id": 597,
+      "departureTime": "2020-04-16T09:16:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 484,
+        "originId": "BNX",
+        "destinationId": "TMN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 293.98
+      }
+    },
+    {
+      "id": 892,
+      "departureTime": "2020-04-16T09:19:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 636,
+        "originId": "JSA",
+        "destinationId": "DAC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 263.59
+      }
+    },
+    {
+      "id": 805,
+      "departureTime": "2020-04-17T01:29:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 828,
+        "originId": "GSP",
+        "destinationId": "MPH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 335.09
+      }
+    },
+    {
+      "id": 661,
+      "departureTime": "2020-04-18T12:40:25.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 755,
+        "originId": "SQN",
+        "destinationId": "BUR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 241.57
+      }
+    },
+    {
+      "id": 354,
+      "departureTime": "2020-04-18T12:58:15.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 493,
+        "originId": "PLN",
+        "destinationId": "KGW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 215.66
+      }
+    },
+    {
+      "id": 918,
+      "departureTime": "2020-04-21T15:17:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 448,
+        "originId": "MIU",
+        "destinationId": "FBM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 323.78
+      }
+    },
+    {
+      "id": 5,
+      "departureTime": "2020-04-21T15:35:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 898,
+        "originId": "FDH",
+        "destinationId": "ULO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 226.09
+      }
+    },
+    {
+      "id": 997,
+      "departureTime": "2020-04-24T06:22:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 386,
+        "originId": "TMR",
+        "destinationId": "BFK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 301.14
+      }
+    },
+    {
+      "id": 158,
+      "departureTime": "2020-04-24T12:30:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 776,
+        "originId": "ENE",
+        "destinationId": "YYH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 342.39
+      }
+    },
+    {
+      "id": 42,
+      "departureTime": "2020-04-24T16:07:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 436,
+        "originId": "IFO",
+        "destinationId": "HTS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 312.84
+      }
+    },
+    {
+      "id": 630,
+      "departureTime": "2020-04-25T02:12:54.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 474,
+        "originId": "YNC",
+        "destinationId": "TET"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 247.3
+      }
+    },
+    {
+      "id": 841,
+      "departureTime": "2020-04-25T13:55:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 250,
+        "originId": "PGX",
+        "destinationId": "VPE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 335.62
+      }
+    },
+    {
+      "id": 385,
+      "departureTime": "2020-04-27T04:48:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 270,
+        "originId": "FMI",
+        "destinationId": "NLF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 355.73
+      }
+    },
+    {
+      "id": 534,
+      "departureTime": "2020-04-27T07:15:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 648,
+        "originId": "CAR",
+        "destinationId": "YNB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 323.02
+      }
+    },
+    {
+      "id": 536,
+      "departureTime": "2020-04-28T22:24:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 321,
+        "originId": "NYT",
+        "destinationId": "YOH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 221.78
+      }
+    },
+    {
+      "id": 951,
+      "departureTime": "2020-04-29T01:59:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 802,
+        "originId": "ONS",
+        "destinationId": "PVD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 310.66
+      }
+    },
+    {
+      "id": 545,
+      "departureTime": "2020-04-29T04:12:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 501,
+        "originId": "HOI",
+        "destinationId": "GAQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 371.58
+      }
+    },
+    {
+      "id": 242,
+      "departureTime": "2020-04-30T13:26:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 620,
+        "originId": "BWH",
+        "destinationId": "MLE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 276.08
+      }
+    },
+    {
+      "id": 161,
+      "departureTime": "2020-05-01T17:20:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 652,
+        "originId": "MVY",
+        "destinationId": "BMI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 215.04
+      }
+    },
+    {
+      "id": 436,
+      "departureTime": "2020-05-02T10:45:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 421,
+        "originId": "KCA",
+        "destinationId": "LYH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 228.67
+      }
+    },
+    {
+      "id": 770,
+      "departureTime": "2020-05-03T12:12:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 388,
+        "originId": "OPF",
+        "destinationId": "HHQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 360.1
+      }
+    },
+    {
+      "id": 642,
+      "departureTime": "2020-05-03T14:26:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 492,
+        "originId": "PMB",
+        "destinationId": "KLO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 227.69
+      }
+    },
+    {
+      "id": 270,
+      "departureTime": "2020-05-04T19:13:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 820,
+        "originId": "PKE",
+        "destinationId": "LQM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 339.33
+      }
+    },
+    {
+      "id": 818,
+      "departureTime": "2020-05-05T06:28:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 357,
+        "originId": "BID",
+        "destinationId": "SVP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 242.43
+      }
+    },
+    {
+      "id": 850,
+      "departureTime": "2020-05-05T12:24:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 8,
+        "originId": "PML",
+        "destinationId": "SIS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 365.22
+      }
+    },
+    {
+      "id": 176,
+      "departureTime": "2020-05-05T16:08:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 63,
+        "originId": "YPC",
+        "destinationId": "PMY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 238.01
+      }
+    },
+    {
+      "id": 518,
+      "departureTime": "2020-05-06T12:55:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 263,
+        "originId": "DUT",
+        "destinationId": "ECN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 214.75
+      }
+    },
+    {
+      "id": 309,
+      "departureTime": "2020-05-07T23:21:08.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 873,
+        "originId": "LCG",
+        "destinationId": "VTM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 393.01
+      }
+    },
+    {
+      "id": 159,
+      "departureTime": "2020-05-08T16:33:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 246,
+        "originId": "KWG",
+        "destinationId": "BMT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 383.36
+      }
+    },
+    {
+      "id": 726,
+      "departureTime": "2020-05-09T17:12:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 500,
+        "originId": "JER",
+        "destinationId": "CUL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 124,
+        "price": 232.45
+      }
+    },
+    {
+      "id": 938,
+      "departureTime": "2020-05-10T14:05:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 723,
+        "originId": "MTS",
+        "destinationId": "IAD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 242.65
+      }
+    },
+    {
+      "id": 123,
+      "departureTime": "2020-05-10T20:42:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 754,
+        "originId": "KUV",
+        "destinationId": "YMW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 284.6
+      }
+    },
+    {
+      "id": 944,
+      "departureTime": "2020-05-12T11:26:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 332,
+        "originId": "ICT",
+        "destinationId": "NAC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 244.76
+      }
+    },
+    {
+      "id": 364,
+      "departureTime": "2020-05-12T19:23:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 304,
+        "originId": "SDS",
+        "destinationId": "LMQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 381.48
+      }
+    },
+    {
+      "id": 781,
+      "departureTime": "2020-05-12T23:31:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 670,
+        "originId": "DIA",
+        "destinationId": "LXA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 368
+      }
+    },
+    {
+      "id": 130,
+      "departureTime": "2020-05-13T11:20:15.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 204,
+        "originId": "BBC",
+        "destinationId": "ILY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 366.61
+      }
+    },
+    {
+      "id": 327,
+      "departureTime": "2020-05-15T18:26:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 12,
+        "originId": "XCR",
+        "destinationId": "BMW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 121,
+        "price": 213.37
+      }
+    },
+    {
+      "id": 204,
+      "departureTime": "2020-05-15T19:42:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 591,
+        "originId": "MRD",
+        "destinationId": "KLV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 318.92
+      }
+    },
+    {
+      "id": 25,
+      "departureTime": "2020-05-16T16:12:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 837,
+        "originId": "GNS",
+        "destinationId": "KSC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 299.52
+      }
+    },
+    {
+      "id": 702,
+      "departureTime": "2020-05-19T14:59:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 980,
+        "originId": "QSC",
+        "destinationId": "TGO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 367.91
+      }
+    },
+    {
+      "id": 23,
+      "departureTime": "2020-05-20T06:52:25.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 837,
+        "originId": "GNS",
+        "destinationId": "KSC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 361.88
+      }
+    },
+    {
+      "id": 513,
+      "departureTime": "2020-05-20T18:12:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 800,
+        "originId": "MCO",
+        "destinationId": "PAZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 292.8
+      }
+    },
+    {
+      "id": 568,
+      "departureTime": "2020-05-21T21:38:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 475,
+        "originId": "ZYI",
+        "destinationId": "SKD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 328.98
+      }
+    },
+    {
+      "id": 271,
+      "departureTime": "2020-05-22T11:40:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 932,
+        "originId": "HUH",
+        "destinationId": "HPB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 322.41
+      }
+    },
+    {
+      "id": 4,
+      "departureTime": "2020-05-22T19:25:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 166,
+        "originId": "TGR",
+        "destinationId": "NVT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 374.44
+      }
+    },
+    {
+      "id": 777,
+      "departureTime": "2020-05-22T22:57:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 50,
+        "originId": "JAB",
+        "destinationId": "SQZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 232.34
+      }
+    },
+    {
+      "id": 901,
+      "departureTime": "2020-05-23T16:53:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 898,
+        "originId": "FDH",
+        "destinationId": "ULO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 223.06
+      }
+    },
+    {
+      "id": 241,
+      "departureTime": "2020-05-24T00:06:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 697,
+        "originId": "OUL",
+        "destinationId": "UNT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 203.65
+      }
+    },
+    {
+      "id": 833,
+      "departureTime": "2020-05-24T03:37:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 703,
+        "originId": "ATH",
+        "destinationId": "SBR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 392.37
+      }
+    },
+    {
+      "id": 83,
+      "departureTime": "2020-05-24T21:11:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 759,
+        "originId": "ALC",
+        "destinationId": "IRC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 267.53
+      }
+    },
+    {
+      "id": 462,
+      "departureTime": "2020-05-26T08:05:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 662,
+        "originId": "LND",
+        "destinationId": "PSU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 232.55
+      }
+    },
+    {
+      "id": 746,
+      "departureTime": "2020-05-27T18:17:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 884,
+        "originId": "KET",
+        "destinationId": "MTF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 228.35
+      }
+    },
+    {
+      "id": 240,
+      "departureTime": "2020-05-28T10:00:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 969,
+        "originId": "CNF",
+        "destinationId": "CGB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 398.02
+      }
+    },
+    {
+      "id": 734,
+      "departureTime": "2020-05-29T00:41:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 510,
+        "originId": "JDG",
+        "destinationId": "RIC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 345.47
+      }
+    },
+    {
+      "id": 169,
+      "departureTime": "2020-05-30T11:33:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 333,
+        "originId": "INI",
+        "destinationId": "AHB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 359.09
+      }
+    },
+    {
+      "id": 621,
+      "departureTime": "2020-05-31T06:08:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 588,
+        "originId": "KLH",
+        "destinationId": "ABI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 353.74
+      }
+    },
+    {
+      "id": 932,
+      "departureTime": "2020-06-01T01:59:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 55,
+        "originId": "CLN",
+        "destinationId": "DCF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 273.47
+      }
+    },
+    {
+      "id": 371,
+      "departureTime": "2020-06-01T04:20:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 703,
+        "originId": "ATH",
+        "destinationId": "SBR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 286.02
+      }
+    },
+    {
+      "id": 18,
+      "departureTime": "2020-06-02T11:39:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 386,
+        "originId": "TMR",
+        "destinationId": "BFK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 266.67
+      }
+    },
+    {
+      "id": 187,
+      "departureTime": "2020-06-03T14:43:25.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 37,
+        "originId": "GWD",
+        "destinationId": "IQA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 395.44
+      }
+    },
+    {
+      "id": 423,
+      "departureTime": "2020-06-03T21:23:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 581,
+        "originId": "BNG",
+        "destinationId": "OAM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 255.97
+      }
+    },
+    {
+      "id": 681,
+      "departureTime": "2020-06-04T08:14:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 634,
+        "originId": "BME",
+        "destinationId": "TIQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 269.53
+      }
+    },
+    {
+      "id": 549,
+      "departureTime": "2020-06-04T09:16:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 541,
+        "originId": "LRA",
+        "destinationId": "OBO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 235.73
+      }
+    },
+    {
+      "id": 978,
+      "departureTime": "2020-06-04T11:03:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 200,
+        "originId": "HKG",
+        "destinationId": "RDB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 303.43
+      }
+    },
+    {
+      "id": 252,
+      "departureTime": "2020-06-04T20:10:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 641,
+        "originId": "ATZ",
+        "destinationId": "ELT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 373.37
+      }
+    },
+    {
+      "id": 89,
+      "departureTime": "2020-06-05T04:19:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 478,
+        "originId": "VTB",
+        "destinationId": "VST"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 321.5
+      }
+    },
+    {
+      "id": 686,
+      "departureTime": "2020-06-07T10:53:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 358,
+        "originId": "CGF",
+        "destinationId": "DCN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 205.45
+      }
+    },
+    {
+      "id": 125,
+      "departureTime": "2020-06-08T14:49:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 5,
+        "originId": "VME",
+        "destinationId": "HMJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 277.14
+      }
+    },
+    {
+      "id": 844,
+      "departureTime": "2020-06-08T22:08:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 172,
+        "originId": "AIP",
+        "destinationId": "YZS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 399.11
+      }
+    },
+    {
+      "id": 539,
+      "departureTime": "2020-06-09T06:15:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 996,
+        "originId": "GEG",
+        "destinationId": "AKN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 125,
+        "price": 286.8
+      }
+    },
+    {
+      "id": 773,
+      "departureTime": "2020-06-09T07:06:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 752,
+        "originId": "DRI",
+        "destinationId": "PAT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 306.34
+      }
+    },
+    {
+      "id": 265,
+      "departureTime": "2020-06-09T20:36:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 628,
+        "originId": "JXN",
+        "destinationId": "MGE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 235.28
+      }
+    },
+    {
+      "id": 6,
+      "departureTime": "2020-06-10T13:15:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 262,
+        "originId": "ODB",
+        "destinationId": "TKA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 266.55
+      }
+    },
+    {
+      "id": 787,
+      "departureTime": "2020-06-10T13:58:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 683,
+        "originId": "MNJ",
+        "destinationId": "SMD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 363.76
+      }
+    },
+    {
+      "id": 144,
+      "departureTime": "2020-06-11T08:21:40.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 578,
+        "originId": "MGY",
+        "destinationId": "GUW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 225.73
+      }
+    },
+    {
+      "id": 263,
+      "departureTime": "2020-06-12T02:32:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 946,
+        "originId": "YNB",
+        "destinationId": "YNM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 340.31
+      }
+    },
+    {
+      "id": 113,
+      "departureTime": "2020-06-12T17:02:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 737,
+        "originId": "ROA",
+        "destinationId": "OVB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 373.62
+      }
+    },
+    {
+      "id": 105,
+      "departureTime": "2020-06-12T19:21:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 997,
+        "originId": "YST",
+        "destinationId": "GRI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 231.89
+      }
+    },
+    {
+      "id": 351,
+      "departureTime": "2020-06-13T08:08:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 333,
+        "originId": "INI",
+        "destinationId": "AHB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 205.92
+      }
+    },
+    {
+      "id": 705,
+      "departureTime": "2020-06-14T10:23:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 76,
+        "originId": "IAN",
+        "destinationId": "LZY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 266.53
+      }
+    },
+    {
+      "id": 100,
+      "departureTime": "2020-06-14T15:58:51.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 131,
+        "originId": "NCU",
+        "destinationId": "KAT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 372.27
+      }
+    },
+    {
+      "id": 724,
+      "departureTime": "2020-06-15T05:41:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 68,
+        "originId": "YBE",
+        "destinationId": "BCE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 226.64
+      }
+    },
+    {
+      "id": 658,
+      "departureTime": "2020-06-15T15:27:11.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 52,
+        "originId": "HPB",
+        "destinationId": "RIW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 212.82
+      }
+    },
+    {
+      "id": 456,
+      "departureTime": "2020-06-16T00:21:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 864,
+        "originId": "LDE",
+        "destinationId": "DRO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 337.19
+      }
+    },
+    {
+      "id": 292,
+      "departureTime": "2020-06-16T03:59:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 613,
+        "originId": "CVQ",
+        "destinationId": "AUW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 319.33
+      }
+    },
+    {
+      "id": 78,
+      "departureTime": "2020-06-17T11:50:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 536,
+        "originId": "SGZ",
+        "destinationId": "INV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 274.77
+      }
+    },
+    {
+      "id": 487,
+      "departureTime": "2020-06-18T01:16:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 866,
+        "originId": "LIQ",
+        "destinationId": "OER"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 365.5
+      }
+    },
+    {
+      "id": 35,
+      "departureTime": "2020-06-18T19:49:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 475,
+        "originId": "ZYI",
+        "destinationId": "SKD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 206.16
+      }
+    },
+    {
+      "id": 358,
+      "departureTime": "2020-06-18T21:21:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 33,
+        "originId": "SWT",
+        "destinationId": "ADB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 221.09
+      }
+    },
+    {
+      "id": 353,
+      "departureTime": "2020-06-19T05:12:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 558,
+        "originId": "CRI",
+        "destinationId": "MXS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 225.64
+      }
+    },
+    {
+      "id": 855,
+      "departureTime": "2020-06-19T10:14:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 726,
+        "originId": "OTK",
+        "destinationId": "MRW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 265
+      }
+    },
+    {
+      "id": 370,
+      "departureTime": "2020-06-19T16:12:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 436,
+        "originId": "IFO",
+        "destinationId": "HTS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 253.19
+      }
+    },
+    {
+      "id": 433,
+      "departureTime": "2020-06-21T21:10:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 651,
+        "originId": "GWE",
+        "destinationId": "VLC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 354.53
+      }
+    },
+    {
+      "id": 992,
+      "departureTime": "2020-06-21T23:07:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 841,
+        "originId": "FIK",
+        "destinationId": "CWB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 219.52
+      }
+    },
+    {
+      "id": 973,
+      "departureTime": "2020-06-22T02:38:54.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 705,
+        "originId": "WUT",
+        "destinationId": "WKA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 282.97
+      }
+    },
+    {
+      "id": 669,
+      "departureTime": "2020-06-22T07:31:06.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 931,
+        "originId": "XVS",
+        "destinationId": "QYD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 222.19
+      }
+    },
+    {
+      "id": 567,
+      "departureTime": "2020-06-23T14:20:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 539,
+        "originId": "GAD",
+        "destinationId": "CRM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 212.12
+      }
+    },
+    {
+      "id": 644,
+      "departureTime": "2020-06-24T01:48:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 583,
+        "originId": "OUH",
+        "destinationId": "QPW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 226.29
+      }
+    },
+    {
+      "id": 557,
+      "departureTime": "2020-06-26T06:29:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 427,
+        "originId": "ESL",
+        "destinationId": "TPF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 345.16
+      }
+    },
+    {
+      "id": 523,
+      "departureTime": "2020-06-28T05:30:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 745,
+        "originId": "BVS",
+        "destinationId": "PFB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 342.37
+      }
+    },
+    {
+      "id": 61,
+      "departureTime": "2020-06-28T07:00:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 266,
+        "originId": "FWH",
+        "destinationId": "YXH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 339.75
+      }
+    },
+    {
+      "id": 505,
+      "departureTime": "2020-06-28T13:22:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 240,
+        "originId": "UAK",
+        "destinationId": "LUK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 309.24
+      }
+    },
+    {
+      "id": 683,
+      "departureTime": "2020-06-28T23:36:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 584,
+        "originId": "CYR",
+        "destinationId": "VPZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 206.77
+      }
+    },
+    {
+      "id": 322,
+      "departureTime": "2020-06-30T13:27:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 758,
+        "originId": "TIV",
+        "destinationId": "THF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 280.36
+      }
+    },
+    {
+      "id": 572,
+      "departureTime": "2020-07-01T06:13:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 914,
+        "originId": "JJM",
+        "destinationId": "LLY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 369.75
+      }
+    },
+    {
+      "id": 562,
+      "departureTime": "2020-07-02T05:40:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 225,
+        "originId": "VAM",
+        "destinationId": "IEG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 329.72
+      }
+    },
+    {
+      "id": 418,
+      "departureTime": "2020-07-05T04:37:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 424,
+        "originId": "SLK",
+        "destinationId": "BCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 355.84
+      }
+    },
+    {
+      "id": 455,
+      "departureTime": "2020-07-06T09:10:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 808,
+        "originId": "NVT",
+        "destinationId": "CYP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 302.8
+      }
+    },
+    {
+      "id": 994,
+      "departureTime": "2020-07-06T10:23:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 960,
+        "originId": "HOI",
+        "destinationId": "VGO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 384.94
+      }
+    },
+    {
+      "id": 300,
+      "departureTime": "2020-07-07T06:40:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 991,
+        "originId": "WUA",
+        "destinationId": "BWX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 343.16
+      }
+    },
+    {
+      "id": 537,
+      "departureTime": "2020-07-08T02:49:40.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 707,
+        "originId": "WMI",
+        "destinationId": "ZTU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 269.18
+      }
+    },
+    {
+      "id": 638,
+      "departureTime": "2020-07-08T07:00:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 305,
+        "originId": "TEF",
+        "destinationId": "QSF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 320.24
+      }
+    },
+    {
+      "id": 51,
+      "departureTime": "2020-07-09T13:21:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 979,
+        "originId": "PBJ",
+        "destinationId": "MFI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 261.15
+      }
+    },
+    {
+      "id": 616,
+      "departureTime": "2020-07-09T16:02:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 681,
+        "originId": "JOI",
+        "destinationId": "TRD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 394.64
+      }
+    },
+    {
+      "id": 711,
+      "departureTime": "2020-07-09T16:41:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 846,
+        "originId": "PEM",
+        "destinationId": "GAY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 220.09
+      }
+    },
+    {
+      "id": 684,
+      "departureTime": "2020-07-10T21:45:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 909,
+        "originId": "MZQ",
+        "destinationId": "BEC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 308.73
+      }
+    },
+    {
+      "id": 446,
+      "departureTime": "2020-07-13T20:57:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 864,
+        "originId": "LDE",
+        "destinationId": "DRO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 355.27
+      }
+    },
+    {
+      "id": 865,
+      "departureTime": "2020-07-13T21:33:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 469,
+        "originId": "SZZ",
+        "destinationId": "AGH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 364.28
+      }
+    },
+    {
+      "id": 538,
+      "departureTime": "2020-07-15T12:20:40.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 316,
+        "originId": "SKP",
+        "destinationId": "VHV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 218.41
+      }
+    },
+    {
+      "id": 884,
+      "departureTime": "2020-07-15T21:38:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 777,
+        "originId": "JOK",
+        "destinationId": "QOW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 250.13
+      }
+    },
+    {
+      "id": 731,
+      "departureTime": "2020-07-16T06:42:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 161,
+        "originId": "VOD",
+        "destinationId": "DKR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 272.7
+      }
+    },
+    {
+      "id": 156,
+      "departureTime": "2020-07-16T13:29:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 297,
+        "originId": "CUU",
+        "destinationId": "IGL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 239.21
+      }
+    },
+    {
+      "id": 993,
+      "departureTime": "2020-07-16T22:06:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 397,
+        "originId": "CCZ",
+        "destinationId": "HHR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 267.83
+      }
+    },
+    {
+      "id": 554,
+      "departureTime": "2020-07-17T03:05:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 404,
+        "originId": "YWB",
+        "destinationId": "RGA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 291.86
+      }
+    },
+    {
+      "id": 860,
+      "departureTime": "2020-07-17T05:36:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 365,
+        "originId": "RHD",
+        "destinationId": "JHW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 380.29
+      }
+    },
+    {
+      "id": 131,
+      "departureTime": "2020-07-17T13:54:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 42,
+        "originId": "LXA",
+        "destinationId": "SHV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 318.21
+      }
+    },
+    {
+      "id": 851,
+      "departureTime": "2020-07-18T02:59:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 681,
+        "originId": "JOI",
+        "destinationId": "TRD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 395.07
+      }
+    },
+    {
+      "id": 110,
+      "departureTime": "2020-07-18T12:20:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 719,
+        "originId": "BQS",
+        "destinationId": "ALX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 303.4
+      }
+    },
+    {
+      "id": 845,
+      "departureTime": "2020-07-18T14:09:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 647,
+        "originId": "CXA",
+        "destinationId": "QPG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 335.13
+      }
+    },
+    {
+      "id": 500,
+      "departureTime": "2020-07-19T10:01:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 302,
+        "originId": "ICC",
+        "destinationId": "BQJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 218.27
+      }
+    },
+    {
+      "id": 223,
+      "departureTime": "2020-07-20T10:32:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 507,
+        "originId": "HGA",
+        "destinationId": "LVP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 260.81
+      }
+    },
+    {
+      "id": 797,
+      "departureTime": "2020-07-20T11:41:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 591,
+        "originId": "MRD",
+        "destinationId": "KLV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 328.76
+      }
+    },
+    {
+      "id": 688,
+      "departureTime": "2020-07-25T06:27:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 791,
+        "originId": "AWZ",
+        "destinationId": "OPO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 125,
+        "price": 316.88
+      }
+    },
+    {
+      "id": 622,
+      "departureTime": "2020-07-30T01:38:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 249,
+        "originId": "YCM",
+        "destinationId": "SVL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 318.57
+      }
+    },
+    {
+      "id": 481,
+      "departureTime": "2020-07-30T07:05:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 134,
+        "originId": "SIN",
+        "destinationId": "UUD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 344.8
+      }
+    },
+    {
+      "id": 969,
+      "departureTime": "2020-07-30T08:00:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 109,
+        "originId": "PEX",
+        "destinationId": "YKX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 325.65
+      }
+    },
+    {
+      "id": 208,
+      "departureTime": "2020-07-30T18:40:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 747,
+        "originId": "KAJ",
+        "destinationId": "SQQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 255.87
+      }
+    },
+    {
+      "id": 917,
+      "departureTime": "2020-07-31T17:51:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 468,
+        "originId": "APQ",
+        "destinationId": "BEI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 255.04
+      }
+    },
+    {
+      "id": 732,
+      "departureTime": "2020-08-02T01:32:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 236,
+        "originId": "BWE",
+        "destinationId": "VEL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 124,
+        "price": 255.44
+      }
+    },
+    {
+      "id": 828,
+      "departureTime": "2020-08-02T16:57:25.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 245,
+        "originId": "MNZ",
+        "destinationId": "GAY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 297.4
+      }
+    },
+    {
+      "id": 419,
+      "departureTime": "2020-08-04T21:38:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 701,
+        "originId": "CGH",
+        "destinationId": "PEV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 353.76
+      }
+    },
+    {
+      "id": 289,
+      "departureTime": "2020-08-06T22:18:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 9,
+        "originId": "MVL",
+        "destinationId": "YKL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 230.18
+      }
+    },
+    {
+      "id": 749,
+      "departureTime": "2020-08-07T06:35:06.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 719,
+        "originId": "BQS",
+        "destinationId": "ALX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 366.7
+      }
+    },
+    {
+      "id": 613,
+      "departureTime": "2020-08-07T22:30:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 387,
+        "originId": "MUE",
+        "destinationId": "BWF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 364.25
+      }
+    },
+    {
+      "id": 57,
+      "departureTime": "2020-08-08T05:20:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 184,
+        "originId": "GWO",
+        "destinationId": "AYK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 341.31
+      }
+    },
+    {
+      "id": 463,
+      "departureTime": "2020-08-09T02:54:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 362,
+        "originId": "CAU",
+        "destinationId": "QCY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 323.06
+      }
+    },
+    {
+      "id": 74,
+      "departureTime": "2020-08-09T15:54:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 58,
+        "originId": "YCR",
+        "destinationId": "WMT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 301.45
+      }
+    },
+    {
+      "id": 121,
+      "departureTime": "2020-08-10T11:55:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 757,
+        "originId": "LGP",
+        "destinationId": "PIL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 326.41
+      }
+    },
+    {
+      "id": 902,
+      "departureTime": "2020-08-12T15:48:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 342,
+        "originId": "TNM",
+        "destinationId": "BBL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 327.2
+      }
+    },
+    {
+      "id": 509,
+      "departureTime": "2020-08-12T19:29:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 663,
+        "originId": "CUE",
+        "destinationId": "PUR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 238.82
+      }
+    },
+    {
+      "id": 771,
+      "departureTime": "2020-08-16T13:09:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 128,
+        "originId": "BQS",
+        "destinationId": "SCM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 124,
+        "price": 312.89
+      }
+    },
+    {
+      "id": 229,
+      "departureTime": "2020-08-16T13:33:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 437,
+        "originId": "SDX",
+        "destinationId": "USA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 204.59
+      }
+    },
+    {
+      "id": 529,
+      "departureTime": "2020-08-19T07:34:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 268,
+        "originId": "JDF",
+        "destinationId": "HDS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 259.72
+      }
+    },
+    {
+      "id": 233,
+      "departureTime": "2020-08-20T12:37:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 310,
+        "originId": "SEK",
+        "destinationId": "BUT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 236.14
+      }
+    },
+    {
+      "id": 612,
+      "departureTime": "2020-08-22T06:41:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 337,
+        "originId": "ABV",
+        "destinationId": "GID"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 259.15
+      }
+    },
+    {
+      "id": 302,
+      "departureTime": "2020-08-23T15:11:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 224,
+        "originId": "IAM",
+        "destinationId": "UGN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 386.56
+      }
+    },
+    {
+      "id": 128,
+      "departureTime": "2020-08-25T07:44:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 445,
+        "originId": "RUN",
+        "destinationId": "SQL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 394.32
+      }
+    },
+    {
+      "id": 277,
+      "departureTime": "2020-08-26T03:30:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 747,
+        "originId": "KAJ",
+        "destinationId": "SQQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 212.93
+      }
+    },
+    {
+      "id": 976,
+      "departureTime": "2020-08-26T10:57:36.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 360,
+        "originId": "YMO",
+        "destinationId": "TKG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 355.88
+      }
+    },
+    {
+      "id": 533,
+      "departureTime": "2020-08-27T02:14:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 321,
+        "originId": "NYT",
+        "destinationId": "YOH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 338.9
+      }
+    },
+    {
+      "id": 602,
+      "departureTime": "2020-08-28T05:12:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 266,
+        "originId": "FWH",
+        "destinationId": "YXH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 353.24
+      }
+    },
+    {
+      "id": 956,
+      "departureTime": "2020-08-28T05:23:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 974,
+        "originId": "MEG",
+        "destinationId": "TNM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 250.05
+      }
+    },
+    {
+      "id": 259,
+      "departureTime": "2020-08-28T15:38:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 599,
+        "originId": "BMR",
+        "destinationId": "PRQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 368.8
+      }
+    },
+    {
+      "id": 39,
+      "departureTime": "2020-08-29T07:52:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 516,
+        "originId": "PDV",
+        "destinationId": "BDL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 342.59
+      }
+    },
+    {
+      "id": 747,
+      "departureTime": "2020-08-31T14:30:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 554,
+        "originId": "CPH",
+        "destinationId": "CMU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 223.28
+      }
+    },
+    {
+      "id": 878,
+      "departureTime": "2020-08-31T22:24:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 277,
+        "originId": "SEY",
+        "destinationId": "AGB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 257.38
+      }
+    },
+    {
+      "id": 377,
+      "departureTime": "2020-09-01T23:58:51.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 128,
+        "originId": "BQS",
+        "destinationId": "SCM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 397.94
+      }
+    },
+    {
+      "id": 528,
+      "departureTime": "2020-09-02T20:10:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 294,
+        "originId": "MAT",
+        "destinationId": "DYU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 274.48
+      }
+    },
+    {
+      "id": 934,
+      "departureTime": "2020-09-03T07:57:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 475,
+        "originId": "ZYI",
+        "destinationId": "SKD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 275.26
+      }
+    },
+    {
+      "id": 695,
+      "departureTime": "2020-09-03T14:20:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 899,
+        "originId": "MSH",
+        "destinationId": "UTA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 368.9
+      }
+    },
+    {
+      "id": 425,
+      "departureTime": "2020-09-03T20:38:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 335,
+        "originId": "YGK",
+        "destinationId": "HAM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 389.22
+      }
+    },
+    {
+      "id": 464,
+      "departureTime": "2020-09-04T07:54:36.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 960,
+        "originId": "HOI",
+        "destinationId": "VGO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 367.03
+      }
+    },
+    {
+      "id": 172,
+      "departureTime": "2020-09-07T02:05:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 216,
+        "originId": "ITH",
+        "destinationId": "LRF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 294.37
+      }
+    },
+    {
+      "id": 652,
+      "departureTime": "2020-09-07T10:30:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 413,
+        "originId": "YLJ",
+        "destinationId": "LHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 372.84
+      }
+    },
+    {
+      "id": 13,
+      "departureTime": "2020-09-07T14:20:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 552,
+        "originId": "GRI",
+        "destinationId": "YQV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 365.59
+      }
+    },
+    {
+      "id": 822,
+      "departureTime": "2020-09-09T03:42:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 418,
+        "originId": "PUG",
+        "destinationId": "ELH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 399.96
+      }
+    },
+    {
+      "id": 372,
+      "departureTime": "2020-09-09T19:28:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 881,
+        "originId": "MHE",
+        "destinationId": "MMY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 309.07
+      }
+    },
+    {
+      "id": 408,
+      "departureTime": "2020-09-09T22:29:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 14,
+        "originId": "HQM",
+        "destinationId": "FLN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 124,
+        "price": 356.77
+      }
+    },
+    {
+      "id": 560,
+      "departureTime": "2020-09-14T01:44:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 160,
+        "originId": "PPL",
+        "destinationId": "UBJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 306.34
+      }
+    },
+    {
+      "id": 27,
+      "departureTime": "2020-09-14T11:26:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 940,
+        "originId": "TMH",
+        "destinationId": "LPA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 291.82
+      }
+    },
+    {
+      "id": 346,
+      "departureTime": "2020-09-15T10:11:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 413,
+        "originId": "YLJ",
+        "destinationId": "LHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 261.37
+      }
+    },
+    {
+      "id": 284,
+      "departureTime": "2020-09-16T00:17:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 12,
+        "originId": "XCR",
+        "destinationId": "BMW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 267.89
+      }
+    },
+    {
+      "id": 234,
+      "departureTime": "2020-09-16T11:33:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 906,
+        "originId": "LBF",
+        "destinationId": "MSO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 272.37
+      }
+    },
+    {
+      "id": 274,
+      "departureTime": "2020-09-17T11:14:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 131,
+        "originId": "NCU",
+        "destinationId": "KAT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 351.76
+      }
+    },
+    {
+      "id": 904,
+      "departureTime": "2020-09-19T19:31:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 113,
+        "originId": "SBR",
+        "destinationId": "UAP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 211.29
+      }
+    },
+    {
+      "id": 444,
+      "departureTime": "2020-09-20T18:12:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 687,
+        "originId": "MSY",
+        "destinationId": "JIK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 307.96
+      }
+    },
+    {
+      "id": 526,
+      "departureTime": "2020-09-21T15:39:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 952,
+        "originId": "NST",
+        "destinationId": "BCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 363.2
+      }
+    },
+    {
+      "id": 167,
+      "departureTime": "2020-09-23T00:06:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 558,
+        "originId": "CRI",
+        "destinationId": "MXS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 328.23
+      }
+    },
+    {
+      "id": 85,
+      "departureTime": "2020-09-23T13:29:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 526,
+        "originId": "TLE",
+        "destinationId": "PRN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 286.83
+      }
+    },
+    {
+      "id": 895,
+      "departureTime": "2020-09-24T10:15:32.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 244,
+        "originId": "ALR",
+        "destinationId": "LBI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 303.01
+      }
+    },
+    {
+      "id": 639,
+      "departureTime": "2020-09-24T14:30:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 476,
+        "originId": "LAW",
+        "destinationId": "HRK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 148,
+        "price": 330.05
+      }
+    },
+    {
+      "id": 43,
+      "departureTime": "2020-09-24T15:09:32.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 626,
+        "originId": "BIA",
+        "destinationId": "AOO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 299.31
+      }
+    },
+    {
+      "id": 473,
+      "departureTime": "2020-09-24T21:46:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 414,
+        "originId": "GSP",
+        "destinationId": "CDJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 304.37
+      }
+    },
+    {
+      "id": 129,
+      "departureTime": "2020-09-27T07:40:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 10,
+        "originId": "GMB",
+        "destinationId": "SHW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 313.6
+      }
+    },
+    {
+      "id": 824,
+      "departureTime": "2020-09-27T17:34:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 873,
+        "originId": "LCG",
+        "destinationId": "VTM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 367.55
+      }
+    },
+    {
+      "id": 235,
+      "departureTime": "2020-09-27T19:02:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 930,
+        "originId": "NAJ",
+        "destinationId": "FLD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 296.84
+      }
+    },
+    {
+      "id": 987,
+      "departureTime": "2020-09-28T23:05:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 466,
+        "originId": "WMP",
+        "destinationId": "LCG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 341.97
+      }
+    },
+    {
+      "id": 314,
+      "departureTime": "2020-09-29T08:20:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 606,
+        "originId": "GRI",
+        "destinationId": "SGN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 252.78
+      }
+    },
+    {
+      "id": 869,
+      "departureTime": "2020-09-29T19:29:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 684,
+        "originId": "PQC",
+        "destinationId": "TIE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 325.8
+      }
+    },
+    {
+      "id": 827,
+      "departureTime": "2020-09-30T04:34:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 351,
+        "originId": "CRA",
+        "destinationId": "HUI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 386.72
+      }
+    },
+    {
+      "id": 756,
+      "departureTime": "2020-09-30T10:09:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 959,
+        "originId": "JIK",
+        "destinationId": "HDR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 378.88
+      }
+    },
+    {
+      "id": 785,
+      "departureTime": "2020-09-30T18:43:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 583,
+        "originId": "OUH",
+        "destinationId": "QPW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 225.28
+      }
+    },
+    {
+      "id": 310,
+      "departureTime": "2020-10-01T10:59:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 324,
+        "originId": "DKK",
+        "destinationId": "PRP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 396.24
+      }
+    },
+    {
+      "id": 804,
+      "departureTime": "2020-10-01T23:31:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 622,
+        "originId": "YGK",
+        "destinationId": "COX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 277.33
+      }
+    },
+    {
+      "id": 628,
+      "departureTime": "2020-10-04T10:32:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 496,
+        "originId": "ZMT",
+        "destinationId": "MVD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 233.08
+      }
+    },
+    {
+      "id": 181,
+      "departureTime": "2020-10-05T03:30:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 970,
+        "originId": "HBR",
+        "destinationId": "YTM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 357.62
+      }
+    },
+    {
+      "id": 752,
+      "departureTime": "2020-10-08T01:07:38.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 157,
+        "originId": "ZGI",
+        "destinationId": "BUF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 360.87
+      }
+    },
+    {
+      "id": 255,
+      "departureTime": "2020-10-08T03:54:08.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 854,
+        "originId": "AMS",
+        "destinationId": "NJA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 385.1
+      }
+    },
+    {
+      "id": 931,
+      "departureTime": "2020-10-08T19:20:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 823,
+        "originId": "BYM",
+        "destinationId": "BCL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 203.16
+      }
+    },
+    {
+      "id": 387,
+      "departureTime": "2020-10-09T00:28:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 462,
+        "originId": "YHR",
+        "destinationId": "CDW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 210.04
+      }
+    },
+    {
+      "id": 119,
+      "departureTime": "2020-10-09T04:00:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 494,
+        "originId": "YBK",
+        "destinationId": "KOC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 376.19
+      }
+    },
+    {
+      "id": 477,
+      "departureTime": "2020-10-09T15:57:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 517,
+        "originId": "OLF",
+        "destinationId": "TBJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 342.79
+      }
+    },
+    {
+      "id": 213,
+      "departureTime": "2020-10-10T22:56:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 321,
+        "originId": "NYT",
+        "destinationId": "YOH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 321.4
+      }
+    },
+    {
+      "id": 454,
+      "departureTime": "2020-10-11T04:10:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 323,
+        "originId": "TBJ",
+        "destinationId": "ERL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 322.23
+      }
+    },
+    {
+      "id": 799,
+      "departureTime": "2020-10-11T09:24:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 373,
+        "originId": "DHN",
+        "destinationId": "BXB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 380.19
+      }
+    },
+    {
+      "id": 989,
+      "departureTime": "2020-10-11T13:39:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 371,
+        "originId": "TPQ",
+        "destinationId": "SAL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 292.75
+      }
+    },
+    {
+      "id": 152,
+      "departureTime": "2020-10-13T06:52:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 526,
+        "originId": "TLE",
+        "destinationId": "PRN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 333.17
+      }
+    },
+    {
+      "id": 238,
+      "departureTime": "2020-10-13T07:23:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 954,
+        "originId": "FDH",
+        "destinationId": "BKK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 297.59
+      }
+    },
+    {
+      "id": 382,
+      "departureTime": "2020-10-14T04:54:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 197,
+        "originId": "ENK",
+        "destinationId": "IXM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 352.73
+      }
+    },
+    {
+      "id": 106,
+      "departureTime": "2020-10-16T08:55:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 729,
+        "originId": "AVR",
+        "destinationId": "SCM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 236.02
+      }
+    },
+    {
+      "id": 469,
+      "departureTime": "2020-10-17T04:55:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 936,
+        "originId": "JQA",
+        "destinationId": "XFN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 359.51
+      }
+    },
+    {
+      "id": 120,
+      "departureTime": "2020-10-17T20:10:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 174,
+        "originId": "BFJ",
+        "destinationId": "MOB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 201.9
+      }
+    },
+    {
+      "id": 49,
+      "departureTime": "2020-10-17T21:47:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 601,
+        "originId": "DXR",
+        "destinationId": "DHR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 383.14
+      }
+    },
+    {
+      "id": 798,
+      "departureTime": "2020-10-19T20:35:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 281,
+        "originId": "CRZ",
+        "destinationId": "BKG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 343.69
+      }
+    },
+    {
+      "id": 961,
+      "departureTime": "2020-10-20T10:18:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 651,
+        "originId": "GWE",
+        "destinationId": "VLC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 229.57
+      }
+    },
+    {
+      "id": 854,
+      "departureTime": "2020-10-21T07:26:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 624,
+        "originId": "BKA",
+        "destinationId": "HUY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 202.58
+      }
+    },
+    {
+      "id": 940,
+      "departureTime": "2020-10-21T12:49:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 210,
+        "originId": "OZZ",
+        "destinationId": "HHE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 267.61
+      }
+    },
+    {
+      "id": 503,
+      "departureTime": "2020-10-21T13:28:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 89,
+        "originId": "CGD",
+        "destinationId": "HOI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 378.84
+      }
+    },
+    {
+      "id": 439,
+      "departureTime": "2020-10-21T22:53:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 468,
+        "originId": "APQ",
+        "destinationId": "BEI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 123,
+        "price": 210.35
+      }
+    },
+    {
+      "id": 595,
+      "departureTime": "2020-10-24T15:28:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 905,
+        "originId": "BFM",
+        "destinationId": "SSA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 237.14
+      }
+    },
+    {
+      "id": 65,
+      "departureTime": "2020-10-26T02:41:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 543,
+        "originId": "YPD",
+        "destinationId": "NRK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 344.6
+      }
+    },
+    {
+      "id": 515,
+      "departureTime": "2020-10-26T12:35:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 33,
+        "originId": "SWT",
+        "destinationId": "ADB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 391.49
+      }
+    },
+    {
+      "id": 651,
+      "departureTime": "2020-10-27T04:57:40.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 153,
+        "originId": "BKC",
+        "destinationId": "ELY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 357.69
+      }
+    },
+    {
+      "id": 998,
+      "departureTime": "2020-10-29T00:55:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 967,
+        "originId": "LTT",
+        "destinationId": "GFR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 270.85
+      }
+    },
+    {
+      "id": 782,
+      "departureTime": "2020-10-29T08:30:32.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 713,
+        "originId": "VCL",
+        "destinationId": "ERG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 265.29
+      }
+    },
+    {
+      "id": 452,
+      "departureTime": "2020-10-30T07:49:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 577,
+        "originId": "RFD",
+        "destinationId": "MZL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 322.78
+      }
+    },
+    {
+      "id": 790,
+      "departureTime": "2020-10-30T10:50:11.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 871,
+        "originId": "SLV",
+        "destinationId": "KLN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 282.11
+      }
+    },
+    {
+      "id": 631,
+      "departureTime": "2020-11-01T01:59:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 810,
+        "originId": "IST",
+        "destinationId": "HHZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 207.49
+      }
+    },
+    {
+      "id": 150,
+      "departureTime": "2020-11-02T15:25:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 82,
+        "originId": "SQJ",
+        "destinationId": "MZV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 333.16
+      }
+    },
+    {
+      "id": 189,
+      "departureTime": "2020-11-02T15:27:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 797,
+        "originId": "KKS",
+        "destinationId": "AJL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 386.02
+      }
+    },
+    {
+      "id": 460,
+      "departureTime": "2020-11-04T20:00:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 418,
+        "originId": "PUG",
+        "destinationId": "ELH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 220.43
+      }
+    },
+    {
+      "id": 552,
+      "departureTime": "2020-11-06T02:11:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 501,
+        "originId": "HOI",
+        "destinationId": "GAQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 269.11
+      }
+    },
+    {
+      "id": 374,
+      "departureTime": "2020-11-06T11:08:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 668,
+        "originId": "MQH",
+        "destinationId": "BPC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 385.72
+      }
+    },
+    {
+      "id": 974,
+      "departureTime": "2020-11-06T20:08:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 725,
+        "originId": "EQS",
+        "destinationId": "YGM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 369.08
+      }
+    },
+    {
+      "id": 457,
+      "departureTime": "2020-11-07T07:53:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 680,
+        "originId": "OYO",
+        "destinationId": "QUY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 361
+      }
+    },
+    {
+      "id": 363,
+      "departureTime": "2020-11-07T12:45:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 534,
+        "originId": "ESE",
+        "destinationId": "AUW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 252.03
+      }
+    },
+    {
+      "id": 864,
+      "departureTime": "2020-11-07T14:13:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 690,
+        "originId": "MKC",
+        "destinationId": "CIH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 258.92
+      }
+    },
+    {
+      "id": 409,
+      "departureTime": "2020-11-09T18:58:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 746,
+        "originId": "MCX",
+        "destinationId": "AAQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 217.25
+      }
+    },
+    {
+      "id": 267,
+      "departureTime": "2020-11-10T20:38:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 550,
+        "originId": "WUU",
+        "destinationId": "TOP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 247.32
+      }
+    },
+    {
+      "id": 417,
+      "departureTime": "2020-11-10T22:17:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 471,
+        "originId": "KWA",
+        "destinationId": "RZE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 296.49
+      }
+    },
+    {
+      "id": 504,
+      "departureTime": "2020-11-11T06:55:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 849,
+        "originId": "FTW",
+        "destinationId": "YZH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 217.27
+      }
+    },
+    {
+      "id": 429,
+      "departureTime": "2020-11-11T10:32:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 596,
+        "originId": "FLF",
+        "destinationId": "BAY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 393.1
+      }
+    },
+    {
+      "id": 54,
+      "departureTime": "2020-11-12T19:10:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 489,
+        "originId": "CVG",
+        "destinationId": "JRO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 301.52
+      }
+    },
+    {
+      "id": 102,
+      "departureTime": "2020-11-14T05:01:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 659,
+        "originId": "ODH",
+        "destinationId": "MAM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 299.19
+      }
+    },
+    {
+      "id": 275,
+      "departureTime": "2020-11-14T10:20:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 296,
+        "originId": "JKG",
+        "destinationId": "SBL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 265.35
+      }
+    },
+    {
+      "id": 298,
+      "departureTime": "2020-11-14T21:34:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 391,
+        "originId": "GZP",
+        "destinationId": "WUH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 280.3
+      }
+    },
+    {
+      "id": 45,
+      "departureTime": "2020-11-15T09:36:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 385,
+        "originId": "LFI",
+        "destinationId": "UTP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 332.34
+      }
+    },
+    {
+      "id": 999,
+      "departureTime": "2020-11-16T16:05:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 166,
+        "originId": "TGR",
+        "destinationId": "NVT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 277.42
+      }
+    },
+    {
+      "id": 26,
+      "departureTime": "2020-11-17T06:47:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 799,
+        "originId": "SID",
+        "destinationId": "SQH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 279.59
+      }
+    },
+    {
+      "id": 588,
+      "departureTime": "2020-11-18T01:27:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 960,
+        "originId": "HOI",
+        "destinationId": "VGO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 270.15
+      }
+    },
+    {
+      "id": 451,
+      "departureTime": "2020-11-18T16:02:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 429,
+        "originId": "GNB",
+        "destinationId": "SVJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 225.88
+      }
+    },
+    {
+      "id": 426,
+      "departureTime": "2020-11-20T07:56:02.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 21,
+        "originId": "RAH",
+        "destinationId": "AVV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 295.86
+      }
+    },
+    {
+      "id": 676,
+      "departureTime": "2020-11-20T15:34:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 699,
+        "originId": "BRI",
+        "destinationId": "FLG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 322.59
+      }
+    },
+    {
+      "id": 356,
+      "departureTime": "2020-11-22T07:55:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 286,
+        "originId": "TTU",
+        "destinationId": "USS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 258.36
+      }
+    },
+    {
+      "id": 192,
+      "departureTime": "2020-11-22T20:17:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 482,
+        "originId": "HNM",
+        "destinationId": "KLX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 222.78
+      }
+    },
+    {
+      "id": 594,
+      "departureTime": "2020-11-23T01:52:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 284,
+        "originId": "ESS",
+        "destinationId": "RUN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 293.69
+      }
+    },
+    {
+      "id": 175,
+      "departureTime": "2020-11-23T03:51:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 585,
+        "originId": "KYP",
+        "destinationId": "MHH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 370.66
+      }
+    },
+    {
+      "id": 301,
+      "departureTime": "2020-11-23T08:07:54.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 981,
+        "originId": "KMV",
+        "destinationId": "DOV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 312.48
+      }
+    },
+    {
+      "id": 542,
+      "departureTime": "2020-11-23T12:01:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 479,
+        "originId": "QLR",
+        "destinationId": "PMO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 263.32
+      }
+    },
+    {
+      "id": 653,
+      "departureTime": "2020-11-24T14:56:00.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 376,
+        "originId": "FXE",
+        "destinationId": "YYH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 236.19
+      }
+    },
+    {
+      "id": 117,
+      "departureTime": "2020-11-25T03:04:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 963,
+        "originId": "YCD",
+        "destinationId": "HOG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 322.91
+      }
+    },
+    {
+      "id": 249,
+      "departureTime": "2020-11-27T03:35:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 699,
+        "originId": "BRI",
+        "destinationId": "FLG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 305.33
+      }
+    },
+    {
+      "id": 360,
+      "departureTime": "2020-11-28T14:49:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 36,
+        "originId": "FAJ",
+        "destinationId": "WOS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 350.3
+      }
+    },
+    {
+      "id": 369,
+      "departureTime": "2020-11-29T13:42:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 592,
+        "originId": "NHK",
+        "destinationId": "DRE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 390.23
+      }
+    },
+    {
+      "id": 368,
+      "departureTime": "2020-11-30T02:31:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 880,
+        "originId": "LZR",
+        "destinationId": "AYT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 313.35
+      }
+    },
+    {
+      "id": 766,
+      "departureTime": "2020-12-02T11:49:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 591,
+        "originId": "MRD",
+        "destinationId": "KLV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 209.88
+      }
+    },
+    {
+      "id": 952,
+      "departureTime": "2020-12-02T23:56:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 949,
+        "originId": "CMI",
+        "destinationId": "KCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 326.02
+      }
+    },
+    {
+      "id": 813,
+      "departureTime": "2020-12-03T04:57:32.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 413,
+        "originId": "YLJ",
+        "destinationId": "LHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 250.96
+      }
+    },
+    {
+      "id": 393,
+      "departureTime": "2020-12-03T10:58:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 109,
+        "originId": "PEX",
+        "destinationId": "YKX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 331.12
+      }
+    },
+    {
+      "id": 70,
+      "departureTime": "2020-12-04T00:10:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 1,
+        "originId": "YGV",
+        "destinationId": "KLX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 226.19
+      }
+    },
+    {
+      "id": 395,
+      "departureTime": "2020-12-04T09:10:21.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 764,
+        "originId": "KPV",
+        "destinationId": "LBY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 379.05
+      }
+    },
+    {
+      "id": 434,
+      "departureTime": "2020-12-04T22:20:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 306,
+        "originId": "CIF",
+        "destinationId": "HVN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 218.75
+      }
+    },
+    {
+      "id": 570,
+      "departureTime": "2020-12-04T23:25:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 710,
+        "originId": "GFK",
+        "destinationId": "JAL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 212.5
+      }
+    },
+    {
+      "id": 769,
+      "departureTime": "2020-12-05T10:59:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 366,
+        "originId": "GCC",
+        "destinationId": "YOL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 207.38
+      }
+    },
+    {
+      "id": 559,
+      "departureTime": "2020-12-05T12:05:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 89,
+        "originId": "CGD",
+        "destinationId": "HOI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 247.13
+      }
+    },
+    {
+      "id": 664,
+      "departureTime": "2020-12-06T01:04:24.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 873,
+        "originId": "LCG",
+        "destinationId": "VTM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 289.48
+      }
+    },
+    {
+      "id": 1000,
+      "departureTime": "2020-12-07T12:25:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 172,
+        "originId": "AIP",
+        "destinationId": "YZS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 259.12
+      }
+    },
+    {
+      "id": 415,
+      "departureTime": "2020-12-08T05:54:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 716,
+        "originId": "KEJ",
+        "destinationId": "RNO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 325.1
+      }
+    },
+    {
+      "id": 619,
+      "departureTime": "2020-12-13T05:55:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 723,
+        "originId": "MTS",
+        "destinationId": "IAD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 342.91
+      }
+    },
+    {
+      "id": 212,
+      "departureTime": "2020-12-13T09:53:17.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 799,
+        "originId": "SID",
+        "destinationId": "SQH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 212.94
+      }
+    },
+    {
+      "id": 784,
+      "departureTime": "2020-12-13T16:52:31.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 33,
+        "originId": "SWT",
+        "destinationId": "ADB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 353.85
+      }
+    },
+    {
+      "id": 937,
+      "departureTime": "2020-12-14T11:02:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 112,
+        "originId": "JOE",
+        "destinationId": "GHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 389.21
+      }
+    },
+    {
+      "id": 610,
+      "departureTime": "2020-12-14T14:56:04.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 13,
+        "originId": "KUT",
+        "destinationId": "CYU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 240.49
+      }
+    },
+    {
+      "id": 15,
+      "departureTime": "2020-12-15T03:59:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 75,
+        "originId": "WIL",
+        "destinationId": "ZTB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 209.71
+      }
+    },
+    {
+      "id": 737,
+      "departureTime": "2020-12-15T20:57:15.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 766,
+        "originId": "YSQ",
+        "destinationId": "BJL"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 309.57
+      }
+    },
+    {
+      "id": 986,
+      "departureTime": "2020-12-16T09:09:54.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 40,
+        "originId": "RTS",
+        "destinationId": "KDU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 283.63
+      }
+    },
+    {
+      "id": 432,
+      "departureTime": "2020-12-17T22:40:55.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 497,
+        "originId": "RSD",
+        "destinationId": "CLW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 310.98
+      }
+    },
+    {
+      "id": 646,
+      "departureTime": "2020-12-18T12:48:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 644,
+        "originId": "BBN",
+        "destinationId": "BYP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 359.61
+      }
+    },
+    {
+      "id": 945,
+      "departureTime": "2020-12-18T16:03:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 731,
+        "originId": "WAT",
+        "destinationId": "RBE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 373.6
+      }
+    },
+    {
+      "id": 414,
+      "departureTime": "2020-12-18T19:43:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 508,
+        "originId": "LER",
+        "destinationId": "YGW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 207.34
+      }
+    },
+    {
+      "id": 908,
+      "departureTime": "2020-12-21T22:27:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 568,
+        "originId": "PPF",
+        "destinationId": "IRB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 363.26
+      }
+    },
+    {
+      "id": 21,
+      "departureTime": "2020-12-23T04:07:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 227,
+        "originId": "CAK",
+        "destinationId": "BRW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 122,
+        "price": 391.53
+      }
+    },
+    {
+      "id": 19,
+      "departureTime": "2020-12-23T11:51:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 228,
+        "originId": "KOQ",
+        "destinationId": "BCO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 393.05
+      }
+    },
+    {
+      "id": 127,
+      "departureTime": "2020-12-23T13:37:11.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 685,
+        "originId": "VOG",
+        "destinationId": "ZIG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 227.15
+      }
+    },
+    {
+      "id": 958,
+      "departureTime": "2020-12-24T20:44:29.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 669,
+        "originId": "NWA",
+        "destinationId": "NLK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 125,
+        "price": 380.44
+      }
+    },
+    {
+      "id": 946,
+      "departureTime": "2020-12-28T05:17:35.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 245,
+        "originId": "MNZ",
+        "destinationId": "GAY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 323.68
+      }
+    },
+    {
+      "id": 173,
+      "departureTime": "2020-12-28T13:20:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 152,
+        "originId": "YKY",
+        "destinationId": "CUM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 290.76
+      }
+    },
+    {
+      "id": 320,
+      "departureTime": "2020-12-28T16:51:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 520,
+        "originId": "TNW",
+        "destinationId": "TBZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 311.97
+      }
+    },
+    {
+      "id": 146,
+      "departureTime": "2020-12-28T22:40:23.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 326,
+        "originId": "TNI",
+        "destinationId": "ERN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 265.03
+      }
+    },
+    {
+      "id": 224,
+      "departureTime": "2020-12-30T20:49:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 828,
+        "originId": "GSP",
+        "destinationId": "MPH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 234.73
+      }
+    },
+    {
+      "id": 3,
+      "departureTime": "2020-12-31T16:21:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 252,
+        "originId": "HDR",
+        "destinationId": "BYP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 353.71
+      }
+    },
+    {
+      "id": 336,
+      "departureTime": "2020-12-31T18:59:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 164,
+        "originId": "KVB",
+        "destinationId": "OLF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 393.91
+      }
+    },
+    {
+      "id": 445,
+      "departureTime": "2020-12-31T21:12:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 173,
+        "originId": "FLD",
+        "destinationId": "BHQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 280.53
+      }
+    },
+    {
+      "id": 598,
+      "departureTime": "2021-01-03T15:46:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 707,
+        "originId": "WMI",
+        "destinationId": "ZTU"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 297.75
+      }
+    },
+    {
+      "id": 261,
+      "departureTime": "2021-01-05T05:36:25.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 344,
+        "originId": "SBW",
+        "destinationId": "PRQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 125,
+        "price": 260.96
+      }
+    },
+    {
+      "id": 738,
+      "departureTime": "2021-01-05T12:31:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 337,
+        "originId": "ABV",
+        "destinationId": "GID"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 350.64
+      }
+    },
+    {
+      "id": 924,
+      "departureTime": "2021-01-05T14:08:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 145,
+        "originId": "ADS",
+        "destinationId": "LRV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 351.58
+      }
+    },
+    {
+      "id": 582,
+      "departureTime": "2021-01-05T14:47:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 895,
+        "originId": "MWQ",
+        "destinationId": "PPP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 263.17
+      }
+    },
+    {
+      "id": 873,
+      "departureTime": "2021-01-05T20:36:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 551,
+        "originId": "BDP",
+        "destinationId": "LNZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 372.96
+      }
+    },
+    {
+      "id": 2,
+      "departureTime": "2021-01-06T09:08:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 376,
+        "originId": "FXE",
+        "destinationId": "YYH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 201.26
+      }
+    },
+    {
+      "id": 862,
+      "departureTime": "2021-01-06T17:58:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 150,
+        "originId": "HTL",
+        "destinationId": "VAG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 326.95
+      }
+    },
+    {
+      "id": 977,
+      "departureTime": "2021-01-07T20:35:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 651,
+        "originId": "GWE",
+        "destinationId": "VLC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 328
+      }
+    },
+    {
+      "id": 654,
+      "departureTime": "2021-01-08T10:14:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 239,
+        "originId": "POP",
+        "destinationId": "SMV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 332.08
+      }
+    },
+    {
+      "id": 163,
+      "departureTime": "2021-01-09T10:52:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 38,
+        "originId": "SAH",
+        "destinationId": "SLN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 307.87
+      }
+    },
+    {
+      "id": 708,
+      "departureTime": "2021-01-09T17:56:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 898,
+        "originId": "FDH",
+        "destinationId": "ULO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 238.62
+      }
+    },
+    {
+      "id": 14,
+      "departureTime": "2021-01-10T04:31:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 564,
+        "originId": "BOD",
+        "destinationId": "NOS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 298.43
+      }
+    },
+    {
+      "id": 968,
+      "departureTime": "2021-01-10T19:25:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 413,
+        "originId": "YLJ",
+        "destinationId": "LHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 376.32
+      }
+    },
+    {
+      "id": 236,
+      "departureTime": "2021-01-11T08:00:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 413,
+        "originId": "YLJ",
+        "destinationId": "LHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 370.29
+      }
+    },
+    {
+      "id": 835,
+      "departureTime": "2021-01-13T09:15:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 422,
+        "originId": "BJP",
+        "destinationId": "ORV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 249.22
+      }
+    },
+    {
+      "id": 879,
+      "departureTime": "2021-01-13T17:40:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 793,
+        "originId": "BCU",
+        "destinationId": "OYK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 201.97
+      }
+    },
+    {
+      "id": 397,
+      "departureTime": "2021-01-14T08:51:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 625,
+        "originId": "HDN",
+        "destinationId": "TLI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 217.8
+      }
+    },
+    {
+      "id": 44,
+      "departureTime": "2021-01-14T08:57:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 669,
+        "originId": "NWA",
+        "destinationId": "NLK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 231.52
+      }
+    },
+    {
+      "id": 605,
+      "departureTime": "2021-01-14T14:46:26.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 379,
+        "originId": "MVV",
+        "destinationId": "KHH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 256.5
+      }
+    },
+    {
+      "id": 342,
+      "departureTime": "2021-01-15T10:24:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 513,
+        "originId": "RKV",
+        "destinationId": "UMS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 127,
+        "price": 207.72
+      }
+    },
+    {
+      "id": 637,
+      "departureTime": "2021-01-15T15:29:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 196,
+        "originId": "NTI",
+        "destinationId": "VGD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 271.73
+      }
+    },
+    {
+      "id": 832,
+      "departureTime": "2021-01-15T17:42:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 634,
+        "originId": "BME",
+        "destinationId": "TIQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 249.63
+      }
+    },
+    {
+      "id": 104,
+      "departureTime": "2021-01-15T18:14:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 638,
+        "originId": "BPC",
+        "destinationId": "UBB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 138,
+        "price": 240.66
+      }
+    },
+    {
+      "id": 912,
+      "departureTime": "2021-01-16T07:09:40.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 459,
+        "originId": "CHR",
+        "destinationId": "LCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 284
+      }
+    },
+    {
+      "id": 149,
+      "departureTime": "2021-01-19T14:15:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 257,
+        "originId": "CDJ",
+        "destinationId": "SCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 381.32
+      }
+    },
+    {
+      "id": 846,
+      "departureTime": "2021-01-21T06:29:08.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 219,
+        "originId": "YCL",
+        "destinationId": "MNG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 203.52
+      }
+    },
+    {
+      "id": 438,
+      "departureTime": "2021-01-21T17:13:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 774,
+        "originId": "AFS",
+        "destinationId": "BAD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 246.6
+      }
+    },
+    {
+      "id": 913,
+      "departureTime": "2021-01-21T20:15:20.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 82,
+        "originId": "SQJ",
+        "destinationId": "MZV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 291.61
+      }
+    },
+    {
+      "id": 906,
+      "departureTime": "2021-01-22T05:18:16.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 364,
+        "originId": "VMU",
+        "destinationId": "PHX"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 253.14
+      }
+    },
+    {
+      "id": 960,
+      "departureTime": "2021-01-23T12:02:39.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 505,
+        "originId": "FTU",
+        "destinationId": "PYM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 201.27
+      }
+    },
+    {
+      "id": 480,
+      "departureTime": "2021-01-23T19:42:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 25,
+        "originId": "ONP",
+        "destinationId": "NQT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 319.69
+      }
+    },
+    {
+      "id": 535,
+      "departureTime": "2021-01-25T02:54:22.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 867,
+        "originId": "ABS",
+        "destinationId": "YZV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 264.54
+      }
+    },
+    {
+      "id": 668,
+      "departureTime": "2021-01-25T18:48:49.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 800,
+        "originId": "MCO",
+        "destinationId": "PAZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 224.53
+      }
+    },
+    {
+      "id": 915,
+      "departureTime": "2021-01-25T21:19:08.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 219,
+        "originId": "YCL",
+        "destinationId": "MNG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 363.69
+      }
+    },
+    {
+      "id": 757,
+      "departureTime": "2021-01-27T06:06:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 737,
+        "originId": "ROA",
+        "destinationId": "OVB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 135,
+        "price": 204.67
+      }
+    },
+    {
+      "id": 871,
+      "departureTime": "2021-01-28T09:09:27.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 355,
+        "originId": "NYW",
+        "destinationId": "CDE"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 214.34
+      }
+    },
+    {
+      "id": 897,
+      "departureTime": "2021-01-28T22:43:15.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 596,
+        "originId": "FLF",
+        "destinationId": "BAY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 340.67
+      }
+    },
+    {
+      "id": 793,
+      "departureTime": "2021-01-29T00:39:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 527,
+        "originId": "PNS",
+        "destinationId": "CEK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 372.24
+      }
+    },
+    {
+      "id": 620,
+      "departureTime": "2021-01-30T05:12:18.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 706,
+        "originId": "ROK",
+        "destinationId": "VLC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 216.95
+      }
+    },
+    {
+      "id": 332,
+      "departureTime": "2021-01-30T20:10:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 223,
+        "originId": "LUA",
+        "destinationId": "NFG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 146,
+        "price": 371.28
+      }
+    },
+    {
+      "id": 516,
+      "departureTime": "2021-02-01T17:06:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 785,
+        "originId": "BBG",
+        "destinationId": "TLQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 222.12
+      }
+    },
+    {
+      "id": 963,
+      "departureTime": "2021-02-01T22:37:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 76,
+        "originId": "IAN",
+        "destinationId": "LZY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 136,
+        "price": 296.99
+      }
+    },
+    {
+      "id": 659,
+      "departureTime": "2021-02-02T16:10:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 809,
+        "originId": "FTK",
+        "destinationId": "KRZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 252.64
+      }
+    },
+    {
+      "id": 928,
+      "departureTime": "2021-02-03T12:24:15.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 601,
+        "originId": "DXR",
+        "destinationId": "DHR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 337.85
+      }
+    },
+    {
+      "id": 979,
+      "departureTime": "2021-02-03T22:25:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 749,
+        "originId": "KEV",
+        "destinationId": "LRS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 345.83
+      }
+    },
+    {
+      "id": 687,
+      "departureTime": "2021-02-04T04:24:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 5,
+        "originId": "VME",
+        "destinationId": "HMJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 387.47
+      }
+    },
+    {
+      "id": 330,
+      "departureTime": "2021-02-04T15:52:59.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 433,
+        "originId": "SJP",
+        "destinationId": "GIZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 220.32
+      }
+    },
+    {
+      "id": 853,
+      "departureTime": "2021-02-05T12:02:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 19,
+        "originId": "OHS",
+        "destinationId": "TTT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 297.22
+      }
+    },
+    {
+      "id": 109,
+      "departureTime": "2021-02-05T16:02:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 994,
+        "originId": "TLD",
+        "destinationId": "SAY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 235.13
+      }
+    },
+    {
+      "id": 905,
+      "departureTime": "2021-02-05T17:58:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 313,
+        "originId": "JKG",
+        "destinationId": "HTG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 388.39
+      }
+    },
+    {
+      "id": 400,
+      "departureTime": "2021-02-06T12:41:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 588,
+        "originId": "KLH",
+        "destinationId": "ABI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 267.41
+      }
+    },
+    {
+      "id": 626,
+      "departureTime": "2021-02-09T19:00:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 697,
+        "originId": "OUL",
+        "destinationId": "UNT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 237.16
+      }
+    },
+    {
+      "id": 748,
+      "departureTime": "2021-02-09T22:01:32.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 535,
+        "originId": "CFB",
+        "destinationId": "APC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 322.46
+      }
+    },
+    {
+      "id": 420,
+      "departureTime": "2021-02-09T23:00:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 947,
+        "originId": "SNV",
+        "destinationId": "GAQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 356.07
+      }
+    },
+    {
+      "id": 171,
+      "departureTime": "2021-02-10T01:41:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 292,
+        "originId": "EFD",
+        "destinationId": "CFV"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 222.37
+      }
+    },
+    {
+      "id": 465,
+      "departureTime": "2021-02-10T12:53:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 844,
+        "originId": "TKD",
+        "destinationId": "SZW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 234.92
+      }
+    },
+    {
+      "id": 792,
+      "departureTime": "2021-02-10T20:12:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 912,
+        "originId": "BQH",
+        "destinationId": "SHW"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 292.78
+      }
+    },
+    {
+      "id": 248,
+      "departureTime": "2021-02-11T04:24:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 804,
+        "originId": "OUK",
+        "destinationId": "MSA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 396.12
+      }
+    },
+    {
+      "id": 717,
+      "departureTime": "2021-02-11T13:04:51.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 129,
+        "originId": "KHK",
+        "destinationId": "IYK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 385.1
+      }
+    },
+    {
+      "id": 894,
+      "departureTime": "2021-02-14T21:16:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 537,
+        "originId": "STM",
+        "destinationId": "AIN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 297.06
+      }
+    },
+    {
+      "id": 115,
+      "departureTime": "2021-02-15T01:28:01.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 124,
+        "originId": "HDG",
+        "destinationId": "PVD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 126,
+        "price": 231.56
+      }
+    },
+    {
+      "id": 50,
+      "departureTime": "2021-02-16T22:37:33.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 952,
+        "originId": "NST",
+        "destinationId": "BCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 204.11
+      }
+    },
+    {
+      "id": 380,
+      "departureTime": "2021-02-17T07:15:17.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 749,
+        "originId": "KEV",
+        "destinationId": "LRS"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 380.95
+      }
+    },
+    {
+      "id": 511,
+      "departureTime": "2021-02-17T13:02:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 821,
+        "originId": "MHV",
+        "destinationId": "NKB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 214.04
+      }
+    },
+    {
+      "id": 712,
+      "departureTime": "2021-02-18T20:25:43.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 477,
+        "originId": "CSY",
+        "destinationId": "USM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 265.22
+      }
+    },
+    {
+      "id": 357,
+      "departureTime": "2021-02-19T04:20:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 969,
+        "originId": "CNF",
+        "destinationId": "CGB"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 232.82
+      }
+    },
+    {
+      "id": 312,
+      "departureTime": "2021-02-19T16:42:41.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 734,
+        "originId": "TID",
+        "destinationId": "ZAC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 254.18
+      }
+    },
+    {
+      "id": 166,
+      "departureTime": "2021-02-20T19:49:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 714,
+        "originId": "IQT",
+        "destinationId": "OHA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 235.1
+      }
+    },
+    {
+      "id": 936,
+      "departureTime": "2021-02-21T18:22:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 298,
+        "originId": "KAX",
+        "destinationId": "FEZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 244.74
+      }
+    },
+    {
+      "id": 839,
+      "departureTime": "2021-02-23T21:52:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 338,
+        "originId": "TUR",
+        "destinationId": "PUF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 137,
+        "price": 393.81
+      }
+    },
+    {
+      "id": 114,
+      "departureTime": "2021-02-24T19:00:05.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 368,
+        "originId": "NUE",
+        "destinationId": "TNI"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 125,
+        "price": 332.58
+      }
+    },
+    {
+      "id": 288,
+      "departureTime": "2021-02-26T04:05:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 612,
+        "originId": "HLH",
+        "destinationId": "ZAD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 392.22
+      }
+    },
+    {
+      "id": 220,
+      "departureTime": "2021-02-28T07:00:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 242,
+        "originId": "GMO",
+        "destinationId": "DLH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 254.02
+      }
+    },
+    {
+      "id": 228,
+      "departureTime": "2021-02-28T07:10:57.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 51,
+        "originId": "SJO",
+        "destinationId": "PMG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 347.4
+      }
+    },
+    {
+      "id": 677,
+      "departureTime": "2021-02-28T11:40:45.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 350,
+        "originId": "PCF",
+        "destinationId": "TNN"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 124,
+        "price": 299.76
+      }
+    },
+    {
+      "id": 826,
+      "departureTime": "2021-03-03T20:00:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 300,
+        "originId": "GAL",
+        "destinationId": "TRR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 204.74
+      }
+    },
+    {
+      "id": 579,
+      "departureTime": "2021-03-04T02:29:48.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 952,
+        "originId": "NST",
+        "destinationId": "BCH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 370.55
+      }
+    },
+    {
+      "id": 817,
+      "departureTime": "2021-03-04T09:48:11.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 624,
+        "originId": "BKA",
+        "destinationId": "HUY"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 370.29
+      }
+    },
+    {
+      "id": 488,
+      "departureTime": "2021-03-04T19:54:36.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 866,
+        "originId": "LIQ",
+        "destinationId": "OER"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 308.99
+      }
+    },
+    {
+      "id": 990,
+      "departureTime": "2021-03-05T18:40:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 718,
+        "originId": "LDE",
+        "destinationId": "HDM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 247.45
+      }
+    },
+    {
+      "id": 840,
+      "departureTime": "2021-03-06T23:19:36.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 672,
+        "originId": "HMO",
+        "destinationId": "AVP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 399.7
+      }
+    },
+    {
+      "id": 648,
+      "departureTime": "2021-03-07T18:42:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 570,
+        "originId": "APG",
+        "destinationId": "OAG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 273.45
+      }
+    },
+    {
+      "id": 458,
+      "departureTime": "2021-03-08T01:58:12.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 799,
+        "originId": "SID",
+        "destinationId": "SQH"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 225.65
+      }
+    },
+    {
+      "id": 517,
+      "departureTime": "2021-03-09T01:42:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 672,
+        "originId": "HMO",
+        "destinationId": "AVP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 393.15
+      }
+    },
+    {
+      "id": 975,
+      "departureTime": "2021-03-11T02:29:03.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 130,
+        "originId": "ROV",
+        "destinationId": "KSA"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 366.67
+      }
+    },
+    {
+      "id": 111,
+      "departureTime": "2021-03-12T14:47:47.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 490,
+        "originId": "KHT",
+        "destinationId": "HID"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 335.24
+      }
+    },
+    {
+      "id": 64,
+      "departureTime": "2021-03-13T01:39:30.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 39,
+        "originId": "GRX",
+        "destinationId": "PBM"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 274.37
+      }
+    },
+    {
+      "id": 294,
+      "departureTime": "2021-03-13T08:02:56.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 602,
+        "originId": "HDI",
+        "destinationId": "QNC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 320.15
+      }
+    },
+    {
+      "id": 185,
+      "departureTime": "2021-03-15T00:42:36.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 941,
+        "originId": "YEC",
+        "destinationId": "BBO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 141,
+        "price": 239.76
+      }
+    },
+    {
+      "id": 24,
+      "departureTime": "2021-03-15T00:42:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 185,
+        "originId": "LID",
+        "destinationId": "AKC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 147,
+        "price": 338.22
+      }
+    },
+    {
+      "id": 211,
+      "departureTime": "2021-03-15T06:25:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 992,
+        "originId": "PIA",
+        "destinationId": "UCT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 255.53
+      }
+    },
+    {
+      "id": 476,
+      "departureTime": "2021-03-15T10:20:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 735,
+        "originId": "GKL",
+        "destinationId": "CMJ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 367.46
+      }
+    },
+    {
+      "id": 547,
+      "departureTime": "2021-03-16T22:46:46.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 219,
+        "originId": "YCL",
+        "destinationId": "MNG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 285.23
+      }
+    },
+    {
+      "id": 768,
+      "departureTime": "2021-03-16T23:14:50.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 165,
+        "originId": "PPN",
+        "destinationId": "ROR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 338.73
+      }
+    },
+    {
+      "id": 250,
+      "departureTime": "2021-03-18T05:45:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 175,
+        "originId": "YYW",
+        "destinationId": "YDF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 140,
+        "price": 395.13
+      }
+    },
+    {
+      "id": 882,
+      "departureTime": "2021-03-19T16:55:28.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 565,
+        "originId": "LSQ",
+        "destinationId": "ZBR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 144,
+        "price": 389.19
+      }
+    },
+    {
+      "id": 116,
+      "departureTime": "2021-03-20T14:21:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 175,
+        "originId": "YYW",
+        "destinationId": "YDF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 134,
+        "price": 318.01
+      }
+    },
+    {
+      "id": 81,
+      "departureTime": "2021-03-21T16:04:37.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 942,
+        "originId": "GFO",
+        "destinationId": "ESR"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 218.27
+      }
+    },
+    {
+      "id": 196,
+      "departureTime": "2021-03-21T16:42:52.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 183,
+        "originId": "MTT",
+        "destinationId": "OCF"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 143,
+        "price": 291.86
+      }
+    },
+    {
+      "id": 926,
+      "departureTime": "2021-03-21T23:50:13.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 327,
+        "originId": "MSC",
+        "destinationId": "AAZ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 129,
+        "price": 221.05
+      }
+    },
+    {
+      "id": 966,
+      "departureTime": "2021-03-24T01:49:58.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 115,
+        "originId": "EKB",
+        "destinationId": "DOP"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 224.79
+      }
+    },
+    {
+      "id": 514,
+      "departureTime": "2021-03-24T10:24:34.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 947,
+        "originId": "SNV",
+        "destinationId": "GAQ"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 130,
+        "price": 281.97
+      }
+    },
+    {
+      "id": 563,
+      "departureTime": "2021-03-25T15:10:07.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 880,
+        "originId": "LZR",
+        "destinationId": "AYT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 139,
+        "price": 316.55
+      }
+    },
+    {
+      "id": 62,
+      "departureTime": "2021-03-26T03:10:06.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 111,
+        "originId": "NCG",
+        "destinationId": "FBD"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 352.85
+      }
+    },
+    {
+      "id": 806,
+      "departureTime": "2021-03-26T05:49:44.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 840,
+        "originId": "CCV",
+        "destinationId": "STC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 142,
+        "price": 399.44
+      }
+    },
+    {
+      "id": 696,
+      "departureTime": "2021-03-26T07:39:53.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 382,
+        "originId": "RML",
+        "destinationId": "CUC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 343.88
+      }
+    },
+    {
+      "id": 95,
+      "departureTime": "2021-03-26T10:30:09.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 909,
+        "originId": "MZQ",
+        "destinationId": "BEC"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 145,
+        "price": 219.27
+      }
+    },
+    {
+      "id": 730,
+      "departureTime": "2021-03-27T01:35:42.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 309,
+        "originId": "BYP",
+        "destinationId": "LWK"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 131,
+        "price": 373.69
+      }
+    },
+    {
+      "id": 154,
+      "departureTime": "2021-03-27T03:24:19.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 123,
+        "originId": "SAA",
+        "destinationId": "YBG"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 128,
+        "price": 339.76
+      }
+    },
+    {
+      "id": 162,
+      "departureTime": "2021-03-28T10:03:10.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 61,
+        "originId": "MNB",
+        "destinationId": "PKT"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 133,
+        "price": 311.75
+      }
+    },
+    {
+      "id": 388,
+      "departureTime": "2021-03-28T11:12:14.000Z",
+      "airplaneId": 1,
+      "route": {
+        "id": 716,
+        "originId": "KEJ",
+        "destinationId": "RNO"
+      },
+      "airplane": {
+        "id": 1
+      },
+      "seats": {
+        "total": 150,
+        "available": 132,
+        "price": 319.92
+      }
+    }
+  ]
+}

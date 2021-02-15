@@ -50,6 +50,7 @@ export class FlightsComponent implements OnInit {
           state: "error",
           error
         };
+        console.log('flight error:', error, this.flights);
       },
 
     );
