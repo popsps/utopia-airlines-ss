@@ -18,92 +18,6 @@ import {FlightResultItemComponent} from './flight-result-list/flight-result-item
 import {results, total} from './mock-flights.json';
 import {SpinnerComponent} from '../shared/components/spinner/spinner.component';
 
-describe('FlightsComponent load with data first page and limit:10; Test html', () => {
-  let component: FlightsComponent;
-  let fixture: ComponentFixture<FlightsComponent>;
-  let de: DebugElement;
-  let flightService: FlightService;
-  let spy: jasmine.Spy;
-  let flights: PaginatedFlightResult;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        FlightsComponent, FlightSearchFormComponent, FlightResultListComponent,
-        FlightResultItemComponent, FlightCreationModalComponent, PaginationComponent
-      ],
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
-      providers: [FlightService]
-    })
-      .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FlightsComponent);
-    component = fixture.componentInstance;
-    de = fixture.debugElement;
-
-    flightService = de.injector.get(FlightService);
-    flights = {
-      results: results.slice(0, 10).map(obj => new Flight().deserialize(obj)),
-      offset: 0,
-      total,
-      count: 10
-    };
-    spy = spyOn(flightService, 'getAll').and.returnValue(of(flights));
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-  it('should have label with `search bar`', () => {
-    expect(de.nativeElement.querySelector('app-flight-search-form').innerText).toContain('Origin');
-  });
-  it('should have label with `Origin`', () => {
-    expect(de.query(By.css('.form-label')).nativeElement.innerText).toBe('Origin');
-  });
-  it('test add flight click', fakeAsync(() => {
-    console.log('modal class', de.query(By.css('app-flight-creation-modal div')).nativeElement);
-    // spyOn(component, 'onClick');
-    const button = de.query(By.css('button[type=button]'));
-    console.log('button', button.nativeElement);
-    // button.nativeElement.click();
-    button.nativeElement.dispatchEvent(new Event('click'));
-    tick();
-    fixture.detectChanges();
-    console.log('modal class after', de.query(By.css('app-flight-creation-modal div')).nativeElement);
-    expect(de.query(By.css('.modal-content'))).toBeTruthy();
-    // expect(button.onClick).toHaveBeenCalledTimes(1);
-  }));
-  it('getAll service should return the first 10 flights', async () => {
-    expect(spy).toHaveBeenCalled();
-    expect(spy.calls.all().length).toEqual(1);
-    expect(component.flights.state).toEqual('done');
-    expect(component.flights.data.count).toEqual(flights.count);
-    expect(component.flights.data.offset).toEqual(flights.offset);
-    expect(component.flights.data.total).toEqual(flights.total);
-    expect(component.flights.data.results).toEqual(flights.results);
-    console.log('flights ff', flights);
-    console.log('flights component results', component.flights);
-  });
-  it('filter', fakeAsync(async () => {
-    const destinationInput = de.query(By.css('app-flight-search-form #destination-input')).nativeElement;
-    console.log('dest input', destinationInput.value);
-    console.log('dest filter results bef', component.filter);
-    destinationInput.value = 'AGB';
-    destinationInput.dispatchEvent(new Event('input'));
-    tick();
-    fixture.detectChanges();
-    console.log('dest input after', destinationInput.value);
-    console.log('dest filter results', component.filter);
-    spy.and.returnValue(of(null));
-    component.loadFlights();
-    console.log('flights spy reset', component.flights);
-    expect(component.filter).toEqual({origin: '', destination: 'AGB', departureDate: null});
-  }));
-});
-
 
 describe('FlightsComponent load with data first page and limit:10', () => {
   let component: FlightsComponent;
@@ -159,8 +73,6 @@ describe('FlightsComponent load with data first page and limit:10', () => {
     expect(component.flights.data.offset).toEqual(flights.offset);
     expect(component.flights.data.total).toEqual(flights.total);
     expect(component.flights.data.results).toEqual(flights.results);
-    console.log('flights ff', flights);
-    console.log('flights component results', component.flights);
   });
 });
 
@@ -345,6 +257,5 @@ describe('FlightsComponent cannot load the data from the server', () => {
     expect(spy.calls.all().length).toEqual(1);
     expect(component.flights.state).toEqual('error');
     expect(component.flights.error).toEqual(serverError);
-    console.log('flights component results', component.flights);
   });
 });
