@@ -68,28 +68,14 @@ describe('FlightsComponent load with data first page and limit:10; Test html', (
     // spyOn(component, 'onClick');
     const button = de.query(By.css('button[type=button]'));
     console.log('button', button.nativeElement);
-    button.nativeElement.click();
-    tick(500);
+    // button.nativeElement.click();
+    button.nativeElement.dispatchEvent(new Event('click'));
+    tick();
     fixture.detectChanges();
-    console.log('modal class', de.query(By.css('app-flight-creation-modal')).nativeElement);
+    console.log('modal class after', de.query(By.css('app-flight-creation-modal div')).nativeElement);
     expect(de.query(By.css('.modal-content'))).toBeTruthy();
     // expect(button.onClick).toHaveBeenCalledTimes(1);
   }));
-  // it('test add flight click test', async () => {
-  //   console.log('modal class', de.query(By.css('app-flight-creation-modal div')).nativeElement);
-  //   // expect(de.query(By.css('app-flight-creation-modal')).nativeElement.classList).toBe(['modal']);
-  //   const button = de.query(By.css('button[type=button]'));
-  //   // spyOn(button, 'da');
-  //   console.log('button', button.nativeElement);
-  //   button.nativeElement.click();
-  //   fixture.detectChanges();
-  //   console.log('modal class', de.query(By.css('app-flight-creation-modal div')).nativeElement);
-  //   fixture.whenStable().then(() => {
-  //     console.log('modal class stable', de.query(By.css('app-flight-creation-modal div')).nativeElement);
-  //   });
-  //   expect(de.query(By.css('.modal-content'))).toBeTruthy();
-  //   // expect(button.onClick).toHaveBeenCalledTimes(1);
-  // });
   it('getAll service should return the first 10 flights', async () => {
     expect(spy).toHaveBeenCalled();
     expect(spy.calls.all().length).toEqual(1);
@@ -101,6 +87,21 @@ describe('FlightsComponent load with data first page and limit:10; Test html', (
     console.log('flights ff', flights);
     console.log('flights component results', component.flights);
   });
+  it('filter', fakeAsync(async () => {
+    const destinationInput = de.query(By.css('app-flight-search-form #destination-input')).nativeElement;
+    console.log('dest input', destinationInput.value);
+    console.log('dest filter results bef', component.filter);
+    destinationInput.value = 'AGB';
+    destinationInput.dispatchEvent(new Event('input'));
+    tick();
+    fixture.detectChanges();
+    console.log('dest input after', destinationInput.value);
+    console.log('dest filter results', component.filter);
+    spy.and.returnValue(of(null));
+    component.loadFlights();
+    console.log('flights spy reset', component.flights);
+    expect(component.filter).toEqual({origin: '', destination: 'AGB', departureDate: null});
+  }));
 });
 
 
@@ -111,8 +112,9 @@ describe('FlightsComponent load with data first page and limit:10', () => {
   let flightService: FlightService;
   let spy: jasmine.Spy;
   let flights: PaginatedFlightResult;
+  const PAGE_SIZE = 10;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         FlightsComponent, FlightSearchFormComponent, FlightResultListComponent,
@@ -124,7 +126,7 @@ describe('FlightsComponent load with data first page and limit:10', () => {
       .compileComponents();
   });
 
-  beforeEach(() => {
+  beforeAll(() => {
     fixture = TestBed.createComponent(FlightsComponent);
     component = fixture.componentInstance;
     de = fixture.debugElement;
@@ -139,7 +141,6 @@ describe('FlightsComponent load with data first page and limit:10', () => {
     spy = spyOn(flightService, 'getAll').and.returnValue(of(flights));
     fixture.detectChanges();
   });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
