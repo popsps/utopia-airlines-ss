@@ -39,6 +39,7 @@ import { PhonePipe } from './shared/pipes/phone.pipe';
 import { FlightResultItemComponent } from './flights/flight-result-list/flight-result-item/flight-result-item.component';
 import { DatePipe } from '@angular/common';
 import { PaginationComponent } from './shared/components/pagination/pagination.component';
+import { BookingSearchFormComponent } from './bookings/booking-search-form/booking-search-form.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PaginationComponent } from './shared/components/pagination/pagination.c
     UserPageComponent,
     PhonePipe,
     FlightResultItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    BookingSearchFormComponent
   ],
   imports: [
     BrowserModule,

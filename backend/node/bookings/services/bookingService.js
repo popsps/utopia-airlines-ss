@@ -1,6 +1,8 @@
+const { Op } = require("sequelize");
 const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking } = require("@utopia-airlines-wss/common/models");
-const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
+const { NotFoundError, handleMutationError, BadRequestError } = require("@utopia-airlines-wss/common/errors");
+const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 
 const findBookingById = async (id, options) => {
   const booking = await Booking.findByPk(id, options);
@@ -8,17 +10,39 @@ const findBookingById = async (id, options) => {
   return booking;
 };
 
+// const removeUndefined = query => {
+//   return [
+//     ...Object.entries(query),
+//     ...Object.getOwnPropertySymbols(query)
+//       .map(key => [key, query[key]]),
+//   ]
+//     .filter(([, value]) => value != null)
+//     .reduce((obj, [key, value]) => {
+//       obj[key] = value;
+//       return obj;
+//     }, {});
+// };
+const getDateRange = date => {
+  const startTime = new Date(date.getTime());
+  startTime.setHours(0, 0, 0, 0);
+  const endTime = new Date(startTime.getTime());
+  endTime.setDate(endTime.getDate() + 1);
+  return [startTime, endTime];
+};
+
 const bookingService = {
-  async findAllBookings(
-    {isActive = true, offset = 0, limit = 10} = {}) {
-    const where = {isActive};
-    if(limit > 10000)
+  async findAllBookings({
+    isActive = true, offset = 0, limit = 10,
+    gender, fName, lName, origin, destination, departureDate
+  }) {
+    if (limit > 10000)
       throw new BadRequestError("Limit exceeds maximum of 10000");
+    isActive = !(isActive && isActive === "false");
     const bookings = await Booking.findAndCountAll({
-      where,
       limit: +limit,
       offset: +offset,
       distinct: true,
+      where: { isActive },
       include: [
         {
           association: "agent",
@@ -33,13 +57,49 @@ const bookingService = {
           association: "flights",
           include: {
             association: "route",
-            include: ["origin", "destination"],
+            // required: true,
+            // where: removeUndefined({
+            //   departureTime: departureDate
+            //     ? {
+            //       [Op.between]: getDateRange(new Date(departureDate)),
+            //     }
+            //     : null,
+            // }),
+            include: [{
+              association: "origin",
+              where: removeUndefined({
+                city: origin && {
+                  [Op.substring]: origin,
+                }
+              })
+            }, {
+              association: "destination",
+              where: removeUndefined({
+                iataId: destination && {
+                  [Op.substring]: destination,
+                }
+              })
+            }],
+
           },
           through: { attributes: [] },
         },
-        "passengers",
+        {
+          association: "passengers",
+          where: removeUndefined({
+            gender: gender && {
+              [Op.substring]: gender,
+            },
+            givenName: fName && {
+              [Op.substring]: fName
+            },
+            familyName: lName && {
+              [Op.substring]: lName
+            },
+          })
+        },
       ],
-    }); 
+    });
     return bookings;
   },
   async findBookingById({ id }) {

@@ -9,6 +9,8 @@ export const environment = {
   loginUrl: '/api/session/admin',
   userApiUrl: '/api/users',
   bookingApiUrl: '/api/bookings',
+  bookingUserApiUrl: '/api/bookings/user',
+  bookingGuestApiUrl: '/api/bookings/guest',
   flightApiUrl: '/api/flights',
   passengerApiUrl: '/api/passengers',
 };
