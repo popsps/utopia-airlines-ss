@@ -76,7 +76,6 @@ describe('FlightsComponent load with data first page and limit:10', () => {
   });
 });
 
-
 describe('FlightsComponent load with data second page and limit:10', () => {
   let component: FlightsComponent;
   let fixture: ComponentFixture<FlightsComponent>;
