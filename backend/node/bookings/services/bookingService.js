@@ -33,7 +33,7 @@ const getDateRange = date => {
 const bookingService = {
   async findAllBookings({
     isActive = true, offset = 0, limit = 10,
-    gender, fName, lName, origin, destination, departureDate
+    gender, fName, lName, origin, destination, departureDate, aid, id
   }) {
     if (limit > 10000)
       throw new BadRequestError("Limit exceeds maximum of 10000");
@@ -55,31 +55,50 @@ const bookingService = {
         "guest",
         {
           association: "flights",
+          // required: false,
+          where: removeUndefined({
+            departureTime: departureDate
+              ? {
+                [Op.between]: getDateRange(new Date(departureDate)),
+              }
+              : null,
+            id: aid && { [Op.eq]: aid },
+            // "$route.origin.city$": { [Op.substring]: origin }
+          }),
           include: {
             association: "route",
+            as: "route",
             // required: true,
             // where: removeUndefined({
-            //   departureTime: departureDate
-            //     ? {
-            //       [Op.between]: getDateRange(new Date(departureDate)),
-            //     }
-            //     : null,
+            //   originId: origin && {
+            //     [Op.substring]: origin,
+            //   },
+            //   destinationId: destination && {
+            //     [Op.substring]: destination,
+            //   },
             // }),
-            include: [{
-              association: "origin",
-              where: removeUndefined({
-                city: origin && {
-                  [Op.substring]: origin,
-                }
-              })
-            }, {
-              association: "destination",
-              where: removeUndefined({
-                iataId: destination && {
-                  [Op.substring]: destination,
-                }
-              })
-            }],
+            // where: removeUndefined({
+            //   id: id && { [Op.eq]: id }
+            // }),
+            include: [
+              {
+                association: "origin",
+                as: "origin",
+                // required: true,
+                // where: removeUndefined({
+                //   city: origin && {
+                //     [Op.substring]: origin,
+                //   }
+                // })
+              },
+              {
+                association: "destination",
+                // where: removeUndefined({
+                //   iataId: destination && {
+                //     [Op.substring]: destination,
+                //   }
+                // })
+              }],
 
           },
           through: { attributes: [] },
