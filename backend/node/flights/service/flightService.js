@@ -12,9 +12,12 @@ const getDateRange = date => {
 };
 
 const flightService = {
-  async findAllFlights({ origin, destination, departureDate } = {}, { offset = 0, limit = 10 }){
+  async findAllFlights({ origin, destination, originCity, destinationCity, departureDate } = {}, {
+    offset = 0,
+    limit = 10
+  }) {
     const { count, rows } = await Flight.findAndCountAll({
-      where: removeUndefined({ 
+      where: removeUndefined({
         departureTime: departureDate
           ? {
             [Op.between]: getDateRange(new Date(departureDate)),
@@ -26,8 +29,9 @@ const flightService = {
       order: [
         ["departureTime", "ASC"],
       ],
-      include: [ 
-        { 
+      include: [
+        {
+
           association: "route",
           where: removeUndefined({
             originId: origin && {
@@ -36,7 +40,25 @@ const flightService = {
             destinationId: destination && {
               [Op.substring]: destination,
             },
-          }), 
+          }),
+          include: [
+            {
+              association: "origin",
+              where: removeUndefined({
+                city: originCity && {
+                  [Op.substring]: originCity,
+                }
+              }),
+            },
+            {
+              association: "destination",
+              where: removeUndefined({
+                city: destinationCity && {
+                  [Op.substring]: destinationCity,
+                }
+              }),
+            },
+          ]
         },
         "airplane",
       ],
@@ -46,7 +68,7 @@ const flightService = {
       offset,
       count: rows.length,
       results: rows,
-    }; 
+    };
   },
   async findFlightById(id) {
     const flight = await Flight.findByPk(id,
@@ -56,8 +78,8 @@ const flightService = {
           "airplane",
         ],
       });
-    if(!flight) throw new NotFoundError("cannot find flight");
-    return flight; 
+    if (!flight) throw new NotFoundError("cannot find flight");
+    return flight;
   },
   async createFlight({ routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     try {
@@ -68,13 +90,13 @@ const flightService = {
         reservedSeats: reserved,
         seatPrice: price,
       });
-    } catch(err) {
+    } catch (err) {
       handleMutationError(err);
     }
   },
   async updateFlight(id, { routeId, airplaneId, departureTime, seats: { reserved, price } = {} } = {}) {
     const flight = await flightService.findFlightById(id);
-    if(!flight) throw new NotFoundError("cannot find flight");
+    if (!flight) throw new NotFoundError("cannot find flight");
     try {
       const newFlightInfo = {
         routeId,
@@ -84,13 +106,13 @@ const flightService = {
         seatPrice: price,
       };
       flight.update(newFlightInfo);
-    } catch(err) {
+    } catch (err) {
       handleMutationError(err);
     }
   },
   async deleteFlight(id) {
     const flight = await Flight.findByPk(id);
-    if(!flight) throw new NotFoundError("cannot find flight");
+    if (!flight) throw new NotFoundError("cannot find flight");
     await flight.destroy();
   },
 };
