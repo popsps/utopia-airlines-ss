@@ -2,6 +2,8 @@ const { Op } = require("sequelize");
 const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
 const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
 const { removeUndefined } = require("@utopia-airlines-wss/common/util");
+const { Route } = require("@utopia-airlines-wss/common/models/Route");
+
 
 const getDateRange = date => {
   const startTime = new Date(date.getTime());
@@ -11,52 +13,80 @@ const getDateRange = date => {
   return [startTime, endTime];
 };
 
+
 const flightService = {
-  async findAllFlights({ origin, destination, originCity, destinationCity, departureDate } = {}, {
-    offset = 0,
-    limit = 10
-  }) {
+  async findAllFlights(
+    {
+      origin, destination, departureDate, sort, order = "ASC"
+    } = {}, { offset = 0, limit = 10 }) {
+    //order: ADC, DESC
+    //sort: seatPrice, departureTime
     const { count, rows } = await Flight.findAndCountAll({
-      where: removeUndefined({
-        departureTime: departureDate
-          ? {
-            [Op.between]: getDateRange(new Date(departureDate)),
-          }
-          : null,
-      }),
+      where: {
+        ...removeUndefined({
+          departureTime: departureDate ? { [Op.between]: getDateRange(new Date(departureDate)), } : null,
+        }),
+        [Op.and]: (origin || destination) ? [
+          [
+            origin ?
+              {
+                [Op.or]: [
+                  { "$route.origin_id$": { [Op.substring]: origin }, },
+                  { "$route.origin.name$": { [Op.substring]: origin }, },
+                  { "$route.origin.city$": { [Op.substring]: origin }, },
+                  { "$route.origin.country$": { [Op.substring]: origin }, },
+                ]
+              } : null,
+            destination ?
+              {
+                [Op.or]: [
+                  { "$route.destination_id$": { [Op.substring]: destination }, },
+                  { "$route.destination.name$": { [Op.substring]: destination }, },
+                  { "$route.destination.city$": { [Op.substring]: destination }, },
+                  { "$route.destination.country$": { [Op.substring]: destination }, }
+                ]
+              } : null
+          ]
+        ] : [],
+      },
       offset: +offset,
       limit: +limit,
-      order: [
-        ["departureTime", "ASC"],
-      ],
+      order: (sort) ? [[sort, order]] : null,
       include: [
         {
-
+          // model: Route,
+          // as: "route",
           association: "route",
-          where: removeUndefined({
-            originId: origin && {
-              [Op.substring]: origin,
-            },
-            destinationId: destination && {
-              [Op.substring]: destination,
-            },
-          }),
+          // where: removeUndefined({
+          //   originId: origin && {
+          //     [Op.substring]: origin,
+          //   },
+          //   destinationId: destination && {
+          //     [Op.substring]: destination,
+          //   },
+          // }),
           include: [
             {
               association: "origin",
-              where: removeUndefined({
-                city: originCity && {
-                  [Op.substring]: originCity,
-                }
-              }),
+              // where: removeUndefined({
+              //   city: originCity && {
+              //     [Op.substring]: originCity,
+              //   },
+              //   country: originCountry && {
+              //     [Op.substring]: originCountry,
+              //   }
+              // }),
             },
             {
               association: "destination",
-              where: removeUndefined({
-                city: destinationCity && {
-                  [Op.substring]: destinationCity,
-                }
-              }),
+              // where: removeUndefined({
+              //   city: destinationCity && {
+              //     [Op.substring]: destinationCity,
+              //   },
+              //   country: destinationCountry && {
+              //     [Op.substring]: destinationCountry,
+              //   }
+              // }),
             },
           ]
         },

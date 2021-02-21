@@ -11,7 +11,7 @@ export class FlightResultItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.flight);
+    // console.log(this.flight);
   }
 
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { FlightService, PaginatedFlightResult } from "../shared/services/flight.service";
+import {FlightService, PaginatedFlightResult} from '../shared/services/flight.service';
 
-import { FlightFilter } from '../shared/models/FlightFilter';
+import {FlightFilter} from '../shared/models/FlightFilter';
 
 @Component({
   selector: 'app-flights',
@@ -14,7 +14,7 @@ export class FlightsComponent implements OnInit {
 
   pageNum = 1;
   flights: {
-    state: "pending" | "done" | "error";
+    state: 'pending' | 'done' | 'error';
     error?: any;
     data?: PaginatedFlightResult;
   };
@@ -23,7 +23,7 @@ export class FlightsComponent implements OnInit {
 
   constructor(private flightService: FlightService) {
     this.flights = {
-      state: "pending",
+      state: 'pending',
     };
   }
 
@@ -31,7 +31,7 @@ export class FlightsComponent implements OnInit {
     this.loadFlights();
   }
 
-  loadFlights() {
+  loadFlights(): void {
     this.flightService.getAll({
       ...this.filter,
       offset: (this.pageNum - 1) * FlightsComponent.PAGE_SIZE,
@@ -40,37 +40,39 @@ export class FlightsComponent implements OnInit {
       (data) => {
         this.flights = {
           ...this.flights,
-          state: "done",
+          state: 'done',
           data
         };
+        console.log('new flights:', this.flights.data)
       },
       (error) => {
         this.flights = {
           ...this.flights,
-          state: "error",
+          state: 'error',
           error
         };
       },
-
     );
   }
 
-  getPageSize() {
+  getPageSize(): number {
     return FlightsComponent.PAGE_SIZE;
   }
 
-  getTotalPageCount() {
-    if (this.flights.state !== "done") return 1;
+  getTotalPageCount(): number {
+    if (this.flights.state !== 'done') {
+      return 1;
+    }
     return Math.ceil(this.flights.data.total / FlightsComponent.PAGE_SIZE);
   }
 
-  onFilterChange(filter) {
+  onFilterChange(filter): void {
     this.pageNum = 1;
     this.filter = filter;
     this.loadFlights();
   }
 
-  onPageNumChange(pageNum) {
+  onPageNumChange(pageNum): void {
     this.pageNum = pageNum;
     this.loadFlights();
   }

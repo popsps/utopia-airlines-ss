@@ -56,19 +56,38 @@ const bookingService = {
         {
           association: "flights",
           // required: false,
-          where: removeUndefined({
-            departureTime: departureDate
-              ? {
-                [Op.between]: getDateRange(new Date(departureDate)),
-              }
-              : null,
-            id: aid && { [Op.eq]: aid },
-            // "$route.origin.city$": { [Op.substring]: origin }
-          }),
+          where: {
+            ...removeUndefined({
+              departureTime: departureDate ? { [Op.between]: getDateRange(new Date(departureDate)), } : null,
+              id: aid && { [Op.eq]: aid },
+              // "$route.origin.city$": { [Op.substring]: origin }
+            }),
+            [Op.and]: (origin || destination) ? [
+              [
+                origin ?
+                  {
+                    [Op.or]: [
+                      { "$route.origin_id$": { [Op.substring]: origin }, },
+                      { "$route.origin.name$": { [Op.substring]: origin }, },
+                      { "$route.origin.city$": { [Op.substring]: origin }, },
+                      { "$route.origin.country$": { [Op.substring]: origin }, },
+                    ]
+                  } : null,
+                destination ?
+                  {
+                    [Op.or]: [
+                      { "$route.destination_id$": { [Op.substring]: destination }, },
+                      { "$route.destination.name$": { [Op.substring]: destination }, },
+                      { "$route.destination.city$": { [Op.substring]: destination }, },
+                      { "$route.destination.country$": { [Op.substring]: destination }, }
+                    ]
+                  } : null
+              ]
+            ] : [],
+          },
           include: {
             association: "route",
-            as: "route",
-            // required: true,
+            // required: false,
             // where: removeUndefined({
             //   originId: origin && {
             //     [Op.substring]: origin,
@@ -83,8 +102,7 @@ const bookingService = {
             include: [
               {
                 association: "origin",
-                as: "origin",
-                // required: true,
+                required: false,
                 // where: removeUndefined({
                 //   city: origin && {
                 //     [Op.substring]: origin,

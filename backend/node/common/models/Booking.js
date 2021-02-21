@@ -30,8 +30,16 @@ class Booking extends Model {
     });
     Booking.belongsToMany(Flight, {
       through: "flight_bookings",
-      foreignKey: "booking_id",
-      otherKey: "flight_id",
+      foreignKey: {
+        name: "bookingId",
+        field: "booking_id",
+        allowNull: false,
+      },
+      otherKey: {
+        name: "flightId",
+        field: "flight_id",
+        allowNull: false,
+      },
       as: "flights",
     });
     Booking.hasMany(Passenger, {
