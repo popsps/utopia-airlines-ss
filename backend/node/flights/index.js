@@ -5,7 +5,7 @@ const cookieSession = require("cookie-session");
 
 const { getCurrentUser, errorHandler } = require("@utopia-airlines-wss/common/middleware");
 
-const PORT = process.env.PORT || process.argv[2] || 8093;
+const PORT = process.env.PORT || process.argv[2] || 3001;
 
 const app = express();
 
