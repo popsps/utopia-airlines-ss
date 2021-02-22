@@ -4,7 +4,7 @@
     <app-booking-search-form (filterChanged)="onFilterChange($event)"
                              [bookingFilter]="filter">
     </app-booking-search-form>
-    <div class="text-center font-weight-bold">Total: {{totalBookings}}</div>
+    <div class="text-center">Total: <span class="font-weight-bold">{{totalBookings}}</span></div>
     <div>
       <!--    <div class="d-flex justify-content-center">-->
       <!--      <button type="button" routerLink="/bookings/add"-->

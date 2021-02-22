@@ -59,7 +59,7 @@ export class BookingListComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
+        this.error = {isError: true, message: 'No Booking Found', status: null};
         console.log(error);
       }, () => {
         this.loading = false;
