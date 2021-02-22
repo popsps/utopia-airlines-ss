@@ -110,3 +110,7 @@ Environment:
               - 'https://www.amazon.com/'
       ListenerArn: !Ref Listener
       Priority: 1
+
+
+      # The following resource(s) failed to create: [UtopiaRDS]. Rollback requested by user.
+# DBSecurityGroup not found: mysql
