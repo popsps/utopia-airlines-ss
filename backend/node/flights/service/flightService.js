@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
 const { Flight, FlightRaw } = require("@utopia-airlines-wss/common/models");
-const { NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
+const { NotFoundError, handleMutationError, BadRequestError } = require("@utopia-airlines-wss/common/errors");
 const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 const { Route } = require("@utopia-airlines-wss/common/models/Route");
 
@@ -21,6 +21,8 @@ const flightService = {
     } = {}, { offset = 0, limit = 10 }) {
     //order: ADC, DESC
     //sort: seatPrice, departureTime
+    if (limit > 10000)
+      throw new BadRequestError("Limit exceeds maximum of 10000");
     const { count, rows } = await Flight.findAndCountAll({
       where: {
         ...removeUndefined({

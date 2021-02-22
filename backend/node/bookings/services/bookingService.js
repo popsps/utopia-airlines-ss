@@ -10,18 +10,6 @@ const findBookingById = async (id, options) => {
   return booking;
 };
 
-// const removeUndefined = query => {
-//   return [
-//     ...Object.entries(query),
-//     ...Object.getOwnPropertySymbols(query)
-//       .map(key => [key, query[key]]),
-//   ]
-//     .filter(([, value]) => value != null)
-//     .reduce((obj, [key, value]) => {
-//       obj[key] = value;
-//       return obj;
-//     }, {});
-// };
 const getDateRange = date => {
   const startTime = new Date(date.getTime());
   startTime.setHours(0, 0, 0, 0);
@@ -33,7 +21,8 @@ const getDateRange = date => {
 const bookingService = {
   async findAllBookings({
     isActive = true, offset = 0, limit = 10,
-    gender, fName, lName, origin, destination, departureDate, aid, id
+    gender, origin,
+    destination, departureDate, fid, id, sort, order = "ASC"
   }) {
     if (limit > 10000)
       throw new BadRequestError("Limit exceeds maximum of 10000");
@@ -42,7 +31,37 @@ const bookingService = {
       limit: +limit,
       offset: +offset,
       distinct: true,
-      where: { isActive },
+      subQuery: false,
+      where: {
+        isActive,
+        ...removeUndefined({
+          "$flights.departure_time$": departureDate ? { [Op.between]: getDateRange(new Date(departureDate)), } : null,
+          "$flights.id$": fid && { [Op.eq]: fid },
+        }),
+        [Op.and]: (origin || destination) ? [
+          [
+            origin ?
+              {
+                [Op.or]: [
+                  // { "$flights.route.origin_id$": { [Op.substring]: origin }, },
+                  { "$flights.route.origin.name$": { [Op.substring]: origin }, },
+                  { "$flights.route.origin.city$": { [Op.substring]: origin }, },
+                  { "$flights.route.origin.country$": { [Op.substring]: origin }, },
+                ]
+              } : null,
+            destination ?
+              {
+                [Op.or]: [
+                  { "$flights.route.destination_id$": { [Op.substring]: destination }, },
+                  { "$flights.route.destination.name$": { [Op.substring]: destination }, },
+                  { "$flights.route.destination.city$": { [Op.substring]: destination }, },
+                  { "$flights.route.destination.country$": { [Op.substring]: destination }, }
+                ]
+              } : null
+          ]
+        ] : [],
+      },
+      order: (sort) ? [[sort, order]] : null,
       include: [
         {
           association: "agent",
@@ -55,69 +74,12 @@ const bookingService = {
         "guest",
         {
           association: "flights",
-          // required: false,
-          where: {
-            ...removeUndefined({
-              departureTime: departureDate ? { [Op.between]: getDateRange(new Date(departureDate)), } : null,
-              id: aid && { [Op.eq]: aid },
-              // "$route.origin.city$": { [Op.substring]: origin }
-            }),
-            [Op.and]: (origin || destination) ? [
-              [
-                origin ?
-                  {
-                    [Op.or]: [
-                      { "$route.origin_id$": { [Op.substring]: origin }, },
-                      { "$route.origin.name$": { [Op.substring]: origin }, },
-                      { "$route.origin.city$": { [Op.substring]: origin }, },
-                      { "$route.origin.country$": { [Op.substring]: origin }, },
-                    ]
-                  } : null,
-                destination ?
-                  {
-                    [Op.or]: [
-                      { "$route.destination_id$": { [Op.substring]: destination }, },
-                      { "$route.destination.name$": { [Op.substring]: destination }, },
-                      { "$route.destination.city$": { [Op.substring]: destination }, },
-                      { "$route.destination.country$": { [Op.substring]: destination }, }
-                    ]
-                  } : null
-              ]
-            ] : [],
-          },
           include: {
             association: "route",
-            // required: false,
-            // where: removeUndefined({
-            //   originId: origin && {
-            //     [Op.substring]: origin,
-            //   },
-            //   destinationId: destination && {
-            //     [Op.substring]: destination,
-            //   },
-            // }),
-            // where: removeUndefined({
-            //   id: id && { [Op.eq]: id }
-            // }),
             include: [
-              {
-                association: "origin",
-                required: false,
-                // where: removeUndefined({
-                //   city: origin && {
-                //     [Op.substring]: origin,
-                //   }
-                // })
-              },
-              {
-                association: "destination",
-                // where: removeUndefined({
-                //   iataId: destination && {
-                //     [Op.substring]: destination,
-                //   }
-                // })
-              }],
-
+              "origin",
+              "destination"
+            ],
           },
           through: { attributes: [] },
         },
@@ -126,12 +88,6 @@ const bookingService = {
           where: removeUndefined({
             gender: gender && {
               [Op.substring]: gender,
-            },
-            givenName: fName && {
-              [Op.substring]: fName
-            },
-            familyName: lName && {
-              [Op.substring]: lName
             },
           })
         },

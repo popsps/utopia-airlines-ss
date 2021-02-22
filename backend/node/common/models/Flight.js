@@ -38,9 +38,9 @@ class Flight extends Model {
       through: "flight_passengers",
       foreignKey: "flight_id",
       as: "passengers",
+      constraints: false
     });
   }
-
   toJSON(type) {
     const { seatPrice, maxCapacity, reservedSeats, passengerCount, availableSeats, passengers, ...values } = this.get();
     if (values.route) delete values.routeId;

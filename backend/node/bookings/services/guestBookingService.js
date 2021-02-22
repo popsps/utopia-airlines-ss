@@ -1,13 +1,60 @@
+const { Op } = require("sequelize");
 const { sequelize } = require("@utopia-airlines-wss/common/db");
 const { Booking, GuestBooking, BookingGuest } = require("@utopia-airlines-wss/common/models");
-const { StandardizedError, NotFoundError, handleMutationError   } = require("@utopia-airlines-wss/common/errors");
-
+const { StandardizedError, NotFoundError, handleMutationError } = require("@utopia-airlines-wss/common/errors");
+const { removeUndefined } = require("@utopia-airlines-wss/common/util");
 const { flightService } = require("./flightService");
 
+const getDateRange = date => {
+  const startTime = new Date(date.getTime());
+  startTime.setHours(0, 0, 0, 0);
+  const endTime = new Date(startTime.getTime());
+  endTime.setDate(endTime.getDate() + 1);
+  return [startTime, endTime];
+};
+
 const guestBookingService = {
-  async findAllGuestBookings({ isActive = true } = {}) {
-    return await GuestBooking.findAll({
-      where: { isActive },
+  async findAllGuestBookings({
+    isActive = true, offset = 0, limit = 10,
+    gender, origin,
+    destination, departureDate, fid, id, sort, order = "ASC"
+  }) {
+    const where = {
+      isActive,
+      ...removeUndefined({
+        "$flights.departure_time$": departureDate ? { [Op.between]: getDateRange(new Date(departureDate)), } : null,
+        "$flights.id$": fid && { [Op.eq]: fid },
+      }),
+      [Op.and]: (origin || destination) ? [
+        [
+          origin ?
+            {
+              [Op.or]: [
+                // { "$flights.route.origin_id$": { [Op.substring]: origin }, },
+                { "$flights.route.origin.name$": { [Op.substring]: origin }, },
+                { "$flights.route.origin.city$": { [Op.substring]: origin }, },
+                { "$flights.route.origin.country$": { [Op.substring]: origin }, },
+              ]
+            } : null,
+          destination ?
+            {
+              [Op.or]: [
+                { "$flights.route.destination_id$": { [Op.substring]: destination }, },
+                { "$flights.route.destination.name$": { [Op.substring]: destination }, },
+                { "$flights.route.destination.city$": { [Op.substring]: destination }, },
+                { "$flights.route.destination.country$": { [Op.substring]: destination }, }
+              ]
+            } : null
+        ]
+      ] : [],
+    };
+    return await GuestBooking.findAndCountAll({
+      limit: +limit,
+      offset: +offset,
+      distinct: true,
+      subQuery: false,
+      order: (sort) ? [[sort, order]] : null,
+      where,
       include: [
         "agent",
         {
@@ -53,7 +100,7 @@ const guestBookingService = {
           contactPhone: contact.phone,
         },
         passengers: passengers.map(
-          ({ name: { given: givenName, family: familyName } = {}, ...rest }) => ({ ...rest,  givenName, familyName })
+          ({ name: { given: givenName, family: familyName } = {}, ...rest }) => ({ ...rest, givenName, familyName })
         ),
       };
       if (agentId != null) data.agent = { agentId };
