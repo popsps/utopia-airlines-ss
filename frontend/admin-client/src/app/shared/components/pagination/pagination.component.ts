@@ -42,15 +42,35 @@ export class PaginationComponent implements OnInit {
 
   getPagesToDisplay(): number[] {
     // if number of pages to show is less than the collection size
-    if (this.totalPageCount < this.displayedPageRange) {
-      return Array(this.totalPageCount).fill(0).map((_, i) => i + 1);
+    if (this.displayedPageRange > this.totalPageCount) {
+      return Array(this.totalPageCount).fill(0).map((v, i) => i + 1);
     }
-    const start = this.currentPage <= this.displayedPageRange
-      ? 0
-      : Math.min(
-      this.currentPage - this.displayedPageRange,
-      this.totalPageCount - 2 * this.displayedPageRange
-    ) - 1;
-    return Array(2 * this.displayedPageRange + 1).fill(0).map((_, i) => i + start + 1);
+    // const start = this.currentPage <= this.displayedPageRange
+    //   ? 0
+    //   : Math.min(
+    //   this.currentPage - this.displayedPageRange,
+    //   this.totalPageCount - 2 * this.displayedPageRange
+    // ) - 1;
+    // return Array(2 * this.displayedPageRange + 1).fill(0).map((_, i) => i + start + 1);
+    const activePages = [];
+    let size = this.displayedPageRange;
+    const currentPage = this.currentPage;
+    activePages.push(currentPage);
+    size--;
+    let prev = (currentPage > 1) ? currentPage - 1 : null;
+    let next = (currentPage < this.totalPageCount) ? currentPage + 1 : null;
+    while (size !== 0) {
+      if (prev) {
+        activePages.push(prev);
+        prev = (prev > 1) ? prev - 1 : null;
+        size--;
+      }
+      if (next) {
+        activePages.push(next);
+        next = (next < this.totalPageCount) ? next + 1 : null;
+        size--;
+      }
+    }
+    return activePages.sort((a, b) => a - b);
   }
 }

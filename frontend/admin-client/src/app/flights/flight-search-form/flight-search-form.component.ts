@@ -37,6 +37,9 @@ export class FlightSearchFormComponent implements OnInit {
       sort = 'seatPrice';
       order = 'DESC';
     }
+    if (sort && sort === 'departureTime') {
+      order = 'DESC';
+    }
     return {
       sort,
       order,
