@@ -28,8 +28,8 @@ export class BookingSearchFormComponent implements OnInit {
       sort: [this.bookingFilter?.sort],
     });
     this.filterBookingForm.valueChanges.subscribe(value => {
-      this.buildFilter(value);
-      // this.filterChanged.emit(this.buildFilter(value));
+      // this.buildFilter(value);
+      this.filterChanged.emit(this.buildFilter(value));
     });
   }
 
@@ -62,7 +62,9 @@ export class BookingSearchFormComponent implements OnInit {
       destination,
       isActive,
       limit,
-      type
+      type,
+      sort,
+      order
       // departureDate: departureDateRange.start ? new Date(departureDateRange.start) : null
     };
   }

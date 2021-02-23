@@ -93,7 +93,10 @@ const userBookingService = {
             },
             through: { attributes: [] },
           },
-          "passengers",
+          {
+            association: "passengers",
+            separate: true
+          }
         ],
       }
     );

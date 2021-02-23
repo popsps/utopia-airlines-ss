@@ -21,14 +21,14 @@ export class BookingListComponent implements OnInit {
   limit = 10;
   filter: BookingFilter;
   error = {isError: false, message: '', status: null};
-  empty = false;
 
   constructor(private bookingService: BookingService, private  pagerService: PagerService,
               private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
-  getBookings(url, page = 1): void {
+  getBookings(): void {
     this.loading = true;
+    const url = this.buildUrl();
     console.log('url:', url);
     this.bookingService.getAllBookings(url)
       .subscribe(bookings => {
@@ -46,20 +46,17 @@ export class BookingListComponent implements OnInit {
         // failure or no result
         if (!bookings || bookings.length === 0) {
           // this.error = {isError: true, message: 'No Booking found', status: null};
-          this.empty = true;
-          this.bookings = null;
-          console.log('no val');
+          this.error.isError = true;
+          this.error.message = 'No Booking Found';
           this.totalBookings = this.bookingService.totalBookings;
         } else {
-          this.empty = false;
           this.bookings = bookings;
           this.totalBookings = this.bookingService.totalBookings;
-          this.setPage(page);
+          this.setPage(this.page);
         }
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.empty = true;
         this.error = {isError: true, message: 'No Booking Found', status: null};
         console.log(error);
       }, () => {
@@ -68,23 +65,28 @@ export class BookingListComponent implements OnInit {
       });
   }
 
-
   navigate(page = 0): void {
     this.router.navigate(['bookings'], {queryParams: {offset: page, ...this.filter}})
       .then(r => console.log('navigated')).catch(err => console.log(err));
   }
 
   ngOnInit(): void {
-    console.log('parse');
-    this.parseQueryParams();
+    // this.parseQueryParams();
+    this.getBookings();
+  }
+
+  onPageChange(page: number): void {
+    this.page = page;
+    this.getBookings();
+    this.getBookings();
   }
 
   setPage(page: number): void {
     if (!this.totalBookings || page < 1 || page > this.pager.totalBookings) {
       return;
     }
+    this.page = page;
     this.pager = this.pagerService.getPager(this.totalBookings, page, this.limit);
-    console.log('pager server:', this.pager);
     this.pagedBookings = this.bookings;
   }
 
@@ -132,15 +134,15 @@ export class BookingListComponent implements OnInit {
           return;
         }
       }
-      this.filter = {limit, origin, destination, isActive, type, sort, order};
-      const url = this.buildUrl(type, page);
-      this.getBookings(url, page);
+      // this.filter = {limit, origin, destination, isActive, type, sort, order};
+      // const url = this.buildUrl(type, page);
+      // this.getBookings(url, page);
     });
   }
 
-  private buildUrl(type: string, page: number): string {
-    const offset = (page - 1) * this.limit;
-    type = (type) ? `/${type}/` : '';
+  private buildUrl(): string {
+    const offset = (this.page - 1) * this.limit;
+    const type = (this.filter?.type) ? `/${this.filter?.type}/` : '';
     let url = `${environment.bookingApiUrl}${type}?offset=${offset}`;
     if (this.filter) {
       for (const [key, value] of Object.entries(this.filter)) {
@@ -153,8 +155,11 @@ export class BookingListComponent implements OnInit {
   }
 
   onFilterChange(filter): void {
+    this.page = 1;
     this.filter = filter;
+    this.limit = this.filter.limit ?? this.limit;
     console.log('this.filter', this.filter);
-    this.navigate(1);
+    this.getBookings();
+    // this.navigate(1);
   }
 }

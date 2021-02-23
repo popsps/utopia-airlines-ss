@@ -90,6 +90,7 @@ const bookingService = {
         },
         {
           association: "passengers",
+          separate: true,
           where: removeUndefined({
             gender: gender && {
               [Op.substring]: gender,
@@ -98,6 +99,7 @@ const bookingService = {
         },
       ],
     });
+    console.log("len", bookings.rows.length);
     return bookings;
   },
   async findBookingById({ id }) {
