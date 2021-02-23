@@ -36,7 +36,7 @@ const userBookingService = {
           origin ?
             {
               [Op.or]: [
-                // { "$flights.route.origin_id$": { [Op.substring]: origin }, },
+                { "$flights.route.origin_id$": { [Op.substring]: origin }, },
                 { "$flights.route.origin.name$": { [Op.substring]: origin }, },
                 { "$flights.route.origin.city$": { [Op.substring]: origin }, },
                 { "$flights.route.origin.country$": { [Op.substring]: origin }, },
@@ -55,7 +55,7 @@ const userBookingService = {
       ] : [],
     };
     if (userId != null) where.userId = userId;
-    return await UserBooking.findAndCountAll({
+    const bookings = await UserBooking.findAndCountAll({
       limit: +limit,
       offset: +offset,
       distinct: true,
@@ -76,6 +76,7 @@ const userBookingService = {
         "passengers",
       ],
     });
+    return bookings;
   },
   async findUserBookingById({ id, userId }) {
     const booking = await UserBooking.findByPk(

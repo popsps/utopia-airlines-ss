@@ -22,7 +22,7 @@ const bookingService = {
   async findAllBookings({
     isActive = true, offset = 0, limit = 10,
     gender, origin,
-    destination, departureDate, fid, id, sort, order = "ASC"
+    destination, departureDate, fid, id, sort, order = "DESC"
   }) {
     if (limit > 10000)
       throw new BadRequestError("Limit exceeds maximum of 10000");
@@ -43,7 +43,7 @@ const bookingService = {
             origin ?
               {
                 [Op.or]: [
-                  // { "$flights.route.origin_id$": { [Op.substring]: origin }, },
+                  { "$flights.route.origin_id$": { [Op.substring]: origin }, },
                   { "$flights.route.origin.name$": { [Op.substring]: origin }, },
                   { "$flights.route.origin.city$": { [Op.substring]: origin }, },
                   { "$flights.route.origin.country$": { [Op.substring]: origin }, },
@@ -61,7 +61,7 @@ const bookingService = {
           ]
         ] : [],
       },
-      order: (sort) ? [[sort, order]] : null,
+      order: (sort) ? [["flights", sort, order]] : null,
       include: [
         {
           association: "agent",
@@ -74,6 +74,11 @@ const bookingService = {
         "guest",
         {
           association: "flights",
+          // attributes: ["departureTime", "seatPrice", "maxCapacity", "reservedSeats", "passengerCount", "availableSeats"],
+          // attributes: ["departureTime", "seatPrice", "maxCapacity", "reservedSeats", "passengerCount", "availableSeats", [sequelize.fn("sum", sequelize.col("seat_price")), "total"]],
+          // group: ["flights.id"],
+          // raw: true,
+          // order: sequelize.literal('total DESC'),
           include: {
             association: "route",
             include: [

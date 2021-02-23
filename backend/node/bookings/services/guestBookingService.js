@@ -30,7 +30,7 @@ const guestBookingService = {
           origin ?
             {
               [Op.or]: [
-                // { "$flights.route.origin_id$": { [Op.substring]: origin }, },
+                { "$flights.route.origin_id$": { [Op.substring]: origin }, },
                 { "$flights.route.origin.name$": { [Op.substring]: origin }, },
                 { "$flights.route.origin.city$": { [Op.substring]: origin }, },
                 { "$flights.route.origin.country$": { [Op.substring]: origin }, },
@@ -48,7 +48,7 @@ const guestBookingService = {
         ]
       ] : [],
     };
-    return await GuestBooking.findAndCountAll({
+    const bookings = await GuestBooking.findAndCountAll({
       limit: +limit,
       offset: +offset,
       distinct: true,
@@ -65,9 +65,14 @@ const guestBookingService = {
           },
           through: { attributes: [] },
         },
-        "passengers",
+        {
+          association: "passengers",
+          separate: true
+        }
       ],
     });
+    // console.log("num:", bookings.rows.length, bookings.count);
+    return bookings;
   },
   async findGuestBookingById({ id }) {
     const booking = await GuestBooking.findByPk(

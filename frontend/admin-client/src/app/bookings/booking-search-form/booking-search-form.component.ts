@@ -1,16 +1,8 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {BookingFilter} from '../../shared/models/BookingFilter';
 
-type BookingFilter = {
-  origin?: string;
-  destination?: string;
-  isActive?: string;
-  limit?: number;
-  fName?: string;
-  lName?: string;
-  type?: string;
-};
 
 @Component({
   selector: 'app-booking-search-form',
@@ -32,7 +24,8 @@ export class BookingSearchFormComponent implements OnInit {
       destination: [this.bookingFilter?.destination],
       isActive: [this.bookingFilter?.isActive],
       limit: [this.bookingFilter?.limit],
-      type: [this.bookingFilter?.type]
+      type: [this.bookingFilter?.type],
+      sort: [this.bookingFilter?.sort],
     });
     this.filterBookingForm.valueChanges.subscribe(value => {
       this.buildFilter(value);
@@ -46,16 +39,27 @@ export class BookingSearchFormComponent implements OnInit {
 
   buildFilter(value: any): BookingFilter {
     const {origin, destination, isActive, limit, type} = value;
+    let {sort} = value;
+    let order;
+    if (sort && sort === 'seatPrice;Desc') {
+      sort = 'seatPrice';
+      order = 'DESC';
+    }
+    if (sort && sort === 'departureTime') {
+      order = 'DESC';
+    }
     this.bookingFilter = {
-      fName: origin,
-      lName: destination,
+      origin,
+      destination,
       isActive,
       limit,
-      type
+      type,
+      sort,
+      order
     };
     return {
-      fName: origin,
-      lName: destination,
+      origin,
+      destination,
       isActive,
       limit,
       type

@@ -5,14 +5,14 @@
   </button>
 </div>
 <form class="row m-4" [formGroup]="filterBookingForm">
-<!--  <div class="col-md">-->
-<!--    <label class="form-label" for="origin-input">Origin</label>-->
-<!--    <input id="origin-input" class="form-control" type="text" formControlName="origin">-->
-<!--  </div>-->
-<!--  <div class="col-md">-->
-<!--    <label class="form-label" for="destination-input">Destination</label>-->
-<!--    <input id="destination-input" class="form-control" type="text" formControlName="destination">-->
-<!--  </div>-->
+  <div class="col-md">
+    <label class="form-label" for="origin-input">Origin</label>
+    <input id="origin-input" class="form-control" type="text" formControlName="origin">
+  </div>
+  <div class="col-md">
+    <label class="form-label" for="destination-input">Destination</label>
+    <input id="destination-input" class="form-control" type="text" formControlName="destination">
+  </div>
   <div class="col-sm">
     <label class="form-label" for="active-select">Active</label>
     <select class="form-control" id="active-select" formControlName="isActive">
@@ -38,6 +38,15 @@
       <option>30</option>
       <option>40</option>
       <option>50</option>
+    </select>
+  </div>
+  <div class="col-sm">
+    <label class="form-label" for="booking-sort">SORT BY</label>
+    <select class="form-control" id="booking-sort" formControlName="sort">
+      <option style="display:none">
+      <option value="departureTime">Newest</option>
+<!--      <option value="seatPrice">Lowest Price</option>-->
+<!--      <option value="seatPrice;Desc">Highest Price</option>-->
     </select>
   </div>
 </form>

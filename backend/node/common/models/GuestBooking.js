@@ -20,6 +20,7 @@ class GuestBooking extends Model {
       foreignKey: {
         name: "bookingId",
         field: "booking_id",
+        allowNull: false,
       },
       as: "passengers",
     });
@@ -59,3 +60,4 @@ GuestBooking.init({
 });
 
 module.exports = { GuestBooking };
+

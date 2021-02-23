@@ -5,13 +5,14 @@
                              [bookingFilter]="filter">
     </app-booking-search-form>
     <div class="text-center">Total: <span class="font-weight-bold">{{totalBookings}}</span></div>
-    <div>
-      <!--    <div class="d-flex justify-content-center">-->
-      <!--      <button type="button" routerLink="/bookings/add"-->
-      <!--              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 500px">ADD BOOKING-->
-      <!--      </button>-->
-      <!--    </div>-->
-      <!--    booking list-->
+    <!--    <div class="d-flex justify-content-center">-->
+    <!--      <button type="button" routerLink="/bookings/add"-->
+    <!--              class="btn btn-dark btn-lg btn-block m-5 " style="max-width: 500px">ADD BOOKING-->
+    <!--      </button>-->
+    <!--    </div>-->
+    <!--    booking list-->
+    <!--      list of all bookings-->
+    <ng-container *ngIf="!empty">
       <div class="list-group m-3" *ngFor="let booking of pagedBookings">
         <a [routerLink]="['/bookings',booking.id]" style="text-decoration: none">
           <div class="list-group-item booking-item rounded">
@@ -39,7 +40,10 @@
               </div>
               <div class="d-flex">
                 <div class="m-3" style="max-width: 20rem;">
-                  <div class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}</div>
+                  <span class="font-weight-bold">{{booking?.flights[0]?.route?.origin?.city}}, </span>
+                  <span>{{booking?.flights[0]?.route?.origin?.country}} </span>
+                  <span>({{booking?.flights[0]?.route?.origin?.iataId}})</span>
+                  <div class="text-secondary mt-sm-1">{{booking?.flights[0]?.route?.origin?.name}}</div>
                   <div>
                     <div class="d-flex my-3">
                       <i class="fas fa-plane-departure mt-1 mr-2"></i>
@@ -48,7 +52,11 @@
                   </div>
                 </div>
                 <div class="m-3 ml-auto" style="max-width: 20rem;">
-                  <div class="font-weight-bold">{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}</div>
+                  <span class="font-weight-bold">{{booking?.flights.slice(-1)[0]?.route?.destination?.city}}, </span>
+                  <span>{{booking?.flights.slice(-1)[0]?.route?.destination?.country}} </span>
+                  <span>({{booking?.flights.slice(-1)[0]?.route?.destination?.iataId}})</span>
+                  <div
+                    class="text-secondary mt-sm-1">{{booking?.flights.slice(-1)[0]?.route?.destination?.name}}</div>
                   <div>
                     <div class="d-flex my-3">
                       <i class="fas fa-plane-arrival mt-1 mr-2"></i>
@@ -58,7 +66,9 @@
                 </div>
               </div>
               <!--            <div class="p-2 text-center">Total travel time</div>-->
-
+              <div class="p-2 text-center">Total Price:
+                <span class="font-weight-bold">{{booking?.totalPrice}}</span>
+              </div>
 
             </div>
             <div class="reserved " [ngClass]="(booking.isActive) ? 'text-success' : 'text-danger'">
@@ -69,17 +79,16 @@
           </div>
         </a>
       </div>
-    </div>
-    <!--    Pagination-->
-    <div class="d-flex justify-content-center" style="margin: 150px">
-      <app-pagination *ngIf="pager.totalPages && pager.currentPage" [(currentPage)]="pager.currentPage"
-                      [totalPageCount]="pager.totalPages" [displayedPageRange]="5"
-                      (pageChange)="navigate($event)"></app-pagination>
-    </div>
+      <!--    Pagination-->
+      <div class="d-flex justify-content-center" style="margin: 150px">
+        <app-pagination *ngIf="pager.totalPages && pager.currentPage" [(currentPage)]="pager.currentPage"
+                        [totalPageCount]="pager.totalPages" [displayedPageRange]="5"
+                        (pageChange)="navigate($event)"></app-pagination>
+      </div>
+    </ng-container>
   </ng-container>
 
   <!--Acknowledgment-->
   <app-spinner [loading]="loading" *ngIf="loading"></app-spinner>
   <app-error-message *ngIf="error?.isError" [error]="error"></app-error-message>
-
 </div>
