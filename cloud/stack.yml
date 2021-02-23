@@ -19,10 +19,7 @@ Resources:
   utopiaALB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
-      Name: "utopiaALB"
-      Scheme: "internet-facing"
-      Type: "application"
-      IpAddressType: "ipv4"
+  
       Subnets:
         - "subnet-309a0757"
         - "subnet-815f088e"
@@ -130,12 +127,6 @@ Resources:
             - ContainerPort: 3000
               HostPort: 3000
               Protocol: "tcp"
-          LogConfiguration:
-            LogDriver: "awslogs"
-            Options:
-              awslogs-group: "/ecs/bookingTD"
-              awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: "ecs"
 
   BookingService:
     Type: AWS::ECS::Service

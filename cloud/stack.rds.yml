@@ -15,3 +15,5 @@ Resources:
 Outputs:
   Address:
     Value: !GetAtt UtopiaRDS.Endpoint.Address
+    Export:
+      Name: RDSEndpoint
