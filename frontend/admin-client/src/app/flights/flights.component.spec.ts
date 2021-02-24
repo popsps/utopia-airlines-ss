@@ -59,10 +59,10 @@ describe('FlightsComponent load with data first page and limit:10', () => {
     expect(component).toBeTruthy();
   });
   it('should have label with `search bar`', () => {
-    expect(de.nativeElement.querySelector('app-flight-search-form').innerText).toContain('Origin');
+    expect(de.nativeElement.querySelector('app-flight-search-form').innerText).toContain('ARRIVAL AIRPORT');
   });
-  it('should have label with `Origin`', () => {
-    expect(de.query(By.css('.form-label')).nativeElement.innerText).toBe('Origin');
+  it('should have label with `ARRIVAL AIRPORT`', () => {
+    expect(de.queryAll(By.css('.form-label'))[2].nativeElement.innerText).toBe('ARRIVAL AIRPORT');
   });
 
   it('getAll service should return the first 10 flights', async () => {
