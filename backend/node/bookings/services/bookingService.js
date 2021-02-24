@@ -99,7 +99,6 @@ const bookingService = {
         },
       ],
     });
-    console.log("len", bookings.rows.length);
     return bookings;
   },
   async findBookingById({ id }) {

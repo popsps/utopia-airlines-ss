@@ -45,7 +45,7 @@ export class FlightSearchFormComponent implements OnInit {
       order,
       origin: origin?.toUpperCase(),
       destination: destination?.toUpperCase(),
-      departureDate: departureDateRange.start ? new Date(departureDateRange.start) : null
+      departureDate: departureDateRange.start ? new Date(departureDateRange.start.replace(/-/g, '\/')) : null
     };
   }
 }

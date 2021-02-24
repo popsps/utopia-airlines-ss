@@ -142,7 +142,7 @@ export class BookingListComponent implements OnInit {
 
   private buildUrl(): string {
     const offset = (this.page - 1) * this.limit;
-    const type = (this.filter?.type) ? `/${this.filter?.type}/` : '';
+    const type = (this.filter?.type && this.filter?.type !== 'ALL') ? `/${this.filter?.type}/` : '';
     let url = `${environment.bookingApiUrl}${type}?offset=${offset}`;
     if (this.filter) {
       for (const [key, value] of Object.entries(this.filter)) {

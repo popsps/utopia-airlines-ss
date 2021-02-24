@@ -25,6 +25,9 @@ const userBookingService = {
     gender, origin, userId,
     destination, departureDate, fid, id, sort, order = "ASC"
   }) {
+    if (limit > 10000)
+      throw new BadRequestError("Limit exceeds maximum of 10000");
+    isActive = !(isActive && isActive === "false");
     const where = {
       isActive,
       ...removeUndefined({
@@ -60,7 +63,7 @@ const userBookingService = {
       offset: +offset,
       distinct: true,
       subQuery: false,
-      order: (sort) ? [[sort, order]] : null,
+      order: (sort) ? [["flights", sort, order]] : null,
       where,
       include: [
         "agent",
