@@ -85,13 +85,19 @@ Resources:
             - ContainerPort: 3001
               HostPort: 3001
               Protocol: "tcp"
+          LogConfiguration: 
+            LogDriver: "awslogs"
+            Options: 
+              awslogs-group: "/ecs/flightTD"
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: "ecs"
           Environment:
             -
               Name: "DB_HOST"
               Value: 
                 Fn::ImportValue: RDSEndpoint
             -
-              Name: "DB_USER"
+              Name: "DB_USERNAME"
               Value: "utopia"
             -
               Name: "DB_PASSWORD"

@@ -35,7 +35,7 @@ Resources:
       Name: "bookingTG"
       VpcId: "vpc-0d17b977"
       HealthCheckIntervalSeconds: 30
-      HealthCheckPath: "/api/session"
+      HealthCheckPath: "/api/bookings"
       Port: 80
       Protocol: "HTTP"
       HealthCheckPort: "traffic-port"
@@ -87,13 +87,19 @@ Resources:
             - ContainerPort: 3000
               HostPort: 3000
               Protocol: "tcp"
+          LogConfiguration: 
+            LogDriver: "awslogs"
+            Options: 
+              awslogs-group: "/ecs/bookingTD"
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: "ecs"
           Environment:
             -
               Name: "DB_HOST"
               Value: 
                 Fn::ImportValue: RDSEndpoint
             -
-              Name: "DB_USER"
+              Name: "DB_USERNAME"
               Value: "utopia"
             -
               Name: "DB_PASSWORD"

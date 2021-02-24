@@ -68,19 +68,25 @@ Resources:
 
   authTaskdefinition:
     Type: AWS::ECS::TaskDefinition
-    # DependsOn: 
-    #   Fn::ImportValue: UtopiaRDS
+    DependsOn: 
+      Fn::ImportValue: UtopiaRDS
     Properties:
-      Family: "authTD"
       NetworkMode: "awsvpc"
       RequiresCompatibilities:
         - "FARGATE"
       Cpu: "256"
       Memory: "512"
       ExecutionRoleArn: !Sub "arn:aws:iam::${AWS::AccountId}:role/ecsTaskExecutionRole"
+      Family: "authTD"
       ContainerDefinitions:
         - Name: "auth-container"
           Image: !Sub "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/auth:latest"
+          LogConfiguration: 
+            LogDriver: "awslogs"
+            Options: 
+              awslogs-group: "/ecs/authTD"
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: "ecs"
           Cpu: 256
           Memory: 512
           Essential: true

@@ -22,4 +22,4 @@ app.use(
   errorHandler
 );
 
-app.listen(PORT, () => console.log("Booking controller is running on " + PORT));
+app.listen(PORT, () => console.log("Booking controller is running on " + PORT ));

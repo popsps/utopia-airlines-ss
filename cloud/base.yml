@@ -1,4 +1,4 @@
-# aws cloudformation create-stack --stack-name testutopia1 --template-body file://$PWD/stack.yml
+# aws cloudformation create-stack --stack-name utopiabase --template-body file://$PWD/base.yml 
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "ecr ecs alb"
 Resources:
@@ -14,7 +14,8 @@ Resources:
         AllocatedStorage: '5'
         PubliclyAccessible: true
         VPCSecurityGroups:
-            - sg-05c329bea57a8d257
+            - !Ref RDSSecurityGroup
+            # - sg-05c329bea57a8d257
   authRepository:
     Type: AWS::ECR::Repository
     Properties:
@@ -124,7 +125,32 @@ Resources:
       SecurityGroupEgress:
         - CidrIp: "0.0.0.0/0"
           IpProtocol: "-1"
+  RDSSecurityGroup:
+      Type: "AWS::EC2::SecurityGroup"
+      Properties:
+          GroupDescription: "Allows MySQL"
+          GroupName: "MySQL"
+          VpcId: "vpc-0d17b977"
+          SecurityGroupIngress: 
+            - 
+              CidrIp: "0.0.0.0/0"
+              FromPort: 3306
+              IpProtocol: "tcp"
+              ToPort: 3306
+            - 
+              CidrIpv6: "::/0"
+              FromPort: 3306
+              IpProtocol: "tcp"
+              ToPort: 3306
+          SecurityGroupEgress: 
+            - 
+              CidrIp: "0.0.0.0/0"
+              IpProtocol: "-1"
 Outputs:
+  RDS:
+    Value: !Ref UtopiaRDS
+    Export:
+      Name: UtopiaRDS
   Address:
     Value: !GetAtt UtopiaRDS.Endpoint.Address
     Export:
@@ -156,4 +182,6 @@ Outputs:
   utopiaALB:
     Value: !Ref utopiaALB
     Export:
-      Name: utopiaALB 
+      Name: utopiaALB
+  ALBEndpoint:
+    Value: !GetAtt utopiaALB.DNSName  
