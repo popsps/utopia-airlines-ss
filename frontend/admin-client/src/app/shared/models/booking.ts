@@ -8,20 +8,26 @@ type Flight = {
     id: number;
     origin: {
       iataId: string;
+      name: string;
       city: string;
+      country: string;
     };
     destination: {
       iataId: string;
+      name: string;
       city: string;
+      country: string;
     };
   };
   departureTime: Date;
   arrivalTime?: Date;
-  maxCapacity: number;
-  reservedSeats: number;
-  passengerCount: number;
-  availableSeats: number;
-  seatPrice: number;
+  seats: {
+    total: number;
+    reserved: number;
+    booked: number;
+    available: number;
+    price: number;
+  }
 };
 
 type User = {
@@ -53,6 +59,7 @@ export class Booking implements Deserializable {
   guest?: GuestContact;
   passengers: Passenger[];
   flights: Flight[];
+  totalPrice?: number;
 
   deserialize(input: any): this {
     Object.assign(this, input);

@@ -12,7 +12,7 @@
   "author": "Samuel Johnson",
   "license": "ISC",
   "dependencies": {
-    "@utopia-airlines-wss/common": "^0.1.0",
+    "@utopia-airlines-wss/common": "^0.1.1",
     "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

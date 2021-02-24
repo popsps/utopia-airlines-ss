@@ -10,9 +10,7 @@ router.use("/user", require("./user"));
 
 
 router.get("/",
-  requireAuthentication({
-    roles: ["ADMIN", "AGENT"],
-  }),
+  requireAuthentication({ roles: ["ADMIN", "AGENT"], }),
   bookingController.getAll
 );
 

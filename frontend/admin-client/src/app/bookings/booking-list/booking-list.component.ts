@@ -4,6 +4,7 @@ import {BookingService} from '../../shared/services/booking.service';
 import {Booking} from '../../shared/models/booking';
 import {PagerService} from '../../shared/services/pager.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {BookingFilter} from '../../shared/models/BookingFilter';
 
 @Component({
   selector: 'app-booking-list',
@@ -18,38 +19,45 @@ export class BookingListComponent implements OnInit {
   loading = false;
   page = 1;
   limit = 10;
+  filter: BookingFilter;
   error = {isError: false, message: '', status: null};
 
   constructor(private bookingService: BookingService, private  pagerService: PagerService,
               private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
-  getBookings(page = 1): void {
+  getBookings(): void {
     this.loading = true;
-    const offset = (page - 1) * this.limit;
-    this.bookingService.getAllBookings(`${environment.bookingApiUrl}?offset=${offset}&limit=${this.limit}`)
+    const url = this.buildUrl();
+    console.log('url:', url);
+    this.bookingService.getAllBookings(url)
       .subscribe(bookings => {
         console.log('bookings:', bookings);
         bookings.forEach(booking => {
+          booking.totalPrice = 0;
           booking?.flights.forEach(flight => {
+            booking.totalPrice += flight.seats.price;
             flight.departureTime = new Date(flight.departureTime);
             flight.arrivalTime = new Date(flight.departureTime);
             flight.arrivalTime.setHours(Math.random() * 8 + 2 + flight.arrivalTime.getHours());
           });
         });
+        this.error.isError = false;
         // failure or no result
         if (!bookings || bookings.length === 0) {
-          this.error = {isError: true, message: 'No Booking found', status: null};
-          this.bookings = bookings;
+          // this.error = {isError: true, message: 'No Booking found', status: null};
+          this.error.isError = true;
+          this.error.message = 'No Booking Found';
+          this.totalBookings = this.bookingService.totalBookings;
         } else {
           this.bookings = bookings;
           this.totalBookings = this.bookingService.totalBookings;
+          this.setPage(this.page);
         }
-        this.setPage(page);
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.error = {isError: true, message: error?.error?.message || error?.message, status: error?.status};
+        this.error = {isError: true, message: 'No Booking Found', status: null};
         console.log(error);
       }, () => {
         this.loading = false;
@@ -58,24 +66,28 @@ export class BookingListComponent implements OnInit {
   }
 
   navigate(page = 0): void {
-    this.router.navigate(['bookings'], {queryParams: {offset: page, limit: this.limit}})
-      .then(r => console.log('navigated'));
+    this.router.navigate(['bookings'], {queryParams: {offset: page, ...this.filter}})
+      .then(r => console.log('navigated')).catch(err => console.log(err));
   }
 
   ngOnInit(): void {
-    this.parseQueryParams();
+    // this.parseQueryParams();
+    this.getBookings();
+  }
+
+  onPageChange(page: number): void {
+    this.page = page;
+    this.getBookings();
+    this.getBookings();
   }
 
   setPage(page: number): void {
     if (!this.totalBookings || page < 1 || page > this.pager.totalBookings) {
       return;
     }
+    this.page = page;
     this.pager = this.pagerService.getPager(this.totalBookings, page, this.limit);
-    console.log('pager server:', this.pager);
-    // this.pagedBookings = this.bookings.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    // console.log('paged bookings:', this.pagedBookings);
     this.pagedBookings = this.bookings;
-    console.log('paged booking', this.pagedBookings);
   }
 
   /**
@@ -84,6 +96,12 @@ export class BookingListComponent implements OnInit {
    */
   private parseQueryParams(): void {
     this.activatedRoute.queryParamMap.subscribe(params => {
+      const isActive = params.get('isActive');
+      const origin = params.get('origin');
+      const destination = params.get('destination');
+      const type = params.get('type');
+      const sort = params.get('sort');
+      const order = params.get('order');
       // page size
       let limit = 10;
       if (params.get('limit')) {
@@ -116,7 +134,32 @@ export class BookingListComponent implements OnInit {
           return;
         }
       }
-      this.getBookings(page);
+      // this.filter = {limit, origin, destination, isActive, type, sort, order};
+      // const url = this.buildUrl(type, page);
+      // this.getBookings(url, page);
     });
+  }
+
+  private buildUrl(): string {
+    const offset = (this.page - 1) * this.limit;
+    const type = (this.filter?.type && this.filter?.type !== 'ALL') ? `/${this.filter?.type}/` : '';
+    let url = `${environment.bookingApiUrl}${type}?offset=${offset}`;
+    if (this.filter) {
+      for (const [key, value] of Object.entries(this.filter)) {
+        if (value) {
+          url += `&${key}=${value}`;
+        }
+      }
+    }
+    return url;
+  }
+
+  onFilterChange(filter): void {
+    this.page = 1;
+    this.filter = filter;
+    this.limit = this.filter.limit ?? this.limit;
+    console.log('this.filter', this.filter);
+    this.getBookings();
+    // this.navigate(1);
   }
 }

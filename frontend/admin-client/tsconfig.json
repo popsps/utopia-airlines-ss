@@ -19,7 +19,7 @@
     ],
     "types": [
       "jquery",
-      "jest"
+      "jasmine"
     ]
   }
 }

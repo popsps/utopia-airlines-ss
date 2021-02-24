@@ -5,13 +5,13 @@
   "scripts": {
     "postinstall": "npm-run-all *:install",
     "start": "npm-run-all -p *:start",
-    "common:install": "cd ./backend/common && npm ci",
-    "bookings:install": "cd ./backend/bookings && npm ci",
-    "airports:install": "cd ./backend/airports && npm ci",
-    "flights:install": "cd ./backend/flights && npm ci",
-    "bookings:start": "cd ./backend/bookings && npm start 3000",
-    "flights:start": "cd ./backend/flights && npm start 3001",
-    "airports:start": "cd ./backend/airports && npm start 3002"
+    "common:install": "cd ./common && npm ci",
+    "bookings:install": "cd ./bookings && npm ci",
+    "airports:install": "cd ./airports && npm ci",
+    "flights:install": "cd ./flights && npm ci",
+    "bookings:start": "cd ./bookings && npm start 3000",
+    "flights:start": "cd ./flights && npm start 3001",
+    "airports:start": "cd ./airports && npm start 3002"
   },
   "repository": {
     "type": "git",
