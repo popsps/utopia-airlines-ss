@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class Passenger extends Model {
-  static associate({ Booking }) {
+  static associate({ Booking, GuestBooking }) {
     Passenger.belongsTo(Booking, {
       foreignKey: {
         name: "bookingId",
@@ -11,6 +11,14 @@ class Passenger extends Model {
       },
       as: "booking",
     });
+    // Passenger.belongsTo(GuestBooking, {
+    //   foreignKey: {
+    //     name: "bookingId",
+    //     field: "booking_id",
+    //     allowNull: false,
+    //   },
+    //   as: "guestBooking",
+    // });
   }
   toJSON(type){
     const { id, bookingId, givenName: given, familyName: family, ...values } = this.get();

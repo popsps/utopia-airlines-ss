@@ -2,8 +2,8 @@ const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class Booking extends Model {
-  static associate({ BookingGuest, BookingAgent, BookingUser, Flight, Passenger }) {
-    
+  static associate({ BookingGuest, BookingAgent, BookingUser, Flight, FlightRaw, Passenger }) {
+
     Booking.hasOne(BookingGuest, {
       foreignKey: {
         name: "bookingId",
@@ -30,9 +30,24 @@ class Booking extends Model {
     });
     Booking.belongsToMany(Flight, {
       through: "flight_bookings",
+      foreignKey: {
+        name: "bookingId",
+        field: "booking_id",
+        allowNull: false,
+      },
+      otherKey: {
+        name: "flightId",
+        field: "flight_id",
+        allowNull: false,
+      },
+      as: "flights",
+      constraints: false
+    });
+    Booking.belongsToMany(FlightRaw, {
+      through: "flight_bookings",
       foreignKey: "booking_id",
       otherKey: "flight_id",
-      as: "flights",
+      as: "flightsRaw",
     });
     Booking.hasMany(Passenger, {
       foreignKey: {
@@ -43,7 +58,8 @@ class Booking extends Model {
       as: "passengers",
     });
   }
-  toJSON(){
+
+  toJSON() {
     const values = Object.assign({}, this.get());
     delete values.confirmationCode;
     values.agent ?? delete values.agent;
@@ -53,7 +69,7 @@ class Booking extends Model {
   }
 }
 
-Booking.init ({
+Booking.init({
   isActive: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
@@ -70,7 +86,7 @@ Booking.init ({
       const [hasGuest, hasUser] = [this.guest, this.user].map(value => value !== undefined);
       if (hasGuest && hasUser) {
 
-        if (this.guest && !this.user) 
+        if (this.guest && !this.user)
           return "GUEST";
         if (!this.guest && this.user)
           return "USER";

@@ -10,12 +10,12 @@ export class FlightRoutePipe implements PipeTransform {
     if (origin)
     {
       origin = origin.toUpperCase();
-      flights = flights.filter(flight => flight.route.originId.startsWith(origin));
+      flights = flights.filter(flight => flight.route.origin.iataId.startsWith(origin));
     }
     if (destination)
     {
       destination = destination.toUpperCase();
-      flights = flights.filter(flight => flight.route.destinationId.startsWith(destination));
+      flights = flights.filter(flight => flight.route.destination.iataId.startsWith(destination));
     }
     return flights;
   }
