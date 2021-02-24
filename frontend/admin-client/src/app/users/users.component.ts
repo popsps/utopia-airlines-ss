@@ -61,19 +61,20 @@ export class UsersComponent implements OnInit {
   }
 
   navigate(page: number): void {
-    if (page < 1 || page > this.totalUsers / this.limit) {
-      this.isError = true;
-      this.error = {
-        message: "invalid page"
-      };
-      return;
-    }
+    // if (page < 1 || page > this.totalUsers / this.limit) {
+    //   this.isError = true;
+    //   this.error = {
+    //     message: "invalid page"
+    //   };
+    //   return;
+    // }
     this.page = page;
     this.initializeUsers();
   }
 
   initializeUsers() {
     const offset = this.page - 1;
+    console.log(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl);
     this.userService
       .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl)
       .subscribe((res) => {
@@ -82,9 +83,14 @@ export class UsersComponent implements OnInit {
         this.users = this.result.content;
         this.totalUsers = this.result.totalElements;
         this.setPage(this.page);
+        debugger;
+        if (this.searchUrl) {
+          this.isSearching = true;
+        }
       }, (err) => {
         this.isError = true;
         this.error = err.error;
+        console.log("Error happened");
       });
   }
 
@@ -101,20 +107,20 @@ export class UsersComponent implements OnInit {
     if (roleFilter) {
       this.searchUrl = this.searchUrl.concat("&role=" + roleFilter);
     }
-    this.userService
-      .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl)
-      .subscribe((res) => {
-        this.result = res;
-        this.totalUsers = this.result.totalElements;
-        this.users = this.result.content;
-        this.setPage(this.page);
-        this.isError = false;
-        this.isSearching = true;
-      }, (err) => {
-        this.isError = true;
-        this.error = err.error;
-        debugger;
-      });
+    // this.userService
+    //   .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl)
+    //   .subscribe((res) => {
+    //     this.result = res;
+    //     this.totalUsers = this.result.totalElements;
+    //     this.users = this.result.content;
+    //     this.setPage(this.page);
+    //     this.isError = false;
+    //     this.isSearching = true;
+    //   }, (err) => {
+    //     this.isError = true;
+    //     this.error = err.error;
+    //   });
+    this.initializeUsers();
   }
 
   cancelSearch() {
