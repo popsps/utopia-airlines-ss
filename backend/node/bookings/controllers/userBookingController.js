@@ -6,9 +6,9 @@ const userBookingController = {
     try {
       const bookings = await userBookingService.findAllUserBookings({
         ...req.query,
-        userId: req.user?.role.name === "CUSTOMER"
-          ? req.user?.id
-          :  null,
+        // userId: req.user?.role.name === "CUSTOMER"
+        //   ? req.user?.id
+        //   :  null,
       });
       sendJson({
         req,

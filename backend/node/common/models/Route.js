@@ -1,4 +1,4 @@
-const { Model } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const { sequelize } = require("../db");
 
 class Route extends Model {
@@ -28,6 +28,7 @@ class Route extends Model {
       as: "flights",
     });
   }
+
   toJSON() {
     const values = this.get();
     if (values.origin) delete values.originId;
@@ -36,7 +37,24 @@ class Route extends Model {
   }
 }
 
-Route.init({}, {
+Route.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    field: "id",
+  },
+  originId: {
+    type: DataTypes.STRING,
+    field: "origin_id",
+    allowNull: false,
+  },
+  destinationId: {
+    type: DataTypes.STRING,
+    field: "destination_id",
+    allowNull: false,
+  },
+}, {
   tableName: "route",
   freezeTableName: true,
   sequelize,

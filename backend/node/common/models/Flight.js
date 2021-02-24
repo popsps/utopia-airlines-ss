@@ -22,8 +22,16 @@ class Flight extends Model {
     });
     Flight.belongsToMany(Booking, {
       through: "flight_bookings",
-      foreignKey: "flight_id",
-      otherKey: "booking_id",
+      foreignKey: {
+        name: "flightId",
+        field: "flight_id",
+        allowNull: false,
+      },
+      otherKey: {
+        name: "bookingId",
+        field: "booking_id",
+        allowNull: false,
+      },
       as: "bookings",
     });
     Flight.belongsToMany(Booking, {
@@ -32,7 +40,7 @@ class Flight extends Model {
       as: "passengers",
     });
   }
-  toJSON(type){
+  toJSON(type) {
     const { seatPrice, maxCapacity, reservedSeats, passengerCount, availableSeats, passengers, ...values } = this.get();
     if (values.route) delete values.routeId;
     if (passengers && type === "full") values.passengers = passengers;
@@ -41,7 +49,7 @@ class Flight extends Model {
       seats: removeUndefined({
         total: maxCapacity,
         reserved: type === "full" ? reservedSeats : null,
-        booked : type === "full" ? passengerCount : null,
+        booked: type === "full" ? passengerCount : null,
         available: availableSeats,
         price: seatPrice,
       }),

@@ -25,6 +25,11 @@ class FlightRaw extends Model {
       otherKey: "booking_id",
       as: "bookings",
     });
+    FlightRaw.belongsToMany(Booking, {
+      through: "flight_passengers",
+      foreignKey: "flight_id",
+      as: "passengers",
+    });
   }
   toJSON(){
     const { seatPrice, reservedSeats, ...values } = this.get();
