@@ -6,7 +6,6 @@ import {
 } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PagerService } from '../shared/services/pager.service';
 
 @Component({
@@ -39,8 +38,6 @@ export class UsersComponent implements OnInit {
     private userService: HttpService,
     private formBuilder: FormBuilder,
     private pagerService: PagerService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -107,19 +104,6 @@ export class UsersComponent implements OnInit {
     if (roleFilter) {
       this.searchUrl = this.searchUrl.concat("&role=" + roleFilter);
     }
-    // this.userService
-    //   .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl)
-    //   .subscribe((res) => {
-    //     this.result = res;
-    //     this.totalUsers = this.result.totalElements;
-    //     this.users = this.result.content;
-    //     this.setPage(this.page);
-    //     this.isError = false;
-    //     this.isSearching = true;
-    //   }, (err) => {
-    //     this.isError = true;
-    //     this.error = err.error;
-    //   });
     this.initializeUsers();
   }
 
