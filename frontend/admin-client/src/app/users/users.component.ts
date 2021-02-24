@@ -6,8 +6,7 @@ import {
 } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
-import { User } from '../shared/models/user';
-
+import { PagerService } from '../shared/services/pager.service';
 
 @Component({
   selector: 'app-users',
@@ -15,10 +14,12 @@ import { User } from '../shared/models/user';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  // TODO: Add Typescript type instead of any
+  page = 1;
+  limit = 15;
+  totalUsers: number;
+  pager: any = {};
+  result: any;
   users: any;
-  searchString: string;
-  searchUsersForm: FormGroup;
   addUserForm: FormGroup;
   username: string;
   password: string;
@@ -29,31 +30,88 @@ export class UsersComponent implements OnInit {
   role: string;
   apiUrl: string;
   isError: boolean;
-  // TODO: Create Error Entity
   error: any;
+  isSearching: boolean;
+  searchUrl = "";
 
   constructor(
     private userService: HttpService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private pagerService: PagerService,
   ) { }
 
   ngOnInit(): void {
     this.apiUrl = environment.userApiUrl;
     this.isError = false;
+    this.isSearching = false;
     this.initializeUsers();
     this.initializeForm();
   }
 
+  setPage(page: number): void {
+    if (!this.totalUsers || page < 1 || page > this.pager.totalUsers) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.totalUsers, page, this.limit);
+    console.log('pager server:', this.pager);
+    console.log('paged users', this.users);
+  }
+
+  navigate(page: number): void {
+    // if (page < 1 || page > this.totalUsers / this.limit) {
+    //   this.isError = true;
+    //   this.error = {
+    //     message: "invalid page"
+    //   };
+    //   return;
+    // }
+    this.page = page;
+    this.initializeUsers();
+  }
+
   initializeUsers() {
+    const offset = this.page - 1;
+    console.log(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl);
     this.userService
-      .get(this.apiUrl)
+      .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl)
       .subscribe((res) => {
         this.isError = false;
-        this.users = res;
+        this.result = res;
+        this.users = this.result.content;
+        this.totalUsers = this.result.totalElements;
+        this.setPage(this.page);
+        debugger;
+        if (this.searchUrl) {
+          this.isSearching = true;
+        }
       }, (err) => {
         this.isError = true;
         this.error = err.error;
+        console.log("Error happened");
       });
+  }
+
+  searchUsers(usernameFilter, emailFilter, roleFilter) {
+    this.page = 1;
+    const offset = this.page - 1;
+    this.searchUrl = "";
+    if (usernameFilter) {
+      this.searchUrl = this.searchUrl.concat("&username=" + usernameFilter);
+    }
+    if (emailFilter) {
+      this.searchUrl = this.searchUrl.concat("&email=" + emailFilter);
+    }
+    if (roleFilter) {
+      this.searchUrl = this.searchUrl.concat("&role=" + roleFilter);
+    }
+    this.initializeUsers();
+  }
+
+  cancelSearch() {
+    this.isSearching = false;
+    this.page = 1;
+    this.searchUrl = "";
+    this.initializeUsers();
   }
 
   initializeForm() {
