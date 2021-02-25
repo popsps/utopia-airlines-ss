@@ -1,17 +1,14 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from "@angular/router/testing";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Passenger } from 'src/app/shared/models/passenger';
 import { BookingService } from 'src/app/shared/services/booking.service';
 import { Booking } from '../../shared/models/booking';
 import { BookingListComponent } from './booking-list.component';
-import { environment } from 'src/environments/environment';
 import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { BookingFormComponent } from '../booking-form/booking-form.component';
 import { BookingComponent } from '../booking/booking.component';
 import { results } from './mock-bookings.json';
-import { Observable, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
@@ -37,7 +34,7 @@ describe('BookingListComponent Successful', () => {
         HttpClientTestingModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterTestingModule,
+        RouterTestingModule
       ],
       providers: [BookingService]
     })
