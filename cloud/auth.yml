@@ -1,4 +1,4 @@
-# aws cloudformation create-stack --stack-name testutopia1 --template-body file://$PWD/stack.yml
+# aws cloudformation create-stack --stack-name utopiaAuth --template-body file://$PWD/stack.yml
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "ecr ecs alb"
 Resources:
@@ -68,8 +68,8 @@ Resources:
 
   authTaskdefinition:
     Type: AWS::ECS::TaskDefinition
-    DependsOn: 
-      Fn::ImportValue: UtopiaRDS
+    # DependsOn: 
+    #   Fn::ImportValue: UtopiaRDS
     Properties:
       NetworkMode: "awsvpc"
       RequiresCompatibilities:

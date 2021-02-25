@@ -1,6 +1,7 @@
 # aws cloudformation create-stack --stack-name utopiabase --template-body file://$PWD/base.yml 
+# aws cloudformation describe-stacks --query Stacks[].Outputs[*].[OutputKey,OutputValue] --output text
 AWSTemplateFormatVersion: "2010-09-09"
-Description: "ecr ecs alb"
+Description: "Utopia airline base infstructure"
 Resources:
   UtopiaRDS:
     Type: 'AWS::RDS::DBInstance'
@@ -129,7 +130,7 @@ Resources:
       Type: "AWS::EC2::SecurityGroup"
       Properties:
           GroupDescription: "Allows MySQL"
-          GroupName: "MySQL"
+          GroupName: "utopiaMySQL"
           VpcId: "vpc-0d17b977"
           SecurityGroupIngress: 
             - 
