@@ -13,7 +13,7 @@
     </app-flight-result-list>
     <div class="d-flex justify-content-center my-4">
       <app-pagination [(currentPage)]="pageNum" [totalPageCount]="getTotalPageCount()" [displayedPageRange]="5"
-        (pageChange)="onPageNumChange($event)"></app-pagination>
+        (currentPageChange)="onPageNumChange($event)"></app-pagination>
     </div>
   </ng-container>
 </main>

@@ -82,7 +82,7 @@
     <div class="d-flex justify-content-center" style="margin: 150px">
       <app-pagination *ngIf="pager.totalPages && pager.currentPage" [(currentPage)]="pager.currentPage"
                       [totalPageCount]="pager.totalPages" [displayedPageRange]="5"
-                      (pageChange)="onPageChange($event)"></app-pagination>
+                      (currentPageChange)="onPageChange($event)"></app-pagination>
     </div>
   </ng-container>
 
