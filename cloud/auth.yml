@@ -1,4 +1,4 @@
-# aws cloudformation create-stack --stack-name utopiaAuth --template-body file://$PWD/stack.yml
+# aws cloudformation create-stack --stack-name utopiaAuth --template-body file://$PWD/auth.yml
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "ecr ecs alb"
 Resources:

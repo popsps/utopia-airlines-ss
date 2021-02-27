@@ -33,6 +33,10 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: "airport"
+  adminportalRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: "adminportal"
   utopiaECS:
     Type: AWS::ECS::Cluster
     Properties:
@@ -152,7 +156,7 @@ Outputs:
     Value: !Ref UtopiaRDS
     Export:
       Name: UtopiaRDS
-  Address:
+  RDSEndpoint:
     Value: !GetAtt UtopiaRDS.Endpoint.Address
     Export:
       Name: RDSEndpoint
@@ -185,4 +189,6 @@ Outputs:
     Export:
       Name: utopiaALB
   ALBEndpoint:
-    Value: !GetAtt utopiaALB.DNSName  
+    Value: !GetAtt utopiaALB.DNSName
+    Export:
+      Name: ALBEndpoint  
