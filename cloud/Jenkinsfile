@@ -1,3 +1,5 @@
+// sudo -su jenkins
+// aws configure
 pipeline {
     agent any
     stages {
@@ -10,12 +12,17 @@ pipeline {
         }
         stage('build'){
             steps{
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 014285101692.dkr.ecr.us-east-1.amazonaws.com"
                 dir('./backend/auth') {
-                    pwd()
-                    sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 014285101692.dkr.ecr.us-east-1.amazonaws.com"
                     sh "docker build -t auth ."
                     sh "docker tag auth:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/auth:latest"
                     sh "docker push 014285101692.dkr.ecr.us-east-1.amazonaws.com/auth:latest"
+                }
+                dir('./backend/node/booking') {
+                    sh "docker build -t booking ."
+                    sh "docker tag auth:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/auth:latest"
+                    sh "docker tag booking:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/booking:latest"
+                    sh "docker push 014285101692.dkr.ecr.us-east-1.amazonaws.com/booking:latest"
                 }
             }
         }

@@ -1,19 +1,27 @@
-#!/bin/bash
-sudo su
-sudo yum update -y
+#!/bin/sh
+yum update -y
 
 # Install Jenkins and Java 8
-sudo wget -O /etc/yum.repos.d/jenkins.repo \
+wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum upgrade -y
-sudo yum install jenkins java-1.8.0-openjdk-devel -y
-sudo systemctl daemon-reload
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum upgrade -y
+yum install jenkins java-1.8.0-openjdk-devel -y
+systemctl daemon-reload
+# Install Git
+yum install git -y
 # Install Docker
-sudo yum install docker -y
-sudo service docker start
-sudo usermod -aG docker ec2-user
-sudo usermod -a -G docker jenkins
-sudo yum update -y
-# Start Jenkins
-sudo systemctl start jenkins
+yum install docker -y
+service docker start
+usermod -aG docker $USER
+usermod -a -G docker jenkins
+yum update -y
+
+
+# Add Jenkins and Docker to startup
+chkconfig jenkins on
+chkconfig docker on
+chkconfig --list
+# Start Jenkins and Docker as a service
+service jenkins start
+service docker start
