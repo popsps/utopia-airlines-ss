@@ -6,7 +6,7 @@ pipeline {
         stage('fetch'){
             steps{
                 pwd()
-                git branch: 'UAW-162_cloudFront', url: 'https://github.com/popsps/utopia-airlines-ss.git'
+                git branch: 'UAW-162_CloudFront', url: 'https://github.com/popsps/utopia-airlines-ss.git'
             }
       
         }
