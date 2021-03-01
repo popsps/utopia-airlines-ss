@@ -1,4 +1,5 @@
 # aws cloudformation create-stack --stack-name utopiaadmin --template-body file://$PWD/adminPortal.yml
+# aws ecs update-service --cluster utopiaCluster --service admin-service --force-new-deployment 
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "ecr ecs alb"
 Resources:
@@ -98,7 +99,10 @@ Resources:
               Name: "API_HOST"
               Value: 
                 Fn::ImportValue: ALBEndpoint
-
+            -
+              Name: "API_PORT"
+              Value: "8081"
+              
   adminService:
     Type: AWS::ECS::Service
     DependsOn: adminListener

@@ -6,7 +6,7 @@ pipeline {
         stage('fetch'){
             steps{
                 pwd()
-                git branch: 'dev', url: 'https://github.com/popsps/utopia-airlines-ss.git'
+                git branch: 'UAW-162_cloudFront', url: 'https://github.com/popsps/utopia-airlines-ss.git'
             }
       
         }
@@ -18,12 +18,16 @@ pipeline {
                     sh "docker tag auth:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/auth:latest"
                     sh "docker push 014285101692.dkr.ecr.us-east-1.amazonaws.com/auth:latest"
                 }
-                dir('./backend/node/booking') {
+                dir('./backend/node/bookings') {
                     sh "docker build -t booking ."
-                    sh "docker tag auth:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/auth:latest"
                     sh "docker tag booking:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/booking:latest"
                     sh "docker push 014285101692.dkr.ecr.us-east-1.amazonaws.com/booking:latest"
                 }
+                dir('./frontend/admin-client') {
+                    sh "docker build -t adminportal ."
+                    sh "docker tag adminportal:latest 014285101692.dkr.ecr.us-east-1.amazonaws.com/adminportal:latest"
+                    sh "docker push 014285101692.dkr.ecr.us-east-1.amazonaws.com/adminportal:latest"
+                }                
             }
         }
      
