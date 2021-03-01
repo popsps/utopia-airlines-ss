@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {FlightService, PaginatedFlightResult} from '../shared/services/flight.service';
 
 import {FlightFilter} from '../shared/models/FlightFilter';
+import {FileSaverService} from 'ngx-filesaver';
+import {Flight} from '../shared/models/Flight';
 
 @Component({
   selector: 'app-flights',
@@ -21,7 +23,7 @@ export class FlightsComponent implements OnInit {
 
   filter: FlightFilter = {};
 
-  constructor(private flightService: FlightService) {
+  constructor(private flightService: FlightService, private fileSaver: FileSaverService) {
     this.flights = {
       state: 'pending',
     };
@@ -43,7 +45,7 @@ export class FlightsComponent implements OnInit {
           state: 'done',
           data
         };
-        console.log('new flights:', this.flights.data)
+        console.log('new flights:', this.flights.data);
       },
       (error) => {
         this.flights = {
@@ -76,6 +78,21 @@ export class FlightsComponent implements OnInit {
   onPageNumChange(pageNum): void {
     this.pageNum = pageNum;
     this.loadFlights();
+  }
+
+  onSaveCSV(): void {
+    const data = this.flights.data.results;
+    const replacer = (key, value) => value === null ? '' : value;
+    const header = Object.keys(data[0]); // build header
+    console.log('flights fields', Flight.allKeys());
+    const csv = data.map((row) => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+    csv.unshift(header.join(','));
+    console.log(header);
+    console.log(csv);
+    const csvArray = csv.join('\r\n');
+    console.log(csvArray);
+    // const csvBlob = new Blob([csvArray], {type: 'text/csv;charset=utf-8'});
+    // this.fileSaver.save(csvBlob, 'flights.csv');
   }
 
 }
