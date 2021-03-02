@@ -102,7 +102,17 @@ export class UsersComponent implements OnInit {
       this.searchUrl = this.searchUrl.concat("&email=" + emailFilter);
     }
     if (roleFilter) {
-      this.searchUrl = this.searchUrl.concat("&role=" + roleFilter);
+      switch (roleFilter) {
+        case "ADMIN":
+          this.searchUrl = this.searchUrl.concat("&role=" + 1);
+          break;
+        case "CUSTOMER":
+          this.searchUrl = this.searchUrl.concat("&role=" + 2);
+          break;
+        case "AGENT":
+          this.searchUrl = this.searchUrl.concat("&role=" + 3);
+          break;
+      }
     }
     this.initializeUsers();
   }
