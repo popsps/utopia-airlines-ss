@@ -119,13 +119,21 @@ public class UserService implements UserDetailsService {
 	  try {
 		  String username = params.get("username");
 		  String email = params.get("email");
-		  Sort sort;
-		  if(params.get("sort") == "ascending") {
-			  sort = Sort.unsorted();
+		  String sort = params.get("sort");
+		  if(sort == null) {
+			  sort = "username";
 		  }
-		  else {
-			  sort = Sort.by("username");
+		  String orderSort = params.get("orderSort");
+		  if(orderSort == null) {
+			  orderSort = "ASC";
 		  }
+//		  Sort sort;
+//		  if(params.get("sort") == "id") {
+//			  sort = Sort.by("id");
+//		  }
+//		  else {
+//			  sort = Sort.by("username");
+//		  }
 		  
 //		  For non-paginated list of users
 		  if(params.get("offset") == null || params.get("limit") == null) {
@@ -137,11 +145,11 @@ public class UserService implements UserDetailsService {
 		  }
 		  
 //		  For paginated list of users
-		  Pageable paging = PageRequest.of(Integer.parseInt(params.get("offset")), Integer.parseInt(params.get("limit")), sort);
+		  Pageable paging = PageRequest.of(Integer.parseInt(params.get("offset")), Integer.parseInt(params.get("limit")));
 		  if(params.get("role") != null) {
-			  return userDao.findAll(username, email, Integer.parseInt(params.get("role")), paging);
+			  return userDao.findAll(username, email, Integer.parseInt(params.get("role")), sort, paging);
 		  }
-		  return userDao.findAll(username, email, paging);
+		  return userDao.findAll(username, email, sort, paging);
 	  }
 	  catch(Exception e) {
 			LOGGER.error(e.getMessage());
