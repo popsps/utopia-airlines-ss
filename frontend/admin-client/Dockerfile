@@ -7,11 +7,6 @@ RUN npm install -g @angular/cli@10.2.1
 COPY . .
 RUN npm run build
 
-# FROM nginx:alpine
-# COPY default.conf /etc/nginx/conf.d/default.conf
-# COPY --from=angular_builder /user/src/app/dist/admin-client /usr/share/nginx/html
-# EXPOSE 80
-
 FROM nginx:1.18.0-alpine-perl
 RUN apk add --no-cache nginx-mod-http-perl
 COPY nginx.conf /etc/nginx/nginx.conf

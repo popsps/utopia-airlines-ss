@@ -17,7 +17,6 @@ usermod -aG docker ec2-user
 usermod -a -G docker jenkins
 yum update -y
 
-
 # Add Jenkins and Docker to startup
 chkconfig jenkins on
 chkconfig docker on
@@ -25,3 +24,5 @@ chkconfig --list
 # Start Jenkins and Docker as a service
 service jenkins start
 service docker start
+# sudo -su jenkins
+# aws configure

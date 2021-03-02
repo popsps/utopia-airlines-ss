@@ -1,5 +1,3 @@
-// sudo -su jenkins
-// aws configure
 pipeline {
     agent any
     stages {
