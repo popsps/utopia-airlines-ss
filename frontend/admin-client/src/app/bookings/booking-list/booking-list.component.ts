@@ -162,4 +162,8 @@ export class BookingListComponent implements OnInit {
     this.getBookings();
     // this.navigate(1);
   }
+
+  onSaveCSV(): void {
+    this.bookingService.saveBookingsAsCSV(this.bookings);
+  }
 }

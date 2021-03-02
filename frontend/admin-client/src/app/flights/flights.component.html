@@ -9,7 +9,7 @@
   <app-flight-search-form (filterChanged)="onFilterChange($event)"></app-flight-search-form>
   <app-spinner *ngIf="flights.state==='pending'"></app-spinner>
   <ng-container *ngIf="flights.state==='done'">
-    <button class="btn btn-dark my-4" (click)="onSaveCSV()">Save as CSV</button>
+    <button class="btn btn-dark my-4" (click)="onSaveCSV()">Generate a CSV report</button>
     <app-flight-result-list [flights]="flights.data.results"></app-flight-result-list>
     <div class="d-flex justify-content-center my-4">
       <app-pagination [(currentPage)]="pageNum" [totalPageCount]="getTotalPageCount()" [displayedPageRange]="5"

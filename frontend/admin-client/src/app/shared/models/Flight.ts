@@ -7,7 +7,7 @@ export class Flight implements Deserializable {
   route: Route;
   airplaneId: number;
   departureTime: Date;
-  // arrivalTime: Date;
+  arrivalTime?: Date;
   seats: {
     total: number;
     reserved?: number;
@@ -15,13 +15,6 @@ export class Flight implements Deserializable {
     available: number;
     price: number;
   };
-
-  static allKeys(): any {
-    const flight = new Flight();
-    flight.id = 0;
-    return Object.keys(flight);
-  }
-
   deserialize(input: any): this {
     const {route, departureTime, ...rest} = input;
     Object.assign(this, rest);
