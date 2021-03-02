@@ -13,7 +13,7 @@ yum install git -y
 # Install Docker
 yum install docker -y
 service docker start
-usermod -aG docker $USER
+usermod -aG docker ec2-user
 usermod -a -G docker jenkins
 yum update -y
 
