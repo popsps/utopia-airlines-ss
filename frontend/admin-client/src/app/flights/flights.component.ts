@@ -77,8 +77,19 @@ export class FlightsComponent implements OnInit {
   }
 
   onSaveCSV(): void {
-    const data = this.flights.data.results;
-    this.flightService.saveFlightsAsCSV(data);
+    this.flightService.getAll({
+      ...this.filter,
+      offset: 0,
+      limit: this.flights.data.total
+    }).subscribe(
+      (data) => {
+        this.flightService.saveFlightsAsCSV(data.results);
+      },
+      (error) => {
+        console.log('something went wrong generating CSV', error);
+      },
+    );
+
   }
 
 }

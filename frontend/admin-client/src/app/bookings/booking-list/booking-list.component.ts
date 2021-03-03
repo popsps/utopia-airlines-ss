@@ -28,7 +28,7 @@ export class BookingListComponent implements OnInit {
 
   getBookings(): void {
     this.loading = true;
-    const url = this.buildUrl();
+    const url = this.buildUrl(this.page, this.limit);
     console.log('url:', url);
     this.bookingService.getAllBookings(url)
       .subscribe(bookings => {
@@ -140,8 +140,8 @@ export class BookingListComponent implements OnInit {
     });
   }
 
-  private buildUrl(): string {
-    const offset = (this.page - 1) * this.limit;
+  private buildUrl(page: number, limit: number): string {
+    const offset = (page - 1) * limit;
     const type = (this.filter?.type && this.filter?.type !== 'ALL') ? `/${this.filter?.type}/` : '';
     let url = `${environment.bookingApiUrl}${type}?offset=${offset}`;
     if (this.filter) {
@@ -164,6 +164,25 @@ export class BookingListComponent implements OnInit {
   }
 
   onSaveCSV(): void {
-    this.bookingService.saveBookingsAsCSV(this.bookings);
+    let url = this.buildUrl(1, this.totalBookings);
+    if (!url.includes('limit')) {
+      url += `&limit=${this.totalBookings}`;
+    }
+    console.log('url:', url);
+    this.bookingService.getAllBookings(url)
+      .subscribe(bookings => {
+        bookings.forEach(booking => {
+          booking.totalPrice = 0;
+          booking?.flights.forEach(flight => {
+            booking.totalPrice += flight.seats.price;
+            flight.departureTime = new Date(flight.departureTime);
+            flight.arrivalTime = new Date(flight.departureTime);
+            flight.arrivalTime.setHours(Math.random() * 8 + 2 + flight.arrivalTime.getHours());
+          });
+        });
+        this.bookingService.saveBookingsAsCSV(bookings);
+      }, error => {
+        console.log('something went wrong generating CSV', error);
+      });
   }
 }
