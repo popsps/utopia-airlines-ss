@@ -6,7 +6,6 @@ import {
 } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
-import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
 
 import { PagerService } from '../shared/services/pager.service';
@@ -85,8 +84,6 @@ export class UsersComponent implements OnInit {
       .subscribe((res) => {
         this.isError = false;
         this.result = res;
-        console.log(res);
-        console.log(this.result.content);
         this.users = this.result.content;
         this.totalUsers = this.result.totalElements;
         this.setPage(this.page);
@@ -103,7 +100,7 @@ export class UsersComponent implements OnInit {
   searchUsers(usernameFilter, emailFilter, roleFilter): void {
     this.page = 1;
     const offset = this.page - 1;
-    this.searchUrl = "";
+    this.searchUrl = '';
     if (usernameFilter) {
       this.searchUrl = this.searchUrl.concat('&username=' + usernameFilter);
     }
@@ -134,6 +131,7 @@ export class UsersComponent implements OnInit {
   }
 
   sortBy(sortString: string): void {
+    this.page = 1;
     if (!this.currentSorting.includes(sortString)) {
       this.order = true;
     }
