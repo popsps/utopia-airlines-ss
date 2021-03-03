@@ -19,12 +19,12 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td>Username</td>
-                    <td>Given Name</td>
-                    <td>Family Name</td>
-                    <td>Role</td>
-                    <td>Email</td>
-                    <td>Phone Number</td>
+                    <td (click)="sortBy('username')">Username</td>
+                    <td (click)="sortBy('givenName')">Given Name</td>
+                    <td (click)="sortBy('familyName')">Family Name</td>
+                    <td (click)="sortBy('role')">Role</td>
+                    <td (click)="sortBy('email')">Email</td>
+                    <td (click)="sortBy('phone')">Phone Number</td>
                 </tr>
             </thead>
             <tbody>

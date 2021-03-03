@@ -18,15 +18,15 @@ import java.util.Optional;
 public interface UserDao extends JpaRepository<User, Long> {
   Optional<User> findByUsername(String username);
   
-  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%) and (:role is null or role_id = :role) ORDER BY :sort")
-  Page<User> findAll(@Param("username")String username, @Param("email")String email, @Param("role") int role, @Param("sort") String sort, Pageable pageable);
+  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%) and (:role is null or role_id = :role)")
+  Page<User> findAll(@Param("username")String username, @Param("email")String email, @Param("role") int role, Pageable pageable);
   
-  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%) ORDER BY :sort")
-  Page<User> findAll(@Param("username")String username, @Param("email")String email, @Param("sort") String sort, Pageable pageable);
+  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%)")
+  Page<User> findAll(@Param("username")String username, @Param("email")String email, Pageable pageable);
   
-  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%) and (:role is null or role_id = :role) ORDER BY :sort")
-  List<User> findAll(@Param("username")String username, @Param("email")String email, @Param("role") int role, @Param("sort") String sort);
+  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%) and (:role is null or role_id = :role)")
+  List<User> findAll(@Param("username")String username, @Param("email")String email, @Param("role") int role, Sort sort);
   
-  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%) ORDER BY :sort")
-  List<User> findAll(@Param("username")String username, @Param("email")String email, @Param("sort") String sort);
+  @Query("FROM User u WHERE (:username is null or username LIKE %:username%) and (:email is null or email LIKE %:email%)")
+  List<User> findAll(@Param("username")String username, @Param("email")String email, Sort sort);
 }

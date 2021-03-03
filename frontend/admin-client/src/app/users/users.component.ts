@@ -33,6 +33,8 @@ export class UsersComponent implements OnInit {
   error: any;
   isSearching: boolean;
   searchUrl = "";
+  currentSorting: string;
+  order: boolean;
 
   constructor(
     private userService: HttpService,
@@ -44,6 +46,8 @@ export class UsersComponent implements OnInit {
     this.apiUrl = environment.userApiUrl;
     this.isError = false;
     this.isSearching = false;
+    this.currentSorting = "&sort=username&order=asc";
+    this.order = true;
     this.initializeUsers();
     this.initializeForm();
   }
@@ -71,16 +75,15 @@ export class UsersComponent implements OnInit {
 
   initializeUsers() {
     const offset = this.page - 1;
-    console.log(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl);
+    console.log(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.currentSorting + this.searchUrl);
     this.userService
-      .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.searchUrl)
+      .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.currentSorting + this.searchUrl)
       .subscribe((res) => {
         this.isError = false;
         this.result = res;
         this.users = this.result.content;
         this.totalUsers = this.result.totalElements;
         this.setPage(this.page);
-        debugger;
         if (this.searchUrl) {
           this.isSearching = true;
         }
@@ -121,6 +124,20 @@ export class UsersComponent implements OnInit {
     this.isSearching = false;
     this.page = 1;
     this.searchUrl = "";
+    this.initializeUsers();
+  }
+
+  sortBy(sortString: string) {
+    if (!this.currentSorting.includes(sortString)) {
+      this.order = true;
+    }
+    else {
+      this.order = !this.order;
+    }
+    if (this.order)
+      this.currentSorting = "&sort=" + sortString + "&order=asc";
+    else
+      this.currentSorting = "&sort=" + sortString + "&order=desc";
     this.initializeUsers();
   }
 

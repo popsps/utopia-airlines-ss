@@ -119,22 +119,18 @@ public class UserService implements UserDetailsService {
 	  try {
 		  String username = params.get("username");
 		  String email = params.get("email");
-		  String sort = params.get("sort");
-		  if(sort == null) {
-			  sort = "username";
+		  String sortString = params.get("sort");
+		  if(sortString == null) {
+			  sortString = "username";
 		  }
-		  String orderSort = params.get("orderSort");
-		  if(orderSort == null) {
-			  orderSort = "ASC";
+		  String orderSort = params.get("order");
+		  Sort sort;
+		  if(orderSort.equals("asc") || orderSort == null) {
+			  sort = Sort.by(sortString).ascending();
 		  }
-//		  Sort sort;
-//		  if(params.get("sort") == "id") {
-//			  sort = Sort.by("id");
-//		  }
-//		  else {
-//			  sort = Sort.by("username");
-//		  }
-		  
+		  else {
+			  sort = Sort.by(sortString).descending();
+		  }
 //		  For non-paginated list of users
 		  if(params.get("offset") == null || params.get("limit") == null) {
 			  if(params.get("role") != null) {
@@ -145,11 +141,11 @@ public class UserService implements UserDetailsService {
 		  }
 		  
 //		  For paginated list of users
-		  Pageable paging = PageRequest.of(Integer.parseInt(params.get("offset")), Integer.parseInt(params.get("limit")));
+		  Pageable paging = PageRequest.of(Integer.parseInt(params.get("offset")), Integer.parseInt(params.get("limit")), sort);
 		  if(params.get("role") != null) {
-			  return userDao.findAll(username, email, Integer.parseInt(params.get("role")), sort, paging);
+			  return userDao.findAll(username, email, Integer.parseInt(params.get("role")), paging);
 		  }
-		  return userDao.findAll(username, email, sort, paging);
+		  return userDao.findAll(username, email, paging);
 	  }
 	  catch(Exception e) {
 			LOGGER.error(e.getMessage());
