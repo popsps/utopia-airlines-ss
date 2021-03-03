@@ -50,7 +50,7 @@ export class UsersComponent implements OnInit {
     this.apiUrl = environment.userApiUrl;
     this.isError = false;
     this.isSearching = false;
-    this.currentSorting = "&sort=username&order=asc";
+    this.currentSorting = '&sort=username&order=asc';
     this.order = true;
     this.initializeUsers();
     this.initializeForm();
@@ -77,77 +77,79 @@ export class UsersComponent implements OnInit {
     this.initializeUsers();
   }
 
-  initializeUsers() {
+  initializeUsers(): void {
     const offset = this.page - 1;
-    console.log(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.currentSorting + this.searchUrl);
+    console.log(this.apiUrl + '?offset=' + offset.toString() + '&limit=' + this.limit.toString() + this.currentSorting + this.searchUrl);
     this.httpService
-      .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.currentSorting + this.searchUrl)
+      .get(this.apiUrl + '?offset=' + offset.toString() + '&limit=' + this.limit.toString() + this.currentSorting + this.searchUrl)
       .subscribe((res) => {
         this.isError = false;
         this.result = res;
+        console.log(res);
+        console.log(this.result.content);
         this.users = this.result.content;
         this.totalUsers = this.result.totalElements;
         this.setPage(this.page);
         if (this.searchUrl) {
           this.isSearching = true;
         }
-        debugger;
       }, (err) => {
         this.isError = true;
         this.error = err.error;
-        console.log("Error happened");
-        debugger;
+        console.log('Error happened');
       });
   }
 
-  searchUsers(usernameFilter, emailFilter, roleFilter) {
+  searchUsers(usernameFilter, emailFilter, roleFilter): void {
     this.page = 1;
     const offset = this.page - 1;
     this.searchUrl = "";
     if (usernameFilter) {
-      this.searchUrl = this.searchUrl.concat("&username=" + usernameFilter);
+      this.searchUrl = this.searchUrl.concat('&username=' + usernameFilter);
     }
     if (emailFilter) {
-      this.searchUrl = this.searchUrl.concat("&email=" + emailFilter);
+      this.searchUrl = this.searchUrl.concat('&email=' + emailFilter);
     }
     if (roleFilter) {
       switch (roleFilter) {
-        case "ADMIN":
-          this.searchUrl = this.searchUrl.concat("&role=" + 1);
+        case 'ADMIN':
+          this.searchUrl = this.searchUrl.concat('&role=' + 1);
           break;
-        case "CUSTOMER":
-          this.searchUrl = this.searchUrl.concat("&role=" + 2);
+        case 'CUSTOMER':
+          this.searchUrl = this.searchUrl.concat('&role=' + 2);
           break;
-        case "AGENT":
-          this.searchUrl = this.searchUrl.concat("&role=" + 3);
+        case 'AGENT':
+          this.searchUrl = this.searchUrl.concat('&role=' + 3);
           break;
       }
     }
     this.initializeUsers();
   }
 
-  cancelSearch() {
+  cancelSearch(): void {
     this.isSearching = false;
     this.page = 1;
-    this.searchUrl = "";
+    this.searchUrl = '';
     this.initializeUsers();
   }
 
-  sortBy(sortString: string) {
+  sortBy(sortString: string): void {
     if (!this.currentSorting.includes(sortString)) {
       this.order = true;
     }
     else {
       this.order = !this.order;
     }
-    if (this.order)
-      this.currentSorting = "&sort=" + sortString + "&order=asc";
-    else
-      this.currentSorting = "&sort=" + sortString + "&order=desc";
+    if (this.order) {
+      this.currentSorting = '&sort=' + sortString + '&order=asc';
+    }
+    else {
+      this.currentSorting = '&sort=' + sortString + '&order=desc';
+    }
     this.initializeUsers();
   }
 
-  initializeForm() {
+  initializeForm(): void {
     this.addUserForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -159,7 +161,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  addUser() {
+  addUser(): void {
     this.httpService.post(this.apiUrl, this.addUserForm.value).subscribe((res) => {
       this.isError = false;
       this.initializeUsers();
@@ -171,7 +173,7 @@ export class UsersComponent implements OnInit {
   }
 
   onSaveCSVFile(): void {
-    this.httpService.get(environment.userApiUrl + "?sort=username").subscribe((res) => {
+    this.httpService.get(environment.userApiUrl + '?sort=username').subscribe((res) => {
       let list: any;
       list = res;
       this.userService.saveUsersAsCSV(list.content);
