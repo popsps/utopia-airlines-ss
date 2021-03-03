@@ -125,7 +125,7 @@ public class UserService implements UserDetailsService {
 		  }
 		  String orderSort = params.get("order");
 		  Sort sort;
-		  if(orderSort.equals("asc") || orderSort == null) {
+		  if(orderSort == null || orderSort.equals("asc")) {
 			  sort = Sort.by(sortString).ascending();
 		  }
 		  else {
