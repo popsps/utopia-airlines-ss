@@ -9,14 +9,14 @@ Resources:
         DBName: "utopia"
         DBInstanceIdentifier: "utopiards"
         Engine: MySQL
-        MasterUsername: utopia
-        MasterUserPassword: utopiacoolpassword
+        MasterUsername: '{{resolve:secretsmanager:UtopiaSecretManager:SecretString:username}}'
+        MasterUserPassword: '{{resolve:secretsmanager:UtopiaSecretManager:SecretString:password}}'
         DBInstanceClass: db.t2.micro
         AllocatedStorage: '5'
         PubliclyAccessible: true
         VPCSecurityGroups:
             - !Ref RDSSecurityGroup
-            # - sg-05c329bea57a8d257
+
   authRepository:
     Type: AWS::ECR::Repository
     Properties:
@@ -33,6 +33,10 @@ Resources:
     Type: AWS::ECR::Repository
     Properties:
       RepositoryName: "airport"
+  adminportalRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: "adminportal"
   utopiaECS:
     Type: AWS::ECS::Cluster
     Properties:
@@ -152,7 +156,7 @@ Outputs:
     Value: !Ref UtopiaRDS
     Export:
       Name: UtopiaRDS
-  Address:
+  RDSEndpoint:
     Value: !GetAtt UtopiaRDS.Endpoint.Address
     Export:
       Name: RDSEndpoint
@@ -185,4 +189,6 @@ Outputs:
     Export:
       Name: utopiaALB
   ALBEndpoint:
-    Value: !GetAtt utopiaALB.DNSName  
+    Value: !GetAtt utopiaALB.DNSName
+    Export:
+      Name: ALBEndpoint  
