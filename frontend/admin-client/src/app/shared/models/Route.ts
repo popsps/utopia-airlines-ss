@@ -1,7 +1,7 @@
 import {Deserializable} from './Deserializable';
 
 export class Route implements Deserializable {
-  id: bigint;
+  id: number;
   origin: {
     iataId: string,
     name: string,

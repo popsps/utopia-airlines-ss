@@ -5,17 +5,15 @@ import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
 import com.ss.utopia.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 
 import javax.validation.Valid;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -45,10 +43,10 @@ public class UserController {
 
   @GetMapping
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public List<User> getAllUsers() {
-    return userService.getAll();
+  public Page<User> getAllUsers(@RequestParam Map<String,String> params) {
+    return userService.getAll(params);
   }
-
+  
   @GetMapping("/{userId}")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   public User getUserById(@PathVariable("userId") Long userId) {

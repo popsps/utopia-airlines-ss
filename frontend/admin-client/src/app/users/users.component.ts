@@ -9,6 +9,7 @@ import { HttpService } from '../shared/services/http.service';
 import { User } from '../shared/models/user';
 import { UserService } from '../shared/services/user.service';
 
+import { PagerService } from '../shared/services/pager.service';
 
 @Component({
   selector: 'app-users',
@@ -16,10 +17,12 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  // TODO: Add Typescript type instead of any
+  page = 1;
+  limit = 15;
+  totalUsers: number;
+  pager: any = {};
+  result: any;
   users: any;
-  searchString: string;
-  searchUsersForm: FormGroup;
   addUserForm: FormGroup;
   username: string;
   password: string;
@@ -30,32 +33,118 @@ export class UsersComponent implements OnInit {
   role: string;
   apiUrl: string;
   isError: boolean;
-  // TODO: Create Error Entity
   error: any;
+  isSearching: boolean;
+  searchUrl = "";
+  currentSorting: string;
+  order: boolean;
 
   constructor(
     private httpService: HttpService,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private pagerService: PagerService,
   ) { }
 
   ngOnInit(): void {
     this.apiUrl = environment.userApiUrl;
     this.isError = false;
+    this.isSearching = false;
+    this.currentSorting = "&sort=username&order=asc";
+    this.order = true;
     this.initializeUsers();
     this.initializeForm();
   }
 
+  setPage(page: number): void {
+    if (!this.totalUsers || page < 1 || page > this.pager.totalUsers) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.totalUsers, page, this.limit);
+    console.log('pager server:', this.pager);
+    console.log('paged users', this.users);
+  }
+
+  navigate(page: number): void {
+    // if (page < 1 || page > this.totalUsers / this.limit) {
+    //   this.isError = true;
+    //   this.error = {
+    //     message: "invalid page"
+    //   };
+    //   return;
+    // }
+    this.page = page;
+    this.initializeUsers();
+  }
+
   initializeUsers() {
+    const offset = this.page - 1;
+    console.log(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.currentSorting + this.searchUrl);
     this.httpService
-      .get(this.apiUrl)
+      .get(this.apiUrl + "?offset=" + offset.toString() + "&limit=" + this.limit.toString() + this.currentSorting + this.searchUrl)
       .subscribe((res) => {
         this.isError = false;
-        this.users = res;
+        this.result = res;
+        this.users = this.result.content;
+        this.totalUsers = this.result.totalElements;
+        this.setPage(this.page);
+        if (this.searchUrl) {
+          this.isSearching = true;
+        }
+        debugger;
       }, (err) => {
         this.isError = true;
         this.error = err.error;
+        console.log("Error happened");
+        debugger;
       });
+  }
+
+  searchUsers(usernameFilter, emailFilter, roleFilter) {
+    this.page = 1;
+    const offset = this.page - 1;
+    this.searchUrl = "";
+    if (usernameFilter) {
+      this.searchUrl = this.searchUrl.concat("&username=" + usernameFilter);
+    }
+    if (emailFilter) {
+      this.searchUrl = this.searchUrl.concat("&email=" + emailFilter);
+    }
+    if (roleFilter) {
+      switch (roleFilter) {
+        case "ADMIN":
+          this.searchUrl = this.searchUrl.concat("&role=" + 1);
+          break;
+        case "CUSTOMER":
+          this.searchUrl = this.searchUrl.concat("&role=" + 2);
+          break;
+        case "AGENT":
+          this.searchUrl = this.searchUrl.concat("&role=" + 3);
+          break;
+      }
+    }
+    this.initializeUsers();
+  }
+
+  cancelSearch() {
+    this.isSearching = false;
+    this.page = 1;
+    this.searchUrl = "";
+    this.initializeUsers();
+  }
+
+  sortBy(sortString: string) {
+    if (!this.currentSorting.includes(sortString)) {
+      this.order = true;
+    }
+    else {
+      this.order = !this.order;
+    }
+    if (this.order)
+      this.currentSorting = "&sort=" + sortString + "&order=asc";
+    else
+      this.currentSorting = "&sort=" + sortString + "&order=desc";
+    this.initializeUsers();
   }
 
   initializeForm() {
@@ -82,6 +171,10 @@ export class UsersComponent implements OnInit {
   }
 
   onSaveCSVFile(): void {
-    this.userService.saveUsersAsCSV(this.users);
+    this.httpService.get(environment.userApiUrl + "?sort=username").subscribe((res) => {
+      let list: any;
+      list = res;
+      this.userService.saveUsersAsCSV(list.content);
+    })
   }
 }

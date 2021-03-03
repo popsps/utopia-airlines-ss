@@ -11,6 +11,9 @@
   <!--    booking list-->
   <!--      list of all bookings-->
   <ng-container *ngIf="!loading && !error.isError">
+    <div class="text-center my-3">
+      <button class="btn btn-dark" (click)="onSaveCSV()">Generate CSV Report</button>
+    </div>
     <div class="text-center">Total: <span class="font-weight-bold">{{totalBookings}}</span></div>
     <div class="list-group m-3" *ngFor="let booking of pagedBookings">
       <a [routerLink]="['/bookings',booking.id]" style="text-decoration: none">
@@ -82,7 +85,7 @@
     <div class="d-flex justify-content-center" style="margin: 150px">
       <app-pagination *ngIf="pager.totalPages && pager.currentPage" [(currentPage)]="pager.currentPage"
                       [totalPageCount]="pager.totalPages" [displayedPageRange]="5"
-                      (pageChange)="onPageChange($event)"></app-pagination>
+                      (currentPageChange)="onPageChange($event)"></app-pagination>
     </div>
   </ng-container>
 
