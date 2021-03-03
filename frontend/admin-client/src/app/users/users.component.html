@@ -6,7 +6,12 @@
     <div class=" row">
         <input class="col-md" type="Username" [(ngModel)]="usernameFilter" placeholder="Username">
         <input class="col-md justify-content-center" type="Email" [(ngModel)]="emailFilter" placeholder="Email">
-        <input class="col-md justify-content-end" type="Role" [(ngModel)]="roleFilter" placeholder="Role">
+        <!-- <input class="col-md justify-content-end" type="Role" [(ngModel)]="roleFilter" placeholder="Role"> -->
+        <select class="col-md" type="role" id="role" [(ngModel)]="roleFilter">
+            <option value="CUSTOMER">CUSTOMER</option>
+            <option value="AGENT">AGENT</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
         <button (click)="searchUsers(usernameFilter, emailFilter, roleFilter)">Search</button>
         <button *ngIf="isSearching" (click)="cancelSearch()">Clear</button>
     </div>
@@ -14,12 +19,12 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <td>Username</td>
-                    <td>Given Name</td>
-                    <td>Family Name</td>
-                    <td>Role</td>
-                    <td>Email</td>
-                    <td>Phone Number</td>
+                    <td (click)="sortBy('username')">Username</td>
+                    <td (click)="sortBy('givenName')">Given Name</td>
+                    <td (click)="sortBy('familyName')">Family Name</td>
+                    <td (click)="sortBy('role')">Role</td>
+                    <td (click)="sortBy('email')">Email</td>
+                    <td (click)="sortBy('phone')">Phone Number</td>
                 </tr>
             </thead>
             <tbody>

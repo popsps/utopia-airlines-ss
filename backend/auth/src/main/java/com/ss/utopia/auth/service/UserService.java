@@ -1,19 +1,19 @@
 package com.ss.utopia.auth.service;
 
 import com.ss.utopia.auth.dao.UserDao;
-import com.ss.utopia.auth.dto.FilterDto;
 import com.ss.utopia.auth.dto.UpdateUserDto;
 import com.ss.utopia.auth.dto.UserDto;
 import com.ss.utopia.auth.entity.User;
-import com.ss.utopia.auth.entity.UserRole;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,7 +29,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.servlet.http.Cookie;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -108,27 +107,52 @@ public class UserService implements UserDetailsService {
     userDao.deleteById(userId);
     return 1;
   }
-
+  
+  
   /**
    * Get a list of users
    *
    * @param 
-   * @return List<User>
+   * @return Page<User>
    */
   public Page<User> getAll(Map<String,String> params) {
-	  FilterDto filterDto = new FilterDto(params);
-		try {
-			Page<User> users = filteredGetAll(filterDto);
-			if(users.getContent().size() > 0) {
-				return users;
-			}
-			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Bad search input");
-		}
-		catch(Exception e) {
+	  try {
+		  String username = params.get("username");
+		  String email = params.get("email");
+		  String sortString = params.get("sort");
+		  if(sortString == null) {
+			  sortString = "username";
+		  }
+		  String orderSort = params.get("order");
+		  Sort sort;
+		  if(orderSort.equals("asc") || orderSort == null) {
+			  sort = Sort.by(sortString).ascending();
+		  }
+		  else {
+			  sort = Sort.by(sortString).descending();
+		  }
+//		  For non-paginated list of users
+		  if(params.get("offset") == null || params.get("limit") == null) {
+			  if(params.get("role") != null) {
+				  Page<User> users = new PageImpl<>(userDao.findAll(username, email, Integer.parseInt(params.get("role")), sort));
+				  return users;
+			  }
+			  return new PageImpl<>(userDao.findAll(username, email, sort));
+		  }
+		  
+//		  For paginated list of users
+		  Pageable paging = PageRequest.of(Integer.parseInt(params.get("offset")), Integer.parseInt(params.get("limit")), sort);
+		  if(params.get("role") != null) {
+			  return userDao.findAll(username, email, Integer.parseInt(params.get("role")), paging);
+		  }
+		  return userDao.findAll(username, email, paging);
+	  }
+	  catch(Exception e) {
 			LOGGER.error(e.getMessage());
 			throw new HttpServerErrorException(HttpStatus.BAD_REQUEST, "Bad search input");
-		}
 	  }
+  }
+
 
   /**
    * Get a user by its id and return the user
@@ -236,41 +260,6 @@ public class UserService implements UserDetailsService {
 	  if(userDto.getPhone() != null && userDto.getPhone() != "")
 		  user.setPhone(userDto.getPhone());
 	  return user;
-  }
-  
-  private Page<User> filteredGetAll(FilterDto filterDto){
-	  Pageable paging = PageRequest.of(filterDto.getOffset(), filterDto.getLimit());
-	  if(filterDto.hasRole() && filterDto.hasUsername() && filterDto.hasEmail()) {
-		  return userDao.findByRoleNameAndUsernameAndEmailContaining(
-					filterDto.getRole(), filterDto.getUsername(), filterDto.getEmail(), paging);
-	  } 
-	  else if(filterDto.hasRole() && filterDto.hasUsername()) {
-		  return userDao.findByRoleNameAndUsernameContaining(
-					filterDto.getRole(), filterDto.getUsername(), paging);
-	  }
-	  else if(filterDto.hasRole() && filterDto.hasEmail()) {
-		  return userDao.findByRoleNameAndEmailContaining(
-					filterDto.getRole(), filterDto.getEmail(), paging);
-	  }
-	  else if(filterDto.hasUsername() && filterDto.hasEmail()) {
-		  return userDao.findByUsernameAndEmailContaining(
-					filterDto.getUsername(), filterDto.getEmail(), paging);
-	  }
-	  else if(filterDto.hasRole()) {
-		  return userDao.findByRoleNameContaining(
-					filterDto.getRole(), paging);
-	  }
-	  else if(filterDto.hasUsername()) {
-		  return userDao.findByUsernameContaining(
-					filterDto.getUsername(), paging);
-	  }
-	  else if(filterDto.hasEmail()) {
-		  return userDao.findByEmailContaining(
-					filterDto.getEmail(), paging);
-	  }
-	  else {
-		  return userDao.findAll(paging);
-	  }
   }
   
 }
