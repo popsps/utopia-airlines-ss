@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
   isError: boolean;
   error: any;
   isSearching: boolean;
-  searchUrl = "";
+  searchUrl = '';
   currentSorting: string;
   order: boolean;
 
