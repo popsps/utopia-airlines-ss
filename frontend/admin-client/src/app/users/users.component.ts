@@ -7,6 +7,7 @@ import {
 import { environment } from '../../environments/environment';
 import { HttpService } from '../shared/services/http.service';
 import { User } from '../shared/models/user';
+import { UserService } from '../shared/services/user.service';
 
 
 @Component({
@@ -33,8 +34,9 @@ export class UsersComponent implements OnInit {
   error: any;
 
   constructor(
-    private userService: HttpService,
-    private formBuilder: FormBuilder
+    private httpService: HttpService,
+    private formBuilder: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class UsersComponent implements OnInit {
   }
 
   initializeUsers() {
-    this.userService
+    this.httpService
       .get(this.apiUrl)
       .subscribe((res) => {
         this.isError = false;
@@ -69,7 +71,7 @@ export class UsersComponent implements OnInit {
   }
 
   addUser() {
-    this.userService.post(this.apiUrl, this.addUserForm.value).subscribe((res) => {
+    this.httpService.post(this.apiUrl, this.addUserForm.value).subscribe((res) => {
       this.isError = false;
       this.initializeUsers();
       this.initializeForm();
@@ -77,5 +79,9 @@ export class UsersComponent implements OnInit {
       this.isError = true;
       this.error = err.error;
     });
+  }
+
+  onSaveCSVFile(): void {
+    this.userService.saveUsersAsCSV(this.users);
   }
 }

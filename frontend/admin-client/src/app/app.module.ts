@@ -40,7 +40,7 @@ import {FlightResultItemComponent} from './flights/flight-result-list/flight-res
 import {DatePipe} from '@angular/common';
 import {PaginationComponent} from './shared/components/pagination/pagination.component';
 import {BookingSearchFormComponent} from './bookings/booking-search-form/booking-search-form.component';
-import {FileSaverModule } from 'ngx-filesaver';
+import {FileSaverModule} from 'ngx-filesaver';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,6 @@ import {FileSaverModule } from 'ngx-filesaver';
     NavbarComponent,
     FooterComponent,
     LoginModalComponent,
-    FileSaverModule,
     FlightsComponent,
     FlightDepartureDatePipe,
     FlightRoutePipe,
@@ -81,7 +80,8 @@ import {FileSaverModule } from 'ngx-filesaver';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FileSaverModule
   ],
   providers: [
     HttpService,

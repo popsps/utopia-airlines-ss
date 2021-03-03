@@ -8,3 +8,9 @@ export interface Users {
   role: string;
   password?: string;
 }
+
+export enum Roles {
+  ADMIN = 'ADMIN',
+  CUSTOMER = 'CUSTOMER',
+  AGENT = 'AGENT'
+}
