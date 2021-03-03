@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
 import {FlightService, PaginatedFlightResult} from '../shared/services/flight.service';
-
 import {FlightFilter} from '../shared/models/FlightFilter';
 
 @Component({
@@ -43,7 +41,7 @@ export class FlightsComponent implements OnInit {
           state: 'done',
           data
         };
-        console.log('new flights:', this.flights.data)
+        console.log('new flights:', this.flights.data);
       },
       (error) => {
         this.flights = {
@@ -76,6 +74,22 @@ export class FlightsComponent implements OnInit {
   onPageNumChange(pageNum): void {
     this.pageNum = pageNum;
     this.loadFlights();
+  }
+
+  onSaveCSV(): void {
+    this.flightService.getAll({
+      ...this.filter,
+      offset: 0,
+      limit: this.flights.data.total
+    }).subscribe(
+      (data) => {
+        this.flightService.saveFlightsAsCSV(data.results);
+      },
+      (error) => {
+        console.log('something went wrong generating CSV', error);
+      },
+    );
+
   }
 
 }
