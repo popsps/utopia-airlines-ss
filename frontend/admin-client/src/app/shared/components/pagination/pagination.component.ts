@@ -11,7 +11,7 @@ export class PaginationComponent implements OnInit {
   @Input() totalPageCount: number;
   @Input() displayedPageRange: number;
   @Input() boundaryLinks: boolean;
-  @Output() pageChange = new EventEmitter<number>(true);
+  @Output() currentPageChange = new EventEmitter<number>(true);
 
   constructor() {
   }
@@ -21,23 +21,23 @@ export class PaginationComponent implements OnInit {
   }
 
   goNextPage(): void {
-    this.pageChange.emit(this.currentPage + 1);
+    this.currentPageChange.emit(this.currentPage + 1);
   }
 
   goPrevPage(): void {
-    this.pageChange.emit(this.currentPage - 1);
+    this.currentPageChange.emit(this.currentPage - 1);
   }
 
   goFirstPage(): void {
-    this.pageChange.emit(1);
+    this.currentPageChange.emit(1);
   }
 
   goLastPage(): void {
-    this.pageChange.emit(this.totalPageCount);
+    this.currentPageChange.emit(this.totalPageCount);
   }
 
   goToPage(n: number): void {
-    this.pageChange.emit(n);
+    this.currentPageChange.emit(n);
   }
 
   getPagesToDisplay(): number[] {
@@ -45,13 +45,6 @@ export class PaginationComponent implements OnInit {
     if (this.displayedPageRange > this.totalPageCount) {
       return Array(this.totalPageCount).fill(0).map((v, i) => i + 1);
     }
-    // const start = this.currentPage <= this.displayedPageRange
-    //   ? 0
-    //   : Math.min(
-    //   this.currentPage - this.displayedPageRange,
-    //   this.totalPageCount - 2 * this.displayedPageRange
-    // ) - 1;
-    // return Array(2 * this.displayedPageRange + 1).fill(0).map((_, i) => i + start + 1);
     const activePages = [];
     let size = this.displayedPageRange;
     const currentPage = this.currentPage;
