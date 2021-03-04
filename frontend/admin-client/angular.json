@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "admin-client"
+  "defaultProject": "admin-client",
+  "cli": {
+    "analytics": false
+  }
 }

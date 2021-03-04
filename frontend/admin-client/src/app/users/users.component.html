@@ -1,5 +1,6 @@
 <div *ngIf="users" class="container full-page my-4">
     <!-- <h2>List of all Users. Total Users: {{ totalUsers }}</h2> -->
+    <button class="btn btn-dark my-1" (click)="onSaveCSVFile()">Download User CSV file</button>
     <div *ngIf="isError && error.message.includes('search')">
         <p style="color:red; text-align: center;">{{ error.message }}</p>
     </div>
