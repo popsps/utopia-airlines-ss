@@ -5,7 +5,6 @@ import {
   Validators
 } from '@angular/forms';
 import { environment } from '../../environments/environment';
-import { HttpService } from '../shared/services/http.service';
 import { UserService } from '../shared/services/user.service';
 
 import { PagerService } from '../shared/services/pager.service';
@@ -39,7 +38,6 @@ export class UsersComponent implements OnInit {
   order: boolean;
 
   constructor(
-    private httpService: HttpService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private pagerService: PagerService,
@@ -65,13 +63,13 @@ export class UsersComponent implements OnInit {
   }
 
   navigate(page: number): void {
-    // if (page < 1 || page > this.totalUsers / this.limit) {
-    //   this.isError = true;
-    //   this.error = {
-    //     message: "invalid page"
-    //   };
-    //   return;
-    // }
+    if (page < 1 || page > Math.ceil(this.totalUsers / this.limit)) {
+      this.isError = true;
+      this.error = {
+        message: "invalid page"
+      };
+      return;
+    }
     this.page = page;
     this.initializeUsers();
   }
@@ -79,7 +77,7 @@ export class UsersComponent implements OnInit {
   initializeUsers(): void {
     const offset = this.page - 1;
     console.log(this.apiUrl + '?offset=' + offset.toString() + '&limit=' + this.limit.toString() + this.currentSorting + this.searchUrl);
-    this.httpService
+    this.userService
       .get(this.apiUrl + '?offset=' + offset.toString() + '&limit=' + this.limit.toString() + this.currentSorting + this.searchUrl)
       .subscribe((res) => {
         this.isError = false;
@@ -160,7 +158,7 @@ export class UsersComponent implements OnInit {
   }
 
   addUser(): void {
-    this.httpService.post(this.apiUrl, this.addUserForm.value).subscribe((res) => {
+    this.userService.post(this.apiUrl, this.addUserForm.value).subscribe((res) => {
       this.isError = false;
       this.initializeUsers();
       this.initializeForm();
@@ -171,7 +169,7 @@ export class UsersComponent implements OnInit {
   }
 
   onSaveCSVFile(): void {
-    this.httpService.get(environment.userApiUrl + '?sort=username').subscribe((res) => {
+    this.userService.get(environment.userApiUrl + '?sort=username').subscribe((res) => {
       let list: any;
       list = res;
       this.userService.saveUsersAsCSV(list.content);
