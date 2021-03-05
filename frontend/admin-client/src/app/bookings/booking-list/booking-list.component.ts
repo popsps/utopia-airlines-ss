@@ -151,6 +151,7 @@ export class BookingListComponent implements OnInit {
         }
       }
     }
+    console.log('something');
     return url;
   }
 
